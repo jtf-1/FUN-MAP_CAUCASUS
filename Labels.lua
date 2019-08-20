@@ -90,74 +90,36 @@ local EMPTY = {"", "CenterCenter", 1, 1, 0, 0}
 
 AirFormat = {
 --[distance]		= {format, alignment, color_blending_k, opacity, shift_in_pixels_x, shift_in_pixels_y}
-[1000]	= EMPTY,
-[5000]	= {aircraft_symbol_far,"CenterCenter",1, 0.0, 0, 0},
-[10000]	= {aircraft_symbol_far,"CenterCenter",1, 0.0, 0, 0},
-[20000]	= {aircraft_symbol_far,"CenterCenter",1, 0.0, 0, 0},
+[500]	= EMPTY,
+[5000]	= {aircraft_symbol_far,"CenterCenter",0.75 0.0, 0, 0},
+[10000]	= {aircraft_symbol_far,"CenterCenter",0.75, 0.0, 0, 0},
+[20000]	= {aircraft_symbol_far,"CenterCenter",0.25, 0.0, 0, 0},
 [30000]	= dot_symbol(0,0.1),
 }
 
 GroundFormat = {
 --[distance]		= {format , alignment, color_blending_k, opacity, shift_in_pixels_x, shift_in_pixels_y}
-[1000]	= EMPTY,
-[5000]	= {ground_symbol_far,"CenterCenter",1, 0.0, 0, 0},
-[10000]	= {ground_symbol_far,"CenterCenter",1, 0.0, 0, 0},
+[500]	= EMPTY,
+[5000]	= {ground_symbol_far,"CenterCenter",0.75, 0.0, 0, 0},
+[10000]	= {ground_symbol_far,"CenterCenter",0.75, 0.0, 0, 0},
 [20000]	=  dot_symbol(0.75, 0.1),
 }
 
 NavyFormat = {
 --[distance]		= {format, alignment, color_blending_k, opacity, shift_in_pixels_x, shift_in_pixels_y}
-[1000]	= EMPTY,
-[5000]	= {navy_symbol_far,"CenterCenter",1, 0.0, 0, 0},
-[10000]	= {navy_symbol_far,"CenterCenter",1, 0.0, 0, 0},
-[20000]	= {navy_symbol_far,"CenterCenter",1, 0.0, 0, 0},
+[500]	= EMPTY,
+[10000]	= {navy_symbol_near,"CenterCenter",0.75, 0.0, 0, 0},
+[20000]	= {navy_symbol_far,"CenterCenter",0.75, 0.0, 0, 0},
 [40000]	= dot_symbol(0.75,0.1),
 }
 
 WeaponFormat = {
 --[distance]		= {format ,alignment, color_blending_k, opacity, shift_in_pixels_x, shift_in_pixels_y}
-[1000]	    = EMPTY,
-[5000]	= {weapon_symbol_far,"CenterCenter",1, 0.0, 0, 0},
-[10000]	= {weapon_symbol_far,"CenterCenter",1, 0.0, 0, 0},
-[20000]	= {weapon_symbol_far,"CenterCenter",1, 0.0, 0, 0},
+[500]	= EMPTY,
+[5000]	= {weapon_symbol_near,"CenterCenter",0.75, 0.0, 0, 0},
+[10000]	= {weapon_symbol_far,"CenterCenter",0.75, 0.0, 0, 0},
+[20000]	= {weapon_symbol_far,"CenterCenter",0.25, 0.0, 0, 0},
 }
-
-elseif IS_ABBREVIATED then 
-
-AirFormat = {
---[distance]		= {format, alignment, color_blending_k, opacity, shift_in_pixels_x, shift_in_pixels_y}
-[1000]	= EMPTY,
-[5000]	= {aircraft_symbol_far,"CenterCenter",1, 0.0, 0, 0},
-[10000]	= {aircraft_symbol_far,"CenterCenter",1, 0.0, 0, 0},
-[20000]	= {aircraft_symbol_far,"CenterCenter",1, 0.0, 0, 0},
-[30000]	= dot_symbol(0,0.1),
-}
-
-GroundFormat = {
---[distance]		= {format , alignment, color_blending_k, opacity, shift_in_pixels_x, shift_in_pixels_y}
-[1000]	= EMPTY,
-[5000]	= {ground_symbol_far,"CenterCenter",1, 0.0, 0, 0},
-[10000]	= {ground_symbol_far,"CenterCenter",1, 0.0, 0, 0},
-[20000]	=  dot_symbol(0.75, 0.1),
-}
-
-NavyFormat = {
---[distance]		= {format, alignment, color_blending_k, opacity, shift_in_pixels_x, shift_in_pixels_y}
-[1000]	= EMPTY,
-[5000]	= {navy_symbol_far,"CenterCenter",1, 0.0, 0, 0},
-[10000]	= {navy_symbol_far,"CenterCenter",1, 0.0, 0, 0},
-[20000]	= {navy_symbol_far,"CenterCenter",1, 0.0, 0, 0},
-[40000]	= dot_symbol(0.75,0.1),
-}
-
-WeaponFormat = {
---[distance]		= {format ,alignment, color_blending_k, opacity, shift_in_pixels_x, shift_in_pixels_y}
-[1000]  = EMPTY,
-[5000]	= {weapon_symbol_far,"CenterCenter",1, 0.0, 0, 0},
-[10000]	= {weapon_symbol_far,"CenterCenter",1, 0.0, 0, 0},
-[20000]	= {weapon_symbol_far,"CenterCenter",1, 0.0, 0, 0},
-}
-
 
 
 PointFormat = { 
