@@ -208,7 +208,7 @@ function SpawnStrikeAttack ( StrikeLocation ) -- "location name"
 -- TableStrikeAttack { location { striketype {Airfield, Factory, Bridge, Communications, C2}, strikeivo, strikecoords, strikemission, strikethreats, strikezone, striketargets, medzones { zone, is_open }, smallzones { zone, is_open }, defassets { sam, aaa, manpad, armour}, spawnobjects {}, is_open } 
 local FuncDebug = false
 
-	BASE:TraceOnOff( true )
+	BASE:TraceOnOff( false )
 	BASE:TraceAll( true )
 
 	if TableStrikeAttack[StrikeLocation].is_open then
@@ -219,6 +219,7 @@ local FuncDebug = false
 		local AaaQty = math.random( 2, TableStrikeAttack[StrikeLocation].defassets.aaa ) -- number of AAA defences min 2
 		local ManpadQty = math.random( 1, TableStrikeAttack[StrikeLocation].defassets.manpad ) -- number of manpad defences 1-max spawn in AAA zones. AaaQty + ManpadQty MUST NOT exceed SmallZonesCount
 		local ArmourQty = math.random( 1, TableStrikeAttack[StrikeLocation].defassets.armour ) -- number of armour groups 1-max spawn in SAM zones. SamQty + ArmourQty MUST NOT exceed MedZonesCount
+		local StrikeMarkZone = ZONE:FindByName( TableStrikeAttack[StrikeLocation].strikezone ) -- ZONE object for zone named in strikezone 
 		
 		-- ## Check sufficient zones exist for the mission air defences
 		if SamQty + ArmourQty > MedZonesCount then
@@ -270,9 +271,9 @@ local FuncDebug = false
 				local AssetSpawnStub = _G["DEFSTUB_" .. AssetTemplate] -- _G[contenation for name of generated DEFSTUB_ spawn]
 				local assetzoneindex = TableStrikeAssetZones[count]
 				if AssetZoneType == "med" then -- medzone 
-					assetspawnzone = _G["SPAWN" .. TableStrikeAttack[StrikeLocation].medzones[assetzoneindex].loc] -- _G[concatenation for name of generated spawnzone]
+					assetspawnzone = ZONE:FindByName( TableStrikeAttack[StrikeLocation].medzones[assetzoneindex].loc ) -- _G[concatenation for name of generated spawnzone]
 				else -- smallzone
-					assetspawnzone = _G["SPAWN" .. TableStrikeAttack[StrikeLocation].smallzones[assetzoneindex].loc]
+					assetspawnzone = ZONE:FindByName( TableStrikeAttack[StrikeLocation].smallzones[assetzoneindex].loc ) -- _G["SPAWN" .. TableStrikeAttack[StrikeLocation].smallzones[assetzoneindex].loc]
 				end
 				AssetSpawnStub:SpawnInZone( assetspawnzone ) -- spawn asset in zone in generated zone list
 				local assetspawngroup, assetspawngroupindex = AssetSpawnStub:GetLastAliveGroup()
@@ -291,7 +292,17 @@ local FuncDebug = false
 		
 		-- ## add armour assets
 		AddStrikeAssets( "armour", ArmourQty, "med", MedZonesCount )
-		
+
+    -- ## Create Mission Mark on F10 map
+    local StrikeMarkCoord = StrikeMarkZone:GetCoordinate() -- get coordinates of strikezone
+    local StrikeMarkLabel = TableStrikeAttack[StrikeLocation].strikename -- create label for map mark
+      .. " "
+      .. TableStrikeAttack[StrikeLocation].striketype
+      .. " Strike" 
+      .. "\n" .. TableStrikeAttack[StrikeLocation].strikecoords
+    local StrikeMark = StrikeMarkCoord:MarkToAll(StrikeMarkLabel, true) -- add mark to map
+    TableStrikeAttack[StrikeLocation].strikemarkid = StrikeMark -- add mark ID to table 
+      		
 		-- ## Send briefing message
 		local strikeAttackBrief = "++++++++++++++++++++++++++++++++++++"
 			..	"\n\nAir Interdiction mission against "
@@ -308,6 +319,7 @@ local FuncDebug = false
 			
 		MESSAGE:New ( strikeAttackBrief, 30, "" ):ToAll()
 		
+	
 		TableStrikeAttack[StrikeLocation].is_open = false -- mark strike mission as active
 		
 		-- ## menu: add mission remove menu command and remove mission start command
@@ -326,14 +338,13 @@ local FuncDebug = false
 	end
 
 BASE:TraceOnOff( false )
---BASE:TraceAll( true )
 
 end --function
 
 -- ## Remove strike attack mission
 
 function RemoveStrikeAttack ( StrikeLocation )
-BASE:TraceOnOff( true )
+BASE:TraceOnOff( false )
 BASE:TraceAll( true )
 
 	if not TableStrikeAttack[StrikeLocation].is_open then
@@ -345,8 +356,12 @@ BASE:TraceAll( true )
 				removespawnobject:Destroy( false )
 			end
 		end
-		TableStrikeAttack[StrikeLocation].spawnobjects = {}
-		TableStrikeAttack[StrikeLocation].is_open = true
+		
+		COORDINATE:RemoveMark( TableStrikeAttack[StrikeLocation].strikemarkid ) -- remove mark from map
+		
+		TableStrikeAttack[StrikeLocation].strikemarkid = nil -- reset map mark ID
+		TableStrikeAttack[StrikeLocation].spawnobjects = {} -- clear list of now despawned objects
+		TableStrikeAttack[StrikeLocation].is_open = true -- set strike mission as available
 		
 		-- ## menu: add mission start menu command and remove mission remove command
 		_G["Cmd" .. StrikeLocation .. "Attack"] = MENU_COALITION_COMMAND:New( coalition.side.BLUE, "Start Mission", _G["Menu" .. TableStrikeAttack[StrikeLocation].striketype .. "Attack" .. StrikeLocation], SpawnStrikeAttack, StrikeLocation )
@@ -361,7 +376,6 @@ BASE:TraceAll( true )
 		MESSAGE:New( msg, 10, "" ):ToAll()
 	end
 BASE:TraceOnOff( false )
---BASE:TraceAll( true )
 
 end --function
 
@@ -989,7 +1003,7 @@ cmdConvoyAttackSoftWest = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Supp
 
 
 
--- TableStrikeAttack { location { striketype {Airfield, Factory}, strikename, strikeivo, strikecoords, strikemission, strikethreats, strikezone, striketargets, medzones { zone, is_open }, smallzones { zone, is_open }, defassets { sam, aaa, manpad, armour}, spawnobjects {}, is_open } 
+-- TableStrikeAttack { location { striketype {Airfield, Factory, Bridge}, strikename, strikeivo, strikecoords, strikemission, strikethreats, strikezone, striketargets, medzones { zone, is_open }, smallzones { zone, is_open }, defassets { sam, aaa, manpad, armour}, spawnobjects {}, is_open } 
 TableStrikeAttack = {
 	Beslan = { 																		-- location key
 		striketype = "Airfield", 													-- (Airfield, Factory, Bridge, Communications, C2)
@@ -1041,7 +1055,7 @@ TableStrikeAttack = {
 		strikecoords = "43  26  41 N | 039  56  32 E",
 		strikemission = "CRATER RUNWAY AND ATTRITE AVIATION ASSETS ON THE GROUND",
 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
-		strikezone = "ZONE_BeslanStrike",
+		strikezone = "ZONE_SochiStrike",
 		striketargets = {
 		},
 		medzones = {
@@ -1084,7 +1098,7 @@ TableStrikeAttack = {
 		strikecoords = "44  40  54 N | 040  02  08 E",
 		strikemission = "CRATER RUNWAY AND ATTRITE AVIATION ASSETS ON THE GROUND",
 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
-		strikezone = "ZONE_BeslanStrike",
+		strikezone = "ZONE_MaykopStrike",
 		striketargets = {
 		},
 		medzones = {
@@ -1245,10 +1259,10 @@ TableStrikeAttack = {
 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_LN77Strike",
 		striketargets = {
-			"FACTORY_LN77_01",
-			"FACTORY_LN77_02",
-			"FACTORY_LN77_03",
-			"FACTORY_LN77_04",
+      "FACTORY_LN77_01",
+      "FACTORY_LN77_02",
+      "FACTORY_LN77_03",
+      "FACTORY_LN77_04",
 		},
 		medzones = {
 			{ loc = "ZONE_LN77Med_01", is_open = true },
@@ -1321,10 +1335,10 @@ TableStrikeAttack = {
 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_GJ38Strike",
 		striketargets = {
-			"FACTORY_LP30_01",
-			"FACTORY_LP30_02",
-			"FACTORY_LP30_03",
-			"FACTORY_LP30_04",
+			"FACTORY_GJ38_01",
+			"FACTORY_GJ38_02",
+			"FACTORY_GJ38_03",
+			"FACTORY_GJ38_04",
 		},
 		medzones = {
 			{ loc = "ZONE_GJ38Med_01", is_open = true },
@@ -1403,7 +1417,7 @@ TableStrikeAttack = {
 		strikecoords = "43  26  47 N | 041  44  28 E",
 		strikemission = "DESTROY ROAD BRIDGE",
 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
-		strikezone = "ZONE_MN72Strike",
+		strikezone = "ZONE_GJ21Strike",
 		striketargets = {
 			"FACTORY_LP30_01",
 			"FACTORY_LP30_02",
@@ -1441,8 +1455,14 @@ TableStrikeAttack = {
 }
 
 -- ## generate defence zones
-for strikekey, strikevalue in pairs(TableStrikeAttack) do
-
+-- for strikekey, strikevalue in pairs(TableStrikeAttack) do
+--[[
+    -- Strike zone
+    --local strikezonename = strikevalue.strikezone
+    --local zonestrikezonename = "ZONE" .. strikezonename
+    --_G[ zonestrikezonename ] = ZONE:New( strikezonename )
+		--
+		 
 		-- SAM zones
 		for count = 1, #strikevalue.medzones do
 				local samzonename = strikevalue.medzones[ count ].loc
@@ -1457,6 +1477,7 @@ for strikekey, strikevalue in pairs(TableStrikeAttack) do
 				_G[ aaaspawnzonename ] = ZONE:New( aaazonename )
 		end
 end
+--]]
 
 -- ## strike Defence spawn templates
 TableDefTemplates = {
