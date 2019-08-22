@@ -58,7 +58,7 @@ ON DEMAND GROUND ATTACK MISSIONS
 
 **Convoy Attack: Strike missions against enemoy convoys are available, on-demand, via the F-10 menu. Options are available to spawn both armoured and soft convoys, at a series of random locations within the Central and Western portions of the map. A mission brief will be displayed indicating the last known location of the convoy, its anticipated destination and the threats within it.
 
-**Strategic Strike Attacks: Strike missions are available, on demand, via the F10 menu. Air defences can be spawned at a series of target locations North of the Russian border. A mission brief will be displayed confirming the name of the chosen location, the coordinates of the main target center, and the anticipated threats. A menu option is also available to remove the mission after it has been spawned. The following target categories are selectable;
+**Strategic Strike Attacks: Strike missions are available, on demand, via the F10 menu. Air defences can be spawned at a series of target locations North of the Russian border. A mission brief will be displayed confirming the name of the chosen location, the coordinates of the main target center, and the anticipated threats. A mark, with a label listing the strike name and its coordinates, will be placed on the F10 map at the strike location. A menu option is also available to remove the mission after it has been spawned. The following target categories are selectable;
 
 - Airfield
 - Factory
