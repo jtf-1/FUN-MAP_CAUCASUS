@@ -342,7 +342,6 @@ BASE:TraceOnOff( false )
 end --function
 
 -- ## Remove strike attack mission
-
 function RemoveStrikeAttack ( StrikeLocation )
 BASE:TraceOnOff( false )
 BASE:TraceAll( true )
@@ -447,9 +446,9 @@ tarawagroup:PatrolRoute()
 
 
 -- ## Define spawn zones with trigger zones in ME
-Zone_AAR_1 = ZONE:New( "AAR_1_Zone" ) 
-Zone_AWACS_1 = ZONE:New( "AWACS_1_Zone" )
-Zone_Red_AWACS_1 = ZONE:New( "RED_AWACS_1_Zone" ) 
+Zone_AAR_1 = ZONE:FindByName( "AAR_1_Zone" ) 
+Zone_AWACS_1 = ZONE:FindByName( "AWACS_1_Zone" )
+Zone_Red_AWACS_1 = ZONE:FindByName( "RED_AWACS_1_Zone" ) 
 
 -- ## define table of support aircraft to be spawned
 -- [spawnobjectname, spawnstub, spawnzone}
@@ -481,6 +480,7 @@ Spawn_Tanker_S3B_Texaco1:SetCallsign(CALLSIGN.Tanker.Texaco, 1)
 Spawn_Rescuehelo_Stennis = RESCUEHELO:New(UNIT:FindByName("CSG_CarrierGrp_Stennis"), "RescueHelo_Stennis")
 
 Spawn_Rescuehelo_Stennis:SetRespawnInAir()
+  :SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Stennis_03"))
 	:Start()
 
 	
