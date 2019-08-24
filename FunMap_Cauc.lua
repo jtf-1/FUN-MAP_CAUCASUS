@@ -38,13 +38,13 @@ MenuGroundTop = MENU_COALITION:New( coalition.side.BLUE, " GROUND ATTACK MISSION
 	MenuC2Attack = MENU_COALITION:New(coalition.side.BLUE, "WiP C2 Strike", MenuGroundTop )
 
 -- ## STRIKE PACKAGE MISSIONS
-MenuStrikePackageTop = MENU_COALITION:New(coalition.side.BLUE, "WiP STRIKE PACKAGE MISSIONS" ) -- WiP
+MenuStrikePackageTop = MENU_COALITION:New(coalition.side.BLUE, "  WiP STRIKE PACKAGE MISSIONS" ) -- WiP
 
 -- ## ANTI-SHIP MISSIONS
-MenuAntiShipTop = MENU_COALITION:New(coalition.side.BLUE, "WiP ANTI-SHIP MISSIONS" ) -- WiP
+MenuAntiShipTop = MENU_COALITION:New(coalition.side.BLUE, "  WiP ANTI-SHIP MISSIONS" ) -- WiP
 
 -- ## FLEET DEFENCE MISSIONS
-MenuFleetDefenceTop = MENU_COALITION:New(coalition.side.BLUE, "WiP FLEET DEFENCE MISSIONS" ) -- WiP
+MenuFleetDefenceTop = MENU_COALITION:New(coalition.side.BLUE, "  WiP FLEET DEFENCE MISSIONS" ) -- WiP
 
   
 
