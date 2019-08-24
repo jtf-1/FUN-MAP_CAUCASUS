@@ -23,19 +23,28 @@ MenuGroundTop = MENU_COALITION:New( coalition.side.BLUE, " GROUND ATTACK MISSION
 		MenuConvoyAttackWest = MENU_COALITION:New( coalition.side.BLUE, " West Region", MenuConvoyAttack )
 		MenuConvoyAttackCentral = MENU_COALITION:New( coalition.side.BLUE, " Central Region", MenuConvoyAttack )
 	MenuAirfieldAttack = MENU_COALITION:New(coalition.side.BLUE, " Airfield Strike", MenuGroundTop )
+    MenuAirfieldAttackEast = MENU_COALITION:New( coalition.side.BLUE, " East Region", MenuAirfieldAttack )
+    MenuAirfieldAttackCentral = MENU_COALITION:New( coalition.side.BLUE, " Central Region", MenuAirfieldAttack )
+    MenuAirfieldAttackWest = MENU_COALITION:New( coalition.side.BLUE, " West Region", MenuAirfieldAttack )
 	MenuFactoryAttack = MENU_COALITION:New(coalition.side.BLUE, " Factory Strike", MenuGroundTop )
+    MenuFactoryAttackEast = MENU_COALITION:New( coalition.side.BLUE, " East Region", MenuFactoryAttack )
+    MenuFactoryAttackCentral = MENU_COALITION:New( coalition.side.BLUE, " Central Region", MenuFactoryAttack )
+    MenuFactoryAttackWest = MENU_COALITION:New( coalition.side.BLUE, " West Region", MenuFactoryAttack )
 	MenuBridgeAttack = MENU_COALITION:New(coalition.side.BLUE, " Bridge Strike", MenuGroundTop )
-	MenuCommunicationsAttack = MENU_COALITION:New(coalition.side.BLUE, "   WiP Communications Strike", MenuGroundTop )
-	MenuC2Attack = MENU_COALITION:New(coalition.side.BLUE, "   WiP C2 Strike", MenuGroundTop )
+    MenuBridgeAttackEast = MENU_COALITION:New( coalition.side.BLUE, " East Region", MenuBridgeAttack )
+    MenuBridgeAttackCentral = MENU_COALITION:New( coalition.side.BLUE, " Central Region", MenuBridgeAttack )
+    MenuBridgeAttackWest = MENU_COALITION:New( coalition.side.BLUE, " West Region", MenuBridgeAttack )
+	MenuCommunicationsAttack = MENU_COALITION:New(coalition.side.BLUE, "WiP Communications Strike", MenuGroundTop )
+	MenuC2Attack = MENU_COALITION:New(coalition.side.BLUE, "WiP C2 Strike", MenuGroundTop )
 
 -- ## STRIKE PACKAGE MISSIONS
-MenuStrikePackageTop = MENU_COALITION:New(coalition.side.BLUE, "   WiP STRIKE PACKAGE MISSIONS" ) -- WiP
+MenuStrikePackageTop = MENU_COALITION:New(coalition.side.BLUE, "WiP STRIKE PACKAGE MISSIONS" ) -- WiP
 
 -- ## ANTI-SHIP MISSIONS
-MenuAntiShipTop = MENU_COALITION:New(coalition.side.BLUE, "   WiP ANTI-SHIP MISSIONS" ) -- WiP
+MenuAntiShipTop = MENU_COALITION:New(coalition.side.BLUE, "WiP ANTI-SHIP MISSIONS" ) -- WiP
 
 -- ## FLEET DEFENCE MISSIONS
-MenuFleetDefenceTop = MENU_COALITION:New(coalition.side.BLUE, "   WiP FLEET DEFENCE MISSIONS" ) -- WiP
+MenuFleetDefenceTop = MENU_COALITION:New(coalition.side.BLUE, "WiP FLEET DEFENCE MISSIONS" ) -- WiP
 
   
 
@@ -79,23 +88,23 @@ end -- function
 
 -- ## Spawning CAP flights
 -- max 8x CAP aircraft can be spawned at each location
-function SpawnCap( _args ) --	spawnobject, spawntable { spawn, spawnzone, templates, patrolzone, aicapzone, engagerange }
+function SpawnCap( _args ) -- spawnobject, spawntable { spawn, spawnzone, templates, patrolzone, aicapzone, engagerange }
 
-	local SpawnCapTable = _args[1]
-	
-	SpawnCapTable.spawn:InitLimit( 8,9999 ) -- max 8x cap sections alive   
-		:InitRandomizeTemplate( SpawnCapTable.templates )
-		:InitCleanUp( 60 ) -- remove aircraft that have landed
-		:OnSpawnGroup(
-			function ( SpawnGroup )
-				local AICapZone = AI_CAP_ZONE:New( SpawnCapTable.patrolzone , 1000, 6000, 500, 600 )
-				AICapZone:SetControllable( SpawnGroup )
-				AICapZone:SetEngageRange( SpawnCapTable.engagerange ) -- The AI won't engage when the enemy is beyond the range defined in the cap table.  Zone detection not working :SetEngageZone( SpawnCapTable.engagezone )
-				AICapZone:__Start( 1 ) -- start patrolling in the PatrolZone.
-			end
-		)
-		:SpawnInZone( SpawnCapTable.spawnzone, true, 3000, 6000 )
-		
+  local SpawnCapTable = _args[1]
+  
+  SpawnCapTable.spawn:InitLimit( 8,9999 ) -- max 8x cap sections alive   
+    :InitRandomizeTemplate( SpawnCapTable.templates )
+    :InitCleanUp( 60 ) -- remove aircraft that have landed
+    :OnSpawnGroup(
+      function ( SpawnGroup )
+        AICapZone = AI_CAP_ZONE:New( SpawnCapTable.patrolzone , 1000, 6000, 500, 600 )
+        AICapZone:SetControllable( SpawnGroup )
+        AICapZone:SetEngageRange( SpawnCapTable.engagerange ) -- The AI won't engage when the enemy is beyond the range defined in the cap table.  Zone detection not working :SetEngageZone( SpawnCapTable.engagezone )
+        AICapZone:__Start( 1 ) -- start patrolling in the PatrolZone.
+      end
+    )
+    :SpawnInZone( SpawnCapTable.spawnzone, true, 3000, 6000 )
+    
 end --function
   
 -- ## Spawning enemy convoys
@@ -204,6 +213,7 @@ function SpawnCamp( _args ) --TemplateTable, CampsTable [ loc, town, coords, is_
 	
 end --function
 
+-- TODO: integrate camp attack, convoy strike
 function SpawnStrikeAttack ( StrikeLocation ) -- "location name"
 -- TableStrikeAttack { location { striketype {Airfield, Factory, Bridge, Communications, C2}, strikeivo, strikecoords, strikemission, strikethreats, strikezone, striketargets, medzones { zone, is_open }, smallzones { zone, is_open }, defassets { sam, aaa, manpad, armour}, spawnobjects {}, is_open } 
 local FuncDebug = false
@@ -221,7 +231,10 @@ local FuncDebug = false
 		local ArmourQty = math.random( 1, TableStrikeAttack[StrikeLocation].defassets.armour ) -- number of armour groups 1-max spawn in SAM zones. SamQty + ArmourQty MUST NOT exceed MedZonesCount
 		local StrikeMarkZone = ZONE:FindByName( TableStrikeAttack[StrikeLocation].strikezone ) -- ZONE object for zone named in strikezone 
 		
-		-- ## Check sufficient zones exist for the mission air defences
+    -----------------------------------------------------------------
+		--- Check sufficient zones exist for the mission air defences ---
+		-----------------------------------------------------------------
+		
 		if SamQty + ArmourQty > MedZonesCount then
 			local msg = TableStrikeAttack[StrikeLocation].strikename .. " Error! SAM+Armour count exceedes medium zones count"
 			MESSAGE:New ( msg, 10, "" ):ToAll()
@@ -232,7 +245,11 @@ local FuncDebug = false
 			return
 		end
 
-		if TableStrikeAttack[StrikeLocation].striketype == "Factory" then -- refresh the static objects in case they've been detroyed
+    ------------------------------------------------------------------------
+    --- Refresh static objects in case they've previously been destroyed ---
+    ------------------------------------------------------------------------
+
+		if TableStrikeAttack[StrikeLocation].striketype == "Factory" then 
 			for index, staticname in ipairs(TableStrikeAttack[StrikeLocation].striketargets) do
 				local AssetStrikeStaticName = staticname
 				local AssetStrikeStatic = STATIC:FindByName( AssetStrikeStaticName )
@@ -240,7 +257,10 @@ local FuncDebug = false
 			end
 		end
 		
-		-- ## add strike defence assets
+    ---------------------------------
+		--- add strike defence assets ---
+		---------------------------------
+		
 		function AddStrikeAssets (AssetType, AssetQty, AssetZoneType, AssetZonesCount ) -- AssetType ["sam", "aaa", "manpads", "armour"], AssetQty, AssetZoneType ["med", "small"], AssetZonesCount
 
 			local TableStrikeAssetZones = {}
@@ -281,29 +301,41 @@ local FuncDebug = false
 			end
 		end
 		
-		-- ## add SAM assets
+    -------------------------
+    --- Call asset spawns ---
+    -------------------------
+  
+		-- add SAM assets
 		AddStrikeAssets( "sam", SamQty, "med", MedZonesCount ) -- AssetType ["sam", "aaa", "manpads", "armour"], AssetQty, AssetZoneType ["med", "small"], AssetZonesCount
 		
-		-- ## add AAA assets
+		-- add AAA assets
 		AddStrikeAssets( "aaa", AaaQty, "small", SmallZonesCount )
 		
-		-- ## add Manpad assets
+		-- add Manpad assets
 		AddStrikeAssets( "manpads", ManpadQty, "small", SmallZonesCount )
 		
-		-- ## add armour assets
+		-- add armour assets
 		AddStrikeAssets( "armour", ArmourQty, "med", MedZonesCount )
 
-    -- ## Create Mission Mark on F10 map
+    --------------------------------------
+    --- Create Mission Mark on F10 map ---
+    --------------------------------------
+    
     local StrikeMarkCoord = StrikeMarkZone:GetCoordinate() -- get coordinates of strikezone
     local StrikeMarkLabel = TableStrikeAttack[StrikeLocation].strikename -- create label for map mark
       .. " "
       .. TableStrikeAttack[StrikeLocation].striketype
-      .. " Strike" 
+      .. " Strike"
+      .. " "
+      .. TableStrikeAttack[StrikeLocation].strikeregion 
       .. "\n" .. TableStrikeAttack[StrikeLocation].strikecoords
     local StrikeMark = StrikeMarkCoord:MarkToAll(StrikeMarkLabel, true) -- add mark to map
     TableStrikeAttack[StrikeLocation].strikemarkid = StrikeMark -- add mark ID to table 
       		
-		-- ## Send briefing message
+    -----------------------------
+		--- Send briefing message ---
+		-----------------------------
+		
 		local strikeAttackBrief = "++++++++++++++++++++++++++++++++++++"
 			..	"\n\nAir Interdiction mission against "
 			.. TableStrikeAttack[StrikeLocation].strikename
@@ -322,7 +354,10 @@ local FuncDebug = false
 	
 		TableStrikeAttack[StrikeLocation].is_open = false -- mark strike mission as active
 		
-		-- ## menu: add mission remove menu command and remove mission start command
+    ------------------------------------------------------------------------------
+		--- menu: add mission remove command and remove mission start command ---
+		------------------------------------------------------------------------------
+		
 		_G["Cmd" .. StrikeLocation .. "AttackRemove"] = MENU_COALITION_COMMAND:New( coalition.side.BLUE, "Remove Mission", _G["Menu" .. TableStrikeAttack[StrikeLocation].striketype .. "Attack" .. StrikeLocation], RemoveStrikeAttack, StrikeLocation )
 		_G["Cmd" .. StrikeLocation .. "Attack"]:Remove()
 		
@@ -341,7 +376,10 @@ BASE:TraceOnOff( false )
 
 end --function
 
--- ## Remove strike attack mission
+------------------------------------
+--- Remove strike attack mission ---
+------------------------------------
+
 function RemoveStrikeAttack ( StrikeLocation )
 BASE:TraceOnOff( false )
 BASE:TraceAll( true )
@@ -379,7 +417,10 @@ BASE:TraceOnOff( false )
 end --function
 
 
--- ## Remove oldest spawn in a mission
+----------------------------------------
+--- Remove oldest spawn in a mission ---
+----------------------------------------
+
 function RemoveSpawn( _args )
 
 	local RemoveSpawnGroupTable = _args[1]
@@ -444,28 +485,38 @@ tarawagroup:PatrolRoute()
 -- BEGIN SUPPORT AC SECTION
 
 
+---------------------------------------------------
+--- Define spawn zones with trigger zones in ME ---
+---------------------------------------------------
 
--- ## Define spawn zones with trigger zones in ME
 Zone_AAR_1 = ZONE:FindByName( "AAR_1_Zone" ) 
 Zone_AWACS_1 = ZONE:FindByName( "AWACS_1_Zone" )
 Zone_Red_AWACS_1 = ZONE:FindByName( "RED_AWACS_1_Zone" ) 
 
--- ## define table of support aircraft to be spawned
--- [spawnobjectname, spawnstub, spawnzone}
-TableSpawnSupport = {
+------------------------------------------------------
+--- define table of support aircraft to be spawned ---
+------------------------------------------------------
+
+TableSpawnSupport = { -- {spawnobjectname, spawnstub, spawnzone}
 	{spawnobject = "Tanker_C130_Arco1", spawnzone = Zone_AAR_1},
 	{spawnobject = "Tanker_KC135_Shell1", spawnzone = Zone_AAR_1},
 	{spawnobject = "AWACS_Magic", spawnzone = Zone_AWACS_1},
 	{spawnobject = "RED_AWACS_108", spawnzone = Zone_Red_AWACS_1},
 }
 
--- ## spawn support aircraft
+------------------------------
+--- spawn support aircraft ---
+------------------------------
+
 for i, v in ipairs( TableSpawnSupport ) do
 	SpawnSupport ( v )
 	
 end
 
--- ## Recovery Tanker Stennis
+-------------------------------
+--- Recovery Tanker Stennis ---
+-------------------------------
+
 Spawn_Tanker_S3B_Texaco1 = RECOVERYTANKER:New( UNIT:FindByName( "CSG_CarrierGrp_Stennis"), "Tanker_S3B_Texaco1" )
 
 Spawn_Tanker_S3B_Texaco1:SetCallsign(CALLSIGN.Tanker.Texaco, 1)
@@ -475,7 +526,9 @@ Spawn_Tanker_S3B_Texaco1:SetCallsign(CALLSIGN.Tanker.Texaco, 1)
 	:SetTakeoffAir()
 	:Start()
 
--- ## Resuce Helo Stennis
+---------------------------
+--- Resuce Helo Stennis ---
+---------------------------
 
 Spawn_Rescuehelo_Stennis = RESCUEHELO:New(UNIT:FindByName("CSG_CarrierGrp_Stennis"), "RescueHelo_Stennis")
 
@@ -490,8 +543,10 @@ Spawn_Rescuehelo_Stennis:SetRespawnInAir()
 -- BEGIN RANGE SECTION
 
 
+------------------
+--- GG33 Range ---
+------------------
 
--- ## GG33 Range
 local bombtarget_GG33 = {
 	"RANGE_GG33_bombing_01", 
 	"RANGE_GG33_bombing_02",
@@ -525,7 +580,10 @@ Range_GG33:AddStrafePit( strafepit_GG33, 3000, 300, nil, true, 20, fouldist_GG33
 Range_GG33:AddBombingTargets( bombtarget_GG33, 50 )
 Range_GG33:Start()
 
--- ## NL24 Range
+------------------
+--- NL24 Range ---
+------------------
+
 local bombtarget_NL24={
 	"RANGE_NL24_NORTH_bombing", 
 	"RANGE_NL24_SOUTH_bombing",
@@ -572,44 +630,61 @@ Range_NL24:Start()
 -- On Spawning, the host will be replaced with a goup selected radomly from a list of templates
 
 
--- ## CAP spawn stubs
+-----------------------
+--- CAP spawn stubs ---
+-----------------------
+
 MaykopCapSpawn = SPAWN:New( "MaykopCap" )
 BeslanCapSpawn = SPAWN:New( "BeslanCap" )
 
--- ## CAP spawn zones
-MaykopCapSpawnZone = ZONE:New( "ZONE_MaykopCapSpawn" )
-BeslanCapSpawnZone = ZONE:New( "ZONE_BeslanCapSpawn" )
+-----------------------
+--- CAP spawn zones ---
+-----------------------
 
--- ## CAP spawn templates
+MaykopCapSpawnZone = ZONE:FindByName( "ZONE_MaykopCapSpawn" )
+BeslanCapSpawnZone = ZONE:FindByName( "ZONE_BeslanCapSpawn" )
+
+---------------------------
+--- CAP spawn templates ---
+---------------------------
+
 CapTemplates = {
 	"Russia_Mig29",
 	"Russia_Mig21",
 	"Russia_Su27"
 }
 
--- ## AICapzone patrol and engage zones
+-----------------------------------------
+--- AICapzone patrol and engage zones ---
+-----------------------------------------
+
 WestCapPatrolGroup = GROUP:FindByName( "PolyPatrolWest" )
 WestCapPatrolZone = ZONE_POLYGON:New( "ZONE_PatrolWest", WestCapPatrolGroup )
 WestCapEngageGroup = GROUP:FindByName( "PolyEngageWest" )
 WestCapEngageZone = ZONE_POLYGON:New( "ZONE_EngageWest", WestCapEngageGroup )
 
 EastCapPatrolGroup = GROUP:FindByName( "PolyPatrolEast" )
-EastCapPatrolZone = ZONE_POLYGON:New( "ZONE_PatrolEast", WestCapPatrolGroup )
+EastCapPatrolZone = ZONE_POLYGON:New( "ZONE_PatrolEast", EastCapPatrolGroup )
 EastCapEngageGroup = GROUP:FindByName( "PolyEngageEast" )
 EastCapEngageZone = ZONE_POLYGON:New( "ZONE_EngageEast", EastCapEngageGroup )
 
--- ## table containing CAP spawn config per location 
+------------------------------------------------------
+--- table containing CAP spawn config per location ---
+------------------------------------------------------
+
 CapTable = { -- spawn location, { spawn, spawnzone, templates, patrolzone, engagerange } ...
-	maykop = { 
-		spawn = MaykopCapSpawn, spawnzone = MaykopCapSpawnZone, templates = CapTemplates, patrolzone = WestCapPatrolZone, engagerange = 100000
-	},
-	beslan = { 
-		spawn = BeslanCapSpawn, spawnzone = BeslanCapSpawnZone, templates = CapTemplates, patrolzone = EastCapPatrolZone, engagerange = 100000
-	},
+  maykop = { 
+    spawn = MaykopCapSpawn, spawnzone = MaykopCapSpawnZone, templates = CapTemplates, patrolzone = WestCapPatrolZone, engagerange = 60000
+  },
+  beslan = { 
+    spawn = BeslanCapSpawn, spawnzone = BeslanCapSpawnZone, templates = CapTemplates, patrolzone = EastCapPatrolZone, engagerange = 60000
+  },
 }
 
--- ## Maykop CAP
--- spawn, spawnzone, templates, patrolzone, aicapzone, engagerange 
+------------------
+--- Maykop CAP ---
+------------------
+
 _maykop_args = { -- args passed to spawn menu option
 	CapTable.maykop,
 }
@@ -617,7 +692,10 @@ _maykop_args = { -- args passed to spawn menu option
 CmdMaykopCap = MENU_COALITION_COMMAND:New( coalition.side.BLUE,"Spawn Maykop CAP", MenuCapMaykop, SpawnCap, _maykop_args ) -- Spawn CAP flight
 CmdMaykopCapRemove = MENU_COALITION_COMMAND:New( coalition.side.BLUE,"Remove Oldest Maykop CAP", MenuCapMaykop, RemoveSpawn, _maykop_args ) -- Remove the oldest CAP flight for location
 
--- ## Beslan CAP
+------------------
+--- Beslan CAP ---
+------------------
+
 _beslan_args = { 
 	CapTable.beslan,
 }
@@ -632,8 +710,10 @@ CmdBeslanCapRemove = MENU_COALITION_COMMAND:New( coalition.side.BLUE,"Remove old
 -- BEGIN CAMP ATTACK SECTION
 
 
+-------------------------------------------------
+--- table containing camp spawns per location ---
+-------------------------------------------------
 
--- ## table containing camp spawns per location
 TableCamps = { -- map portion, { camp zone, nearest town, Lat Long, spawned status } ...
 	east = {
 		{ 
@@ -787,8 +867,10 @@ TableCamps = { -- map portion, { camp zone, nearest town, Lat Long, spawned stat
 	}
 }
 
+------------------------
+--- Camp spawn stubs ---
+------------------------
 
--- ## Camp spawn stubs
 CampAttackSpawn = SPAWN:New( "CAMP_Heavy" )
 SpawnTent = SPAWN:New( "CAMP_Tent_01" )
 SpawnHouse01 = SPAWN:New( "CAMP_House_01" )
@@ -802,7 +884,10 @@ SpawnInfSingle = SPAWN:New( "CAMP_Inf_01" )
 SpawnTentGroup = SPAWN:New( "CAMP_Tent_Group" )
 SpawnInfGroup = SPAWN:New( "CAMP_Inf_02" )
 
--- ## Camp spawn templates
+----------------------------
+--- Camp spawn templates ---
+----------------------------
+
 ArmourTemplates = {
 	"CAMP_Heavy_01",
 	"CAMP_Heavy_02",
@@ -810,7 +895,11 @@ ArmourTemplates = {
 	"CAMP_Heavy_04"
 } 
 
--- ## East Zones
+-------------------------
+--- Add menu commands ---
+-------------------------
+
+-- East zones
 _east_args = {
 	ArmourTemplates,
 	TableCamps.east,
@@ -819,7 +908,7 @@ _east_args = {
 
 cmdCampAttackEast = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Eastern Zone",MenuCampAttack,SpawnCamp, _east_args )
 
--- ## Central Zones
+-- Central Zones
 _central_args = {
 	ArmourTemplates,
 	TableCamps.central,
@@ -827,7 +916,7 @@ _central_args = {
 }
 cmdCampAttackCentral = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Central Zone",MenuCampAttack,SpawnCamp, _central_args )
 
--- ## West Zones
+-- West Zones
  _West_args = {
 	ArmourTemplates,
 	TableCamps.west,
@@ -835,14 +924,12 @@ cmdCampAttackCentral = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Central
 }
 cmdCampAttackWest = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Western Zone",MenuCampAttack,SpawnCamp, _West_args )
 
-
--- ## To Do Remove oldest Camp Attack mission
+-- TODO: Remove oldest Camp Attack mission
 _campattackremove_args = { 
 	CampAttackSpawn,
 	SpawnTentGroup,
 	SpawnInfGroup
 }
-
 --cmdCampAttackRemove = MENU_COALITION_COMMAND:New( coalition.side.BLUE, " Remove oldest mission", MenuCampAttack, RemoveSpawnGroup, _campattackremove_args )
 
 
@@ -853,7 +940,7 @@ _campattackremove_args = {
 -- ## Able Sentry Convoy
 -- Convoy is spawned at mission start and will advance North->South on highway B3 towards Tbilisi
 -- On reaching Mtskehta it will respawn at the start of the route.
-Zone_ConvoyObjectiveAbleSentry = ZONE:New( "ConvoyObjectiveAbleSentry" ) 
+Zone_ConvoyObjectiveAbleSentry = ZONE:FindByName( "ConvoyObjectiveAbleSentry" ) 
 
 Spawn_Convoy_AbleSentry = SPAWN:New( "CONVOY_Hard_Able Sentry" )
 	:InitLimit( 20, 50 )
@@ -877,9 +964,9 @@ end -- function
 
 cmdConvoyAbleSentryReset = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Able Sentry Reset",MenuConvoyAttack, ResetAbleSentry )
 
-
--- ## On-demand convoy missions 
-
+---------------------------------
+--- On-demand convoy missions ---
+---------------------------------
 
 SpawnConvoys = { -- map portion, { spawn host, nearest town, Lat Long, destination zone, spawned status } ...
 	west = {
@@ -1003,20 +1090,46 @@ cmdConvoyAttackSoftWest = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Supp
 
 
 
--- TableStrikeAttack { location { striketype {Airfield, Factory, Bridge}, strikename, strikeivo, strikecoords, strikemission, strikethreats, strikezone, striketargets, medzones { zone, is_open }, smallzones { zone, is_open }, defassets { sam, aaa, manpad, armour}, spawnobjects {}, is_open } 
+--- TableStrikeAttack table 
+-- @type TableStrikeAttack
+-- @field #table location key
+-- @field #string striketype type of strike; Airfield, Factory, Bridge, Communications, C2
+-- @field #string strikeregion Region in which mission is located (East, Central, West)
+-- @field #string strikename Friendly name for the location used in briefings, menus etc. Currently the same as the key, but will probably change
+-- @field #string strikeivo "in the vacinity of" ("AFB" if airfield, "[TOWN/CITY]" other targets)
+-- @field #string strikecoords LatLong
+-- @field #string strikemission mission description
+-- @field #string strikethreats threats description
+-- @field #string ME zone at center of strike location
+-- @field #table striketargets static objects to be respawned for object point strikes (Factory, refinery etc)
+-- @field #table medzones ME zones in which medium assets will be spawned. (AAA batteries, vehicle groups, infantry groups etc)
+-- @field #string loc ME defence zone at location
+-- @field #boolean is_open tracks whether defence zone is occupied
+-- @field #table ME zones in which small assets will be spawned
+-- @field #string loc ME defence zone at location
+-- @field #boolean is_open tracks whether defence zone is occupied
+-- @field #table defassets max number of each defence asset. sum of zone types used must not exceed number of zone type available
+-- @field #number sam uses medzones
+-- @field #number aaa uses smallzones
+-- @field #number manpads uses smallzones
+-- @field #number armour uses medzones
+-- @field #table spawnobjects table holding names of the spawned objects relating the mission
+-- @field #boolean is_open mission status. true if mission is avilable for spawning. false if it is in-progress
+
 TableStrikeAttack = {
-	Beslan = { 																		-- location key
-		striketype = "Airfield", 													-- (Airfield, Factory, Bridge, Communications, C2)
-		strikename = "Beslan",														-- Firendly name for the locaiton used in briefings, menus etc. Currently the same as the key, but will probably change
-		strikeivo = "AFB",															-- "in the vacinity of" ("AFB" if airfield, "[TOWN/CITY]" other targets)
-		strikecoords = "43  12  20 N | 044  36  20 E", 								-- LatLong
-		strikemission = "CRATER RUNWAY AND ATTRITE AVIATION ASSETS ON THE GROUND", 	-- text mission
-		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",					-- text threats
-		strikezone = "ZONE_BeslanStrike",											-- zone at center of strike location
-		striketargets = {															-- static objects to be respawned for object point strikes (Factory, refinery etc)
+	Beslan = { 
+		striketype = "Airfield", 
+    strikeregion = "East",                          
+		strikename = "Beslan",
+		strikeivo = "AFB", 
+		strikecoords = "43  12  20 N | 044  36  20 E",
+		strikemission = "CRATER RUNWAY AND ATTRITE AVIATION ASSETS ON THE GROUND",
+		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
+		strikezone = "ZONE_BeslanStrike",
+		striketargets = {
 		},
-		medzones = {																-- ME zones in which medium assets will be spawned. (AAA batteries, vehicle groups, infantry groups etc) 
-			{ loc = "ZONE_BeslanMed_01", is_open = true },							-- loc = name of mission defence ME zone. is-open tracks whether zone is occupied
+		medzones = { 
+			{ loc = "ZONE_BeslanMed_01", is_open = true },
 			{ loc = "ZONE_BeslanMed_02", is_open = true },
 			{ loc = "ZONE_BeslanMed_03", is_open = true },
 			{ loc = "ZONE_BeslanMed_04", is_open = true },
@@ -1027,7 +1140,7 @@ TableStrikeAttack = {
 			{ loc = "ZONE_BeslanMed_09", is_open = true },
 			{ loc = "ZONE_BeslanMed_10", is_open = true },
 		},
-		smallzones = {																-- ME zones in which small assets will be spawned
+		smallzones = {
 			{ loc = "ZONE_BeslanSmall_01", is_open = true },
 			{ loc = "ZONE_BeslanSmall_02", is_open = true },
 			{ loc = "ZONE_BeslanSmall_03", is_open = true },
@@ -1039,17 +1152,18 @@ TableStrikeAttack = {
 			{ loc = "ZONE_BeslanSmall_09", is_open = true },
 			{ loc = "ZONE_BeslanSmall_10", is_open = true },
 		},
-		defassets = { 																-- max number of each defence asset. sum of zone types used must not exceed number of zone type available
-			sam = 4,																-- uses medzones
-			aaa = 5,																-- uses smallzones
-			manpad = 3,																-- uses smallzones
-			armour = 3,																-- uses medzones
+		defassets = {
+			sam = 4,
+			aaa = 5,
+			manpad = 3, 
+			armour = 3,
 		},
-		spawnobjects = {},															-- table holding names of the spawned objects relating the mission.
-		is_open = true,																-- mission status. true if mission is avilable for spawning. false if it is in-progress
+		spawnobjects = {},
+		is_open = true,
 	},
-	Sochi = { -- Airfield
+	Sochi = {
 		striketype = "Airfield",
+    strikeregion = "West",                            
 		strikename = "Sochi",
 		strikeivo = "AFB",
 		strikecoords = "43  26  41 N | 039  56  32 E",
@@ -1091,8 +1205,9 @@ TableStrikeAttack = {
 		spawnobjects = {},
 		is_open = true,
 	},
-	Maykop = { -- Airfield
+	Maykop = {
 		striketype = "Airfield",
+    strikeregion = "West",                            
 		strikename = "Maykop",
 		strikeivo = "AFB",
 		strikecoords = "44  40  54 N | 040  02  08 E",
@@ -1125,7 +1240,7 @@ TableStrikeAttack = {
 			{ loc = "ZONE_MaykopSmall_09", is_open = true },
 			{ loc = "ZONE_MaykopSmall_10", is_open = true },
 		},
-		defassets = { -- max number of each defence asset
+		defassets = {
 			sam = 4,
 			aaa = 5,
 			manpad = 3,
@@ -1134,8 +1249,9 @@ TableStrikeAttack = {
 		spawnobjects = {},
 		is_open = true,
 	},
-	Nalchik = { -- Airfield
+	Nalchik = { 
 		striketype = "Airfield",
+    strikeregion = "Central",                            
 		strikename = "Nalchik",
 		strikeivo = "AFB",
 		strikecoords = "43  30  53 N | 043  38  17 E",
@@ -1168,7 +1284,7 @@ TableStrikeAttack = {
 			{ loc = "ZONE_NalchikSmall_09", is_open = true },
 			{ loc = "ZONE_NalchikSmall_10", is_open = true },
 		},
-		defassets = { -- max number of each defence asset
+		defassets = { 
 			sam = 4,
 			aaa = 5,
 			manpad = 3,
@@ -1177,8 +1293,9 @@ TableStrikeAttack = {
 		spawnobjects = {},
 		is_open = true,
 	},
-	MN76 = { -- Factory strike
+	MN76 = { 
 		striketype = "Factory",
+    strikeregion = "East",                            
 		strikename = "MN76",
 		strikeivo = "Vladikavkaz",
 		strikecoords = "43  00  23 N | 044  39  02 E",
@@ -1206,7 +1323,7 @@ TableStrikeAttack = {
 			{ loc = "ZONE_MN76Small_04", is_open = true },
 			{ loc = "ZONE_MN76Small_05", is_open = true },
 		},
-		defassets = { -- max number of each defence asset
+		defassets = { 
 			sam = 2, 
 			aaa = 3, 
 			manpad = 2, 
@@ -1215,8 +1332,9 @@ TableStrikeAttack = {
 		spawnobjects = {},
 		is_open = true,
 	},
-	LN83 = { -- Factory strike
+	LN83 = { 
 		striketype = "Factory",
+    strikeregion = "Central",                            
 		strikename = "LN83",
 		strikeivo = "Chiora",
 		strikecoords = "42  44  56 N | 043  32  28 E",
@@ -1241,7 +1359,7 @@ TableStrikeAttack = {
 			{ loc = "ZONE_LN83Small_04", is_open = true },
 			{ loc = "ZONE_LN83Small_05", is_open = true },
 		},
-		defassets = { -- max number of each defence asset
+		defassets = { 
 			sam = 2, 
 			aaa = 3, 
 			manpad = 2, 
@@ -1250,8 +1368,9 @@ TableStrikeAttack = {
 		spawnobjects = {},
 		is_open = true,
 	},
-	LN77 = { -- Factory strike
+	LN77 = { 
 		striketype = "Factory",
+    strikeregion = "Central",                            
 		strikename = "LN77",
 		strikeivo = "Verh.Balkaria",
 		strikecoords = "43  07  35 N | 043  27  24 E",
@@ -1278,7 +1397,7 @@ TableStrikeAttack = {
 			{ loc = "ZONE_LN77Small_04", is_open = true },
 			{ loc = "ZONE_LN77Small_05", is_open = true },
 		},
-		defassets = { -- max number of each defence asset
+		defassets = { 
 			sam = 2, 
 			aaa = 3, 
 			manpad = 1, 
@@ -1287,8 +1406,9 @@ TableStrikeAttack = {
 		spawnobjects = {},
 		is_open = true,
 	},
-	LP30 = { -- Factory strike
+	LP30 = { 
 		striketype = "Factory",
+    strikeregion = "Central",                            
 		strikename = "LP30",
 		strikeivo = "Tyrnyauz",
 		strikecoords = "43  23  43 N | 042  55  27 E",
@@ -1317,7 +1437,7 @@ TableStrikeAttack = {
 			{ loc = "ZONE_LP30Small_06", is_open = true },
 			{ loc = "ZONE_LP30Small_07", is_open = true },
 		},
-		defassets = { -- max number of each defence asset
+		defassets = { 
 			sam = 2, 
 			aaa = 3, 
 			manpad = 2, 
@@ -1326,8 +1446,9 @@ TableStrikeAttack = {
 		spawnobjects = {},
 		is_open = true,
 	},
-	GJ38 = { -- Bridge strike
+	GJ38 = { 
 		striketype = "Bridge",
+    strikeregion = "West",                            
 		strikename = "GJ38",
 		strikeivo = "Ust Dzheguta",
 		strikecoords = "DMPI A 44  04  38 N | 041  58  15 E\n\nDMPI B 44  04  23 N | 041  58  34 E",
@@ -1359,7 +1480,7 @@ TableStrikeAttack = {
 			{ loc = "ZONE_GJ38Small_09", is_open = true },
 			{ loc = "ZONE_GJ38Small_10", is_open = true },
 		},
-		defassets = { -- max number of each defence asset
+		defassets = { 
 			sam = 2, 
 			aaa = 4, 
 			manpad = 3, 
@@ -1368,8 +1489,9 @@ TableStrikeAttack = {
 		spawnobjects = {},
 		is_open = true,
 	},
-	MN72 = { -- Bridge strike
+	MN72 = { 
 		striketype = "Bridge",
+    strikeregion = "East",                            
 		strikename = "MN72",
 		strikeivo = "Kazbegi",
 		strikecoords = "44  04  38 N | 041  58  15 E",
@@ -1401,7 +1523,7 @@ TableStrikeAttack = {
 			{ loc = "ZONE_MN72Small_09", is_open = true },
 			{ loc = "ZONE_MN72Small_10", is_open = true },
 		},
-		defassets = { -- max number of each defence asset
+		defassets = { 
 			sam = 2, 
 			aaa = 4, 
 			manpad = 2, 
@@ -1410,8 +1532,9 @@ TableStrikeAttack = {
 		spawnobjects = {},
 		is_open = true,
 	},
-	GJ21 = { -- Bridge strike
+	GJ21 = { 
 		striketype = "Bridge",
+    strikeregion = "West",                            
 		strikename = "GJ21",
 		strikeivo = "Teberda",
 		strikecoords = "43  26  47 N | 041  44  28 E",
@@ -1443,7 +1566,7 @@ TableStrikeAttack = {
 			{ loc = "ZONE_GJ21Small_09", is_open = true },
 			{ loc = "ZONE_GJ21Small_10", is_open = true },
 		},
-		defassets = { -- max number of each defence asset
+		defassets = { 
 			sam = 2, 
 			aaa = 4, 
 			manpad = 1, 
@@ -1454,32 +1577,11 @@ TableStrikeAttack = {
 	},
 }
 
--- ## generate defence zones
--- for strikekey, strikevalue in pairs(TableStrikeAttack) do
---[[
-    -- Strike zone
-    --local strikezonename = strikevalue.strikezone
-    --local zonestrikezonename = "ZONE" .. strikezonename
-    --_G[ zonestrikezonename ] = ZONE:New( strikezonename )
-		--
-		 
-		-- SAM zones
-		for count = 1, #strikevalue.medzones do
-				local samzonename = strikevalue.medzones[ count ].loc
-				local samspawnzonename = "SPAWN" .. samzonename
-				_G[ samspawnzonename ] = ZONE:New( samzonename )
-		end
 
-		-- AAA zones
-		for count = 1, #strikevalue.smallzones do
-				local aaazonename = strikevalue.smallzones[ count ].loc
-				local aaaspawnzonename = "SPAWN" .. aaazonename
-				_G[ aaaspawnzonename ] = ZONE:New( aaazonename )
-		end
-end
---]]
+--------------------------------------
+--- strike Defence spawn templates ---
+--------------------------------------
 
--- ## strike Defence spawn templates
 TableDefTemplates = {
 	sam = {
 		"SAM_Sa3Battery",
@@ -1503,7 +1605,10 @@ TableDefTemplates = {
 	},
 }
 
--- ## generate strike defence spawn stubs
+-------------------------------------------
+--- generate strike defence spawn stubs ---
+-------------------------------------------
+
 StrikeAttackSpawn = SPAWN:New( "DEF_Stub" )
 
 for k, v in pairs(TableDefTemplates) do
@@ -1524,15 +1629,18 @@ TableStaticTemplates = {
 	},
 }
 
--- ## generate strike attack sub menus
+------------------------------------------
+--- menu: generate strike attack menus ---
+------------------------------------------
 
 for strikekey, strikevalue in pairs(TableStrikeAttack) do -- step through TableStrikeAttack and grab the mission data for each key ( = "location")
 
 	local StrikeType = strikevalue.striketype
+	local StrikeRegion = strikevalue.strikeregion
 	local StrikeLocation = strikevalue.strikename
 	local StrikeIvo = strikevalue.strikeivo
 
-	_G["Menu" .. StrikeType .. "Attack" .. StrikeLocation] = MENU_COALITION:New( coalition.side.BLUE, StrikeLocation .. " " .. StrikeIvo, _G["Menu" .. StrikeType .. "Attack"] ) -- add menu for each mission location in the correct strike type sub menu
+	_G["Menu" .. StrikeType .. "Attack" .. StrikeLocation] = MENU_COALITION:New( coalition.side.BLUE, StrikeLocation .. " " .. StrikeIvo, _G["Menu" .. StrikeType .. "Attack" .. StrikeRegion] ) -- add menu for each mission location in the correct strike type sub menu
 	_G["Cmd" .. StrikeLocation .. "Attack"] = MENU_COALITION_COMMAND:New( coalition.side.BLUE, "Start Mission", _G["Menu" .. StrikeType .. "Attack" .. StrikeLocation], SpawnStrikeAttack, StrikeLocation ) -- add menu command to launch the mission
 
 end
