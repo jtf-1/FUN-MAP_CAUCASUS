@@ -13,8 +13,8 @@ Bullseye 42'11'11 N | 041'40'44 E
 TANKERS
 
 Track LM:
-Arco 1-1  [C130]  35X, 276.5, FL160
-Shell 1-1 [KC135] 115X, 317.5, FL200
+- Arco 1-1  [C130]  35X, 276.5, FL160
+- Shell 1-1 [KC135] 115X, 317.5, FL200
 
 Stennis Hawk;
 Texaco 1-1 [S-3B] 15Y, 317.775, FL060
@@ -44,8 +44,8 @@ FARPS
 
 Dublin:
 - COORDS 42 19 47 N | 043 26 08 E
-- BOSS 250.775 AM
-(Use BOSS for AI ATC and to activate FARP lights)
+- AIBOSS 250.775 AM
+(Use AIRBOSS for AI ATC and to activate FARP lights)
 
 ON DEMAND ENEMY CAP
 
@@ -68,8 +68,9 @@ ON DEMAND GROUND ATTACK MISSIONS
 
 RANGE COMPLEX
 
-GG33, NL24
-Range Control: 250.000
+- GG33
+- NL24
+- Range Control: 250.000
 
 Ranges are script scored and have an F10 menu system you can use to manage them.
 
