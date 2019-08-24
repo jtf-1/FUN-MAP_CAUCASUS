@@ -1,0 +1,79 @@
+Welcome to the CSG-1 Caucasus Fun Map!
+
+
+Please make yourself aware of the following information:
+
+
+AWACS
+
+Magic 1-1, 367.575
+
+Bullseye 42'11'11 N | 041'40'44 E
+
+TANKERS
+
+Track LM:
+- Arco 1-1  [C130]  35X, 276.5, FL160
+- Shell 1-1 [KC135] 115X, 317.5, FL200
+
+Stennis Hawk;
+Texaco 1-1 [S-3B] 15Y, 317.775, FL060
+
+
+
+NAVAL OPERATIONS
+
+Strike: 357.775
+Marshall: 285.675
+
+Stennis:
+- BRC 280'
+- TACAN 74X 
+- ILCS: Channel 4
+- Tower/Paddles: 308.475 AM 
+(Use CV TWR alt freq 289.025 to call AI Tower to reqest landing. This also activates lights at night)
+
+Tarawa:
+- BRC 280'
+- TACAN 1X
+- ILCS Channel 2
+- Tower/Paddles: 255.725
+(Use LHA TWR alt freq 278.325 to call AI Tower for landing)
+
+FARPS
+
+Dublin:
+- COORDS 42 19 47 N | 043 26 08 E
+- AIBOSS 250.775 AM
+(Use AIRBOSS for AI ATC and to activate FARP lights)
+
+ON DEMAND ENEMY CAP
+
+Enemy CAP flights are available on demand. CAP flights can be managed for locations at which they are available through the F10 menu. A maximum of 8x concurrent CAP aircraft may be alive at each location. A menu option is also available to remove the oldest spawned CAP flight at each location.
+
+
+ON DEMAND GROUND ATTACK MISSIONS
+
+**Insurgent Camp Attack:  Strike missions are available, on-demand, via the F-10 menu. Camps can be spawned at a series of random locations, South of the Russian border, within the Eastern, Central and Western portions of the map (8x potential locations in each). A mission brief will be displayed with the location of the camp (nearest town and coordinates). A menu option is also available to remove the oldest spawned insurgent camp.
+
+**Convoy Attack: Strike missions against enemoy convoys are available, on-demand, via the F-10 menu. Options are available to spawn both armoured and soft convoys, at a series of random locations within the Central and Western portions of the map. A mission brief will be displayed indicating the last known location of the convoy, its anticipated destination and the threats within it.
+
+**Strategic Strike Attacks: Strike missions are available, on demand, via the F10 menu. Air defences can be spawned at a series of target locations North of the Russian border. A mission brief will be displayed confirming the name of the chosen location, the coordinates of the main target center, and the anticipated threats. A mark, with a label listing the strike name and its coordinates, will be placed on the F10 map at the strike location. A menu option is also available to remove the mission after it has been spawned. The following target categories are selectable;
+
+- Airfield
+- Factory
+- Bridge
+- Communications
+- C2
+
+RANGE COMPLEX
+
+- GG33
+- NL24
+- Range Control: 250.000
+
+Ranges are script scored and have an F10 menu system you can use to manage them.
+
+Bomb targets are scored on the proximity of the last round to the target. Smoke will be used to mark the round's impact.
+
+Strafe Pits, where available, are configured with two targets. Aircraft must be below 3000ft AGL and within 500ft either side of the inbound heading to the target to avoid a foul pass. Rounds fired after the foul line will not count.
