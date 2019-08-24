@@ -1448,7 +1448,7 @@ TableStrikeAttack = {
 	},
 	GJ38 = { 
 		striketype = "Bridge",
-    strikeregion = "West",                            
+    strikeregion = "Central",                            
 		strikename = "GJ38",
 		strikeivo = "Ust Dzheguta",
 		strikecoords = "DMPI A 44  04  38 N | 041  58  15 E\n\nDMPI B 44  04  23 N | 041  58  34 E",
@@ -1534,7 +1534,7 @@ TableStrikeAttack = {
 	},
 	GJ21 = { 
 		striketype = "Bridge",
-    strikeregion = "West",                            
+    strikeregion = "Central",                            
 		strikename = "GJ21",
 		strikeivo = "Teberda",
 		strikecoords = "43  26  47 N | 041  44  28 E",
