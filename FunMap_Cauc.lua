@@ -543,7 +543,7 @@ tarawagroup:PatrolRoute()
 --- Airboss Stennis ---
 -----------------------
 
-  airbossStennis=AIRBOSS:New( "CSG_CarrierGrp_Stennis", "CVN-74 Stennis" )
+  airbossStennis=AIRBOSS:New( "CSG_CarrierGrp_Stennis", "Stennis" )
 
   local stennisCase        = 1
   local stennisOffset_deg    = 0
