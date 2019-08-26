@@ -469,19 +469,6 @@ end --function
 
 
 -- END UTILITY FUNCTIONS
--- BEGIN BOAT SECTION
-
-
-
-stennisgroup = GROUP:FindByName( "CSG_CarrierGrp_Stennis" )
-stennisgroup:PatrolRoute()
-
-tarawagroup = GROUP:FindByName( "CSG_CarrierGrp_Tarawa" )
-tarawagroup:PatrolRoute()
-
-
-
--- END BOAT SECTION
 -- BEGIN SUPPORT AC SECTION
 
 
@@ -523,8 +510,10 @@ Spawn_Tanker_S3B_Texaco1:SetCallsign(CALLSIGN.Tanker.Texaco, 1)
 	:SetTACAN(15, "TEX")
 	:SetRadio(317.775)
 	:SetModex(049)
-	:SetTakeoffAir()
+	-- :SetTakeoffAir()
+  :SetRespawnInAir()
 	:Start()
+
 
 ---------------------------
 --- Resuce Helo Stennis ---
@@ -534,13 +523,52 @@ Spawn_Rescuehelo_Stennis = RESCUEHELO:New(UNIT:FindByName("CSG_CarrierGrp_Stenni
 
 Spawn_Rescuehelo_Stennis:SetRespawnInAir()
   :SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Stennis_03"))
+  :SetRescueStopBoatOff()
 	:Start()
-
 	
 
-	
 -- END SUPPORT AC SECTION
+-- BEGIN BOAT SECTION
+
+
+--[[
+stennisgroup = GROUP:FindByName( "CSG_CarrierGrp_Stennis" )
+stennisgroup:PatrolRoute()
+
+tarawagroup = GROUP:FindByName( "CSG_CarrierGrp_Stennis" )
+tarawagroup:PatrolRoute()
+--]]
+
+-----------------------
+--- Airboss Stennis ---
+-----------------------
+
+  airbossStennis=AIRBOSS:New( "CSG_CarrierGrp_Stennis", "CVN-74 Stennis" )
+
+  local stennisCase        = 1
+  local stennisOffset_deg    = 0
+
+  airbossStennis:SetSoundfilesFolder("Airboss Soundfiles/")
+  airbossStennis:SetICLS( 4,"STN" )
+  airbossStennis:SetCarrierControlledArea( 50 )
+  airbossStennis:SetDespawnOnEngineShutdown( true )
+  airbossStennis:SetRecoveryTanker( Spawn_Tanker_S3B_Texaco1 )
+  airbossStennis:SetMarshalRadio( 285.675, "AM" )
+  airbossStennis:SetLSORadio( 308.475, "AM" )
+  airbossStennis:SetRadioRelayLSO( Spawn_Tanker_S3B_Texaco1:GetUnitName() )
+  airbossStennis:SetRadioRelayMarshal( Spawn_Tanker_S3B_Texaco1:GetUnitName() )
+  airbossStennis:AddRecoveryWindow( "10:01", "16:00", stennisCase, stennisOffset_deg )
+  airbossStennis:SetAirbossNiceGuy( true )
+  airbossStennis:SetRespawnAI()
+
+  airbossStennis:Start()
+
+Spawn_Tanker_S3B_Texaco1:SetRecoveryAirboss( true )
+
+
+-- END BOAT SECTION
 -- BEGIN RANGE SECTION
+
 
 
 ------------------
