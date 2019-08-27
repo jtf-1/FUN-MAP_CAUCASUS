@@ -1,9 +1,6 @@
---CSG-1 Caucasus Fun Map MOOSE Mission Script
-
-
-
-env.info( '*** CSG-1 Caucasus Fun Map MOOSE script ***' )
-env.info( '*** CSG-1 MOOSE MISSION SCRIPT START ***' )
+env.info( '*** JTF-1 Caucasus Fun Map MOOSE script ***' )
+env.info( '*** JTF-1 COMMIT DATE: 2019-08-27 ***' )
+env.info( '*** JTF-1 MOOSE MISSION SCRIPT START ***' )
 
 GlobalDebug = false
 
@@ -531,23 +528,19 @@ Spawn_Rescuehelo_Stennis:SetRespawnInAir()
 -- BEGIN BOAT SECTION
 
 
---[[
-stennisgroup = GROUP:FindByName( "CSG_CarrierGrp_Stennis" )
-stennisgroup:PatrolRoute()
-
-tarawagroup = GROUP:FindByName( "CSG_CarrierGrp_Stennis" )
-tarawagroup:PatrolRoute()
---]]
-
 -----------------------
 --- Airboss Stennis ---
 -----------------------
 
   airbossStennis=AIRBOSS:New( "CSG_CarrierGrp_Stennis", "Stennis" )
 
+  airbossStennis:Load(nil, "Cauc_Airboss-USS Stennis_LSOgrades.csv")
+  airbossStennis:SetAutoSave(nil, "Cauc_Airboss-USS Stennis_LSOgrades.csv")
+
   local stennisCase        = 1
   local stennisOffset_deg    = 0
-
+ 
+  airbossStennis:SetMenuRecovery(30, 25, false, 30)
   airbossStennis:SetSoundfilesFolder("Airboss Soundfiles/")
   airbossStennis:SetICLS( 4,"STN" )
   airbossStennis:SetCarrierControlledArea( 50 )
@@ -557,7 +550,7 @@ tarawagroup:PatrolRoute()
   airbossStennis:SetLSORadio( 308.475, "AM" )
   airbossStennis:SetRadioRelayLSO( Spawn_Tanker_S3B_Texaco1:GetUnitName() )
   airbossStennis:SetRadioRelayMarshal( Spawn_Tanker_S3B_Texaco1:GetUnitName() )
-  airbossStennis:AddRecoveryWindow( "10:01", "16:00", stennisCase, stennisOffset_deg )
+  airbossStennis:AddRecoveryWindow( "10:01", "16:00", stennisCase, stennisOffset_deg, true, 20 )
   airbossStennis:SetAirbossNiceGuy( true )
   airbossStennis:SetRespawnAI()
 
