@@ -1,8 +1,6 @@
-env.info( '*** JTF-1 Caucasus Fun Map MOOSE script ***' )
-env.info( '*** JTF-1 COMMIT DATE: 2019-08-27 ***' )
-env.info( '*** JTF-1 MOOSE MISSION SCRIPT START ***' )
-
-GlobalDebug = false
+env.info( "*** JTF-1 Caucasus Fun Map MOOSE script ***" )
+env.info( "*** JTF-1 COMMIT DATE: 2019-08-28 ***" )
+env.info( "*** JTF-1 MOOSE MISSION SCRIPT START ***" )
 
 -- BEGIN MENU DEFINITIONS
 
@@ -211,33 +209,33 @@ function SpawnCamp( _args ) --TemplateTable, CampsTable [ loc, town, coords, is_
 end --function
 
 -- TODO: integrate camp attack, convoy strike
-function SpawnStrikeAttack ( StrikeLocation ) -- "location name"
--- TableStrikeAttack { location { striketype {Airfield, Factory, Bridge, Communications, C2}, strikeivo, strikecoords, strikemission, strikethreats, strikezone, striketargets, medzones { zone, is_open }, smallzones { zone, is_open }, defassets { sam, aaa, manpad, armour}, spawnobjects {}, is_open } 
-local FuncDebug = false
+function SpawnStrikeAttack ( StrikeIndex ) -- "location name"
+  -- TableStrikeAttack { { striketype [Airfield, Factory, Bridge, Communications, C2], strikeivo, strikecoords, strikemission, strikethreats, strikezone, striketargets, medzones { zone, is_open }, smallzones { zone, is_open }, defassets { sam, aaa, manpad, armour}, spawnobjects {}, is_open } 
+  local FuncDebug = false
 
 	BASE:TraceOnOff( false )
 	BASE:TraceAll( true )
 
-	if TableStrikeAttack[StrikeLocation].is_open then
+	if TableStrikeAttack[StrikeIndex].is_open then
 
-		local MedZonesCount = #TableStrikeAttack[StrikeLocation].medzones -- number of medium defzones
-		local SmallZonesCount = #TableStrikeAttack[StrikeLocation].smallzones -- number of small defzones
-		local SamQty = math.random( 2, TableStrikeAttack[StrikeLocation].defassets.sam ) -- number of SAM defences min 2
-		local AaaQty = math.random( 2, TableStrikeAttack[StrikeLocation].defassets.aaa ) -- number of AAA defences min 2
-		local ManpadQty = math.random( 1, TableStrikeAttack[StrikeLocation].defassets.manpad ) -- number of manpad defences 1-max spawn in AAA zones. AaaQty + ManpadQty MUST NOT exceed SmallZonesCount
-		local ArmourQty = math.random( 1, TableStrikeAttack[StrikeLocation].defassets.armour ) -- number of armour groups 1-max spawn in SAM zones. SamQty + ArmourQty MUST NOT exceed MedZonesCount
-		local StrikeMarkZone = ZONE:FindByName( TableStrikeAttack[StrikeLocation].strikezone ) -- ZONE object for zone named in strikezone 
+		local MedZonesCount = #TableStrikeAttack[StrikeIndex].medzones -- number of medium defzones
+		local SmallZonesCount = #TableStrikeAttack[StrikeIndex].smallzones -- number of small defzones
+		local SamQty = math.random( 2, TableStrikeAttack[StrikeIndex].defassets.sam ) -- number of SAM defences min 2
+		local AaaQty = math.random( 2, TableStrikeAttack[StrikeIndex].defassets.aaa ) -- number of AAA defences min 2
+		local ManpadQty = math.random( 1, TableStrikeAttack[StrikeIndex].defassets.manpad ) -- number of manpad defences 1-max spawn in AAA zones. AaaQty + ManpadQty MUST NOT exceed SmallZonesCount
+		local ArmourQty = math.random( 1, TableStrikeAttack[StrikeIndex].defassets.armour ) -- number of armour groups 1-max spawn in SAM zones. SamQty + ArmourQty MUST NOT exceed MedZonesCount
+		local StrikeMarkZone = ZONE:FindByName( TableStrikeAttack[StrikeIndex].strikezone ) -- ZONE object for zone named in strikezone 
 		
     -----------------------------------------------------------------
 		--- Check sufficient zones exist for the mission air defences ---
 		-----------------------------------------------------------------
 		
 		if SamQty + ArmourQty > MedZonesCount then
-			local msg = TableStrikeAttack[StrikeLocation].strikename .. " Error! SAM+Armour count exceedes medium zones count"
+			local msg = TableStrikeAttack[StrikeIndex].strikename .. " Error! SAM+Armour count exceedes medium zones count"
 			MESSAGE:New ( msg, 10, "" ):ToAll()
 			return
 		elseif AaaQty + ManpadQty > SmallZonesCount then
-			local msg = TableStrikeAttack[StrikeLocation].strikename .. " Error! AAA+MANPAD count exceedes small zones count"
+			local msg = TableStrikeAttack[StrikeIndex].strikename .. " Error! AAA+MANPAD count exceedes small zones count"
 			MESSAGE:New ( msg, 10, "" ):ToAll()
 			return
 		end
@@ -245,9 +243,9 @@ local FuncDebug = false
     ------------------------------------------------------------------------
     --- Refresh static objects in case they've previously been destroyed ---
     ------------------------------------------------------------------------
-
-		if TableStrikeAttack[StrikeLocation].striketype == "Factory" then 
-			for index, staticname in ipairs(TableStrikeAttack[StrikeLocation].striketargets) do
+    MESSAGE:New ( "striketargets length = " .. #TableStrikeAttack[StrikeIndex].striketargets, 10, "" ):ToAll()
+		if #TableStrikeAttack[StrikeIndex].striketargets > 0 then 
+			for index, staticname in ipairs(TableStrikeAttack[StrikeIndex].striketargets) do
 				local AssetStrikeStaticName = staticname
 				local AssetStrikeStatic = STATIC:FindByName( AssetStrikeStaticName )
 				AssetStrikeStatic:ReSpawn( country.id.RUSSIA )
@@ -260,42 +258,47 @@ local FuncDebug = false
 		
 		function AddStrikeAssets (AssetType, AssetQty, AssetZoneType, AssetZonesCount ) -- AssetType ["sam", "aaa", "manpads", "armour"], AssetQty, AssetZoneType ["med", "small"], AssetZonesCount
 
-			local TableStrikeAssetZones = {}
+			if AssetQty > 0 then
+			
+  			local TableStrikeAssetZones = {}
+  
+  			-- select indexes of zones in which to spawn assets 
+  			for count=1, AssetQty do 
+  				local zoneindex = math.random( 1, AssetZonesCount )
+  				if AssetZoneType == "med" then
+  					while ( not TableStrikeAttack[StrikeIndex].medzones[zoneindex].is_open ) do -- ensure selected zone has not been used
+  						zoneindex = math.random ( 1, AssetZonesCount )
+  					end
+  					TableStrikeAttack[StrikeIndex].medzones[zoneindex].is_open = false -- close samzone for selection
+  				else
+  					while ( not TableStrikeAttack[StrikeIndex].smallzones[zoneindex].is_open ) do -- ensure selected zone has not been used
+  						zoneindex = math.random ( 1, AssetZonesCount )
+  					end
+  					TableStrikeAttack[StrikeIndex].smallzones[zoneindex].is_open = false -- close aaazone for selection
+  				end
+  				TableStrikeAssetZones[count] = zoneindex -- add selected zone to list
+  				
+  			end
+  
+  			-- spawn assets
+  			for count = 1, #TableStrikeAssetZones do
+  				-- randomise template (MOOSE removes unit orientation in template)
+  				local DefTemplateIndex = math.random( 1, #TableDefTemplates[AssetType] ) -- generate random index for template
+  				local AssetTemplate = TableDefTemplates[AssetType][DefTemplateIndex] -- select indexed template
+  				local AssetSpawnStub = _G["DEFSTUB_" .. AssetTemplate] -- _G[contenation for name of generated DEFSTUB_ spawn]
+  				local assetzoneindex = TableStrikeAssetZones[count]
+  				if AssetZoneType == "med" then -- medzone 
+  					assetspawnzone = ZONE:FindByName( TableStrikeAttack[StrikeIndex].medzones[assetzoneindex].loc ) -- _G[concatenation for name of generated spawnzone]
+  				else -- smallzone
+  					assetspawnzone = ZONE:FindByName( TableStrikeAttack[StrikeIndex].smallzones[assetzoneindex].loc ) -- _G["SPAWN" .. TableStrikeAttack[StrikeIndex].smallzones[assetzoneindex].loc]
+  				end
+  				AssetSpawnStub:SpawnInZone( assetspawnzone ) -- spawn asset in zone in generated zone list
+  				local assetspawngroup, assetspawngroupindex = AssetSpawnStub:GetLastAliveGroup()
+  				table.insert(TableStrikeAttack[StrikeIndex].spawnobjects, assetspawngroup )
+  			end
 
-			-- select indexes of zones in which to spawn assets 
-			for count=1, AssetQty do 
-				local zoneindex = math.random( 1, AssetZonesCount )
-				if AssetZoneType == "med" then
-					while ( not TableStrikeAttack[StrikeLocation].medzones[zoneindex].is_open ) do -- ensure selected zone has not been used
-						zoneindex = math.random ( 1, AssetZonesCount )
-					end
-					TableStrikeAttack[StrikeLocation].medzones[zoneindex].is_open = false -- close samzone for selection
-				else
-					while ( not TableStrikeAttack[StrikeLocation].smallzones[zoneindex].is_open ) do -- ensure selected zone has not been used
-						zoneindex = math.random ( 1, AssetZonesCount )
-					end
-					TableStrikeAttack[StrikeLocation].smallzones[zoneindex].is_open = false -- close aaazone for selection
-				end
-				TableStrikeAssetZones[count] = zoneindex -- add selected zone to list
-				
-			end
+      end
 
-			-- spawn assets
-			for count = 1, #TableStrikeAssetZones do
-				-- randomise template (MOOSE removes unit orientation in template)
-				local DefTemplateIndex = math.random( 1, #TableDefTemplates[AssetType] ) -- generate random index for template
-				local AssetTemplate = TableDefTemplates[AssetType][DefTemplateIndex] -- select indexed template
-				local AssetSpawnStub = _G["DEFSTUB_" .. AssetTemplate] -- _G[contenation for name of generated DEFSTUB_ spawn]
-				local assetzoneindex = TableStrikeAssetZones[count]
-				if AssetZoneType == "med" then -- medzone 
-					assetspawnzone = ZONE:FindByName( TableStrikeAttack[StrikeLocation].medzones[assetzoneindex].loc ) -- _G[concatenation for name of generated spawnzone]
-				else -- smallzone
-					assetspawnzone = ZONE:FindByName( TableStrikeAttack[StrikeLocation].smallzones[assetzoneindex].loc ) -- _G["SPAWN" .. TableStrikeAttack[StrikeLocation].smallzones[assetzoneindex].loc]
-				end
-				AssetSpawnStub:SpawnInZone( assetspawnzone ) -- spawn asset in zone in generated zone list
-				local assetspawngroup, assetspawngroupindex = AssetSpawnStub:GetLastAliveGroup()
-				table.insert(TableStrikeAttack[StrikeLocation].spawnobjects, assetspawngroup )
-			end
 		end
 		
     -------------------------
@@ -303,31 +306,36 @@ local FuncDebug = false
     -------------------------
   
 		-- add SAM assets
-		AddStrikeAssets( "sam", SamQty, "med", MedZonesCount ) -- AssetType ["sam", "aaa", "manpads", "armour"], AssetQty, AssetZoneType ["med", "small"], AssetZonesCount
-		
+		if SamQty ~= nil then
+		  AddStrikeAssets( "sam", SamQty, "med", MedZonesCount ) -- AssetType ["sam", "aaa", "manpads", "armour"], AssetQty, AssetZoneType ["med", "small"], AssetZonesCount
+		end
 		-- add AAA assets
-		AddStrikeAssets( "aaa", AaaQty, "small", SmallZonesCount )
-		
+		if SamQty ~= nil then
+		  AddStrikeAssets( "aaa", AaaQty, "small", SmallZonesCount )
+		end
 		-- add Manpad assets
-		AddStrikeAssets( "manpads", ManpadQty, "small", SmallZonesCount )
-		
+		if ManPadQty ~= nil then
+				AddStrikeAssets( "manpads", ManpadQty, "small", SmallZonesCount )
+		end
 		-- add armour assets
-		AddStrikeAssets( "armour", ArmourQty, "med", MedZonesCount )
-
+		if ArmourQty ~= nil then
+		  AddStrikeAssets( "armour", ArmourQty, "med", MedZonesCount )
+    end
+    
     --------------------------------------
     --- Create Mission Mark on F10 map ---
     --------------------------------------
     
     local StrikeMarkCoord = StrikeMarkZone:GetCoordinate() -- get coordinates of strikezone
-    local StrikeMarkLabel = TableStrikeAttack[StrikeLocation].strikename -- create label for map mark
+    local StrikeMarkLabel = TableStrikeAttack[StrikeIndex].strikename -- create label for map mark
       .. " "
-      .. TableStrikeAttack[StrikeLocation].striketype
+      .. TableStrikeAttack[StrikeIndex].striketype
       .. " Strike"
       .. " "
-      .. TableStrikeAttack[StrikeLocation].strikeregion 
-      .. "\n" .. TableStrikeAttack[StrikeLocation].strikecoords
+      .. TableStrikeAttack[StrikeIndex].strikeregion 
+      .. "\n" .. TableStrikeAttack[StrikeIndex].strikecoords
     local StrikeMark = StrikeMarkCoord:MarkToAll(StrikeMarkLabel, true) -- add mark to map
-    TableStrikeAttack[StrikeLocation].strikemarkid = StrikeMark -- add mark ID to table 
+    TableStrikeAttack[StrikeIndex].strikemarkid = StrikeMark -- add mark ID to table 
       		
     -----------------------------
 		--- Send briefing message ---
@@ -335,13 +343,13 @@ local FuncDebug = false
 		
 		local strikeAttackBrief = "++++++++++++++++++++++++++++++++++++"
 			..	"\n\nAir Interdiction mission against "
-			.. TableStrikeAttack[StrikeLocation].strikename
+			.. TableStrikeAttack[StrikeIndex].strikename
 			.. " "
-			.. TableStrikeAttack[StrikeLocation].striketype
+			.. TableStrikeAttack[StrikeIndex].striketype
 			.. "\n\nMission: "
-			.. TableStrikeAttack[StrikeLocation].strikemission
+			.. TableStrikeAttack[StrikeIndex].strikemission
 			.. "\n\nCoordinates: "
-			.. TableStrikeAttack[StrikeLocation].strikecoords
+			.. TableStrikeAttack[StrikeIndex].strikecoords
 			.. "\n\nThreats:  "
 			.. "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR"
 			.. "\n\n++++++++++++++++++++++++++++++++++++"
@@ -349,23 +357,21 @@ local FuncDebug = false
 		MESSAGE:New ( strikeAttackBrief, 30, "" ):ToAll()
 		
 	
-		TableStrikeAttack[StrikeLocation].is_open = false -- mark strike mission as active
+		TableStrikeAttack[StrikeIndex].is_open = false -- mark strike mission as active
 		
     ------------------------------------------------------------------------------
 		--- menu: add mission remove command and remove mission start command ---
 		------------------------------------------------------------------------------
 		
-		_G["Cmd" .. StrikeLocation .. "AttackRemove"] = MENU_COALITION_COMMAND:New( coalition.side.BLUE, "Remove Mission", _G["Menu" .. TableStrikeAttack[StrikeLocation].striketype .. "Attack" .. StrikeLocation], RemoveStrikeAttack, StrikeLocation )
-		_G["Cmd" .. StrikeLocation .. "Attack"]:Remove()
+		_G["Cmd" .. StrikeIndex .. "AttackRemove"] = MENU_COALITION_COMMAND:New( coalition.side.BLUE, "Remove Mission", _G["Menu" .. TableStrikeAttack[StrikeIndex].striketype .. "Attack" .. StrikeIndex], RemoveStrikeAttack, StrikeIndex )
+		_G["Cmd" .. StrikeIndex .. "Attack"]:Remove()
 		
 	else
-		msg = "++++++++++++++++++++++++++++++++++++" 
-			.. "\n\nThe " 
-			.. TableStrikeAttack[StrikeLocation].strikename
+		msg = "\n\nThe " 
+			.. TableStrikeAttack[StrikeIndex].strikename
 			.. " "
-			.. TableStrikeAttack[StrikeLocation].striketype
-			.. " strike attack mission is already active."
-			.. "\n\n++++++++++++++++++++++++++++++++++++"
+			.. TableStrikeAttack[StrikeIndex].striketype
+			.. " strike attack mission is already active!"
 		MESSAGE:New( msg, 10, "" ):ToAll()
 	end
 
@@ -377,36 +383,39 @@ end --function
 --- Remove strike attack mission ---
 ------------------------------------
 
-function RemoveStrikeAttack ( StrikeLocation )
+function RemoveStrikeAttack ( StrikeIndex )
 BASE:TraceOnOff( false )
 BASE:TraceAll( true )
 
-	if not TableStrikeAttack[StrikeLocation].is_open then
-		local objectcount = #TableStrikeAttack[StrikeLocation].spawnobjects
+	if not TableStrikeAttack[StrikeIndex].is_open then
+		local objectcount = #TableStrikeAttack[StrikeIndex].spawnobjects
 		for count = 1, objectcount do
-			local removespawnobject = TableStrikeAttack[StrikeLocation].spawnobjects[count]
+			local removespawnobject = TableStrikeAttack[StrikeIndex].spawnobjects[count]
 			if removespawnobject:IsAlive() then
 				
 				removespawnobject:Destroy( false )
 			end
 		end
 		
-		COORDINATE:RemoveMark( TableStrikeAttack[StrikeLocation].strikemarkid ) -- remove mark from map
+		COORDINATE:RemoveMark( TableStrikeAttack[StrikeIndex].strikemarkid ) -- remove mark from map
 		
-		TableStrikeAttack[StrikeLocation].strikemarkid = nil -- reset map mark ID
-		TableStrikeAttack[StrikeLocation].spawnobjects = {} -- clear list of now despawned objects
-		TableStrikeAttack[StrikeLocation].is_open = true -- set strike mission as available
+		TableStrikeAttack[StrikeIndex].strikemarkid = nil -- reset map mark ID
+		TableStrikeAttack[StrikeIndex].spawnobjects = {} -- clear list of now despawned objects
+		TableStrikeAttack[StrikeIndex].is_open = true -- set strike mission as available
 		
 		-- ## menu: add mission start menu command and remove mission remove command
-		_G["Cmd" .. StrikeLocation .. "Attack"] = MENU_COALITION_COMMAND:New( coalition.side.BLUE, "Start Mission", _G["Menu" .. TableStrikeAttack[StrikeLocation].striketype .. "Attack" .. StrikeLocation], SpawnStrikeAttack, StrikeLocation )
-		_G["Cmd" .. StrikeLocation .. "AttackRemove"]:Remove()
+		_G["Cmd" .. StrikeIndex .. "Attack"] = MENU_COALITION_COMMAND:New( coalition.side.BLUE, "Start Mission", _G["Menu" .. TableStrikeAttack[StrikeIndex].striketype .. "Attack" .. StrikeIndex], SpawnStrikeAttack, StrikeIndex )
+		_G["Cmd" .. StrikeIndex .. "AttackRemove"]:Remove()
+
+    msg = "\n\nThe " 
+      .. TableStrikeAttack[StrikeIndex].strikename
+      .. " strike attack mission has been removed."
+    MESSAGE:New( msg, 10, "" ):ToAll()
 
 	else
-		msg = "++++++++++++++++++++++++++++++++++++" 
-			.. "\n\nThe " 
-			.. StrikeLocation
-			.. " strike attack mission is not active."
-			.. "\n\n++++++++++++++++++++++++++++++++++++"
+		msg = "\n\nThe " 
+			.. TableStrikeAttack[StrikeIndex].strikename
+			.. " strike attack mission is not active!"
 		MESSAGE:New( msg, 10, "" ):ToAll()
 	end
 BASE:TraceOnOff( false )
@@ -513,7 +522,7 @@ Spawn_Tanker_S3B_Texaco1:SetCallsign(CALLSIGN.Tanker.Texaco, 1)
 
 
 ---------------------------
---- Resuce Helo Stennis ---
+--- Rescue Helo Stennis ---
 ---------------------------
 
 Spawn_Rescuehelo_Stennis = RESCUEHELO:New(UNIT:FindByName("CSG_CarrierGrp_Stennis"), "RescueHelo_Stennis")
@@ -522,6 +531,17 @@ Spawn_Rescuehelo_Stennis:SetRespawnInAir()
   :SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Stennis_03"))
   :SetRescueStopBoatOff()
 	:Start()
+
+---------------------------
+--- Rescue Helo Tarwa ---
+---------------------------
+
+Spawn_Rescuehelo_Tarawa = RESCUEHELO:New(UNIT:FindByName("CSG_CarrierGrp_Tarawa"), "RescueHelo_Tarawa")
+
+Spawn_Rescuehelo_Tarawa:SetRespawnInAir()
+  :SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Tarawa_03"))
+  :SetRescueStopBoatOff()
+  :Start()
 	
 
 -- END SUPPORT AC SECTION
@@ -532,31 +552,62 @@ Spawn_Rescuehelo_Stennis:SetRespawnInAir()
 --- Airboss Stennis ---
 -----------------------
 
-  airbossStennis=AIRBOSS:New( "CSG_CarrierGrp_Stennis", "Stennis" )
+airbossStennis=AIRBOSS:New( "CSG_CarrierGrp_Stennis", "Stennis" )
 
-  airbossStennis:Load(nil, "Cauc_Airboss-USS Stennis_LSOgrades.csv")
-  airbossStennis:SetAutoSave(nil, "Cauc_Airboss-USS Stennis_LSOgrades.csv")
+airbossStennis:Load(nil, "Cauc_Airboss-USS Stennis_LSOgrades.csv")
+airbossStennis:SetAutoSave(nil, "Cauc_Airboss-USS Stennis_LSOgrades.csv")
 
-  local stennisCase        = 1
-  local stennisOffset_deg    = 0
+local stennisCase = 1
+local stennisOffset_deg = 0
  
-  airbossStennis:SetMenuRecovery(30, 25, false, 30)
-  airbossStennis:SetSoundfilesFolder("Airboss Soundfiles/")
-  airbossStennis:SetICLS( 4,"STN" )
-  airbossStennis:SetCarrierControlledArea( 50 )
-  airbossStennis:SetDespawnOnEngineShutdown( true )
-  airbossStennis:SetRecoveryTanker( Spawn_Tanker_S3B_Texaco1 )
-  airbossStennis:SetMarshalRadio( 285.675, "AM" )
-  airbossStennis:SetLSORadio( 308.475, "AM" )
-  airbossStennis:SetRadioRelayLSO( Spawn_Tanker_S3B_Texaco1:GetUnitName() )
-  airbossStennis:SetRadioRelayMarshal( Spawn_Tanker_S3B_Texaco1:GetUnitName() )
-  airbossStennis:AddRecoveryWindow( "10:01", "16:00", stennisCase, stennisOffset_deg, true, 20 )
-  airbossStennis:SetAirbossNiceGuy( true )
-  airbossStennis:SetRespawnAI()
+airbossStennis:SetMenuRecovery(30, 25, false, 30)
+airbossStennis:SetSoundfilesFolder("Airboss Soundfiles/")
+airbossStennis:SetTACAN(74,"X","STN")
+airbossStennis:SetICLS( 4,"STN" )
+airbossStennis:SetCarrierControlledArea( 50 )
+airbossStennis:SetDespawnOnEngineShutdown( true )
+airbossStennis:SetRecoveryTanker( Spawn_Tanker_S3B_Texaco1 )
+airbossStennis:SetMarshalRadio( 285.675, "AM" )
+airbossStennis:SetLSORadio( 308.475, "AM" )
+airbossStennis:SetRadioRelayLSO( Spawn_Tanker_S3B_Texaco1:GetUnitName() )
+airbossStennis:SetRadioRelayMarshal( Spawn_Tanker_S3B_Texaco1:GetUnitName() )
+airbossStennis:AddRecoveryWindow( "10:01", "16:00", stennisCase, stennisOffset_deg, true, 20 )
+airbossStennis:SetAirbossNiceGuy( true )
+airbossStennis:SetDefaultPlayerSkill(AIRBOSS.Difficulty.Normal)
+airbossStennis:SetRespawnAI()
 
-  airbossStennis:Start()
+airbossStennis:Start()
 
 Spawn_Tanker_S3B_Texaco1:SetRecoveryAirboss( true )
+
+-----------------------
+--- Airboss Tarawa ---
+-----------------------
+
+airbossTarawa=AIRBOSS:New( "CSG_CarrierGrp_Tarawa", "Tarawa" )
+
+airbossTarawa:Load(nil, "Cauc_Airboss-USS Tarawa_LSOgrades.csv")
+airbossTarawa:SetAutoSave(nil, "Cauc_Airboss-USS Tarawa_LSOgrades.csv")
+
+local tarawaCase = 1
+local tarawaOffset_deg = 0
+ 
+airbossTarawa:SetMenuRecovery(30, 25, false, 30)
+airbossTarawa:SetSoundfilesFolder("Airboss Soundfiles/")
+airbossTarawa:SetTACAN(1,"X","TAR")
+airbossTarawa:SetICLS( 1,"TAR" )
+airbossTarawa:SetCarrierControlledArea( 50 )
+airbossTarawa:SetDespawnOnEngineShutdown( true )
+airbossTarawa:SetMarshalRadio( 285.675, "AM" )
+airbossTarawa:SetLSORadio( 255.725, "AM" )
+airbossTarawa:SetRadioRelayLSO( Spawn_Rescuehelo_Tarawa:GetUnitName() )
+airbossTarawa:SetRadioRelayMarshal( Spawn_Rescuehelo_Tarawa:GetUnitName() )
+airbossTarawa:AddRecoveryWindow( "10:01", "16:00", tarawaCase, tarawaOffset_deg, true, 20 )
+airbossTarawa:SetAirbossNiceGuy( true )
+airbossTarawa:SetDefaultPlayerSkill(AIRBOSS.Difficulty.Normal)
+airbossTarawa:SetRespawnAI()
+
+airbossTarawa:Start()
 
 
 -- END BOAT SECTION
@@ -1113,7 +1164,6 @@ cmdConvoyAttackSoftWest = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Supp
 
 --- TableStrikeAttack table 
 -- @type TableStrikeAttack
--- @field #table location key
 -- @field #string striketype type of strike; Airfield, Factory, Bridge, Communications, C2
 -- @field #string strikeregion Region in which mission is located (East, Central, West)
 -- @field #string strikename Friendly name for the location used in briefings, menus etc. Currently the same as the key, but will probably change
@@ -1137,8 +1187,10 @@ cmdConvoyAttackSoftWest = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Supp
 -- @field #table spawnobjects table holding names of the spawned objects relating the mission
 -- @field #boolean is_open mission status. true if mission is avilable for spawning. false if it is in-progress
 
+-- XXX: TableStrikeAttack
+
 TableStrikeAttack = {
-	Beslan = { 
+	{ --Beslan 
 		striketype = "Airfield", 
     strikeregion = "East",                          
 		strikename = "Beslan",
@@ -1148,6 +1200,11 @@ TableStrikeAttack = {
 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_BeslanStrike",
 		striketargets = {
+		  "BESLAN_STATIC_01",
+      "BESLAN_STATIC_02",
+      "BESLAN_STATIC_03",
+      "BESLAN_STATIC_04",
+      "BESLAN_STATIC_05",
 		},
 		medzones = { 
 			{ loc = "ZONE_BeslanMed_01", is_open = true },
@@ -1182,7 +1239,7 @@ TableStrikeAttack = {
 		spawnobjects = {},
 		is_open = true,
 	},
-	Sochi = {
+	{ -- Sochi
 		striketype = "Airfield",
     strikeregion = "West",                            
 		strikename = "Sochi",
@@ -1192,6 +1249,14 @@ TableStrikeAttack = {
 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_SochiStrike",
 		striketargets = {
+		"SOCHI_STATIC_01",
+    "SOCHI_STATIC_02",
+    "SOCHI_STATIC_03",
+    "SOCHI_STATIC_04",
+    "SOCHI_STATIC_05",
+    "SOCHI_STATIC_06",
+    "SOCHI_STATIC_07",
+    "SOCHI_STATIC_08",
 		},
 		medzones = {
 			{ loc = "ZONE_SochiMed_01", is_open = true },
@@ -1226,7 +1291,7 @@ TableStrikeAttack = {
 		spawnobjects = {},
 		is_open = true,
 	},
-	Maykop = {
+	{ -- Maykop
 		striketype = "Airfield",
     strikeregion = "West",                            
 		strikename = "Maykop",
@@ -1236,6 +1301,15 @@ TableStrikeAttack = {
 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_MaykopStrike",
 		striketargets = {
+		"MAYKOP_STATIC_01",
+    "MAYKOP_STATIC_02",
+    "MAYKOP_STATIC_03",
+    "MAYKOP_STATIC_04",
+    "MAYKOP_STATIC_05",
+    "MAYKOP_STATIC_06",
+    "MAYKOP_STATIC_07",
+    "MAYKOP_STATIC_08",
+    "MAYKOP_STATIC_09",
 		},
 		medzones = {
 			{ loc = "ZONE_MaykopMed_01", is_open = true },
@@ -1270,7 +1344,7 @@ TableStrikeAttack = {
 		spawnobjects = {},
 		is_open = true,
 	},
-	Nalchik = { 
+	{ -- Nalchik 
 		striketype = "Airfield",
     strikeregion = "Central",                            
 		strikename = "Nalchik",
@@ -1280,6 +1354,12 @@ TableStrikeAttack = {
 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_NalchikStrike",
 		striketargets = {
+		"NALCHIK_STATIC_01",
+    "NALCHIK_STATIC_02",
+    "NALCHIK_STATIC_03",
+    "NALCHIK_STATIC_04",
+    "NALCHIK_STATIC_05",
+    "NALCHIK_STATIC_06",
 		},
 		medzones = {
 			{ loc = "ZONE_NalchikMed_01", is_open = true },
@@ -1314,7 +1394,7 @@ TableStrikeAttack = {
 		spawnobjects = {},
 		is_open = true,
 	},
-	MN76 = { 
+	{ -- MN76 
 		striketype = "Factory",
     strikeregion = "East",                            
 		strikename = "MN76",
@@ -1324,11 +1404,11 @@ TableStrikeAttack = {
 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_MN76Strike",
 		striketargets = {
-			"FACTORY_MN76_01",
-			"FACTORY_MN76_02",
-			"FACTORY_MN76_03",
-			"FACTORY_MN76_04",
-			"FACTORY_MN76_05",
+		"MN76_STATIC_01",
+    "MN76_STATIC_02",
+    "MN76_STATIC_03",
+    "MN76_STATIC_04",
+    "MN76_STATIC_05",
 		},
 		medzones = {
 			{ loc = "ZONE_MN76Med_01", is_open = true },
@@ -1353,7 +1433,7 @@ TableStrikeAttack = {
 		spawnobjects = {},
 		is_open = true,
 	},
-	LN83 = { 
+	{ -- LN83 
 		striketype = "Factory",
     strikeregion = "Central",                            
 		strikename = "LN83",
@@ -1363,8 +1443,8 @@ TableStrikeAttack = {
 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_LN83Strike",
 		striketargets = {
-			"FACTORY_LN83_01",
-			"FACTORY_LN83_02",
+		"LN83_STATIC_01,",
+		"LN83_STATIC_02",
 		},
 		medzones = {
 			{ loc = "ZONE_LN83Med_01", is_open = true },
@@ -1389,7 +1469,7 @@ TableStrikeAttack = {
 		spawnobjects = {},
 		is_open = true,
 	},
-	LN77 = { 
+	{ -- LN77 
 		striketype = "Factory",
     strikeregion = "Central",                            
 		strikename = "LN77",
@@ -1399,10 +1479,10 @@ TableStrikeAttack = {
 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_LN77Strike",
 		striketargets = {
-      "FACTORY_LN77_01",
-      "FACTORY_LN77_02",
-      "FACTORY_LN77_03",
-      "FACTORY_LN77_04",
+		"LN77_STATIC_01",
+    "LN77_STATIC_02",
+    "LN77_STATIC_03",
+    "LN77_STATIC_04",
 		},
 		medzones = {
 			{ loc = "ZONE_LN77Med_01", is_open = true },
@@ -1427,7 +1507,7 @@ TableStrikeAttack = {
 		spawnobjects = {},
 		is_open = true,
 	},
-	LP30 = { 
+	{ -- LP30 
 		striketype = "Factory",
     strikeregion = "Central",                            
 		strikename = "LP30",
@@ -1437,10 +1517,10 @@ TableStrikeAttack = {
 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_LP30Strike",
 		striketargets = {
-			"FACTORY_LP30_01",
-			"FACTORY_LP30_02",
-			"FACTORY_LP30_03",
-			"FACTORY_LP30_04",
+		"LP30_STATIC_01",
+    "LP30_STATIC_02",
+    "LP30_STATIC_03",
+    "LP30_STATIC_04",
 		},
 		medzones = {
 			{ loc = "ZONE_LP30Med_01", is_open = true },
@@ -1467,7 +1547,7 @@ TableStrikeAttack = {
 		spawnobjects = {},
 		is_open = true,
 	},
-	GJ38 = { 
+	{ -- GJ38 
 		striketype = "Bridge",
     strikeregion = "Central",                            
 		strikename = "GJ38",
@@ -1477,10 +1557,7 @@ TableStrikeAttack = {
 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_GJ38Strike",
 		striketargets = {
-			"FACTORY_GJ38_01",
-			"FACTORY_GJ38_02",
-			"FACTORY_GJ38_03",
-			"FACTORY_GJ38_04",
+			"GJ38_STATIC_01",
 		},
 		medzones = {
 			{ loc = "ZONE_GJ38Med_01", is_open = true },
@@ -1510,7 +1587,7 @@ TableStrikeAttack = {
 		spawnobjects = {},
 		is_open = true,
 	},
-	MN72 = { 
+	{ -- MN72 
 		striketype = "Bridge",
     strikeregion = "East",                            
 		strikename = "MN72",
@@ -1520,10 +1597,6 @@ TableStrikeAttack = {
 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_MN72Strike",
 		striketargets = {
-			"FACTORY_LP30_01",
-			"FACTORY_LP30_02",
-			"FACTORY_LP30_03",
-			"FACTORY_LP30_04",
 		},
 		medzones = {
 			{ loc = "ZONE_MN72Med_01", is_open = true },
@@ -1553,7 +1626,7 @@ TableStrikeAttack = {
 		spawnobjects = {},
 		is_open = true,
 	},
-	GJ21 = { 
+	{ -- GJ21 
 		striketype = "Bridge",
     strikeregion = "Central",                            
 		strikename = "GJ21",
@@ -1563,10 +1636,6 @@ TableStrikeAttack = {
 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_GJ21Strike",
 		striketargets = {
-			"FACTORY_LP30_01",
-			"FACTORY_LP30_02",
-			"FACTORY_LP30_03",
-			"FACTORY_LP30_04",
 		},
 		medzones = {
 			{ loc = "ZONE_GJ21Med_01", is_open = true },
@@ -1654,15 +1723,15 @@ TableStaticTemplates = {
 --- menu: generate strike attack menus ---
 ------------------------------------------
 
-for strikekey, strikevalue in pairs(TableStrikeAttack) do -- step through TableStrikeAttack and grab the mission data for each key ( = "location")
+for strikeIndex, strikeValue in pairs(TableStrikeAttack) do -- step through TableStrikeAttack and grab the mission data for each key ( = "location")
 
-	local StrikeType = strikevalue.striketype
-	local StrikeRegion = strikevalue.strikeregion
-	local StrikeLocation = strikevalue.strikename
-	local StrikeIvo = strikevalue.strikeivo
+	local strikeType = strikeValue.striketype
+	local strikeRegion = strikeValue.strikeregion
+	local strikeName = strikeValue.strikename
+	local StrikeIvo = strikeValue.strikeivo
 
-	_G["Menu" .. StrikeType .. "Attack" .. StrikeLocation] = MENU_COALITION:New( coalition.side.BLUE, StrikeLocation .. " " .. StrikeIvo, _G["Menu" .. StrikeType .. "Attack" .. StrikeRegion] ) -- add menu for each mission location in the correct strike type sub menu
-	_G["Cmd" .. StrikeLocation .. "Attack"] = MENU_COALITION_COMMAND:New( coalition.side.BLUE, "Start Mission", _G["Menu" .. StrikeType .. "Attack" .. StrikeLocation], SpawnStrikeAttack, StrikeLocation ) -- add menu command to launch the mission
+	_G["Menu" .. strikeType .. "Attack" .. strikeIndex] = MENU_COALITION:New( coalition.side.BLUE, strikeName .. " " .. StrikeIvo, _G["Menu" .. strikeType .. "Attack" .. strikeRegion] ) -- add menu for each mission location in the correct strike type sub menu
+	_G["Cmd" .. strikeIndex .. "Attack"] = MENU_COALITION_COMMAND:New( coalition.side.BLUE, "Start Mission", _G["Menu" .. strikeType .. "Attack" .. strikeIndex], SpawnStrikeAttack, strikeIndex ) -- add menu command to launch the mission
 
 end
 
@@ -1672,4 +1741,4 @@ end
 
 
 
-env.info( '*** CSG-1 MOOSE MISSION SCRIPT END *** ' )
+env.info( '*** JTF-1 MOOSE MISSION SCRIPT END *** ' )

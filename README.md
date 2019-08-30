@@ -35,7 +35,7 @@ Stennis:
 Tarawa:
 - BRC 280'
 - TACAN 1X
-- ILCS Channel 2
+- ILCS Channel 1
 - Tower/Paddles: 255.725
 
 (Use LHA TWR alt freq 278.325 to call AI Tower for landing)
