@@ -226,7 +226,7 @@ function SpawnStrikeAttack ( StrikeIndex ) -- "location name"
 		local ArmourQty = math.random( 1, TableStrikeAttack[StrikeIndex].defassets.armour ) -- number of armour groups 1-max spawn in SAM zones. SamQty + ArmourQty MUST NOT exceed MedZonesCount
 		local StrikeMarkZone = ZONE:FindByName( TableStrikeAttack[StrikeIndex].strikezone ) -- ZONE object for zone named in strikezone 
 		
-    -----------------------------------------------------------------
+		-----------------------------------------------------------------
 		--- Check sufficient zones exist for the mission air defences ---
 		-----------------------------------------------------------------
 		
@@ -252,7 +252,7 @@ function SpawnStrikeAttack ( StrikeIndex ) -- "location name"
 			end
 		end
 		
-    ---------------------------------
+		---------------------------------
 		--- add strike defence assets ---
 		---------------------------------
 		
@@ -337,7 +337,7 @@ function SpawnStrikeAttack ( StrikeIndex ) -- "location name"
     local StrikeMark = StrikeMarkCoord:MarkToAll(StrikeMarkLabel, true) -- add mark to map
     TableStrikeAttack[StrikeIndex].strikemarkid = StrikeMark -- add mark ID to table 
       		
-    -----------------------------
+		-----------------------------
 		--- Send briefing message ---
 		-----------------------------
 		
@@ -359,7 +359,7 @@ function SpawnStrikeAttack ( StrikeIndex ) -- "location name"
 	
 		TableStrikeAttack[StrikeIndex].is_open = false -- mark strike mission as active
 		
-    ------------------------------------------------------------------------------
+		------------------------------------------------------------------------------
 		--- menu: add mission remove command and remove mission start command ---
 		------------------------------------------------------------------------------
 		
