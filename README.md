@@ -63,12 +63,12 @@ ON DEMAND GROUND ATTACK MISSIONS
 Insurgent Camp Attack:  
 ----------------------
 
-Strike missions are available, on-demand, via the F-10 menu. Camps can be spawned at a series of random locations, South of the Russian border, within the Eastern, Central and Western portions of the map (8x potential locations in each). A mission brief will be displayed with the location of the camp (nearest town and coordinates). A menu option is also available to remove the oldest spawned insurgent camp.
+Strike missions are available, on-demand, via the F-10 menu. Camps can be spawned at a series of random locations, South of the Russian border, within the Eastern, Central and Western portions of the map (8x potential locations in each). A mission brief will be displayed with the location of the camp (nearest town and coordinates). A mark, with a label listing the strike name and its coordinates, will be placed on the F10 map at the strike location. A menu option is also available to remove the oldest spawned insurgent camp.
 
 Convoy Attack: 
 --------------
 
-Strike missions against enemy convoys are available, on-demand, via the F-10 menu. Options are available to spawn both armoured and soft convoys, at a series of random locations within the Central and Western portions of the map. A mission brief will be displayed indicating the last known location of the convoy, its anticipated destination and the threats within it.
+Strike missions against enemy convoys are available, on-demand, via the F-10 menu. Options are available to spawn both armoured and soft convoys, at a series of random locations within the Central and Western portions of the map. A mission brief will be displayed indicating the last known location of the convoy, its anticipated destination and the threats within it. A mark, with a label listing the strike name and its coordinates, will be placed on the F10 map at the strike location.
 
 Strategic Strike Attacks: 
 -------------------------
