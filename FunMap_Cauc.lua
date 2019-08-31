@@ -243,7 +243,6 @@ function SpawnStrikeAttack ( StrikeIndex ) -- "location name"
     ------------------------------------------------------------------------
     --- Refresh static objects in case they've previously been destroyed ---
     ------------------------------------------------------------------------
-    MESSAGE:New ( "striketargets length = " .. #TableStrikeAttack[StrikeIndex].striketargets, 10, "" ):ToAll()
 		if #TableStrikeAttack[StrikeIndex].striketargets > 0 then 
 			for index, staticname in ipairs(TableStrikeAttack[StrikeIndex].striketargets) do
 				local AssetStrikeStaticName = staticname
@@ -1224,6 +1223,7 @@ TableStrikeAttack = {
       "BESLAN_STATIC_03",
       "BESLAN_STATIC_04",
       "BESLAN_STATIC_05",
+      "BESLAN_STATIC_06",
 		},
 		medzones = { 
 			{ loc = "ZONE_BeslanMed_01", is_open = true },
@@ -1462,7 +1462,7 @@ TableStrikeAttack = {
 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_LN83Strike",
 		striketargets = {
-		"LN83_STATIC_01,",
+		"LN83_STATIC_01",
 		"LN83_STATIC_02",
 		},
 		medzones = {
