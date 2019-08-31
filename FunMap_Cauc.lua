@@ -54,6 +54,35 @@ function MenuWip( _arg )
 	  MESSAGE:New( "The " .. _arg .. " menu option is currently under construction. " ,5,"" ):ToAll()
 end --function
 
+    
+-- ## Create Mission Mark on F10 map
+function MissionMapMark(StrikeIndex)
+
+  if StrikeIndex then
+    
+    local StrikeMarkZone = ZONE:FindByName( TableStrikeAttack[StrikeIndex].strikezone ) -- ZONE object for zone named in strikezone 
+    local StrikeMarkZoneCoord = StrikeMarkZone:GetCoordinate() -- get coordinates of strikezone
+
+    local StrikeMarkName = TableStrikeAttack[StrikeIndex].strikename
+    local StrikeMarkType = TableStrikeAttack[StrikeIndex].striketype
+    local StrikeMarkRegion = TableStrikeAttack[StrikeIndex].strikeregion
+    local StrikeMarkCoords = TableStrikeAttack[StrikeIndex].strikecoords
+
+    local StrikeMarkLabel = StrikeMarkName .. " " 
+      .. StrikeMarkType 
+      .. " Strike " 
+      .. StrikeMarkRegion 
+      .. "\n" 
+      .. StrikeMarkCoords
+
+    local StrikeMark = StrikeMarkZoneCoord:MarkToAll(StrikeMarkLabel, true) -- add mark to map
+
+    TableStrikeAttack[StrikeIndex].strikemarkid = StrikeMark -- add mark ID to table 
+
+  end
+
+end --function
+
 -- ## Spawn Support aircraft
 -- Scheduled function on spawn to check for presence of the support aircraft in its spawn zone. Repeat check every 60 seconds. Respawn if ac has left zone. 
 -- also respawn on engine shutdown if an airfield is within the support zone.
@@ -81,7 +110,7 @@ function SpawnSupport (SupportSpawn) -- spawnobject, spawnzone
 
 end -- function
 
--- ## Spawning CAP flights
+--XXX ## Spawning CAP flights
 -- max 8x CAP aircraft can be spawned at each location
 function SpawnCap( _args ) -- spawnobject, spawntable { spawn, spawnzone, templates, patrolzone, aicapzone, engagerange }
 
@@ -102,7 +131,7 @@ function SpawnCap( _args ) -- spawnobject, spawntable { spawn, spawnzone, templa
     
 end --function
   
--- ## Spawning enemy convoys
+--XXX ## Spawning enemy convoys
 --  ( Central, West ) 
 function SpawnConvoy ( _args ) -- ConvoyTemplates, SpawnHost {conv, dest, destzone, strikecoords, is_open}, ConvoyType, ConvoyThreats
 
@@ -131,6 +160,26 @@ function SpawnConvoy ( _args ) -- ConvoyTemplates, SpawnHost {conv, dest, destzo
 		)
 		:Spawn()
 
+    --------------------------------------
+    --- Create Mission Mark on F10 map ---
+    --------------------------------------
+    
+    --MissionMapMark(CampTableIndex)
+    local StrikeMarkZone = SpawnHost -- ZONE object for zone named in strikezone 
+    local StrikeMarkZoneCoord = StrikeMarkZone:GetCoordinate() -- get coordinates of strikezone
+
+    local StrikeMarkType = "Convoy"
+    local StrikeMarkCoords = SpawnHostTable[SpawnIndex].coords
+
+    local StrikeMarkLabel = StrikeMarkType 
+      .. " Strike\n" 
+      .. StrikeMarkCoords
+
+    local StrikeMark = StrikeMarkZoneCoord:MarkToAll(StrikeMarkLabel, true) -- add mark to map
+
+    --SpawnCampsTable[ CampTableIndex ].strikemarkid = StrikeMark -- add mark ID to table 
+
+
 	local ConvoyAttackBrief = "++++++++++++++++++++++++++++++++++++" 
 		.."\n\nIntelligence is reporting an enemy "
 		.. ConvoyType
@@ -147,7 +196,7 @@ function SpawnConvoy ( _args ) -- ConvoyTemplates, SpawnHost {conv, dest, destzo
 		
 end --function  
   
--- ## Spawning enemy camps 
+--XXX ## Spawning enemy camps 
 function SpawnCamp( _args ) --TemplateTable, CampsTable [ loc, town, coords, is_open ], Region
 	
 	local SpawnTemplateTable = _args[1]
@@ -193,7 +242,32 @@ function SpawnCamp( _args ) --TemplateTable, CampsTable [ loc, town, coords, is_
 		)
 	:SpawnInZone( SpawnCampZone )
 
-	local CampAttackBrief = "++++++++++++++++++++++++++++++++++++" 
+    --------------------------------------
+    --- Create Mission Mark on F10 map ---
+    --------------------------------------
+    
+    --MissionMapMark(CampTableIndex)
+    local StrikeMarkZone = SpawnCampZone -- ZONE object for zone named in strikezone 
+    local StrikeMarkZoneCoord = StrikeMarkZone:GetCoordinate() -- get coordinates of strikezone
+
+    local StrikeMarkName = SpawnCampsTable[ CampTableIndex ].town
+    local StrikeMarkType = "Camp"
+    local StrikeMarkRegion = SpawnZoneRegion
+    local StrikeMarkCoords = SpawnCampsTable[ CampTableIndex ].coords
+
+    local StrikeMarkLabel = StrikeMarkName .. " " 
+      .. StrikeMarkType 
+      .. " Strike " 
+      .. StrikeMarkRegion 
+      .. "\n" 
+      .. StrikeMarkCoords
+
+    local StrikeMark = StrikeMarkZoneCoord:MarkToAll(StrikeMarkLabel, true) -- add mark to map
+
+    SpawnCampsTable[ CampTableIndex ].strikemarkid = StrikeMark -- add mark ID to table 
+ 
+    
+ 	local CampAttackBrief = "++++++++++++++++++++++++++++++++++++" 
 		.."\n\nIntelligence is reporting an insurgent camp IVO "
 		.. SpawnCampsTable[ CampTableIndex ].town
 		.. "\n\nMission:  LOCATE AND DESTROY THE CAMP."
@@ -325,16 +399,18 @@ function SpawnStrikeAttack ( StrikeIndex ) -- "location name"
     --- Create Mission Mark on F10 map ---
     --------------------------------------
     
-    local StrikeMarkCoord = StrikeMarkZone:GetCoordinate() -- get coordinates of strikezone
-    local StrikeMarkLabel = TableStrikeAttack[StrikeIndex].strikename -- create label for map mark
-      .. " "
-      .. TableStrikeAttack[StrikeIndex].striketype
-      .. " Strike"
-      .. " "
-      .. TableStrikeAttack[StrikeIndex].strikeregion 
-      .. "\n" .. TableStrikeAttack[StrikeIndex].strikecoords
-    local StrikeMark = StrikeMarkCoord:MarkToAll(StrikeMarkLabel, true) -- add mark to map
-    TableStrikeAttack[StrikeIndex].strikemarkid = StrikeMark -- add mark ID to table 
+    MissionMapMark(StrikeIndex)
+    
+    --local StrikeMarkCoord = StrikeMarkZone:GetCoordinate() -- get coordinates of strikezone
+    --local StrikeMarkLabel = TableStrikeAttack[StrikeIndex].strikename -- create label for map mark
+    --  .. " "
+    --  .. TableStrikeAttack[StrikeIndex].striketype
+    --  .. " Strike"
+    --  .. " "
+    --  .. TableStrikeAttack[StrikeIndex].strikeregion 
+    --  .. "\n" .. TableStrikeAttack[StrikeIndex].strikecoords
+    --local StrikeMark = StrikeMarkCoord:MarkToAll(StrikeMarkLabel, true) -- add mark to map
+    --TableStrikeAttack[StrikeIndex].strikemarkid = StrikeMark -- add mark ID to table 
       		
 		-----------------------------
 		--- Send briefing message ---
@@ -1075,8 +1151,7 @@ SpawnConvoys = { -- map portion, { spawn host, nearest town, Lat Long, destinati
 			is_open = true
 		},
 		{ 
-			conv = 
-			SPAWN:New( "CONVOY_03" ), 
+			conv = SPAWN:New( "CONVOY_03" ), 
 			dest = "Sukhumi Airfield", 
 			destzone = ZONE:New("ConvoyObjective_02"), 
 			coords = "43  02  07 N | 041  27  14 E", 
