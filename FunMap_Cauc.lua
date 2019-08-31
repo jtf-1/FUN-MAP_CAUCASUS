@@ -1,5 +1,5 @@
 env.info( "*** JTF-1 Caucasus Fun Map MOOSE script ***" )
-env.info( "*** JTF-1 COMMIT DATE: 2019-08-28 ***" )
+env.info( "*** JTF-1 COMMIT DATE: 2019-08-31 ***" )
 env.info( "*** JTF-1 MOOSE MISSION SCRIPT START ***" )
 
 -- BEGIN MENU DEFINITIONS
@@ -517,8 +517,25 @@ Spawn_Tanker_S3B_Texaco1:SetCallsign(CALLSIGN.Tanker.Texaco, 1)
 	:SetRadio(317.775)
 	:SetModex(049)
 	-- :SetTakeoffAir()
+	:SetAltitude(6000)
   :SetRespawnInAir()
 	:Start()
+
+------------------------------
+--- Recovery Tanker Tarawa ---
+------------------------------
+
+Spawn_Tanker_C130_Texaco2 = RECOVERYTANKER:New( UNIT:FindByName( "CSG_CarrierGrp_Tarawa"), "Tanker_C130" )
+
+Spawn_Tanker_C130_Texaco2:SetCallsign(CALLSIGN.Tanker.Texaco, 2)
+  :SetTACAN(16, "TEX")
+  :SetRadio(276.1)
+  :SetModex(999)
+  :SetAltitude(10000)
+  :SetTakeoffAir()
+  :SetRespawnInAir()
+  :SetHomeBase(AIRBASE:FindByName("Kobuleti"))
+  :Start()
 
 
 ---------------------------
@@ -539,7 +556,7 @@ Spawn_Rescuehelo_Stennis:SetRespawnInAir()
 Spawn_Rescuehelo_Tarawa = RESCUEHELO:New(UNIT:FindByName("CSG_CarrierGrp_Tarawa"), "RescueHelo_Tarawa")
 
 Spawn_Rescuehelo_Tarawa:SetRespawnInAir()
-  :SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Tarawa_03"))
+  --:SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Tarawa_03"))
   :SetRescueStopBoatOff()
   :Start()
 	
@@ -591,6 +608,8 @@ airbossTarawa:SetAutoSave(nil, "Cauc_Airboss-USS Tarawa_LSOgrades.csv")
 
 local tarawaCase = 1
 local tarawaOffset_deg = 0
+local tarawaRadioRelayMarshall = UNIT:FindByName("RadioRelayMarshall_Tarawa")
+local tarawaRadioRelayPaddles = UNIT:FindByName("RadioRelayPaddles_Tarawa")
  
 airbossTarawa:SetMenuRecovery(30, 25, false, 30)
 airbossTarawa:SetSoundfilesFolder("Airboss Soundfiles/")
@@ -600,8 +619,8 @@ airbossTarawa:SetCarrierControlledArea( 50 )
 airbossTarawa:SetDespawnOnEngineShutdown( true )
 airbossTarawa:SetMarshalRadio( 285.675, "AM" )
 airbossTarawa:SetLSORadio( 255.725, "AM" )
-airbossTarawa:SetRadioRelayLSO( Spawn_Rescuehelo_Tarawa:GetUnitName() )
-airbossTarawa:SetRadioRelayMarshal( Spawn_Rescuehelo_Tarawa:GetUnitName() )
+airbossTarawa:SetRadioRelayLSO( tarawaRadioRelayPaddles )
+airbossTarawa:SetRadioRelayMarshal( tarawaRadioRelayMarshall  )
 airbossTarawa:AddRecoveryWindow( "10:01", "16:00", tarawaCase, tarawaOffset_deg, true, 20 )
 airbossTarawa:SetAirbossNiceGuy( true )
 airbossTarawa:SetDefaultPlayerSkill(AIRBOSS.Difficulty.Normal)

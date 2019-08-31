@@ -12,17 +12,20 @@ TANKERS
 =======
 
 Track LM;
-- Arco 1-1  [C130]  35X, 276.5, FL160
+- Arco 1-1  [KC130] 35X, 276.5, FL160
 - Shell 1-1 [KC135] 115X, 317.5, FL200
 
 Stennis Hawk;
 - Texaco 1-1 [S-3B] 15Y, 317.775, FL060
 
+Tarawa Hawk;
+- Texaco 2-1 [KC-130] 16Y, 276.1, FL100
+
 NAVAL OPERATIONS
 ================
 
 Strike: 357.775
-Marshall: 285.675
+Marshal: 285.675
 
 Stennis:
 - BRC 280'
@@ -45,9 +48,9 @@ FARPS
 
 Dublin:
 - COORDS 42 19 47 N | 043 26 08 E
-- AIBOSS 250.775 AM
+- Airboss 250.775 AM
 
-(Use AIRBOSS for AI ATC and to activate FARP lights)
+(Use Airboss for AI ATC and to activate FARP lights)
 
 ON DEMAND ENEMY CAP
 ===================
@@ -65,7 +68,7 @@ Strike missions are available, on-demand, via the F-10 menu. Camps can be spawne
 Convoy Attack: 
 --------------
 
-Strike missions against enemoy convoys are available, on-demand, via the F-10 menu. Options are available to spawn both armoured and soft convoys, at a series of random locations within the Central and Western portions of the map. A mission brief will be displayed indicating the last known location of the convoy, its anticipated destination and the threats within it.
+Strike missions against enemy convoys are available, on-demand, via the F-10 menu. Options are available to spawn both armoured and soft convoys, at a series of random locations within the Central and Western portions of the map. A mission brief will be displayed indicating the last known location of the convoy, its anticipated destination and the threats within it.
 
 Strategic Strike Attacks: 
 -------------------------
@@ -95,7 +98,7 @@ AIRBOSS
 =======
 
 Scripted recovery of aircraft on CVN-74 John C Stennis is available via the F10 menu.
-Use the Marshall and Paddles frequencies as shown above to contact the relevant agencies when using the menu or when told to do so by Marshall. 
+Use the Marshal and Paddles frequencies as shown above to contact the relevant agencies when using the menu or when told to do so by Marshal. 
 
 Main Features;
 --------------
@@ -123,7 +126,7 @@ AIRBOSS Menu Structure;
 F3 Request Marshal
 ------------------
 
-This radio command can be used to request a stack in the holding pattern from Marshal. Necessary conditions are that the flight is inside the Carrier Controlled Area (CCA).
+This radio command can be used to request a stack in the holding pattern from Marshal. Necessary conditions are that the flight is inside the Carrier Controlled Area (CCA, 50nm).
 
 Marshal will assign an individual stack for each player group depending on the current or next open recovery case window. If multiple players have registered as a section, the section lead will be assigned a stack and is responsible to guide his section to the assigned holding position.
 
