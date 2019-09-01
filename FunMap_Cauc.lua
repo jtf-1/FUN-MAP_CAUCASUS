@@ -1,5 +1,5 @@
 env.info( "*** JTF-1 Caucasus Fun Map MOOSE script ***" )
-env.info( "*** JTF-1 COMMIT DATE: 2019-08-31 ***" )
+env.info( "*** JTF-1 COMMIT DATE: 2019-09-01 ***" )
 env.info( "*** JTF-1 MOOSE MISSION SCRIPT START ***" )
 
 -- BEGIN MENU DEFINITIONS
@@ -117,17 +117,18 @@ function SpawnCap( _args ) -- spawnobject, spawntable { spawn, spawnzone, templa
   local SpawnCapTable = _args[1]
   
   SpawnCapTable.spawn:InitLimit( 8,9999 ) -- max 8x cap sections alive   
-    :InitRandomizeTemplate( SpawnCapTable.templates )
     :InitCleanUp( 60 ) -- remove aircraft that have landed
     :OnSpawnGroup(
       function ( SpawnGroup )
         AICapZone = AI_CAP_ZONE:New( SpawnCapTable.patrolzone , 1000, 6000, 500, 600 )
         AICapZone:SetControllable( SpawnGroup )
-        AICapZone:SetEngageRange( SpawnCapTable.engagerange ) -- The AI won't engage when the enemy is beyond the range defined in the cap table.  Zone detection not working :SetEngageZone( SpawnCapTable.engagezone )
+        AICapZone:SetEngageZone( SpawnCapTable.engagezone ) -- AICapZone:SetEngageRange( SpawnCapTable.engagerange )
         AICapZone:__Start( 1 ) -- start patrolling in the PatrolZone.
       end
     )
     :SpawnInZone( SpawnCapTable.spawnzone, true, 3000, 6000 )
+
+
     
 end --function
   
@@ -840,10 +841,20 @@ EastCapEngageZone = ZONE_POLYGON:New( "ZONE_EngageEast", EastCapEngageGroup )
 
 CapTable = { -- spawn location, { spawn, spawnzone, templates, patrolzone, engagerange } ...
   maykop = { 
-    spawn = MaykopCapSpawn, spawnzone = MaykopCapSpawnZone, templates = CapTemplates, patrolzone = WestCapPatrolZone, engagerange = 60000
+    spawn = MaykopCapSpawn, 
+    spawnzone = MaykopCapSpawnZone, 
+    templates = CapTemplates, 
+    patrolzone = WestCapPatrolZone, 
+    engagerange = 60000,
+    engagezone = WestCapEngageZone,
   },
   beslan = { 
-    spawn = BeslanCapSpawn, spawnzone = BeslanCapSpawnZone, templates = CapTemplates, patrolzone = EastCapPatrolZone, engagerange = 60000
+    spawn = BeslanCapSpawn, 
+    spawnzone = BeslanCapSpawnZone, 
+    templates = CapTemplates, 
+    patrolzone = EastCapPatrolZone, 
+    engagerange = 60000,
+    engagezone = EastCapEngageZone,
   },
 }
 
