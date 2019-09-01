@@ -74,7 +74,7 @@ local weapon_symbol_near    = "˙"  --U+02C8
 local weapon_symbol_far     = "˙"  --U+02C8
 
 local function dot_symbol(blending,opacity)
-    return {"˙","CenterBottom", blending or 1.0 , opacity  or 0.1}
+    return {"˙","CenterCenter", blending or 1.0 , opacity  or 0.1}
 end
 
 local NAME 				   = "%N"
