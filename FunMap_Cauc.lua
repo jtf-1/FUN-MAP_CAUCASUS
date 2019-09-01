@@ -54,35 +54,6 @@ function MenuWip( _arg )
 	  MESSAGE:New( "The " .. _arg .. " menu option is currently under construction. " ,5,"" ):ToAll()
 end --function
 
-    
--- ## Create Mission Mark on F10 map
-function MissionMapMark(StrikeIndex)
-
-  if StrikeIndex then
-    
-    local StrikeMarkZone = ZONE:FindByName( TableStrikeAttack[StrikeIndex].strikezone ) -- ZONE object for zone named in strikezone 
-    local StrikeMarkZoneCoord = StrikeMarkZone:GetCoordinate() -- get coordinates of strikezone
-
-    local StrikeMarkName = TableStrikeAttack[StrikeIndex].strikename
-    local StrikeMarkType = TableStrikeAttack[StrikeIndex].striketype
-    local StrikeMarkRegion = TableStrikeAttack[StrikeIndex].strikeregion
-    local StrikeMarkCoords = TableStrikeAttack[StrikeIndex].strikecoords
-
-    local StrikeMarkLabel = StrikeMarkName .. " " 
-      .. StrikeMarkType 
-      .. " Strike " 
-      .. StrikeMarkRegion 
-      .. "\n" 
-      .. StrikeMarkCoords
-
-    local StrikeMark = StrikeMarkZoneCoord:MarkToAll(StrikeMarkLabel, true) -- add mark to map
-
-    TableStrikeAttack[StrikeIndex].strikemarkid = StrikeMark -- add mark ID to table 
-
-  end
-
-end --function
-
 -- ## Spawn Support aircraft
 -- Scheduled function on spawn to check for presence of the support aircraft in its spawn zone. Repeat check every 60 seconds. Respawn if ac has left zone. 
 -- also respawn on engine shutdown if an airfield is within the support zone.
@@ -170,7 +141,7 @@ function SpawnConvoy ( _args ) -- ConvoyTemplates, SpawnHost {conv, dest, destzo
     local StrikeMarkZoneCoord = StrikeMarkZone:GetCoordinate() -- get coordinates of strikezone
 
     local StrikeMarkType = "Convoy"
-    local StrikeMarkCoords = SpawnHostTable[SpawnIndex].coords
+    local StrikeMarkCoords = StrikeMarkZoneCoord:ToStringLLDMS()
 
     local StrikeMarkLabel = StrikeMarkType 
       .. " Strike\n" 
@@ -187,8 +158,8 @@ function SpawnConvoy ( _args ) -- ConvoyTemplates, SpawnHost {conv, dest, destzo
 		.. " convoy\nbelieved to be routing to "
 		.. SpawnHostTable[SpawnIndex].dest .. "."
 		.. "\n\nMission:  LOCATE AND DESTROY THE CONVOY."
-		.. "\n\nLast Known Position:  "
-		.. SpawnHostTable[SpawnIndex].coords
+		.. "\n\nLast Known Position:\n"
+		.. StrikeMarkCoords
 		.. ConvoyThreats
 		.. "\n\n++++++++++++++++++++++++++++++++++++"
 		
@@ -254,7 +225,7 @@ function SpawnCamp( _args ) --TemplateTable, CampsTable [ loc, town, coords, is_
     local StrikeMarkName = SpawnCampsTable[ CampTableIndex ].town
     local StrikeMarkType = "Camp"
     local StrikeMarkRegion = SpawnZoneRegion
-    local StrikeMarkCoords = SpawnCampsTable[ CampTableIndex ].coords
+    local StrikeMarkCoords = StrikeMarkZoneCoord:ToStringLLDMS()
 
     local StrikeMarkLabel = StrikeMarkName .. " " 
       .. StrikeMarkType 
@@ -272,8 +243,8 @@ function SpawnCamp( _args ) --TemplateTable, CampsTable [ loc, town, coords, is_
 		.."\n\nIntelligence is reporting an insurgent camp IVO "
 		.. SpawnCampsTable[ CampTableIndex ].town
 		.. "\n\nMission:  LOCATE AND DESTROY THE CAMP."
-		.. "\n\nCoordinates:  "
-		.. SpawnCampsTable[ CampTableIndex ].coords
+		.. "\n\nCoordinates:\n"
+		.. StrikeMarkCoords
 		.. "\n\nThreats:  INFANTRY, HEAVY MG, RPG, I/R SAM, LIGHT ARMOR, AAA"
 		.. "\n\n++++++++++++++++++++++++++++++++++++"
 		
@@ -400,34 +371,40 @@ function SpawnStrikeAttack ( StrikeIndex ) -- "location name"
     --- Create Mission Mark on F10 map ---
     --------------------------------------
     
-    MissionMapMark(StrikeIndex)
+    local StrikeMarkZone = ZONE:FindByName( TableStrikeAttack[StrikeIndex].strikezone ) -- ZONE object for zone named in strikezone 
+    local StrikeMarkZoneCoord = StrikeMarkZone:GetCoordinate() -- get coordinates of strikezone
+
+    local StrikeMarkName = TableStrikeAttack[StrikeIndex].strikename
+    local StrikeMarkType = TableStrikeAttack[StrikeIndex].striketype
+    local StrikeMarkRegion = TableStrikeAttack[StrikeIndex].strikeregion
+    local StrikeMarkCoords = StrikeMarkZoneCoord:ToStringLLDMS() --TableStrikeAttack[StrikeIndex].strikecoords
+
+    local StrikeMarkLabel = StrikeMarkName .. " " 
+      .. StrikeMarkType 
+      .. " Strike " 
+      .. StrikeMarkRegion 
+      .. "\n" 
+      .. StrikeMarkCoords
+
+    local StrikeMark = StrikeMarkZoneCoord:MarkToAll(StrikeMarkLabel, true) -- add mark to map
     
-    --local StrikeMarkCoord = StrikeMarkZone:GetCoordinate() -- get coordinates of strikezone
-    --local StrikeMarkLabel = TableStrikeAttack[StrikeIndex].strikename -- create label for map mark
-    --  .. " "
-    --  .. TableStrikeAttack[StrikeIndex].striketype
-    --  .. " Strike"
-    --  .. " "
-    --  .. TableStrikeAttack[StrikeIndex].strikeregion 
-    --  .. "\n" .. TableStrikeAttack[StrikeIndex].strikecoords
-    --local StrikeMark = StrikeMarkCoord:MarkToAll(StrikeMarkLabel, true) -- add mark to map
-    --TableStrikeAttack[StrikeIndex].strikemarkid = StrikeMark -- add mark ID to table 
-      		
-		-----------------------------
+    TableStrikeAttack[StrikeIndex].strikemarkid = StrikeMark -- add mark ID to table 
+    
+ 		-----------------------------
 		--- Send briefing message ---
 		-----------------------------
 		
 		local strikeAttackBrief = "++++++++++++++++++++++++++++++++++++"
 			..	"\n\nAir Interdiction mission against "
-			.. TableStrikeAttack[StrikeIndex].strikename
+			.. StrikeMarkName
 			.. " "
-			.. TableStrikeAttack[StrikeIndex].striketype
+			.. StrikeMarkType
 			.. "\n\nMission: "
 			.. TableStrikeAttack[StrikeIndex].strikemission
-			.. "\n\nCoordinates: "
-			.. TableStrikeAttack[StrikeIndex].strikecoords
+			.. "\n\nCoordinates:\n"
+			.. StrikeMarkCoords
 			.. "\n\nThreats:  "
-			.. "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR"
+			.. TableStrikeAttack[StrikeIndex].strikethreats
 			.. "\n\n++++++++++++++++++++++++++++++++++++"
 			
 		MESSAGE:New ( strikeAttackBrief, 30, "" ):ToAll()
@@ -626,7 +603,7 @@ Spawn_Rescuehelo_Stennis:SetRespawnInAir()
 	:Start()
 
 ---------------------------
---- Rescue Helo Tarwa ---
+--- Rescue Helo Tarawa ---
 ---------------------------
 
 Spawn_Rescuehelo_Tarawa = RESCUEHELO:New(UNIT:FindByName("CSG_CarrierGrp_Tarawa"), "RescueHelo_Tarawa")
@@ -1114,30 +1091,46 @@ _campattackremove_args = {
 -- END CAMP ATTACK SECTION
 -- BEGIN CONVOY ATTACK SECTION
 
--- ## Able Sentry Convoy
+-- XXX ## Able Sentry Convoy
 -- Convoy is spawned at mission start and will advance North->South on highway B3 towards Tbilisi
 -- On reaching Mtskehta it will respawn at the start of the route.
+
+function ResetAbleSentry()
+  Spawn_Convoy_AbleSentry:ReSpawn(SpawnIndex_Convoy_AbleSentry) 
+end -- function
+
 Zone_ConvoyObjectiveAbleSentry = ZONE:FindByName( "ConvoyObjectiveAbleSentry" ) 
 
 Spawn_Convoy_AbleSentry = SPAWN:New( "CONVOY_Hard_Able Sentry" )
 	:InitLimit( 20, 50 )
 	:OnSpawnGroup(
 		function ( SpawnGroup )
-			SpawnIndex_Convoy_AbleSentry = Spawn_Convoy_AbleSentry:GetSpawnIndexFromGroup( SpawnGroup )
-			Check_Convoy_AbleSentry = SCHEDULER:New( nil, 
-			function()
-				if SpawnGroup:IsPartlyInZone( Zone_ConvoyObjectiveAbleSentry ) then
-					Spawn_Convoy_AbleSentry:ReSpawn( SpawnIndex_Convoy_AbleSentry )
-				end
-			end,
-			{}, 0, 60 )
+			-- SpawnIndex_Convoy_AbleSentry = Spawn_Convoy_AbleSentry:GetSpawnIndexFromGroup( SpawnGroup )
+			checkConvoyAbleSentry = SCHEDULER:New( SpawnGroup, 
+  			function()
+  				if SpawnGroup:IsPartlyInZone( Zone_ConvoyObjectiveAbleSentry ) then
+  					ResetAbleSentry()
+  				end
+  			end,
+  			{}, 0, 60
+  		)
+		  mapMarkConvoyAbleSentry = SCHEDULER:New( SpawnGroup, 
+        function()
+          if Spawn_Convoy_AbleSentry.mapmarkid then
+            COORDINATE:RemoveMark( Spawn_Convoy_AbleSentry.mapmarkid )
+          end    
+          local coordsAbleSentry = SpawnGroup:GetCoordinate()
+          local labelAbleSentry = "Able Sentry Convoy\nMost recent reported postion\n" .. coordsAbleSentry:ToStringLLDMS()
+          local mapMarkAbleSentry = coordsAbleSentry:MarkToAll(labelAbleSentry, true) -- add mark to map
+          Spawn_Convoy_AbleSentry.mapmarkid = mapMarkAbleSentry -- add mark ID to SPAWN object 
+        end,
+        {}, 0, 120
+      )
 		end
 	)
 	:SpawnScheduled( 60 , .1 )
 
-function ResetAbleSentry()
-	Spawn_Convoy_AbleSentry:ReSpawn(SpawnIndex_Convoy_AbleSentry)	
-end -- function
+
 
 cmdConvoyAbleSentryReset = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Able Sentry Reset",MenuConvoyAttack, ResetAbleSentry )
 
