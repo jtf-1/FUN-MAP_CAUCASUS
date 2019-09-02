@@ -59,7 +59,7 @@ labels_format_version 	= 1 -- labels format vesrion
 -- text_blur_type = 0 - none
 -- text_blur_type = 1 - 3x3 pixels
 -- text_blur_type = 2 - 5x5 pixels
-font_properties =  {"DejaVuLGCSans.ttf", 3, 0, 0, 0}
+font_properties =  {"DejaVuLGCSans.ttf", 2, 0, 0, 0}
 
 local aircraft_symbol_near  =  "˙"  --U+02C8
 local aircraft_symbol_far   =  "˙"  --U+02C8
@@ -74,7 +74,7 @@ local weapon_symbol_near    = "˙"  --U+02C8
 local weapon_symbol_far     = "˙"  --U+02C8
 
 local function dot_symbol(blending,opacity)
-    return {"˙","CenterCenter", blending or 1.0 , opacity  or 0.1}
+    return {"˙","CenterBottom", blending or 1.0 , opacity  or 0.1}
 end
 
 local NAME 				   = "%N"
@@ -113,15 +113,15 @@ NavyFormat = {
 [500]	= EMPTY,
 [10000]	= dot_symbol(0,0.75), --{navy_symbol_near				,"CenterCenter"	,0.75	, 0.5	,0	, 0},
 [20000]	= dot_symbol(0,0.5), --{navy_symbol_far 				,"CenterCenter"	,0.5	, 0.25	,0	, 0},
-[40000]	= dot_symbol(0,0.1),
+[40000]	= dot_symbol(0,0.25),
 }
 
 WeaponFormat = {
 --[distance]		= {format ,alignment, color_blending_k, opacity, shift_in_pixels_x, shift_in_pixels_y}
 [500]	    = EMPTY,
-[5000]	= dot_symbol(0,0.75),--{weapon_symbol_near					,"CenterCenter"	,0.75	, 0.5	,0	, 0},
-[10000]	= dot_symbol(0,0.5),--{weapon_symbol_far					,"CenterCenter"	,0.5	, 0.25	,0	, 0},
-[20000]	= dot_symbol(0,0.25),--{weapon_symbol_far					,"CenterCenter"	,0.25	, 0.1	,0	, 0},
+[5000]	= dot_symbol(0,0.25),--{weapon_symbol_near					,"CenterCenter"	,0.75	, 0.5	,0	, 0},
+[10000]	= dot_symbol(0,0.1),--{weapon_symbol_far					,"CenterCenter"	,0.5	, 0.25	,0	, 0},
+[20000]	= dot_symbol(0,0.05),--{weapon_symbol_far					,"CenterCenter"	,0.25	, 0.1	,0	, 0},
 }
 
 
@@ -133,9 +133,9 @@ PointFormat = {
 
 -- Colors in {red, green, blue} format, volume from 0 up to 255
 
-ColorAliesSide   = {105, 105, 105}
-ColorEnemiesSide = {105, 105, 105}
-ColorUnknown     = {105, 105, 105} -- will be blend at distance with coalition color
+ColorAliesSide   = {75, 75, 75}
+ColorEnemiesSide = {75, 75, 75}
+ColorUnknown     = {75, 75, 75} -- will be blend at distance with coalition color
 
 
 

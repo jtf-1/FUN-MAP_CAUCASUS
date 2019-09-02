@@ -33,7 +33,7 @@ Stennis:
 - ILCS: Channel 4
 - Tower/Paddles: 308.475 AM
  
-(Use CV TWR alt freq 289.025 to call AI Tower to reqest landing. This also activates lights at night)
+(Use CV TWR alt freq 289.025 to call AI Tower to request landing. This also activates lights at night)
 
 Tarawa:
 - BRC 280'
@@ -52,10 +52,15 @@ Dublin:
 
 (Use Airboss for AI ATC and to activate FARP lights)
 
+ABLE SENTRY CONVOY
+==================
+
+A strike attack against an armoured convoy is present throughout the mission run time. The convoy originates in grid MN50 and will follow the MSR South for approximately 40NM to Misaktsieli in grid MM74. It consists of MTBs and BTRs, and is protected by mobile AAA and SAM. The convoy will respwan at its orgin if it is completely destroyed or if it reaches its destination. It can also be respawned, on demand, via the F10 menu.
+
 ON DEMAND ENEMY CAP
 ===================
 
-Enemy CAP flights are available on demand. CAP flights can be managed for locations at which they are available through the F10 menu. A maximum of 8x concurrent CAP aircraft may be alive at each location. A menu option is also available to remove the oldest spawned CAP flight at each location.
+Enemy CAP flights are available on demand. CAP flights can be managed for locations at which they are available through the F10 menu. A maximum of 8x concurrent CAP flights may be alive at each location. A menu option is also available to remove the oldest spawned CAP flight at each location.
 
 ON DEMAND GROUND ATTACK MISSIONS
 ================================
@@ -78,8 +83,8 @@ Strike missions are available, on demand, via the F10 menu. Air defences can be 
 - Airfield
 - Factory
 - Bridge
-- Communications
-- C2
+- Communications (WiP)
+- C2 (WiP)
 
 RANGE COMPLEXES
 ===============
@@ -105,7 +110,7 @@ Main Features;
 
 - CASE I, II and III recoveries.
 - Automatic LSO grading including (optional) live grading while in the groove.
-- Different skill levels from on-the-fly tips for flight students to ziplip for pros. Can be set for each player individually.
+- Different skill levels, from on-the-fly tips for flight students to ziplip for pros, can be set for each player individually.
 - Separate radio channels for LSO and Marshal transmissions.
 - Voice over support for LSO and Marshal radio transmissions.
 - Advanced F10 radio menu including carrier info, weather, radio frequencies, TACAN/ICLS channels, player LSO grades, marking of zones etc.
@@ -128,7 +133,7 @@ F3 Request Marshal
 
 This radio command can be used to request a stack in the holding pattern from Marshal. Necessary conditions are that the flight is inside the Carrier Controlled Area (CCA, 50nm).
 
-Marshal will assign an individual stack for each player group depending on the current or next open recovery case window. If multiple players have registered as a section, the section lead will be assigned a stack and is responsible to guide his section to the assigned holding position.
+Marshal will assign an individual stack for each player group depending on the current or next open recovery case window. If multiple players have registered as a section, the section lead will be assigned a stack and is responsible for guiding his section to the assigned holding position.
 
 F4 Request Commence
 -------------------
@@ -145,7 +150,7 @@ The player can request refueling at the Hawk tanker. The player will be informed
 F6 Spinning
 -----------
 
-If the pattern is full, players can go into the spinning pattern. This step is only allowed, if the player is in the pattern and his next step is initial, break entry, early/late break. At this point, the player should climb to 1200 ft a fly on the port side of the boat to go back to the initial again.
+If the pattern is full, players can go into the spin pattern. This step is only allowed, if the player is in the pattern and his next step is initial, break entry or early/late break. At this point, the player should climb to 1200 ft and follow the spin pattern on the port side of the boat and return to the initial.
 
 If a player is in the spin pattern, flights in the Marshal queue should hold their altitude and are not allowed into the pattern until the spinning aircraft proceeds.
 
@@ -160,7 +165,7 @@ Request an emergency landing, i.e. bypass all pattern steps and go directly to t
 
 All section members are supposed to follow. Player (or section lead) is removed from all other queues and automatically added to the landing pattern queue.
 
-If this command is called while the player is currently on the carrier, he will be put in the bolter pattern. So the next expected step after take of is the abeam position. This allows for quick landing training exercises without having to go through the whole pattern.
+If this command is called while the player is currently on the carrier, he will be put in the bolter pattern so that the next expected step after take off will be the abeam position. This allows for quick landing training exercises without having to go through the whole pattern.
 
 F8 [Reset My Status]
 --------------------
