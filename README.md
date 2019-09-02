@@ -55,7 +55,7 @@ Dublin:
 ABLE SENTRY CONVOY
 ==================
 
-A strike attack against an armoured convoy is present throughout the mission run time. The convoy originates in grid MN50 and will follow the MSR South for approximately 40NM to Misaktsieli in grid MM74. It consists of MTBs and BTRs, and is protected by mobile AAA and SAM. The convoy will respwan at its origin if it is completely destroyed or if it reaches its destination. It can also be respawned, on demand, via the F10 menu.
+A strike attack against an armoured convoy is present throughout the mission run time. The convoy originates in grid MN50 and will follow the MSR South for approximately 40NM to Misaktsieli in grid MM74. It consists of MTBs and BTRs, and is protected by mobile AAA and SAM. The convoy will respwan at its origin if it is completely destroyed or if it reaches its destination. It can also be respawned, on demand, via the F10 menu. A mark, with a label listing the last known coordinates of the convoy, will be placed on the F10 map and updated every three minutes.
 
 ON DEMAND ENEMY CAP
 ===================
