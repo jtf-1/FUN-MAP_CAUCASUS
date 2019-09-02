@@ -133,9 +133,9 @@ PointFormat = {
 
 -- Colors in {red, green, blue} format, volume from 0 up to 255
 
-ColorAliesSide   = {105, 105, 105}
-ColorEnemiesSide = {105, 105, 105}
-ColorUnknown     = {105, 105, 105} -- will be blend at distance with coalition color
+ColorAliesSide   = {85, 85, 85}
+ColorEnemiesSide = {85, 85, 85}
+ColorUnknown     = {85, 85, 85} -- will be blend at distance with coalition color
 
 
 
