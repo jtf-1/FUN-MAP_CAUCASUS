@@ -74,7 +74,7 @@ local weapon_symbol_near    = "˙"  --U+02C8
 local weapon_symbol_far     = "˙"  --U+02C8
 
 local function dot_symbol(blending,opacity)
-    return {"˙","CenterBottom", blending or 1.0 , opacity  or 0.1}
+    return {"˙","CenterCenter", blending or 1.0 , opacity  or 0.1}
 end
 
 local NAME 				   = "%N"
@@ -94,34 +94,34 @@ local EMPTY = {"", "CenterCenter", 1, 1, 0, 0}
 AirFormat = {
 --[distance]		= {format, alignment, color_blending_k, opacity, shift_in_pixels_x, shift_in_pixels_y}
 [500]	= EMPTY,
-[5000]	= dot_symbol(0,0.5), --{aircraft_symbol_near	, "CenterCenter"	,0.75	, 0.5	,0	, 0},
-[10000]	= dot_symbol(0,0.25), --{aircraft_symbol_near	, "CenterCenter"	,0.5	, 0.25	,0	, 0},
-[20000]	= dot_symbol(0,0.1), --{aircraft_symbol_far 	, "CenterCenter"	,0.25	, 0.1	,0	, 0},
-[30000]	= dot_symbol(0,0.05),
+[1000]	= {aircraft_symbol_near	, "CenterCenter"	,0	, 0.5	,0	, 0}, --dot_symbol(0,0.5), --
+[2000]	= {aircraft_symbol_near	, "CenterCenter"	,0	, 0.25	,0	, 0}, --dot_symbol(0,0.25), --
+[10000]	= {aircraft_symbol_far 	, "CenterCenter"	,0	, 0.1	,0	, 0}, --dot_symbol(0,0.1), --
+[20000]	= {aircraft_symbol_far 	, "CenterCenter"	,0	, 0.05	,0	, 0}, --dot_symbol(0,0.05), --
 }
 
 GroundFormat = {
 --[distance]		= {format , alignment, color_blending_k, opacity, shift_in_pixels_x, shift_in_pixels_y}
 [500]	= EMPTY,
-[5000]	=  dot_symbol(0,0.5), --{ground_symbol_near		,"CenterCenter"	,0.75	, 0.5	,0	, 0},
-[10000]	=  dot_symbol(0,0.25), --{ground_symbol_far		,"CenterCenter"	,0.5	, 0.25	,0	, 0},
-[20000]	=  dot_symbol(0, 0.1),
+[1000]	=  {ground_symbol_near	,"CenterCenter"	,0	, 0.5	,0	, 0}, --dot_symbol(0,0.5), --
+[5000]	=  {ground_symbol_far	,"CenterCenter"	,0	, 0.25	,0	, 0}, --dot_symbol(0,0.25), --
+[10000]	=  {ground_symbol_far	,"CenterCenter"	,0	, 0.1	,0	, 0}, --dot_symbol(0, 0.1), --
 }
 
 NavyFormat = {
 --[distance]		= {format, alignment, color_blending_k, opacity, shift_in_pixels_x, shift_in_pixels_y}
 [500]	= EMPTY,
-[10000]	= dot_symbol(0,0.75), --{navy_symbol_near				,"CenterCenter"	,0.75	, 0.5	,0	, 0},
-[20000]	= dot_symbol(0,0.5), --{navy_symbol_far 				,"CenterCenter"	,0.5	, 0.25	,0	, 0},
-[40000]	= dot_symbol(0,0.25),
+[5000]	= {navy_symbol_near		,"CenterCenter"	,0	, 0.75	,0	, 0}, --dot_symbol(0,0.75), --
+[10000]	= {navy_symbol_far		,"CenterCenter"	,0	, 0.5	,0	, 0}, --dot_symbol(0,0.5), --
+[20000]	= {navy_symbol_far		,"CenterCenter"	,0	, 0.25	,0	, 0}, --dot_symbol(0,0.25), --
 }
 
 WeaponFormat = {
 --[distance]		= {format ,alignment, color_blending_k, opacity, shift_in_pixels_x, shift_in_pixels_y}
-[500]	    = EMPTY,
-[5000]	= dot_symbol(0,0.25),--{weapon_symbol_near					,"CenterCenter"	,0.75	, 0.5	,0	, 0},
-[10000]	= dot_symbol(0,0.1),--{weapon_symbol_far					,"CenterCenter"	,0.5	, 0.25	,0	, 0},
-[20000]	= dot_symbol(0,0.05),--{weapon_symbol_far					,"CenterCenter"	,0.25	, 0.1	,0	, 0},
+[500]	= EMPTY,
+[1000]	= {weapon_symbol_near	,"CenterCenter"	,0	, 0.25	,0	, 0}, --dot_symbol(0,0.25),--
+[5000]	= {weapon_symbol_far	,"CenterCenter"	,0	, 0.1	,0	, 0}, --dot_symbol(0,0.1),--
+[10000]	= {weapon_symbol_far	,"CenterCenter"	,0	, 0.05	,0	, 0}, --dot_symbol(0,0.05),--
 }
 
 
@@ -133,9 +133,9 @@ PointFormat = {
 
 -- Colors in {red, green, blue} format, volume from 0 up to 255
 
-ColorAliesSide   = {75, 75, 75}
-ColorEnemiesSide = {75, 75, 75}
-ColorUnknown     = {75, 75, 75} -- will be blend at distance with coalition color
+ColorAliesSide   = {105, 105, 105}
+ColorEnemiesSide = {105, 105, 105}
+ColorUnknown     = {105, 105, 105} -- will be blend at distance with coalition color
 
 
 
