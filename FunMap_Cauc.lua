@@ -1126,7 +1126,7 @@ Spawn_Convoy_AbleSentry = SPAWN:New( "CONVOY_Hard_Able Sentry" )
           local mapMarkAbleSentry = coordsAbleSentry:MarkToAll(labelAbleSentry, true) -- add mark to map
           Spawn_Convoy_AbleSentry.mapmarkid = mapMarkAbleSentry -- add mark ID to SPAWN object 
         end,
-        {}, 0, 120
+        {}, 0, 180
       )
 		end
 	)
