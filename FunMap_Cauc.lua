@@ -1,5 +1,6 @@
+
 env.info( "*** JTF-1 Caucasus Fun Map MOOSE script ***" )
-env.info( "*** JTF-1 COMMIT DATE: 2019-09-01 ***" )
+env.info( "*** JTF-1 COMMIT DATE: 2019-09-03 ***" )
 env.info( "*** JTF-1 MOOSE MISSION SCRIPT START ***" )
 
 -- BEGIN MENU DEFINITIONS
@@ -116,6 +117,26 @@ function SpawnConvoy ( _args ) -- ConvoyTemplates, SpawnHost {conv, dest, destzo
 	local SpawnIndex = math.random ( 1, #SpawnHostTable )
 	local SpawnHost = SpawnHostTable[SpawnIndex].conv
 	local DestZone = SpawnHostTable[SpawnIndex].destzone
+
+  --------------------------------------
+  --- Create Mission Mark on F10 map ---
+  --------------------------------------
+  
+  --MissionMapMark(CampTableIndex)
+  local StrikeMarkZone = SpawnHost -- ZONE object for zone named in strikezone 
+  local StrikeMarkZoneCoord = StrikeMarkZone:GetCoordinate() -- get coordinates of strikezone
+
+  local StrikeMarkType = "Convoy"
+  local StrikeMarkCoords = StrikeMarkZoneCoord:ToStringLLDMS()
+
+  local StrikeMarkLabel = StrikeMarkType 
+    .. " Strike\n" 
+    .. StrikeMarkCoords
+
+  local StrikeMark = StrikeMarkZoneCoord:MarkToAll(StrikeMarkLabel, true) -- add mark to map
+
+  --SpawnCampsTable[ CampTableIndex ].strikemarkid = StrikeMark -- add mark ID to table 
+
 	
 	SpawnHost:InitRandomizeTemplate( TemplateTable )
 		:OnSpawnGroup(
@@ -131,25 +152,6 @@ function SpawnConvoy ( _args ) -- ConvoyTemplates, SpawnHost {conv, dest, destzo
 			end
 		)
 		:Spawn()
-
-    --------------------------------------
-    --- Create Mission Mark on F10 map ---
-    --------------------------------------
-    
-    --MissionMapMark(CampTableIndex)
-    local StrikeMarkZone = SpawnHost -- ZONE object for zone named in strikezone 
-    local StrikeMarkZoneCoord = StrikeMarkZone:GetCoordinate() -- get coordinates of strikezone
-
-    local StrikeMarkType = "Convoy"
-    local StrikeMarkCoords = StrikeMarkZoneCoord:ToStringLLDMS()
-
-    local StrikeMarkLabel = StrikeMarkType 
-      .. " Strike\n" 
-      .. StrikeMarkCoords
-
-    local StrikeMark = StrikeMarkZoneCoord:MarkToAll(StrikeMarkLabel, true) -- add mark to map
-
-    --SpawnCampsTable[ CampTableIndex ].strikemarkid = StrikeMark -- add mark ID to table 
 
 
 	local ConvoyAttackBrief = "++++++++++++++++++++++++++++++++++++" 
