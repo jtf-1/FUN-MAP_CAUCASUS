@@ -93,35 +93,36 @@ local EMPTY = {"", "CenterCenter", 1, 1, 0, 0}
 
 AirFormat = {
 --[distance]		= {format, alignment, color_blending_k, opacity, shift_in_pixels_x, shift_in_pixels_y}
-[500]	= EMPTY,
-[1000]	= {aircraft_symbol_near	, "CenterCenter"	,0	, 0.5	,0	, 0}, --dot_symbol(0,0.5), --
-[2000]	= {aircraft_symbol_near	, "CenterCenter"	,0	, 0.25	,0	, 0}, --dot_symbol(0,0.25), --
-[10000]	= {aircraft_symbol_far 	, "CenterCenter"	,0	, 0.1	,0	, 0}, --dot_symbol(0,0.1), --
-[20000]	= {aircraft_symbol_far 	, "CenterCenter"	,0	, 0.05	,0	, 0}, --dot_symbol(0,0.05), --
+[1000]	= EMPTY,
+[2000]	= {aircraft_symbol_near	, "CenterCenter"	,0	, 0.75	,0	, 0}, --dot_symbol(0,0.25), --
+[10000]	= {aircraft_symbol_far 	, "CenterCenter"	,0	, 0.5	,0	, 0}, --dot_symbol(0,0.1), --
+[20000]	= {aircraft_symbol_far 	, "CenterCenter"	,0	, 0.25	,0	, 0}, --dot_symbol(0,0.05), --
+[30000] = {aircraft_symbol_far  , "CenterCenter"  ,0  , 0.1 ,0  , 0}, --dot_symbol(0,0.05), --
 }
 
 GroundFormat = {
 --[distance]		= {format , alignment, color_blending_k, opacity, shift_in_pixels_x, shift_in_pixels_y}
-[500]	= EMPTY,
-[1000]	=  {ground_symbol_near	,"CenterCenter"	,0	, 0.5	,0	, 0}, --dot_symbol(0,0.5), --
-[5000]	=  {ground_symbol_far	,"CenterCenter"	,0	, 0.25	,0	, 0}, --dot_symbol(0,0.25), --
-[10000]	=  {ground_symbol_far	,"CenterCenter"	,0	, 0.1	,0	, 0}, --dot_symbol(0, 0.1), --
+[1000]	= EMPTY,
+[5000]	=  {ground_symbol_far	,"CenterCenter"	,0	, 0.75	,0	, 0}, --dot_symbol(0,0.25), --
+[10000]	=  {ground_symbol_far	,"CenterCenter"	,0	, 0.5	,0	, 0}, --dot_symbol(0, 0.1), --
+[20000] =  {ground_symbol_far ,"CenterCenter" ,0  , 0.25  ,0  , 0}, --dot_symbol(0, 0.1), --
 }
 
 NavyFormat = {
 --[distance]		= {format, alignment, color_blending_k, opacity, shift_in_pixels_x, shift_in_pixels_y}
-[500]	= EMPTY,
-[5000]	= {navy_symbol_near		,"CenterCenter"	,0	, 0.75	,0	, 0}, --dot_symbol(0,0.75), --
-[10000]	= {navy_symbol_far		,"CenterCenter"	,0	, 0.5	,0	, 0}, --dot_symbol(0,0.5), --
-[20000]	= {navy_symbol_far		,"CenterCenter"	,0	, 0.25	,0	, 0}, --dot_symbol(0,0.25), --
+[1000]	= EMPTY,
+[5000]	= {navy_symbol_near		,"CenterCenter"	,0	, 0.5	,0	, 0}, --dot_symbol(0,0.75), --
+[10000]	= {navy_symbol_far		,"CenterCenter"	,0	, 0.75	,0	, 0}, --dot_symbol(0,0.5), --
+[20000]	= {navy_symbol_far		,"CenterCenter"	,0	, 0.5	,0	, 0}, --dot_symbol(0,0.25), --
+[30000] = {navy_symbol_far    ,"CenterCenter" ,0  , 0.25 ,0  , 0}, --dot_symbol(0,0.25), --
 }
 
 WeaponFormat = {
 --[distance]		= {format ,alignment, color_blending_k, opacity, shift_in_pixels_x, shift_in_pixels_y}
-[500]	= EMPTY,
-[1000]	= {weapon_symbol_near	,"CenterCenter"	,0	, 0.25	,0	, 0}, --dot_symbol(0,0.25),--
-[5000]	= {weapon_symbol_far	,"CenterCenter"	,0	, 0.1	,0	, 0}, --dot_symbol(0,0.1),--
-[10000]	= {weapon_symbol_far	,"CenterCenter"	,0	, 0.05	,0	, 0}, --dot_symbol(0,0.05),--
+[1000]	= EMPTY,
+[5000]	= {weapon_symbol_far	,"CenterCenter"	,0	, 0.25	,0	, 0}, --dot_symbol(0,0.1),--
+[10000]	= {weapon_symbol_far	,"CenterCenter"	,0	, 0.5	,0	, 0}, --dot_symbol(0,0.05),--
+[20000] = {weapon_symbol_far  ,"CenterCenter" ,0  , 0.25 ,0  , 0}, --dot_symbol(0,0.05),--
 }
 
 
