@@ -1,6 +1,6 @@
 
 env.info( "*** JTF-1 Caucasus Fun Map MOOSE script ***" )
-env.info( "*** JTF-1 COMMIT DATE: 2019-09-03 ***" )
+env.info( "*** JTF-1 COMMIT DATE: 2019-09-04T16:51 ***" )
 env.info( "*** JTF-1 MOOSE MISSION SCRIPT START ***" )
 
 -- BEGIN MENU DEFINITIONS
@@ -127,7 +127,7 @@ function SpawnConvoy ( _args ) -- ConvoyTemplates, SpawnHost {conv, dest, destzo
   local StrikeMarkZoneCoord = StrikeMarkZone:GetCoordinate() -- get coordinates of strikezone
 
   local StrikeMarkType = "Convoy"
-  local StrikeMarkCoords = StrikeMarkZoneCoord:ToStringLLDMS()
+  local StrikeMarkCoords = StrikeMarkZoneCoord:ToStringLLDMS(_SETTINGS:SetLL_Accuracy(0))
 
   local StrikeMarkLabel = StrikeMarkType 
     .. " Strike\n" 
@@ -227,7 +227,7 @@ function SpawnCamp( _args ) --TemplateTable, CampsTable [ loc, town, coords, is_
     local StrikeMarkName = SpawnCampsTable[ CampTableIndex ].town
     local StrikeMarkType = "Camp"
     local StrikeMarkRegion = SpawnZoneRegion
-    local StrikeMarkCoords = StrikeMarkZoneCoord:ToStringLLDMS()
+    local StrikeMarkCoords = StrikeMarkZoneCoord:ToStringLLDMS(_SETTINGS:SetLL_Accuracy(0))
 
     local StrikeMarkLabel = StrikeMarkName .. " " 
       .. StrikeMarkType 
@@ -379,7 +379,7 @@ function SpawnStrikeAttack ( StrikeIndex ) -- "location name"
     local StrikeMarkName = TableStrikeAttack[StrikeIndex].strikename
     local StrikeMarkType = TableStrikeAttack[StrikeIndex].striketype
     local StrikeMarkRegion = TableStrikeAttack[StrikeIndex].strikeregion
-    local StrikeMarkCoords = StrikeMarkZoneCoord:ToStringLLDMS() --TableStrikeAttack[StrikeIndex].strikecoords
+    local StrikeMarkCoords = StrikeMarkZoneCoord:ToStringLLDMS(_SETTINGS:SetLL_Accuracy(0)) --TableStrikeAttack[StrikeIndex].strikecoords
 
     local StrikeMarkLabel = StrikeMarkName .. " " 
       .. StrikeMarkType 
@@ -1122,7 +1122,7 @@ Spawn_Convoy_AbleSentry = SPAWN:New( "CONVOY_Hard_Able Sentry" )
             COORDINATE:RemoveMark( Spawn_Convoy_AbleSentry.mapmarkid )
           end    
           local coordsAbleSentry = SpawnGroup:GetCoordinate()
-          local labelAbleSentry = "Able Sentry Convoy\nMost recent reported postion\n" .. coordsAbleSentry:ToStringLLDMS()
+          local labelAbleSentry = "Able Sentry Convoy\nMost recent reported postion\n" .. coordsAbleSentry:ToStringLLDMS(_SETTINGS:SetLL_Accuracy(0))
           local mapMarkAbleSentry = coordsAbleSentry:MarkToAll(labelAbleSentry, true) -- add mark to map
           Spawn_Convoy_AbleSentry.mapmarkid = mapMarkAbleSentry -- add mark ID to SPAWN object 
         end,
