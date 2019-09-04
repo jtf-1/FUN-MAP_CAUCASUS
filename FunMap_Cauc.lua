@@ -50,12 +50,12 @@ MenuGroundTop = MENU_COALITION:New( coalition.side.BLUE, " GROUND ATTACK MISSION
 
 
 
--- ## Message displayed if WiP menu options are selected
+-- XXX Message displayed if WiP menu options are selected
 function MenuWip( _arg )
 	  MESSAGE:New( "The " .. _arg .. " menu option is currently under construction. " ,5,"" ):ToAll()
 end --function
 
--- ## Spawn Support aircraft
+-- XXX Spawn Support aircraft
 -- Scheduled function on spawn to check for presence of the support aircraft in its spawn zone. Repeat check every 60 seconds. Respawn if ac has left zone. 
 -- also respawn on engine shutdown if an airfield is within the support zone.
 function SpawnSupport (SupportSpawn) -- spawnobject, spawnzone
@@ -631,6 +631,8 @@ airbossStennis:SetAutoSave(nil, "Cauc_Airboss-USS Stennis_LSOgrades.csv")
 
 local stennisCase = 1
 local stennisOffset_deg = 0
+local stennisRadioRelayMarshall = UNIT:FindByName("RadioRelayMarshall_Stennis")
+local stennisRadioRelayPaddles = UNIT:FindByName("RadioRelayPaddles_Stennis")
  
 airbossStennis:SetMenuRecovery(30, 25, false, 30)
 airbossStennis:SetSoundfilesFolder("Airboss Soundfiles/")
@@ -641,9 +643,9 @@ airbossStennis:SetDespawnOnEngineShutdown( true )
 airbossStennis:SetRecoveryTanker( Spawn_Tanker_S3B_Texaco1 )
 airbossStennis:SetMarshalRadio( 285.675, "AM" )
 airbossStennis:SetLSORadio( 308.475, "AM" )
-airbossStennis:SetRadioRelayLSO( Spawn_Tanker_S3B_Texaco1:GetUnitName() )
-airbossStennis:SetRadioRelayMarshal( Spawn_Tanker_S3B_Texaco1:GetUnitName() )
-airbossStennis:AddRecoveryWindow( "10:01", "16:00", stennisCase, stennisOffset_deg, true, 20 )
+airbossStennis:SetRadioRelayLSO( stennisRadioRelayPaddles )
+airbossStennis:SetRadioRelayMarshal( stennisRadioRelayMarshall )
+airbossStennis:AddRecoveryWindow( "10:01", "18:00", stennisCase, stennisOffset_deg, true, 20 )
 airbossStennis:SetAirbossNiceGuy( true )
 airbossStennis:SetDefaultPlayerSkill(AIRBOSS.Difficulty.Normal)
 airbossStennis:SetRespawnAI()
