@@ -633,12 +633,15 @@ local clouds, visibility, fog, dust = airbossStennis:_GetStaticWeather() -- get 
 
 --- Determine Daytime Case
 -- adjust case according to weather state
-if clouds.base < 305 or visibility < 8000 then -- cloudbase < 1000' or viz < 5 miles, Case III
+if (stennisClouds.base < 305 and stennisClouds.density > 8) or stennisVisibility < 8000 then -- cloudbase < 1000' or viz < 5 miles, Case III
   stennisCase = 3
-elseif fog and fog.thickness > 60 and fog.visibility < 8000 then -- visibility in fog < 5nm, Case III
+  --MESSAGE:New("Case III, Clouds<1000/Viz" ,60,""):ToAll()
+elseif stennisFog and stennisFog.thickness > 60 and stennisFog.visibility < 8000 then -- visibility in fog < 5nm, Case III
   stennisCase = 3
-elseif clouds.base < 915 then -- cloudbase < 3000', viz > 5 miles, Case II
-    stennisCase = 2
+  --MESSAGE:New("Case III, Fog" ,60,""):ToAll()
+elseif (stennisClouds.base < 915 and stennisClouds.density > 8) and stennisVisibility >= 8000 then -- cloudbase < 3000', viz > 5 miles, Case II
+  stennisCase = 2
+  --MESSAGE:New("Case II, Clouds<3000/Viz" ,60,""):ToAll()
 end     
   
 airbossStennis:SetMenuRecovery(30, 25, false, 30)
