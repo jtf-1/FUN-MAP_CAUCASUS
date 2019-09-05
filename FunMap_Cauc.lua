@@ -3,7 +3,7 @@ env.info( "*** JTF-1 Caucasus Fun Map MOOSE script ***" )
 env.info( "*** JTF-1 COMMIT DATE: 2019-09-04T16:51 ***" )
 env.info( "*** JTF-1 MOOSE MISSION SCRIPT START ***" )
 
--- BEGIN MENU DEFINITIONS
+-- XXX BEGIN MENU DEFINITIONS
 
 
 
@@ -33,21 +33,18 @@ MenuGroundTop = MENU_COALITION:New( coalition.side.BLUE, " GROUND ATTACK MISSION
 	MenuCommunicationsAttack = MENU_COALITION:New(coalition.side.BLUE, " WiP Communications Strike", MenuGroundTop )
 	MenuC2Attack = MENU_COALITION:New(coalition.side.BLUE, " WiP C2 Strike", MenuGroundTop )
 
+-- ## ANTI-SHIP MISSIONS
+MenuAntiShipTop = MENU_COALITION:New(coalition.side.BLUE, " WiP ANTI-SHIP MISSIONS" ) -- WiP
+
 -- ## STRIKE PACKAGE MISSIONS
 --MenuStrikePackageTop = MENU_COALITION:New(coalition.side.BLUE, " WiP STRIKE PACKAGE MISSIONS" ) -- WiP
 
--- ## ANTI-SHIP MISSIONS
---MenuAntiShipTop = MENU_COALITION:New(coalition.side.BLUE, " WiP ANTI-SHIP MISSIONS" ) -- WiP
-
 -- ## FLEET DEFENCE MISSIONS
 --MenuFleetDefenceTop = MENU_COALITION:New(coalition.side.BLUE, " WiP FLEET DEFENCE MISSIONS" ) -- WiP
-
-  
-
+ 
 
 -- END MENU DEFINITIONS
--- BEGIN UTILITY FUNCTIONS
-
+-- BEGIN FUNCTIONS
 
 
 -- XXX Message displayed if WiP menu options are selected
@@ -79,7 +76,6 @@ function SpawnSupport (SupportSpawn) -- spawnobject, spawnzone
 		:InitRepeatOnEngineShutDown()
 		:Spawn()
 
-
 end -- function
 
 --XXX ## Spawning CAP flights
@@ -99,8 +95,6 @@ function SpawnCap( _args ) -- spawnobject, spawntable { spawn, spawnzone, templa
       end
     )
     :SpawnInZone( SpawnCapTable.spawnzone, true, 3000, 6000 )
-
-
     
 end --function
   
@@ -529,8 +523,8 @@ local function InList( tbl, val )
 end --function
 
 
--- END UTILITY FUNCTIONS
--- BEGIN SUPPORT AC SECTION
+-- END FUNCTIONS
+-- XXX BEGIN SUPPORT AC SECTION
 
 
 ---------------------------------------------------
@@ -617,7 +611,7 @@ Spawn_Rescuehelo_Tarawa:SetRespawnInAir()
 	
 
 -- END SUPPORT AC SECTION
--- BEGIN BOAT SECTION
+-- XXX BEGIN BOAT SECTION
 
 
 -----------------------
@@ -637,15 +631,16 @@ local stennisRadioRelayPaddles = UNIT:FindByName("RadioRelayPaddles_Stennis")
 local missionStartTime = timer.getTime0( )
 local clouds, visibility, fog, dust = airbossStennis:_GetStaticWeather() -- get mission weather (assumes static weather is used)
 
---- adjust daytime Case according to weather state
-if clouds.base < 305 then -- cloudbase lower than 1000', Case III
+--- Determine Daytime Case
+-- adjust case according to weather state
+if clouds.base < 305 or visibility < 8000 then -- cloudbase < 1000' or viz < 5 miles, Case III
   stennisCase = 3
-elseif fog and fog.thickness > 60 and fog.visibility < 8000 then -- visibility < 5nm, Case III
+elseif fog and fog.thickness > 60 and fog.visibility < 8000 then -- visibility in fog < 5nm, Case III
   stennisCase = 3
-elseif clouds.base < 915 then -- cloudbase lower than 3000', viz 5nm+, Case II
+elseif clouds.base < 915 then -- cloudbase < 3000', viz > 5 miles, Case II
     stennisCase = 2
 end     
- 
+  
 airbossStennis:SetMenuRecovery(30, 25, false, 30)
 airbossStennis:SetSoundfilesFolder("Airboss Soundfiles/")
 airbossStennis:SetTACAN(74,"X","STN")
@@ -661,8 +656,8 @@ airbossStennis:SetRadioRelayMarshal( stennisRadioRelayMarshall )
 --- Recovery windows dependant on mission start and finish times
 -- Sunset @ 17:45, Sunrise @ 05:30
 -- otherwise, intiate recovery through F10 menu
-if missionStartTime == 28800 then -- 08:30 start, 19:30 finish
-  airbossStennis:AddRecoveryWindow( "08:01", "18:45", stennisCase, stennisOffset_deg, true, 20 ) -- Recovery window from mission start + 1min to before sunset + 30mins
+if missionStartTime == 30600 then -- 08:30 start, 19:30 finish
+  airbossStennis:AddRecoveryWindow( "08:31", "18:45", stennisCase, stennisOffset_deg, true, 20 ) -- Recovery window from mission start + 1min to before sunset + 30mins
   airbossStennis:AddRecoveryWindow( "18:46", "20:00", 3, stennisOffset_deg, true, 30 ) -- Recovery window after sunset + 30mins
 elseif missionStartTime == 79200 then -- 22:00 start, 09:00+1 finish
   airbossStennis:AddRecoveryWindow( "22:01", "8:30+1", 3, stennisOffset_deg, true, 30 ) -- Recovery window after sunset + 30mins until sunrise - 30mins
@@ -710,7 +705,7 @@ airbossTarawa:Start()
 
 
 -- END BOAT SECTION
--- BEGIN RANGE SECTION
+-- XXX BEGIN RANGE SECTION
 
 
 
