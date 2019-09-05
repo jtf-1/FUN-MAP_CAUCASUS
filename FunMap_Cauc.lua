@@ -629,10 +629,22 @@ airbossStennis=AIRBOSS:New( "CSG_CarrierGrp_Stennis", "Stennis" )
 airbossStennis:Load(nil, "Cauc_Airboss-USS Stennis_LSOgrades.csv")
 airbossStennis:SetAutoSave(nil, "Cauc_Airboss-USS Stennis_LSOgrades.csv")
 
+
 local stennisCase = 1
 local stennisOffset_deg = 0
 local stennisRadioRelayMarshall = UNIT:FindByName("RadioRelayMarshall_Stennis")
 local stennisRadioRelayPaddles = UNIT:FindByName("RadioRelayPaddles_Stennis")
+local missionStartTime = timer.getTime0( )
+local clouds, visibility, fog, dust = airbossStennis:_GetStaticWeather() -- get mission weather (assumes static weather is used)
+
+--- adjust daytime Case according to weather state
+if clouds.base < 305 then -- cloudbase lower than 1000', Case III
+  stennisCase = 3
+elseif fog and fog.thickness > 60 and fog.visibility < 8000 then -- visibility < 5nm, Case III
+  stennisCase = 3
+elseif clouds.base < 915 then -- cloudbase lower than 3000', viz 5nm+, Case II
+    stennisCase = 2
+end     
  
 airbossStennis:SetMenuRecovery(30, 25, false, 30)
 airbossStennis:SetSoundfilesFolder("Airboss Soundfiles/")
@@ -645,7 +657,18 @@ airbossStennis:SetMarshalRadio( 285.675, "AM" )
 airbossStennis:SetLSORadio( 308.475, "AM" )
 airbossStennis:SetRadioRelayLSO( stennisRadioRelayPaddles )
 airbossStennis:SetRadioRelayMarshal( stennisRadioRelayMarshall )
-airbossStennis:AddRecoveryWindow( "10:01", "18:00", stennisCase, stennisOffset_deg, true, 20 )
+
+--- Recovery windows dependant on mission start and finish times
+-- Sunset @ 17:45, Sunrise @ 05:30
+-- otherwise, intiate recovery through F10 menu
+if missionStartTime == 28800 then -- 08:30 start, 19:30 finish
+  airbossStennis:AddRecoveryWindow( "08:01", "18:45", stennisCase, stennisOffset_deg, true, 20 ) -- Recovery window from mission start + 1min to before sunset + 30mins
+  airbossStennis:AddRecoveryWindow( "18:46", "20:00", 3, stennisOffset_deg, true, 30 ) -- Recovery window after sunset + 30mins
+elseif missionStartTime == 79200 then -- 22:00 start, 09:00+1 finish
+  airbossStennis:AddRecoveryWindow( "22:01", "8:30+1", 3, stennisOffset_deg, true, 30 ) -- Recovery window after sunset + 30mins until sunrise - 30mins
+  airbossStennis:AddRecoveryWindow( "8:31+1", "10:00+1", stennisCase, stennisOffset_deg, true, 20 ) -- Recovery window from mission start + 1min to before sunset + 30mins
+end
+
 airbossStennis:SetAirbossNiceGuy( true )
 airbossStennis:SetDefaultPlayerSkill(AIRBOSS.Difficulty.Normal)
 airbossStennis:SetRespawnAI()
@@ -678,7 +701,7 @@ airbossTarawa:SetMarshalRadio( 285.675, "AM" )
 airbossTarawa:SetLSORadio( 255.725, "AM" )
 airbossTarawa:SetRadioRelayLSO( tarawaRadioRelayPaddles )
 airbossTarawa:SetRadioRelayMarshal( tarawaRadioRelayMarshall  )
-airbossTarawa:AddRecoveryWindow( "10:01", "16:00", tarawaCase, tarawaOffset_deg, true, 20 )
+airbossTarawa:AddRecoveryWindow( "8:01", "10:00+1", tarawaCase, tarawaOffset_deg, true, 20 ) --Tarawa Case I only for now
 airbossTarawa:SetAirbossNiceGuy( true )
 airbossTarawa:SetDefaultPlayerSkill(AIRBOSS.Difficulty.Normal)
 airbossTarawa:SetRespawnAI()
