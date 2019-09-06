@@ -618,18 +618,18 @@ Spawn_Rescuehelo_Tarawa:SetRespawnInAir()
 --- Airboss Stennis ---
 -----------------------
 
+-- Create AIRBOSS object for Stennis
 airbossStennis=AIRBOSS:New( "CSG_CarrierGrp_Stennis", "Stennis" )
 
+-- Set load and save path/name for persistent LSO grades
 airbossStennis:Load(nil, "Cauc_Airboss-USS Stennis_LSOgrades.csv")
 airbossStennis:SetAutoSave(nil, "Cauc_Airboss-USS Stennis_LSOgrades.csv")
 
-
-local stennisCase = 1
-local stennisOffset_deg = 0
-local stennisRadioRelayMarshall = UNIT:FindByName("RadioRelayMarshall_Stennis")
-local stennisRadioRelayPaddles = UNIT:FindByName("RadioRelayPaddles_Stennis")
-local missionStartTime = timer.getTime0( )
-local clouds, visibility, fog, dust = airbossStennis:_GetStaticWeather() -- get mission weather (assumes static weather is used)
+local stennisCase = 1 -- default to Case I
+local stennisOffset_deg = 0 -- Marshal offset
+local stennisRadioRelayMarshall = UNIT:FindByName("RadioRelayMarshall_Stennis") -- radio relay unit for Marshal
+local stennisRadioRelayPaddles = UNIT:FindByName("RadioRelayPaddles_Stennis") -- radio relay unit for LSO
+local stennisClouds, stennisVisibility, stennisFog, stennisDust = airbossStennis:_GetStaticWeather() -- get mission weather (assumes static weather is used)
 
 --- Determine Daytime Case
 -- adjust case according to weather state
@@ -643,7 +643,8 @@ elseif (stennisClouds.base < 915 and stennisClouds.density > 8) and stennisVisib
   stennisCase = 2
   --MESSAGE:New("Case II, Clouds<3000/Viz" ,60,""):ToAll()
 end     
-  
+ 
+-- Stennis AIRBOSS configuration
 airbossStennis:SetMenuRecovery(30, 25, false, 30)
 airbossStennis:SetSoundfilesFolder("Airboss Soundfiles/")
 airbossStennis:SetTACAN(74,"X","STN")
@@ -656,21 +657,15 @@ airbossStennis:SetLSORadio( 308.475, "AM" )
 airbossStennis:SetRadioRelayLSO( stennisRadioRelayPaddles )
 airbossStennis:SetRadioRelayMarshal( stennisRadioRelayMarshall )
 
---- Recovery windows dependant on mission start and finish times
--- Sunset @ 17:45, Sunrise @ 05:30
+--- Recovery Windows 
+-- dependant on mission start and finish times
+-- Sunrise @ 08:00, Sunset @ 19:00, recovery @ sunrise+10 and sunset-10
 -- otherwise, intiate recovery through F10 menu
-if missionStartTime == 30600 then -- 08:30 start, 19:30 finish
-  airbossStennis:AddRecoveryWindow( "08:31", "18:45", stennisCase, stennisOffset_deg, true, 20 ) -- Recovery window from mission start + 1min to before sunset + 30mins
-  airbossStennis:AddRecoveryWindow( "18:46", "20:00", 3, stennisOffset_deg, true, 30 ) -- Recovery window after sunset + 30mins
-elseif missionStartTime == 79200 then -- 22:00 start, 09:00+1 finish
-  airbossStennis:AddRecoveryWindow( "22:01", "8:30+1", 3, stennisOffset_deg, true, 30 ) -- Recovery window after sunset + 30mins until sunrise - 30mins
-  airbossStennis:AddRecoveryWindow( "8:31+1", "10:00+1", stennisCase, stennisOffset_deg, true, 20 ) -- Recovery window from mission start + 1min to before sunset + 30mins
-end
+airbossStennis:AddRecoveryWindow( "8:10", "18:50", stennisCase, stennisOffset_deg, true, 30 ) -- Recovery window from mission start + 1min to before sunset + 30mins
+airbossStennis:AddRecoveryWindow( "18:50", "8:10+1", 3, stennisOffset_deg, true, 30 ) -- Recovery window after sunset + 30mins until sunrise - 30mins
+airbossStennis:AddRecoveryWindow( "8:10+1", "18:50+1", stennisCase, stennisOffset_deg, true, 30 ) -- Recovery window from mission start + 1min to before sunset + 30mins
 
-airbossStennis:SetAirbossNiceGuy( true )
-airbossStennis:SetDefaultPlayerSkill(AIRBOSS.Difficulty.Normal)
-airbossStennis:SetRespawnAI()
-
+-- Start AIRBOSS Stennis
 airbossStennis:Start()
 
 Spawn_Tanker_S3B_Texaco1:SetRecoveryAirboss( true )
