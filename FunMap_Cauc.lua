@@ -635,13 +635,10 @@ local stennisClouds, stennisVisibility, stennisFog, stennisDust = airbossStennis
 -- adjust case according to weather state
 if (stennisClouds.base < 305 and stennisClouds.density > 8) or stennisVisibility < 8000 then -- cloudbase < 1000' or viz < 5 miles, Case III
   stennisCase = 3
-  --MESSAGE:New("Case III, Clouds<1000/Viz" ,60,""):ToAll()
 elseif stennisFog and stennisFog.thickness > 60 and stennisFog.visibility < 8000 then -- visibility in fog < 5nm, Case III
   stennisCase = 3
-  --MESSAGE:New("Case III, Fog" ,60,""):ToAll()
 elseif (stennisClouds.base < 915 and stennisClouds.density > 8) and stennisVisibility >= 8000 then -- cloudbase < 3000', viz > 5 miles, Case II
   stennisCase = 2
-  --MESSAGE:New("Case II, Clouds<3000/Viz" ,60,""):ToAll()
 end     
  
 -- Stennis AIRBOSS configuration
@@ -656,14 +653,13 @@ airbossStennis:SetMarshalRadio( 285.675, "AM" )
 airbossStennis:SetLSORadio( 308.475, "AM" )
 airbossStennis:SetRadioRelayLSO( stennisRadioRelayPaddles )
 airbossStennis:SetRadioRelayMarshal( stennisRadioRelayMarshall )
-
 --- Recovery Windows 
 -- dependant on mission start and finish times
 -- Sunrise @ 08:00, Sunset @ 19:00, recovery @ sunrise+10 and sunset-10
 -- otherwise, intiate recovery through F10 menu
-airbossStennis:AddRecoveryWindow( "8:10", "18:50", stennisCase, stennisOffset_deg, true, 30 ) -- Recovery window from mission start + 1min to before sunset + 30mins
-airbossStennis:AddRecoveryWindow( "18:50", "8:10+1", 3, stennisOffset_deg, true, 30 ) -- Recovery window after sunset + 30mins until sunrise - 30mins
-airbossStennis:AddRecoveryWindow( "8:10+1", "18:50+1", stennisCase, stennisOffset_deg, true, 30 ) -- Recovery window from mission start + 1min to before sunset + 30mins
+airbossStennis:AddRecoveryWindow( "8:10", "18:50", stennisCase, stennisOffset_deg, true, 30 ) 
+airbossStennis:AddRecoveryWindow( "18:50", "8:10+1", 3, stennisOffset_deg, true, 30 ) 
+airbossStennis:AddRecoveryWindow( "8:10+1", "18:50+1", stennisCase, stennisOffset_deg, true, 30 ) 
 
 -- Start AIRBOSS Stennis
 airbossStennis:Start()
