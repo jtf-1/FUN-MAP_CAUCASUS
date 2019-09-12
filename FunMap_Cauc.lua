@@ -625,14 +625,17 @@ airbossStennis=AIRBOSS:New( "CSG_CarrierGrp_Stennis", "Stennis" )
 airbossStennis:Load(nil, "Cauc_Airboss-USS Stennis_LSOgrades.csv")
 airbossStennis:SetAutoSave(nil, "Cauc_Airboss-USS Stennis_LSOgrades.csv")
 
-local stennisCase = 1 -- default to Case I
 local stennisOffset_deg = 0 -- Marshal offset
+local stennisDefaultPlayerSkill = AIRBOSS.Difficulty.Normal -- default skill level
 local stennisRadioRelayMarshall = UNIT:FindByName("RadioRelayMarshall_Stennis") -- radio relay unit for Marshal
 local stennisRadioRelayPaddles = UNIT:FindByName("RadioRelayPaddles_Stennis") -- radio relay unit for LSO
 local stennisClouds, stennisVisibility, stennisFog, stennisDust = airbossStennis:_GetStaticWeather() -- get mission weather (assumes static weather is used)
 
 --- Determine Daytime Case
 -- adjust case according to weather state
+
+local stennisCase = 1 -- default to Case I
+
 if (stennisClouds.base < 305 and stennisClouds.density > 8) or stennisVisibility < 8000 then -- cloudbase < 1000' or viz < 5 miles, Case III
   stennisCase = 3
 elseif stennisFog and stennisFog.thickness > 60 and stennisFog.visibility < 8000 then -- visibility in fog < 5nm, Case III
@@ -653,8 +656,12 @@ airbossStennis:SetMarshalRadio( 285.675, "AM" )
 airbossStennis:SetLSORadio( 308.475, "AM" )
 airbossStennis:SetRadioRelayLSO( stennisRadioRelayPaddles )
 airbossStennis:SetRadioRelayMarshal( stennisRadioRelayMarshall )
---- Recovery Windows 
--- dependant on mission start and finish times
+airbossStennis:SetAirbossNiceGuy( true ) -- allow direct to commence
+airbossStennis:SetDefaultPlayerSkill(stennisDefaultPlayerSkill)
+airbossStennis:SetRespawnAI()
+
+--- Fun Map Recovery Windows 
+-- dependent on mission start and finish times
 -- Sunrise @ 08:00, Sunset @ 19:00, recovery @ sunrise+10 and sunset-10
 -- otherwise, intiate recovery through F10 menu
 airbossStennis:AddRecoveryWindow( "8:10", "18:50", stennisCase, stennisOffset_deg, true, 30 ) 
