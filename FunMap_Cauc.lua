@@ -412,9 +412,9 @@ function SpawnStrikeAttack ( StrikeIndex ) -- "location name"
 		--- menu: add mission remove command and remove mission start command ---
 		------------------------------------------------------------------------------
 		
+    _G["Cmd" .. StrikeIndex .. "Attack"]:Remove()
 		_G["Cmd" .. StrikeIndex .. "AttackRemove"] = MENU_COALITION_COMMAND:New( coalition.side.BLUE, "Remove Mission", _G["Menu" .. TableStrikeAttack[StrikeIndex].striketype .. "Attack" .. StrikeIndex], RemoveStrikeAttack, StrikeIndex )
-		_G["Cmd" .. StrikeIndex .. "Attack"]:Remove()
-		
+			
 	else
 		msg = "\n\nThe " 
 			.. TableStrikeAttack[StrikeIndex].strikename
@@ -453,8 +453,8 @@ BASE:TraceAll( true )
 		TableStrikeAttack[StrikeIndex].is_open = true -- set strike mission as available
 		
 		-- ## menu: add mission start menu command and remove mission remove command
+    _G["Cmd" .. StrikeIndex .. "AttackRemove"]:Remove()
 		_G["Cmd" .. StrikeIndex .. "Attack"] = MENU_COALITION_COMMAND:New( coalition.side.BLUE, "Start Mission", _G["Menu" .. TableStrikeAttack[StrikeIndex].striketype .. "Attack" .. StrikeIndex], SpawnStrikeAttack, StrikeIndex )
-		_G["Cmd" .. StrikeIndex .. "AttackRemove"]:Remove()
 
     msg = "\n\nThe " 
       .. TableStrikeAttack[StrikeIndex].strikename
@@ -532,6 +532,7 @@ end --function
 ---------------------------------------------------
 
 Zone_AAR_1 = ZONE:FindByName( "AAR_1_Zone" ) 
+Zone_AAR_2 = ZONE:FindByName( "AAR_2_Zone" ) 
 Zone_AWACS_1 = ZONE:FindByName( "AWACS_1_Zone" )
 Zone_Red_AWACS_1 = ZONE:FindByName( "RED_AWACS_1_Zone" ) 
 
@@ -539,9 +540,10 @@ Zone_Red_AWACS_1 = ZONE:FindByName( "RED_AWACS_1_Zone" )
 --- define table of support aircraft to be spawned ---
 ------------------------------------------------------
 
-TableSpawnSupport = { -- {spawnobjectname, spawnstub, spawnzone}
+TableSpawnSupport = { -- {spawnobjectname, spawnzone}
 	{spawnobject = "Tanker_C130_Arco1", spawnzone = Zone_AAR_1},
 	{spawnobject = "Tanker_KC135_Shell1", spawnzone = Zone_AAR_1},
+  {spawnobject = "Tanker_KC135_Shell2", spawnzone = Zone_AAR_2},
 	{spawnobject = "AWACS_Magic", spawnzone = Zone_AWACS_1},
 	{spawnobject = "RED_AWACS_108", spawnzone = Zone_Red_AWACS_1},
 }
@@ -661,12 +663,13 @@ airbossStennis:SetDefaultPlayerSkill(stennisDefaultPlayerSkill)
 airbossStennis:SetRespawnAI()
 
 --- Fun Map Recovery Windows 
--- dependent on mission start and finish times
+-- sunrise and sunset dependant on mission date
+-- https://www.timeanddate.com/sun/united-arab-emirates/abu-dhabi?month=4&year=2011
 -- Sunrise @ 08:00, Sunset @ 19:00, recovery @ sunrise+10 and sunset-10
 -- otherwise, intiate recovery through F10 menu
-airbossStennis:AddRecoveryWindow( "8:10", "18:50", stennisCase, stennisOffset_deg, true, 30 ) 
-airbossStennis:AddRecoveryWindow( "18:50", "8:10+1", 3, stennisOffset_deg, true, 30 ) 
-airbossStennis:AddRecoveryWindow( "8:10+1", "18:50+1", stennisCase, stennisOffset_deg, true, 30 ) 
+airbossStennis:AddRecoveryWindow( "8:10", "18:50", stennisCase, stennisOffset_deg, true, 30 ) -- sunrise to sunset
+airbossStennis:AddRecoveryWindow( "18:50", "8:10+1", 3, stennisOffset_deg, true, 30 ) -- sunset to sunrise D+1
+airbossStennis:AddRecoveryWindow( "8:10+1", "18:50+1", stennisCase, stennisOffset_deg, true, 30 ) -- sunrise D+1 to sunset D+1
 
 -- Start AIRBOSS Stennis
 airbossStennis:Start()
@@ -682,7 +685,7 @@ airbossTarawa=AIRBOSS:New( "CSG_CarrierGrp_Tarawa", "Tarawa" )
 airbossTarawa:Load(nil, "Cauc_Airboss-USS Tarawa_LSOgrades.csv")
 airbossTarawa:SetAutoSave(nil, "Cauc_Airboss-USS Tarawa_LSOgrades.csv")
 
-local tarawaCase = 1
+local tarawaCase = stennisCase -- set daytime case according to weather, determined in Stennis section. assumes statc weather accross whole map.
 local tarawaOffset_deg = 0
 local tarawaRadioRelayMarshall = UNIT:FindByName("RadioRelayMarshall_Tarawa")
 local tarawaRadioRelayPaddles = UNIT:FindByName("RadioRelayPaddles_Tarawa")
@@ -697,11 +700,19 @@ airbossTarawa:SetMarshalRadio( 285.675, "AM" )
 airbossTarawa:SetLSORadio( 255.725, "AM" )
 airbossTarawa:SetRadioRelayLSO( tarawaRadioRelayPaddles )
 airbossTarawa:SetRadioRelayMarshal( tarawaRadioRelayMarshall  )
-airbossTarawa:AddRecoveryWindow( "8:01", "10:00+1", tarawaCase, tarawaOffset_deg, true, 20 ) --Tarawa Case I only for now
 airbossTarawa:SetAirbossNiceGuy( true )
 airbossTarawa:SetDefaultPlayerSkill(AIRBOSS.Difficulty.Normal)
 airbossTarawa:SetRespawnAI()
 
+--- Fun Map Recovery Windows 
+-- dependent on mission start and finish times
+-- Sunrise @ 08:00, Sunset @ 19:00, recovery @ sunrise+10 and sunset-10
+-- otherwise, intiate recovery through F10 menu
+airbossTarawa:AddRecoveryWindow( "8:10", "18:50", tarawaCase, tarawaOffset_deg, true, 30 ) -- sunrise to sunset 
+airbossTarawa:AddRecoveryWindow( "18:50", "8:10+1", 3, tarawaOffset_deg, true, 30 ) -- sunset to sunrise D+1
+airbossTarawa:AddRecoveryWindow( "8:10+1", "18:50+1", tarawaCase, tarawaOffset_deg, true, 30 ) -- sunrise D+1 to sunset D+1
+
+-- Start AIRBOSS Tarawa
 airbossTarawa:Start()
 
 
