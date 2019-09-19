@@ -15,6 +15,9 @@ Track LM;
 - Arco 1-1  [KC130] 35X, 276.5, FL160
 - Shell 1-1 [KC135] 115X, 317.5, FL200
 
+Track EH;
+- Shell 2-1 [KC135] 116X, 317.6, FL200
+
 Stennis Hawk;
 - Texaco 1-1 [S-3B] 15Y, 317.775, FL060
 
