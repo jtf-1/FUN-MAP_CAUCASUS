@@ -1,4 +1,3 @@
-
 env.info( "*** JTF-1 Caucasus Fun Map MOOSE script ***" )
 env.info( "*** JTF-1 COMMIT DATE: 2019-09-04T16:51 ***" )
 env.info( "*** JTF-1 MOOSE MISSION SCRIPT START ***" )
@@ -607,7 +606,7 @@ Spawn_Rescuehelo_Stennis:SetRespawnInAir()
 Spawn_Rescuehelo_Tarawa = RESCUEHELO:New(UNIT:FindByName("CSG_CarrierGrp_Tarawa"), "RescueHelo_Tarawa")
 
 Spawn_Rescuehelo_Tarawa:SetRespawnInAir()
-  --:SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Tarawa_03"))
+  :SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Tarawa_03"))
   :SetRescueStopBoatOff()
   :Start()
 	
