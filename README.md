@@ -12,12 +12,12 @@ TANKERS
 =======
 
 Track LM;
-- Arco 1-1  [KC130] 35X, 276.5, FL160
-- Shell 1-1 [KC135MPRS] 115X, 317.5, FL200
-- Texaco 1-1 [KC135] 125X, 317.75, FL200
+- Arco 1-1  [KC130] 35Y, 276.5, FL160
+- Shell 1-1 [KC135MPRS] 115Y, 317.5, FL200
+- Texaco 1-1 [KC135] 125Y, 317.75, FL200
 
 Track EH;
-- Shell 2-1 [KC135MPRS] 116X, 317.6, FL200
+- Shell 2-1 [KC135MPRS] 116Y, 317.6, FL200
 
 Stennis Hawk;
 - Texaco 6-1 [S-3B] 15Y, 317.775, FL060
