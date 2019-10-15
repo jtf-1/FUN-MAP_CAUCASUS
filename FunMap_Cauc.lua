@@ -120,11 +120,14 @@ function SpawnConvoy ( _args ) -- ConvoyTemplates, SpawnHost {conv, dest, destzo
   local StrikeMarkZoneCoord = StrikeMarkZone:GetCoordinate() -- get coordinates of strikezone
 
   local StrikeMarkType = "Convoy"
-  local StrikeMarkCoords = StrikeMarkZoneCoord:ToStringLLDMS(_SETTINGS:SetLL_Accuracy(0))
+  local StrikeMarkCoordsLLDMS = StrikeMarkZoneCoord:ToStringLLDMS(_SETTINGS:SetLL_Accuracy(0)) --TableStrikeAttack[StrikeIndex].strikecoords
+  local StrikeMarkCoordsLLDDM = StrikeMarkZoneCoord:ToStringLLDDM(_SETTINGS:SetLL_Accuracy(3)) --TableStrikeAttack[StrikeIndex].strikecoords
 
   local StrikeMarkLabel = StrikeMarkType 
     .. " Strike\n" 
-    .. StrikeMarkCoords
+    .. StrikeMarkCoordsLLDMS
+	.. "\n"
+	.. StrikeMarkCoordsLLDDM
 
   local StrikeMark = StrikeMarkZoneCoord:MarkToAll(StrikeMarkLabel, true) -- add mark to map
 
@@ -154,7 +157,10 @@ function SpawnConvoy ( _args ) -- ConvoyTemplates, SpawnHost {conv, dest, destzo
 		.. SpawnHostTable[SpawnIndex].dest .. "."
 		.. "\n\nMission:  LOCATE AND DESTROY THE CONVOY."
 		.. "\n\nLast Known Position:\n"
-		.. StrikeMarkCoords
+		.. StrikeMarkCoordsLLDMS
+		.. "\n"
+		.. StrikeMarkCoordsLLDDM
+		.. "\n"
 		.. ConvoyThreats
 		.. "\n\n++++++++++++++++++++++++++++++++++++"
 		
@@ -220,14 +226,18 @@ function SpawnCamp( _args ) --TemplateTable, CampsTable [ loc, town, coords, is_
     local StrikeMarkName = SpawnCampsTable[ CampTableIndex ].town
     local StrikeMarkType = "Camp"
     local StrikeMarkRegion = SpawnZoneRegion
-    local StrikeMarkCoords = StrikeMarkZoneCoord:ToStringLLDMS(_SETTINGS:SetLL_Accuracy(0))
+ 	local StrikeMarkCoordsLLDMS = StrikeMarkZoneCoord:ToStringLLDMS(_SETTINGS:SetLL_Accuracy(0)) --TableStrikeAttack[StrikeIndex].strikecoords
+	local StrikeMarkCoordsLLDDM = StrikeMarkZoneCoord:ToStringLLDDM(_SETTINGS:SetLL_Accuracy(3)) --TableStrikeAttack[StrikeIndex].strikecoords
 
     local StrikeMarkLabel = StrikeMarkName .. " " 
       .. StrikeMarkType 
       .. " Strike " 
       .. StrikeMarkRegion 
       .. "\n" 
-      .. StrikeMarkCoords
+      .. StrikeMarkCoordsLLDMS
+	  .. "\n"
+	  .. StrikeMarkCoordsLLDDM
+	  
 
     local StrikeMark = StrikeMarkZoneCoord:MarkToAll(StrikeMarkLabel, true) -- add mark to map
 
@@ -239,7 +249,9 @@ function SpawnCamp( _args ) --TemplateTable, CampsTable [ loc, town, coords, is_
 		.. SpawnCampsTable[ CampTableIndex ].town
 		.. "\n\nMission:  LOCATE AND DESTROY THE CAMP."
 		.. "\n\nCoordinates:\n"
-		.. StrikeMarkCoords
+		.. StrikeMarkCoordsLLDMS
+		.. "\n"
+		.. StrikeMarkCoordsLLDDM
 		.. "\n\nThreats:  INFANTRY, HEAVY MG, RPG, I/R SAM, LIGHT ARMOR, AAA"
 		.. "\n\n++++++++++++++++++++++++++++++++++++"
 		
@@ -372,14 +384,17 @@ function SpawnStrikeAttack ( StrikeIndex ) -- "location name"
     local StrikeMarkName = TableStrikeAttack[StrikeIndex].strikename
     local StrikeMarkType = TableStrikeAttack[StrikeIndex].striketype
     local StrikeMarkRegion = TableStrikeAttack[StrikeIndex].strikeregion
-    local StrikeMarkCoords = StrikeMarkZoneCoord:ToStringLLDMS(_SETTINGS:SetLL_Accuracy(0)) --TableStrikeAttack[StrikeIndex].strikecoords
+    local StrikeMarkCoordsLLDMS = StrikeMarkZoneCoord:ToStringLLDMS(_SETTINGS:SetLL_Accuracy(0)) --TableStrikeAttack[StrikeIndex].strikecoords
+    local StrikeMarkCoordsLLDDM = StrikeMarkZoneCoord:ToStringLLDDM(_SETTINGS:SetLL_Accuracy(3)) --TableStrikeAttack[StrikeIndex].strikecoords
 
     local StrikeMarkLabel = StrikeMarkName .. " " 
       .. StrikeMarkType 
       .. " Strike " 
       .. StrikeMarkRegion 
       .. "\n" 
-      .. StrikeMarkCoords
+      .. StrikeMarkCoordsLLDMS
+	  .. "\n"
+      .. StrikeMarkCoordsLLDDM
 
     local StrikeMark = StrikeMarkZoneCoord:MarkToAll(StrikeMarkLabel, true) -- add mark to map
     
@@ -397,7 +412,9 @@ function SpawnStrikeAttack ( StrikeIndex ) -- "location name"
 			.. "\n\nMission: "
 			.. TableStrikeAttack[StrikeIndex].strikemission
 			.. "\n\nCoordinates:\n"
-			.. StrikeMarkCoords
+			.. StrikeMarkCoordsLLDMS
+			.. "\n"
+			.. StrikeMarkCoordsLLDDM
 			.. "\n\nThreats:  "
 			.. TableStrikeAttack[StrikeIndex].strikethreats
 			.. "\n\n++++++++++++++++++++++++++++++++++++"
@@ -543,6 +560,7 @@ TableSpawnSupport = { -- {spawnobjectname, spawnzone}
 	{spawnobject = "Tanker_C130_Arco1", spawnzone = Zone_AAR_1},
 	{spawnobject = "Tanker_KC135_Shell1", spawnzone = Zone_AAR_1},
   {spawnobject = "Tanker_KC135_Shell2", spawnzone = Zone_AAR_2},
+  {spawnobject = "Tanker_KC135_Texaco1", spawnzone = Zone_AAR_1},
 	{spawnobject = "AWACS_Magic", spawnzone = Zone_AWACS_1},
 	{spawnobject = "RED_AWACS_108", spawnzone = Zone_Red_AWACS_1},
 }
@@ -556,60 +574,6 @@ for i, v in ipairs( TableSpawnSupport ) do
 	
 end
 
--------------------------------
---- Recovery Tanker Stennis ---
--------------------------------
-
-Spawn_Tanker_S3B_Texaco1 = RECOVERYTANKER:New( UNIT:FindByName( "CSG_CarrierGrp_Stennis"), "Tanker_S3B_Texaco1" )
-
-Spawn_Tanker_S3B_Texaco1:SetCallsign(CALLSIGN.Tanker.Texaco, 1)
-	:SetTACAN(15, "TEX")
-	:SetRadio(317.775)
-	:SetModex(049)
-	-- :SetTakeoffAir()
-	:SetAltitude(6000)
-  :SetRespawnInAir()
-	:Start()
-
-------------------------------
---- Recovery Tanker Tarawa ---
-------------------------------
-
-Spawn_Tanker_C130_Texaco2 = RECOVERYTANKER:New( UNIT:FindByName( "CSG_CarrierGrp_Tarawa"), "Tanker_C130" )
-
-Spawn_Tanker_C130_Texaco2:SetCallsign(CALLSIGN.Tanker.Texaco, 2)
-  :SetTACAN(16, "TEX")
-  :SetRadio(276.1)
-  :SetModex(999)
-  :SetAltitude(10000)
-  :SetTakeoffAir()
-  :SetRespawnInAir()
-  :SetHomeBase(AIRBASE:FindByName("Kobuleti"))
-  :Start()
-
-
----------------------------
---- Rescue Helo Stennis ---
----------------------------
-
-Spawn_Rescuehelo_Stennis = RESCUEHELO:New(UNIT:FindByName("CSG_CarrierGrp_Stennis"), "RescueHelo_Stennis")
-
-Spawn_Rescuehelo_Stennis:SetRespawnInAir()
-  :SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Stennis_03"))
-  :SetRescueStopBoatOff()
-	:Start()
-
----------------------------
---- Rescue Helo Tarawa ---
----------------------------
-
-Spawn_Rescuehelo_Tarawa = RESCUEHELO:New(UNIT:FindByName("CSG_CarrierGrp_Tarawa"), "RescueHelo_Tarawa")
-
-Spawn_Rescuehelo_Tarawa:SetRespawnInAir()
-  :SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Tarawa_03"))
-  :SetRescueStopBoatOff()
-  :Start()
-	
 
 -- END SUPPORT AC SECTION
 -- XXX BEGIN BOAT SECTION
@@ -673,7 +637,38 @@ airbossStennis:AddRecoveryWindow( "8:10+1", "18:50+1", stennisCase, stennisOffse
 -- Start AIRBOSS Stennis
 airbossStennis:Start()
 
-Spawn_Tanker_S3B_Texaco1:SetRecoveryAirboss( true )
+-- Recovery Tanker Stennis ---
+
+Spawn_Tanker_S3B_Texaco6 = RECOVERYTANKER:New( UNIT:FindByName( "CSG_CarrierGrp_Stennis"), "Tanker_S3B_Texaco6" )
+
+Spawn_Tanker_S3B_Texaco6:SetCallsign(CALLSIGN.Tanker.Texaco, 6)
+	:SetTACAN(15, "TEX")
+	:SetRadio(317.775)
+	:SetModex(049)
+	-- :SetTakeoffAir()
+	:SetAltitude(6000)
+  :SetRespawnInAir()
+	:Start()
+
+Spawn_Tanker_S3B_Texaco6:SetRecoveryAirboss( true )
+
+-- Rescue Helo Stennis ---
+
+Spawn_Rescuehelo_Stennis = RESCUEHELO:New(UNIT:FindByName("CSG_CarrierGrp_Stennis"), "RescueHelo_Stennis")
+
+Spawn_Rescuehelo_Stennis:SetRespawnInAir()
+  :SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Stennis_03"))
+  :SetRescueStopBoatOff()
+	:Start()
+
+-- Rescue Helo Tarawa ---
+
+Spawn_Rescuehelo_Tarawa = RESCUEHELO:New(UNIT:FindByName("CSG_CarrierGrp_Tarawa"), "RescueHelo_Tarawa")
+
+Spawn_Rescuehelo_Tarawa:SetRespawnInAir()
+  :SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Tarawa_03"))
+  :SetRescueStopBoatOff()
+  :Start()
 
 -----------------------
 --- Airboss Tarawa ---
@@ -714,6 +709,19 @@ airbossTarawa:AddRecoveryWindow( "8:10+1", "18:50+1", tarawaCase, tarawaOffset_d
 -- Start AIRBOSS Tarawa
 airbossTarawa:Start()
 
+-- Recovery Tanker Tarawa ---
+
+Spawn_Tanker_C130_Arco2 = RECOVERYTANKER:New( UNIT:FindByName( "CSG_CarrierGrp_Tarawa"), "Tanker_C130_Arco2" )
+
+Spawn_Tanker_C130_Arco2:SetCallsign(CALLSIGN.Tanker.Arco, 2)
+  :SetTACAN(16, "TEX")
+  :SetRadio(276.1)
+  :SetModex(999)
+  :SetAltitude(10000)
+  :SetTakeoffAir()
+  :SetRespawnInAir()
+  :SetHomeBase(AIRBASE:FindByName("Kobuleti"))
+  :Start()
 
 -- END BOAT SECTION
 -- XXX BEGIN RANGE SECTION
@@ -1153,7 +1161,7 @@ Spawn_Convoy_AbleSentry = SPAWN:New( "CONVOY_Hard_Able Sentry" )
             COORDINATE:RemoveMark( Spawn_Convoy_AbleSentry.mapmarkid )
           end    
           local coordsAbleSentry = SpawnGroup:GetCoordinate()
-          local labelAbleSentry = "Able Sentry Convoy\nMost recent reported postion\n" .. coordsAbleSentry:ToStringLLDMS(_SETTINGS:SetLL_Accuracy(0))
+          local labelAbleSentry = "Able Sentry Convoy\nMost recent reported postion\n" .. coordsAbleSentry:ToStringLLDMS(_SETTINGS:SetLL_Accuracy(0)) .. "\n" .. coordsAbleSentry:ToStringLLDDM(_SETTINGS:SetLL_Accuracy(3))
           local mapMarkAbleSentry = coordsAbleSentry:MarkToAll(labelAbleSentry, true) -- add mark to map
           Spawn_Convoy_AbleSentry.mapmarkid = mapMarkAbleSentry -- add mark ID to SPAWN object 
         end,
@@ -1163,6 +1171,7 @@ Spawn_Convoy_AbleSentry = SPAWN:New( "CONVOY_Hard_Able Sentry" )
 	)
 	:SpawnScheduled( 60 , .1 )
 
+    
 
 
 cmdConvoyAbleSentryReset = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Able Sentry Reset",MenuConvoyAttack, ResetAbleSentry )
@@ -1336,6 +1345,9 @@ TableStrikeAttack = {
       "BESLAN_STATIC_04",
       "BESLAN_STATIC_05",
       "BESLAN_STATIC_06",
+      "BESLAN_STATIC_07",
+      "BESLAN_STATIC_08",
+      "BESLAN_STATIC_09",
 		},
 		medzones = { 
 			{ loc = "ZONE_BeslanMed_01", is_open = true },
@@ -1388,6 +1400,8 @@ TableStrikeAttack = {
     "SOCHI_STATIC_06",
     "SOCHI_STATIC_07",
     "SOCHI_STATIC_08",
+    "SOCHI_STATIC_09",
+    "SOCHI_STATIC_10",
 		},
 		medzones = {
 			{ loc = "ZONE_SochiMed_01", is_open = true },
@@ -1441,6 +1455,9 @@ TableStrikeAttack = {
     "MAYKOP_STATIC_07",
     "MAYKOP_STATIC_08",
     "MAYKOP_STATIC_09",
+    "MAYKOP_STATIC_10",
+    "MAYKOP_STATIC_11",
+    "MAYKOP_STATIC_12",
 		},
 		medzones = {
 			{ loc = "ZONE_MaykopMed_01", is_open = true },
@@ -1491,6 +1508,10 @@ TableStrikeAttack = {
     "NALCHIK_STATIC_04",
     "NALCHIK_STATIC_05",
     "NALCHIK_STATIC_06",
+    "NALCHIK_STATIC_07",
+    "NALCHIK_STATIC_08",
+    "NALCHIK_STATIC_09",
+    "NALCHIK_STATIC_10",
 		},
 		medzones = {
 			{ loc = "ZONE_NalchikMed_01", is_open = true },
