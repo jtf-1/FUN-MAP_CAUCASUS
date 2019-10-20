@@ -1,6 +1,12 @@
 Welcome to the JTF-1 Caucasus Fun Map!
 Please make yourself aware of the following information:
 
+ATIS
+====
+
+- Vaziani 122.7
+- Tbilisi-Lochini 132.8
+
 AWACS
 =====
 
