@@ -540,6 +540,26 @@ end --function
 
 
 -- END FUNCTIONS
+-- XXX BEGIN ATIS
+
+atisVaziani=ATIS:New(AIRBASE.Caucasus.Vaziani, 122.7)
+atisVaziani:SetRadioRelayUnitName("Radio Relay Vaziani")
+atisVaziani:AddILS(108.75, "31")
+atisVaziani:SetTACAN(22)
+atisVaziani:SetTowerFrequencies({269.1, 140.1})
+atisVaziani:Start()
+
+
+atisTbilisi=ATIS:New(AIRBASE.Caucasus.Tbilisi_Lochini, 132.8)
+atisTbilisi:SetRadioRelayUnitName("Radio Relay Tbilisi")
+atisTbilisi:AddILS(108.9, "31")
+atisTbilisi:SetVOR(113.7)
+atisTbilisi:SetTowerFrequencies({267.1, 138.1})
+atisTbilisi:SetActiveRunway("L")
+atisTbilisi:Start()
+
+
+-- END ATIS
 -- XXX BEGIN SUPPORT AC SECTION
 
 
