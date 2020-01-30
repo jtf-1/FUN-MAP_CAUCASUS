@@ -641,10 +641,10 @@ airbossStennis:SetMarshalRadio( 285.675, "AM" )
 airbossStennis:SetLSORadio( 308.475, "AM" )
 airbossStennis:SetRadioRelayLSO( stennisRadioRelayPaddles )
 airbossStennis:SetRadioRelayMarshal( stennisRadioRelayMarshall )
-airbossStennis:SetAirbossNiceGuy( true ) -- allow direct to commence
+airbossStennis:SetAirbossNiceGuy(true) -- allow direct to commence
 airbossStennis:SetDefaultPlayerSkill(stennisDefaultPlayerSkill)
 airbossStennis:SetRespawnAI()
-airbossStennis:SetMenuMarkZones( false ) -- disable marking zones using smoke or flares
+airbossStennis:SetMenuMarkZones(false) -- disable marking zones using smoke or flares
 
 --- Fun Map Recovery Windows 
 -- sunrise and sunset dependant on mission date
@@ -663,33 +663,37 @@ airbossStennis:Start()
 Spawn_Tanker_S3B_Texaco6 = RECOVERYTANKER:New( UNIT:FindByName( "CSG_CarrierGrp_Stennis"), "Tanker_S3B_Texaco6" )
 
 Spawn_Tanker_S3B_Texaco6:SetCallsign(CALLSIGN.Tanker.Texaco, 6)
-	:SetTACAN(15, "TEX")
-	:SetRadio(317.775)
-	:SetModex(049)
-	-- :SetTakeoffAir()
-	:SetAltitude(6000)
-  :SetRespawnInAir()
-	:Start()
+Spawn_Tanker_S3B_Texaco6:SetTACAN(15, "TEX")
+Spawn_Tanker_S3B_Texaco6:SetRadio(317.775)
+Spawn_Tanker_S3B_Texaco6:SetModex(049)
+Spawn_Tanker_S3B_Texaco6:SetTakeoffAir()
+Spawn_Tanker_S3B_Texaco6:SetAltitude(6000)
+Spawn_Tanker_S3B_Texaco6:SetRespawnInAir()
+Spawn_Tanker_S3B_Texaco6:Start()
 
-Spawn_Tanker_S3B_Texaco6:SetRecoveryAirboss( true )
+Spawn_Tanker_S3B_Texaco6:SetRecoveryAirboss( false )
 
 -- Rescue Helo Stennis ---
 
 Spawn_Rescuehelo_Stennis = RESCUEHELO:New(UNIT:FindByName("CSG_CarrierGrp_Stennis"), "RescueHelo_Stennis")
 
-Spawn_Rescuehelo_Stennis:SetRespawnInAir()
-  :SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Stennis_03"))
-  :SetRescueStopBoatOff()
-	:Start()
+Spawn_Rescuehelo_Stennis:SetTakeoffAir()
+Spawn_Rescuehelo_Stennis::SetRespawnInAir()
+Spawn_Rescuehelo_Stennis:SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Stennis_03"))
+Spawn_Rescuehelo_Stennis:SetRescueStopBoatOff()
+Spawn_Rescuehelo_Stennis:SetOffsetZ(800)
+Spawn_Rescuehelo_Stennis:Start()
 
 -- Rescue Helo Tarawa ---
 
 Spawn_Rescuehelo_Tarawa = RESCUEHELO:New(UNIT:FindByName("CSG_CarrierGrp_Tarawa"), "RescueHelo_Tarawa")
 
+Spawn_Rescuehelo_Tarawa:SetTakeoffAir()
 Spawn_Rescuehelo_Tarawa:SetRespawnInAir()
-  :SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Tarawa_03"))
-  :SetRescueStopBoatOff()
-  :Start()
+Spawn_Rescuehelo_Tarawa:SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Tarawa_03"))
+Spawn_Rescuehelo_Tarawa:SetRescueStopBoatOff()
+Spawn_Rescuehelo_Tarawa:SetOffsetZ(800)
+Spawn_Rescuehelo_Tarawa:Start()
 
 -----------------------
 --- Airboss Tarawa ---
