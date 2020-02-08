@@ -678,7 +678,7 @@ Spawn_Tanker_S3B_Texaco6:SetRecoveryAirboss( false )
 Spawn_Rescuehelo_Stennis = RESCUEHELO:New(UNIT:FindByName("CSG_CarrierGrp_Stennis"), "RescueHelo_Stennis")
 
 Spawn_Rescuehelo_Stennis:SetTakeoffAir()
-Spawn_Rescuehelo_Stennis::SetRespawnInAir()
+Spawn_Rescuehelo_Stennis:SetRespawnInAir()
 Spawn_Rescuehelo_Stennis:SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Stennis_03"))
 Spawn_Rescuehelo_Stennis:SetRescueStopBoatOff()
 Spawn_Rescuehelo_Stennis:SetOffsetZ(800)
