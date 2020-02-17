@@ -682,7 +682,7 @@ Spawn_Rescuehelo_Stennis:SetRespawnInAir()
 Spawn_Rescuehelo_Stennis:SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Stennis_03"))
 Spawn_Rescuehelo_Stennis:SetRescueStopBoatOff()
 Spawn_Rescuehelo_Stennis:SetOffsetZ(800)
-Spawn_Rescuehelo_Stennis:Start()
+--Spawn_Rescuehelo_Stennis:Start()
 
 -- Rescue Helo Tarawa ---
 
@@ -693,7 +693,7 @@ Spawn_Rescuehelo_Tarawa:SetRespawnInAir()
 Spawn_Rescuehelo_Tarawa:SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Tarawa_03"))
 Spawn_Rescuehelo_Tarawa:SetRescueStopBoatOff()
 Spawn_Rescuehelo_Tarawa:SetOffsetZ(800)
-Spawn_Rescuehelo_Tarawa:Start()
+--Spawn_Rescuehelo_Tarawa:Start()
 
 -----------------------
 --- Airboss Tarawa ---
