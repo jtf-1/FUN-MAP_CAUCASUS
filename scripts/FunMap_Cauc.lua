@@ -540,26 +540,26 @@ end --function
 
 
 -- END FUNCTIONS
--- XXX BEGIN ATIS
+-- -- XXX BEGIN ATIS
 
-atisVaziani=ATIS:New(AIRBASE.Caucasus.Vaziani, 122.7)
-atisVaziani:SetRadioRelayUnitName("Radio Relay Vaziani")
-atisVaziani:AddILS(108.75, "31")
-atisVaziani:SetTACAN(22)
-atisVaziani:SetTowerFrequencies({269.1, 140.1})
-atisVaziani:Start()
-
-
-atisTbilisi=ATIS:New(AIRBASE.Caucasus.Tbilisi_Lochini, 132.8)
-atisTbilisi:SetRadioRelayUnitName("Radio Relay Tbilisi")
-atisTbilisi:AddILS(108.9, "31")
-atisTbilisi:SetVOR(113.7)
-atisTbilisi:SetTowerFrequencies({267.1, 138.1})
-atisTbilisi:SetActiveRunway("L")
-atisTbilisi:Start()
+-- atisVaziani=ATIS:New(AIRBASE.Caucasus.Vaziani, 122.7)
+-- atisVaziani:SetRadioRelayUnitName("Radio Relay Vaziani")
+-- atisVaziani:AddILS(108.75, "31")
+-- atisVaziani:SetTACAN(22)
+-- atisVaziani:SetTowerFrequencies({269.1, 140.1})
+-- atisVaziani:Start()
 
 
--- END ATIS
+-- atisTbilisi=ATIS:New(AIRBASE.Caucasus.Tbilisi_Lochini, 132.8)
+-- atisTbilisi:SetRadioRelayUnitName("Radio Relay Tbilisi")
+-- atisTbilisi:AddILS(108.9, "31")
+-- atisTbilisi:SetVOR(113.7)
+-- atisTbilisi:SetTowerFrequencies({267.1, 138.1})
+-- atisTbilisi:SetActiveRunway("L")
+-- atisTbilisi:Start()
+
+
+-- -- END ATIS
 -- XXX BEGIN SUPPORT AC SECTION
 
 
@@ -600,70 +600,70 @@ end
 
 
 -----------------------
---- Airboss Stennis ---
+--- Airboss Lincoln ---
 -----------------------
 
--- Create AIRBOSS object for Stennis
-airbossStennis=AIRBOSS:New( "CSG_CarrierGrp_Stennis", "Stennis" )
+-- -- Create AIRBOSS object for Lincoln
+-- airbossLincoln=AIRBOSS:New( "CSG_CarrierGrp_Lincoln", "Lincoln" )
 
--- Set load and save path/name for persistent LSO grades
-airbossStennis:Load(nil, "Cauc_Airboss-USS Stennis_LSOgrades.csv")
-airbossStennis:SetAutoSave(nil, "Cauc_Airboss-USS Stennis_LSOgrades.csv")
+-- -- Set load and save path/name for persistent LSO grades
+-- airbossLincoln:Load(nil, "Cauc_Airboss-USS Lincoln_LSOgrades.csv")
+-- airbossLincoln:SetAutoSave(nil, "Cauc_Airboss-USS Lincoln_LSOgrades.csv")
 
-local stennisOffset_deg = 0 -- Marshal offset
-local stennisDefaultPlayerSkill = AIRBOSS.Difficulty.Normal -- default skill level
-local stennisRadioRelayMarshall = UNIT:FindByName("RadioRelayMarshall_Stennis") -- radio relay unit for Marshal
-local stennisRadioRelayPaddles = UNIT:FindByName("RadioRelayPaddles_Stennis") -- radio relay unit for LSO
-local stennisClouds, stennisVisibility, stennisFog, stennisDust = airbossStennis:_GetStaticWeather() -- get mission weather (assumes static weather is used)
+-- local lincolnOffset_deg = 0 -- Marshal offset
+-- local lincolnDefaultPlayerSkill = AIRBOSS.Difficulty.Normal -- default skill level
+-- local lincolnRadioRelayMarshall = UNIT:FindByName("RadioRelayMarshall_Lincoln") -- radio relay unit for Marshal
+-- local lincolnRadioRelayPaddles = UNIT:FindByName("RadioRelayPaddles_Lincoln") -- radio relay unit for LSO
+-- local lincolnClouds, lincolnVisibility, lincolnFog, lincolnDust = airbossLincoln:_GetStaticWeather() -- get mission weather (assumes static weather is used)
 
---- Determine Daytime Case
--- adjust case according to weather state
+-- --- Determine Daytime Case
+-- -- adjust case according to weather state
 
-local stennisCase = 1 -- default to Case I
+-- local lincolnCase = 1 -- default to Case I
 
-if (stennisClouds.base < 305 and stennisClouds.density > 8) or stennisVisibility < 8000 then -- cloudbase < 1000' or viz < 5 miles, Case III
-  stennisCase = 3
-elseif stennisFog and stennisFog.thickness > 60 and stennisFog.visibility < 8000 then -- visibility in fog < 5nm, Case III
-  stennisCase = 3
-elseif (stennisClouds.base < 915 and stennisClouds.density > 8) and stennisVisibility >= 8000 then -- cloudbase < 3000', viz > 5 miles, Case II
-  stennisCase = 2
-end     
+-- if (lincolnClouds.base < 305 and lincolnClouds.density > 8) or lincolnVisibility < 8000 then -- cloudbase < 1000' or viz < 5 miles, Case III
+  -- lincolnCase = 3
+-- elseif lincolnFog and lincolnFog.thickness > 60 and lincolnFog.visibility < 8000 then -- visibility in fog < 5nm, Case III
+  -- lincolnCase = 3
+-- elseif (lincolnClouds.base < 915 and lincolnClouds.density > 8) and lincolnVisibility >= 8000 then -- cloudbase < 3000', viz > 5 miles, Case II
+  -- lincolnCase = 2
+-- end     
  
--- Stennis AIRBOSS configuration
-airbossStennis:SetMenuRecovery(30, 25, false, 30)
-airbossStennis:SetSoundfilesFolder("Airboss Soundfiles/")
-airbossStennis:SetTACAN(74,"X","STN")
-airbossStennis:SetICLS( 4,"STN" )
-airbossStennis:SetCarrierControlledArea( 50 )
-airbossStennis:SetDespawnOnEngineShutdown( true )
-airbossStennis:SetRecoveryTanker( Spawn_Tanker_S3B_Texaco1 )
-airbossStennis:SetMarshalRadio( 285.675, "AM" )
-airbossStennis:SetLSORadio( 308.475, "AM" )
-airbossStennis:SetRadioRelayLSO( stennisRadioRelayPaddles )
-airbossStennis:SetRadioRelayMarshal( stennisRadioRelayMarshall )
-airbossStennis:SetAirbossNiceGuy(true) -- allow direct to commence
-airbossStennis:SetDefaultPlayerSkill(stennisDefaultPlayerSkill)
-airbossStennis:SetRespawnAI()
-airbossStennis:SetMenuMarkZones(false) -- disable marking zones using smoke or flares
+-- -- Lincoln AIRBOSS configuration
+-- airbossLincoln:SetMenuRecovery(30, 25, false, 30)
+-- airbossLincoln:SetSoundfilesFolder("Airboss Soundfiles/")
+-- airbossLincoln:SetTACAN(74,"X","STN")
+-- airbossLincoln:SetICLS( 4,"STN" )
+-- airbossLincoln:SetCarrierControlledArea( 50 )
+-- airbossLincoln:SetDespawnOnEngineShutdown( true )
+-- airbossLincoln:SetRecoveryTanker( Spawn_Tanker_S3B_Texaco1 )
+-- airbossLincoln:SetMarshalRadio( 285.675, "AM" )
+-- airbossLincoln:SetLSORadio( 308.475, "AM" )
+-- airbossLincoln:SetRadioRelayLSO( lincolnRadioRelayPaddles )
+-- airbossLincoln:SetRadioRelayMarshal( lincolnRadioRelayMarshall )
+-- airbossLincoln:SetAirbossNiceGuy(true) -- allow direct to commence
+-- airbossLincoln:SetDefaultPlayerSkill(lincolnDefaultPlayerSkill)
+-- airbossLincoln:SetRespawnAI()
+-- airbossLincoln:SetMenuMarkZones(false) -- disable marking zones using smoke or flares
 
---- Fun Map Recovery Windows 
--- sunrise and sunset dependant on mission date
--- https://www.timeanddate.com/sun/united-arab-emirates/abu-dhabi?month=4&year=2011
--- Sunrise @ 08:00, Sunset @ 19:00, recovery @ sunrise+10 and sunset-10
--- otherwise, intiate recovery through F10 menu
-airbossStennis:AddRecoveryWindow( "8:10", "18:50", stennisCase, stennisOffset_deg, true, 30 ) -- sunrise to sunset
-airbossStennis:AddRecoveryWindow( "18:50", "8:10+1", 3, stennisOffset_deg, true, 30 ) -- sunset to sunrise D+1
-airbossStennis:AddRecoveryWindow( "8:10+1", "18:50+1", stennisCase, stennisOffset_deg, true, 30 ) -- sunrise D+1 to sunset D+1
+-- --- Fun Map Recovery Windows 
+-- -- sunrise and sunset dependant on mission date
+-- -- https://www.timeanddate.com/sun/united-arab-emirates/abu-dhabi?month=4&year=2011
+-- -- Sunrise @ 08:00, Sunset @ 19:00, recovery @ sunrise+10 and sunset-10
+-- -- otherwise, intiate recovery through F10 menu
+-- airbossLincoln:AddRecoveryWindow( "8:10", "18:50", lincolnCase, lincolnOffset_deg, true, 30 ) -- sunrise to sunset
+-- airbossLincoln:AddRecoveryWindow( "18:50", "8:10+1", 3, lincolnOffset_deg, true, 30 ) -- sunset to sunrise D+1
+-- airbossLincoln:AddRecoveryWindow( "8:10+1", "18:50+1", lincolnCase, lincolnOffset_deg, true, 30 ) -- sunrise D+1 to sunset D+1
 
--- Start AIRBOSS Stennis
-airbossStennis:Start()
+-- -- Start AIRBOSS Lincoln
+-- airbossLincoln:Start()
 
--- Recovery Tanker Stennis ---
+-- Recovery Tanker Lincoln ---
 
-Spawn_Tanker_S3B_Texaco6 = RECOVERYTANKER:New( UNIT:FindByName( "CSG_CarrierGrp_Stennis"), "Tanker_S3B_Texaco6" )
+Spawn_Tanker_S3B_Texaco6 = RECOVERYTANKER:New( UNIT:FindByName( "CSG_CarrierGrp_Lincoln"), "Tanker_S3B_Texaco6" )
 
 Spawn_Tanker_S3B_Texaco6:SetCallsign(CALLSIGN.Tanker.Texaco, 6)
-Spawn_Tanker_S3B_Texaco6:SetTACAN(15, "TEX")
+Spawn_Tanker_S3B_Texaco6:SetTACAN(38, "TEX")
 Spawn_Tanker_S3B_Texaco6:SetRadio(317.775)
 Spawn_Tanker_S3B_Texaco6:SetModex(049)
 Spawn_Tanker_S3B_Texaco6:SetTakeoffAir()
@@ -673,16 +673,16 @@ Spawn_Tanker_S3B_Texaco6:Start()
 
 Spawn_Tanker_S3B_Texaco6:SetRecoveryAirboss( false )
 
--- Rescue Helo Stennis ---
+-- Rescue Helo Lincoln ---
 
-Spawn_Rescuehelo_Stennis = RESCUEHELO:New(UNIT:FindByName("CSG_CarrierGrp_Stennis"), "RescueHelo_Stennis")
+Spawn_Rescuehelo_Lincoln = RESCUEHELO:New(UNIT:FindByName("CSG_CarrierGrp_Lincoln"), "RescueHelo_Lincoln")
 
-Spawn_Rescuehelo_Stennis:SetTakeoffAir()
-Spawn_Rescuehelo_Stennis:SetRespawnInAir()
-Spawn_Rescuehelo_Stennis:SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Stennis_03"))
-Spawn_Rescuehelo_Stennis:SetRescueStopBoatOff()
-Spawn_Rescuehelo_Stennis:SetOffsetZ(800)
---Spawn_Rescuehelo_Stennis:Start()
+Spawn_Rescuehelo_Lincoln:SetTakeoffAir()
+Spawn_Rescuehelo_Lincoln:SetRespawnInAir()
+Spawn_Rescuehelo_Lincoln:SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Lincoln_03"))
+Spawn_Rescuehelo_Lincoln:SetRescueStopBoatOff()
+Spawn_Rescuehelo_Lincoln:SetOffsetZ(800)
+--Spawn_Rescuehelo_Lincoln:Start()
 
 -- Rescue Helo Tarawa ---
 
@@ -704,7 +704,7 @@ airbossTarawa=AIRBOSS:New( "CSG_CarrierGrp_Tarawa", "Tarawa" )
 airbossTarawa:Load(nil, "Cauc_Airboss-USS Tarawa_LSOgrades.csv")
 airbossTarawa:SetAutoSave(nil, "Cauc_Airboss-USS Tarawa_LSOgrades.csv")
 
-local tarawaCase = stennisCase -- set daytime case according to weather, determined in Stennis section. assumes statc weather accross whole map.
+local tarawaCase = lincolnCase -- set daytime case according to weather, determined in Lincoln section. assumes statc weather accross whole map.
 local tarawaOffset_deg = 0
 local tarawaRadioRelayMarshall = UNIT:FindByName("RadioRelayMarshall_Tarawa")
 local tarawaRadioRelayPaddles = UNIT:FindByName("RadioRelayPaddles_Tarawa")
@@ -740,7 +740,7 @@ airbossTarawa:Start()
 Spawn_Tanker_C130_Arco2 = RECOVERYTANKER:New( UNIT:FindByName( "CSG_CarrierGrp_Tarawa"), "Tanker_C130_Arco2" )
 
 Spawn_Tanker_C130_Arco2:SetCallsign(CALLSIGN.Tanker.Arco, 2)
-  :SetTACAN(16, "TEX")
+  :SetTACAN(39, "ARC")
   :SetRadio(276.1)
   :SetModex(999)
   :SetAltitude(10000)
