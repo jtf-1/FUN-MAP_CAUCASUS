@@ -37,7 +37,7 @@ NAVAL OPERATIONS
 Strike: 357.775
 Marshal: 285.675
 
-Stennis:
+CVN-72 Abraham Lincoln:
 - BRC 280'
 - TACAN 74X 
 - ILCS: Channel 4
