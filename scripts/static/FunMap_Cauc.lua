@@ -1,4 +1,4 @@
-env.info( '*** MISSION FILE BUILD DATE: 2022-04-19T15:51:12.84Z ***') 
+env.info( '*** MISSION FILE BUILD DATE: 2022-06-20T12:13:08.61Z ***') 
 env.info( "*** JTF-1 MOOSE MISSION SCRIPT START ***" )
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- BEGIN INIT
@@ -309,7 +309,7 @@ function ADMIN:BuildAdminMenu(unit,playername)
     local testMenu = MENU_GROUP:New(adminGroup, "Test", adminMenu)
     for i, menuCommand in ipairs(ADMIN.missionList) do
       MENU_GROUP_COMMAND:New( adminGroup, menuCommand.menuText, adminMenu, ADMIN.LoadMission, self, playername, menuCommand.missionFlagValue )
-      MENU_GROUP_COMMAND:New( adminGroup, "SRS Broadcast test", testMenu, MISSIONSRS.SendRadio, MISSIONSRS, "99 all players, test broadcast over default radio.")
+      MENU_GROUP_COMMAND:New( adminGroup, "SRS Broadcast test", testMenu, MISSIONSRS.SendRadio, MISSIONSRS, "All Players, test broadcast over default radio.")
     end
   end
 end
@@ -351,7 +351,7 @@ function MISSIONTIMER:AddSchedules()
       self.msgWarning[i] = SCHEDULER:New( nil, 
         function()
           BASE:T("[MISSIONTIMER] TIMER WARNING CALLED at " .. tostring(msgTime) .. " minutes remaining.")
-          local msg = "99 all players, mission is scheduled to restart in  " .. msgTime .. " minutes!"
+          local msg = "All Players, mission is scheduled to restart in  " .. msgTime .. " minutes!"
           if MISSIONSRS.Radio then -- if MISSIONSRS radio object has been created, send message via default broadcast.
             MISSIONSRS:SendRadio(msg)
           else -- otherwise, send in-game text message
@@ -376,7 +376,7 @@ function MISSIONTIMER:Restart()
   end
   if self.clientList:CountAlive() > 0 then
     local delayTime = self.restartDelay
-    local msg  = "99 all players, mission will restart when no active clients are present. Next check will be in " .. tostring(delayTime) .." minutes." 
+    local msg  = "All Players, mission will restart when no active clients are present. Next check will be in " .. tostring(delayTime) .." minutes." 
     if MISSIONSRS.Radio then -- if MISSIONSRS radio object has been created, send message via default broadcast.
       MISSIONSRS:SendRadio(msg)
     else -- otherwise, send in-game text message
