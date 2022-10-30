@@ -1,4 +1,4 @@
-env.info( '*** MISSION FILE BUILD DATE: 2022-06-20T12:13:08.61Z ***') 
+env.info( '*** MISSION FILE BUILD DATE: 2022-10-30T21:56:07.23Z ***') 
 env.info( "*** JTF-1 MOOSE MISSION SCRIPT START ***" )
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- BEGIN INIT
@@ -246,6 +246,7 @@ ADMIN.missionList = { -- List of missions for load mission menu commands
   {menuText = "Restart current mission", missionFlagValue = 0},
   {menuText = "Load DAY Caucasus", missionFlagValue = 1},
   {menuText = "Load NIGHT Caucasus", missionFlagValue = 2},
+  {menuText = "Load WEATHER Caucasus", missionFlagValue = 3},
 }
 
 function ADMIN:GetPlayerUnitAndName(unitName)
