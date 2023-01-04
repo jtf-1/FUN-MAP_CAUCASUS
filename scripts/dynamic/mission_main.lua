@@ -1093,8 +1093,7 @@ TableCamps = { -- map portion, { camp zone, nearest town, Lat Long, spawned stat
 --- Camp spawn stubs ---
 ------------------------
 
-CampAttackSpawn = SPAWN:New( "CAMP_Heavy" )
-SpawnTent = SPAWN:New( "CAMP_Tent_01" )
+--[[ SpawnTent = SPAWN:New( "CAMP_Tent_01" )
 SpawnHouse01 = SPAWN:New( "CAMP_House_01" )
 SpawnHouse02 = SPAWN:New( "CAMP_House_02" )
 SpawnHouse03 = SPAWN:New( "CAMP_House_03" )
@@ -1102,7 +1101,8 @@ SpawnHouse04 = SPAWN:New( "CAMP_House_04" )
 SpawnHouse05 = SPAWN:New( "CAMP_House_05" )  
 SpawnTower = SPAWN:New( "CAMP_Tower_01" )
 SpawnInfSingle = SPAWN:New( "CAMP_Inf_01" )
-
+ ]]
+CampAttackSpawn = SPAWN:New( "CAMP_Heavy" )
 SpawnTentGroup = SPAWN:New( "CAMP_Tent_Group" )
 SpawnInfGroup = SPAWN:New( "CAMP_Inf_02" )
 
