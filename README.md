@@ -97,6 +97,13 @@ Strike missions are available, on demand, via the F10 menu. Air defences can be 
 - Communications (WiP)
 - C2 (WiP)
 
+AI BFM/ACM
+==========
+
+On-demand single or pair adversary spawns are available via the F10 menu while aircraft are within the BFM/ACM zone in grid ML (see F10 map for zone). Adversaries will be spawned ahead of you at the selected distance (5NM, 10NM, 20NM). If the adversary aircraft depart the zone they will be removed.
+
+Notifications relating to target activation, reset and deactivation will be broadcast on 377.8 UHF.
+
 RANGE COMPLEXES
 ===============
 

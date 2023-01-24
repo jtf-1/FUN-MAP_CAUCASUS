@@ -6,7 +6,7 @@ env.info( "*** STARTING DYNAMIC LOADER ***" )
 
 
 local JTFbase = _G
-local __JTFfilepath = 'E:/GitHub/FUN-MAP_CAUCASUS/scripts/dynamic/'
+local __JTFfilepath = 'D:/GitHub/FUN-MAP_CAUCASUS/scripts/dynamic/'
 
 __JTFLoader = {}
 
@@ -25,6 +25,6 @@ end
 
 __JTFLoader.Includes = {}
 
-__JTFLoader.Include( 'mission_files.lua' ) -- "E:\GitHub\FUN-MAP_NTTR\scripts\dynamic\mission_files.lua"
+__JTFLoader.Include( 'mission_files.lua' ) -- "D:\GitHub\FUN-MAP_NTTR\scripts\dynamic\mission_files.lua"
 
 --- End mission script dynamic loader
