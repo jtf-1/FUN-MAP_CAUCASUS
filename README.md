@@ -117,6 +117,59 @@ Bomb targets are scored on the proximity of the last round to the target. Smoke 
 
 Strafe Pits, where available, are configured with two targets. Aircraft must be below 3000ft AGL and within 500ft either side of the inbound heading to the target to avoid a foul pass. Rounds fired after the foul line will not count.
 
+MAP MARK SPAWNING
+=================
+
+WIP - Use F10 map marks to spawn BVR opponents or ground threats anywhere on the map. Add mark to map then type the CMD syntax below in the map mark text field. The command will execute on mouse-clicking out of the text box.
+
+NOTE: currently no syntax error feedback if you get it wrong.
+
+
+Groundspawn Syntax
+------------------
+
+CMD GSPAWN: [groundspawn type][, [option]: [value]][...]
+
+
+Groundspawn Types
+-----------------
+
+- SA6
+- SA10
+
+Groundspawn Options
+----------------
+
+- ALERT: [GREEN, AUTO, RED] - default RED 
+- SKILL: [AVERAGE, GOOD, HIGH, EXCELLENT, RANDOM] - default AVERAGE
+
+Example
+-------
+
+CMD GSPAWN: SA6, ALERT: GREEN, SKILL: HIGH
+
+Will spawn an SA6 Battery on the location of the map mark, in alert state GREEN and with skill level HIGH.
+
+
+
+Delete Spawn Syntax
+-------------------
+
+CMD DELETE: [object type] [group name from F10 map]
+
+Delete Spawn Object Types
+-------------------------
+
+- GROUP
+
+Example
+-------
+
+CMD DELETE: GROUP MIG29A#001
+
+Will remove the spawned group named MIG29A#001
+
+
 AIRBOSS
 =======
 
