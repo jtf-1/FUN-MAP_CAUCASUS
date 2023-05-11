@@ -1,7 +1,7 @@
 -- Forrestal Full Deck 3 Cats 4 Spawns
 
 local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 
 -- Copy and paste over this with the units information
                                         ["category"] = "ADEquipment",
@@ -33,7 +33,7 @@ local staticObj = {
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 
 local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 
 -- Copy and paste over this with the units information
                                       ["livery_id"] = "vf-33 starfighters ab201 (1988)",
@@ -66,7 +66,7 @@ local staticObj = {
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 
 local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 
 -- Copy and paste over this with the units information
                                         ["livery_id"] = "vf-33 starfighters ab201 (1988)",
@@ -99,7 +99,7 @@ local staticObj = {
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 
 local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 
                                         ["livery_id"] = "VF-21 Freelancers 200",
                                         ["category"] = "Planes",
@@ -130,7 +130,7 @@ local staticObj = {
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 
 local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										["livery_id"] = "VF-21 Freelancers 200",
                                         ["category"] = "Planes",
                                         ["offsets"] = 
@@ -160,7 +160,7 @@ local staticObj = {
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "VF-21 Freelancers 200",
                                         ["category"] = "Planes",
@@ -191,7 +191,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "VF-21 Freelancers 200",
                                         ["category"] = "Planes",
@@ -222,7 +222,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "USMC VMA-311 Tomcats",
                                         ["category"] = "Planes",
@@ -253,7 +253,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["category"] = "ADEquipment",
                                         ["offsets"] = 
@@ -283,7 +283,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["category"] = "ADEquipment",
                                         ["offsets"] = 
@@ -313,7 +313,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["category"] = "ADEquipment",
                                         ["offsets"] = 
@@ -343,7 +343,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["category"] = "ADEquipment",
                                         ["offsets"] = 
@@ -373,7 +373,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "VF-31 AE204 1988",
                                         ["category"] = "Planes",
@@ -404,7 +404,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "VF-31 AE200 1988",
                                         ["category"] = "Planes",
@@ -435,7 +435,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "vf-33 starfighters ab201 (1988)",
                                         ["category"] = "Planes",
@@ -466,7 +466,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "vf-33 starfighters ab201 (1988)",
                                         ["category"] = "Planes",
@@ -497,7 +497,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "USMC VMA-311 Tomcats",
                                         ["category"] = "Planes",
@@ -528,7 +528,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "USN VA-144 Roadrunners",
                                         ["category"] = "Planes",
@@ -559,7 +559,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "USN VA-144 Roadrunners",
                                         ["category"] = "Planes",
@@ -590,7 +590,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "VAW-124 BearAces",
                                         ["category"] = "Planes",
@@ -621,7 +621,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["category"] = "ADEquipment",
                                         ["offsets"] = 
@@ -651,7 +651,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["mass"] = 1500,
                                         ["category"] = "Cargos",
@@ -684,7 +684,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["mass"] = 1500,
                                         ["category"] = "Cargos",
@@ -717,7 +717,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["mass"] = 1500,
                                         ["category"] = "Cargos",
@@ -750,7 +750,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["mass"] = 1500,
                                         ["category"] = "Cargos",
@@ -783,7 +783,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["mass"] = 1500,
                                         ["category"] = "Cargos",
@@ -816,7 +816,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["mass"] = 1500,
                                         ["category"] = "Cargos",
@@ -849,7 +849,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["mass"] = 840,
                                         ["category"] = "Cargos",
@@ -882,7 +882,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["mass"] = 840,
                                         ["category"] = "Cargos",
@@ -915,7 +915,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["mass"] = 840,
                                         ["category"] = "Cargos",
@@ -948,7 +948,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["mass"] = 840,
                                         ["category"] = "Cargos",
@@ -981,7 +981,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["mass"] = 840,
                                         ["category"] = "Cargos",
@@ -1014,7 +1014,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["mass"] = 840,
                                         ["category"] = "Cargos",
@@ -1047,7 +1047,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["mass"] = 840,
                                         ["category"] = "Cargos",
@@ -1080,7 +1080,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["mass"] = 840,
                                         ["category"] = "Cargos",
@@ -1113,7 +1113,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["mass"] = 1500,
                                         ["category"] = "Cargos",
@@ -1146,7 +1146,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["category"] = "ADEquipment",
                                         ["offsets"] = 
@@ -1176,7 +1176,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["category"] = "ADEquipment",
                                         ["offsets"] = 
@@ -1206,7 +1206,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "red",
                                         ["category"] = "Personnel",
@@ -1238,7 +1238,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "red",
                                         ["category"] = "Personnel",
@@ -1270,7 +1270,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                       ["livery_id"] = "red",
                                         ["category"] = "Personnel",
@@ -1302,7 +1302,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "red",
                                         ["category"] = "Personnel",
@@ -1334,7 +1334,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "red",
                                         ["category"] = "Personnel",
@@ -1366,7 +1366,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "red",
                                         ["category"] = "Personnel",
@@ -1398,7 +1398,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "red",
                                         ["category"] = "Personnel",
@@ -1430,7 +1430,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "red",
                                         ["category"] = "Personnel",
@@ -1462,7 +1462,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "red",
                                         ["category"] = "Personnel",
@@ -1494,7 +1494,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "red",
                                         ["category"] = "Personnel",
@@ -1526,7 +1526,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "blue",
                                         ["category"] = "Personnel",
@@ -1558,7 +1558,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "white",
                                         ["category"] = "Personnel",
@@ -1590,7 +1590,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "blue",
                                         ["category"] = "Personnel",
@@ -1622,7 +1622,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "blue",
                                         ["category"] = "Personnel",
@@ -1654,7 +1654,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "blue",
                                         ["category"] = "Personnel",
@@ -1686,7 +1686,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "brown",
                                         ["category"] = "Personnel",
@@ -1718,7 +1718,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "brown",
                                         ["category"] = "Personnel",
@@ -1750,7 +1750,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "brown",
                                         ["category"] = "Personnel",
@@ -1782,7 +1782,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "brown",
                                         ["category"] = "Personnel",
@@ -1814,7 +1814,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "brown",
                                         ["category"] = "Personnel",
@@ -1846,7 +1846,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "purple",
                                         ["category"] = "Personnel",
@@ -1878,7 +1878,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "purple",
                                         ["category"] = "Personnel",
@@ -1910,7 +1910,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "purple",
                                         ["category"] = "Personnel",
@@ -1942,7 +1942,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "purple",
                                         ["category"] = "Personnel",
@@ -1974,7 +1974,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["category"] = "Personnel",
                                         ["offsets"] = 
@@ -2003,7 +2003,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["category"] = "Personnel",
                                         ["offsets"] = 
@@ -2034,7 +2034,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "green",
                                         ["category"] = "Personnel",
@@ -2066,7 +2066,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "white",
                                         ["category"] = "Personnel",
@@ -2098,7 +2098,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["mass"] = 840,
                                         ["category"] = "Cargos",
@@ -2131,7 +2131,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["livery_id"] = "green",
                                         ["category"] = "Personnel",
@@ -2163,7 +2163,7 @@ coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
 										
 										local staticObj = {
-	["name"] = "C2A_Greyhound", -- unit name (Name this something identifiable if you wish to remove it later)
+	["name"] = "dDeck_forrestal", -- unit name (Name this something identifiable if you wish to remove it later)
 										
 										                                        ["category"] = "ADEquipment",
                                         ["offsets"] = 
