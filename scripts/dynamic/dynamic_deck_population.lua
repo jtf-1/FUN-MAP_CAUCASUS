@@ -88,28 +88,28 @@ DYNDECK.ship = {
             {
                 group = "Cat",
                 name = "sc_cat1l_f18", 
-                menutext = "F18 Cat 1 Left", 
+                menutext = "F18 Cat 1 Launch", 
                 noClear = true, 
                 active = false
             }, 
             {
                 group = "Cat",
                 name = "sc_cat1r_f18", 
-                menutext = "F18 Cat 1 Right", 
+                menutext = "F18 Cat 1 Recovery", 
                 noClear = true, 
                 active = false
             }, 
             {
                 group = "Cat",
                 name = "sc_cat2l_f18", 
-                menutext = "F18 Cat 2 Left", 
+                menutext = "F18 Cat 2 Launch", 
                 noClear = true, 
                 active = false
             }, 
             {
                 group = "Cat",
                 name = "sc_cat2r_f18", 
-                menutext = "F18 Cat 2 Right", 
+                menutext = "F18 Cat 2 Recovery", 
                 noClear = true, 
                 active = false
             }, 
@@ -186,28 +186,28 @@ DYNDECK.ship = {
             {
                 group = "Patio",
                 name = "sc_patiol_f14", 
-                menutext = "F14 on Patio Nose Left", 
+                menutext = "F14 on Patio Launch", 
                 noClear = true, 
                 active = false
             }, 
             {
                 group = "Patio",
                 name = "sc_patior_f14", 
-                menutext = "F14 on Patio Nose Right", 
+                menutext = "F14 on Patio Recovery", 
                 noClear = true, 
                 active = false
             }, 
             {
                 group = "Patio",
                 name = "sc_patiol_f18", 
-                menutext = "F18 on Patio Nose Left", 
+                menutext = "F18 on Patio Launch", 
                 noClear = true, 
                 active = false
             }, 
             {
                 group = "Patio",
                 name = "sc_patior_f18", 
-                menutext = "F18 on Patio Nose Right", 
+                menutext = "F18 on Patio Recovery", 
                 noClear = true, 
                 active = false
             }, 
