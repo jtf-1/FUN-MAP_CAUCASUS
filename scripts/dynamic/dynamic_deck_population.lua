@@ -15,93 +15,268 @@ DYNDECK.ship = {
         fullTemplateActive = false, -- flag to denote a full deck template is active
         templates = {
             {
-                name = "sc_flex4c234", -- name of template as it appears in the name of the function containing the template
-                menutext = "Flex EL3 spawns cat 1234", -- text that will appear in the template's menu entry
-                noClear = false, -- whether a full deck clear should not be performed prior to applying the template. True = do not clear deck (for partial templates). False = clear deck fi#rst (for full templates)
-                active = false -- flag to denote template is active. True = active (do not re-apply the template if it seelcted from the menu). False = template is not active.
+                -- Submenu group under which template should appear. 
+                -- "" assumes full template. 
+                -- If a name is present, partial template assumed. 
+                -- Value will be used as the text for group the submenu.
+                -- Templates with same group name will appear in same group submenu
+
+                group = "", 
+
+                -- name of template as it appears in the name of the function containing the template
+
+                name = "sc_flex4c234", 
+
+                -- text that will appear in the template's menu entry
+
+                menutext = "Launch and Recovery medium density", 
+
+                -- whether a full deck clear should not be performed prior to applying the template. 
+                -- True = do not clear deck (for partial templates). 
+                -- False = clear deck first (for full templates)
+
+                noClear = false, 
+
+                -- flag to denote template is active. 
+                -- True = active (do not re-apply the template if it seelcted from the menu). 
+                -- False = template is not active.
+
+                active = false 
             },
             {
-                name = "sc_cat1", 
-                menutext = "F18s full Cat 1", 
+                group = "",
+                name = "sc_lch_low", 
+                menutext = "Launch low density", 
                 noClear = true, 
                 active = false
             }, 
             {
-                name = "sc_cat2l", 
-                menutext = "F18s full Cat 2", 
+                group = "",
+                name = "sc_lch_med", 
+                menutext = "Launch medium density", 
                 noClear = true, 
                 active = false
             }, 
             {
-                name = "sc_cat2r", 
-                menutext = "F18s x3 Cat 2", 
+                group = "",
+                name = "sc_lch_hvy", 
+                menutext = "Launch high density", 
                 noClear = true, 
                 active = false
             }, 
             {
-                name = "sc_corral", 
-                menutext = "AC and Tech Corral", 
+                group = "",
+                name = "sc_rec_low", 
+                menutext = "Recovery low density", 
                 noClear = true, 
                 active = false
             }, 
             {
+                group = "",
+                name = "sc_rec_med", 
+                menutext = "Recovery medium density", 
+                noClear = true, 
+                active = false
+            }, 
+            {
+                group = "",
+                name = "sc_rec_hvy", 
+                menutext = "Recovery high density", 
+                noClear = true, 
+                active = false
+            }, 
+            {
+                group = "Cat",
+                name = "sc_cat1l_f18", 
+                menutext = "F18 Cat 1 Left", 
+                noClear = true, 
+                active = false
+            }, 
+            {
+                group = "Cat",
+                name = "sc_cat1r_f18", 
+                menutext = "F18 Cat 1 Right", 
+                noClear = true, 
+                active = false
+            }, 
+            {
+                group = "Cat",
+                name = "sc_cat2l_f18", 
+                menutext = "F18 Cat 2 Left", 
+                noClear = true, 
+                active = false
+            }, 
+            {
+                group = "Cat",
+                name = "sc_cat2r_f18", 
+                menutext = "F18 Cat 2 Right", 
+                noClear = true, 
+                active = false
+            }, 
+            {
+                group = "Elevators",
+                name = "sc_el1_f14", 
+                menutext = "F14 EL1", 
+                noClear = true, 
+                active = false
+            }, 
+            {
+                group = "Elevators",
+                name = "sc_el2_f14", 
+                menutext = "F14 EL2", 
+                noClear = true, 
+                active = false
+            }, 
+            {
+                group = "Elevators",
+                name = "sc_el3_f14", 
+                menutext = "F14 EL3", 
+                noClear = true, 
+                active = false
+            }, 
+            {
+                group = "Elevators",
+                name = "sc_el4_f14", 
+                menutext = "F14 EL4", 
+                noClear = true, 
+                active = false
+            }, 
+            {
+                group = "Elevators",
+                name = "sc_el1_f18", 
+                menutext = "F18 EL1", 
+                noClear = true, 
+                active = false
+            }, 
+            {
+                group = "Elevators",
+                name = "sc_el2_f18", 
+                menutext = "F18 EL2", 
+                noClear = true, 
+                active = false
+            }, 
+            {
+                group = "Elevators",
+                name = "sc_el3_f18", 
+                menutext = "F18 EL3", 
+                noClear = true, 
+                active = false
+            }, 
+            {
+                group = "Elevators",
+                name = "sc_el4_f18", 
+                menutext = "F18 EL4", 
+                noClear = true, 
+                active = false
+            }, 
+            {
+                group = "Island",
                 name = "sc_island", 
                 menutext = "AC and Tech around Island", 
                 noClear = true, 
                 active = false
             }, 
             {
+                group = "Island",
                 name = "sc_deckeq", 
                 menutext = "Deck eqpt around Island", 
                 noClear = true, 
                 active = false
             }, 
             {
-                name = "sc_patio", 
-                menutext = "F14s on Patio", 
+                group = "Patio",
+                name = "sc_patiol_f14", 
+                menutext = "F14 on Patio Nose Left", 
                 noClear = true, 
                 active = false
             }, 
             {
-                name = "sc_fantail", 
-                menutext = "F14s on Fantail", 
+                group = "Patio",
+                name = "sc_patior_f14", 
+                menutext = "F14 on Patio Nose Right", 
                 noClear = true, 
                 active = false
             }, 
             {
-                name = "sc_el1", 
-                menutext = "AC and Tech on Elevator 1", 
+                group = "Patio",
+                name = "sc_patiol_f18", 
+                menutext = "F18 on Patio Nose Left", 
                 noClear = true, 
                 active = false
             }, 
             {
-                name = "sc_el3", 
-                menutext = "AC and Tech on Elevator 3", 
+                group = "Patio",
+                name = "sc_patior_f18", 
+                menutext = "F18 on Patio Nose Right", 
                 noClear = true, 
                 active = false
             }, 
             {
-                name = "sc_el4", 
-                menutext = "AC and Tech on Elevator 4", 
+                group = "Corral",
+                name = "sc_corral", 
+                menutext = "AC and Tech Corral", 
                 noClear = true, 
                 active = false
             }, 
-        }
-    },
-    {
-        name = "CVN-59 Forrestal",
-        id = 1202,
-        coalitionID = 2,
-        fullTemplateActive = false,
-        templates = {
             {
-                name = "forrestal_flex4c234", 
-                menutext = "Flex 4 spawn cat 234", 
-                noClear = false, 
+                group = "Fantail",
+                name = "sc_fantail_f14", 
+                menutext = "F14 on Fantail", 
+                noClear = true, 
+                active = false
+            }, 
+            {
+                group = "Fantail",
+                name = "sc_fantail_f18", 
+                menutext = "F18 on Fantail", 
+                noClear = true, 
                 active = false
             },
+            {
+                group = "Other",
+                name = "sc_wires", 
+                menutext = "Techs along Wires", 
+                noClear = true, 
+                active = false
+            }, 
+            {
+                group = "Other",
+                name = "sc_street", 
+                menutext = "AC and techs on Street", 
+                noClear = true, 
+                active = false
+            }, 
+            {
+                group = "Other",
+                name = "sc_bow", 
+                menutext = "AC and techs on Bow", 
+                noClear = true, 
+                active = false
+            }, 
+            {
+                group = "Other",
+                name = "sc_point", 
+                menutext = "AC and techs on Point", 
+                noClear = true, 
+                active = false
+            }, 
         }
     },
+    -- {
+    --     name = "CVN-59 Forrestal",
+    --     id = 1202,
+    --     coalitionID = 2,
+    --     fullTemplateActive = false,
+    --     templates = {
+    --         {
+    --             group = "", 
+    --             name = "forrestal_flex4c234",
+    --             menutext = "Launch and Recovery medium density",
+    --             noClear = false,
+    --             active = false
+    --         },
+    --     }
+    -- },
 }
 
 -- Remove template objects from the ship
@@ -110,6 +285,7 @@ function DYNDECK:clearDeck(templateName, shipID, coalitionID, shipIndex, templat
 
     local staticFind = templateName or ("dyndeck_" .. shipID) -- search string for identifying objects to remove
     local statObj = coalition.getStaticObjects(coalitionID) -- table of all static objects for coalition
+ 
     -- step through table to find statics with the search string in thier name
     for i, static in pairs(statObj) do
         local staticName = static:getName()
@@ -135,60 +311,151 @@ end
 -- Apply the selected template to the ship
 function DYNDECK:applyTemplate(templateName, shipID, coalitionID, noClear, shipIndex, templateIndex)
     BASE:T("[DYNDECK] applyTemplate called.")
-    -- only apply the template if it is *not* already active
-    if not DYNDECK.ship[shipIndex].templates[templateIndex].active then
-        BASE:T("[DYNDECK] Template not active.")
-        if DYNDECK.ship[shipIndex].fullTemplateActive or (not noClear) then -- a full template is being, or has already been, applied
-            -- clear deck before applying template
-            DYNDECK:clearDeck(false, shipID, coalitionID, shipIndex)
+ 
+    if DYNDECK[templateName] then -- check called template exists!
+        -- only apply the template if it is *not* already active
+ 
+        if not DYNDECK.ship[shipIndex].templates[templateIndex].active then
+            BASE:T("[DYNDECK] Template not active.")
+ 
+            if DYNDECK.ship[shipIndex].fullTemplateActive or (not noClear) then -- a full template is being, or has already been, applied
+                BASE:T("[DYNDECK] Clear Deck.")
+                -- clear deck before applying template
+                DYNDECK:clearDeck(false, shipID, coalitionID, shipIndex)
+            end
+ 
+            BASE:T("[DYNDECK] Apply template: " .. templateName)
+            -- call function for the template
+            DYNDECK[templateName](shipID, templateName)
+            -- mark the template as active
+            DYNDECK.ship[shipIndex].templates[templateIndex].active = true
+ 
+            if not noClear then 
+                -- mark ship as having a full template applied
+                DYNDECK.ship[shipIndex].fullTemplateActive = true
+            end
+        else
+            BASE:T("[DYNDECK] TEMPLATE ALREADY ACTIVE!")
         end
-        BASE:T("[DYNDECK] Apply template")
-        -- call function for the template
-        DYNDECK[templateName](shipID, templateName)
-        -- mark the template as active
-        DYNDECK.ship[shipIndex].templates[templateIndex].active = true
-        if not noClear then 
-            -- mark ship as having a full template applied
-            DYNDECK.ship[shipIndex].fullTemplateActive = true
-        end
-    else
-        BASE:T("[DYNDECK] TEMPLATE ALREADY ACTIVE!")
+ 
+    else -- if template does not exist
+        _msg = "[DYNDECK] ERROR! REQUESTED SHIP TEMPLATE NOT FOUND: " .. templateName
+        BASE:T(_msg)
+        MESSAGE:New(_msg):ToAll()
     end
 end
 
 function DYNDECK:addMenu()
 
+    BASE:T("[DYNDECK] Add template menus to mission.")
+ 
     -- add menu root
     DYNDECK.menu = MENU_MISSION:New("Dynamic Deck")
+
     -- add ship menus
-    for shipIndex, menuship in ipairs(DYNDECK.ship) do
+     for shipIndex, menuship in ipairs(DYNDECK.ship) do
+  
         -- add menu for ship
         DYNDECK.menu[menuship.id] = MENU_MISSION:New(menuship.name, DYNDECK.menu)
-        -- add Fixed Templates submenu
-        DYNDECK.menu[menuship.id].fixed = MENU_MISSION:New("Fixed Templates", DYNDECK.menu[menuship.id])
-        -- add Partial Templates submenu
+        -- add submenu for COMPLETE templates
+        DYNDECK.menu[menuship.id].complete = MENU_MISSION:New("Complete Templates", DYNDECK.menu[menuship.id])
+        -- add submenu for PARTIAL templates
         DYNDECK.menu[menuship.id].partial = MENU_MISSION:New("Partial Templates", DYNDECK.menu[menuship.id])
-        -- add menus for the ship's templates
+  
+        
+        -- add menu commands for full templates first
         for templateIndex, template in ipairs(menuship.templates) do
-            if template.noClear then -- partial template
-                -- add a submenu for the partial template
-                DYNDECK.menu[menuship.id].partial[template.name] = MENU_MISSION:New(template.menutext, DYNDECK.menu[menuship.id].partial)
-                -- add a menu to apply the partial template
-                MENU_MISSION_COMMAND:New("Add", DYNDECK.menu[menuship.id].partial[template.name], DYNDECK.applyTemplate, self, template.name, menuship.id, menuship.coalitionID, true, shipIndex ,templateIndex)
-                -- add a menu to remove the partial template
-                MENU_MISSION_COMMAND:New("Remove", DYNDECK.menu[menuship.id].partial[template.name], DYNDECK.clearDeck, self, template.name, menuship.id, menuship.coalitionID, shipIndex ,templateIndex)  
-            else
-                -- full template
-                MENU_MISSION_COMMAND:New(template.menutext, DYNDECK.menu[menuship.id].fixed, DYNDECK.applyTemplate, self, template.name, menuship.id, menuship.coalitionID, false, shipIndex ,templateIndex)
-            end
+  
+            if template.group == "" then -- this is a full template and should be placed in the ship's root menu
+  
+             end
+  
         end
+
+        -- add group submenus and add/remove commands for partial templates
+        for templateIndex, template in ipairs(menuship.templates) do
+ 
+            if template.group == "" then -- this is a complete template and should be placed in the Complete Templates submenu
+                BASE:T("[DYNDECK] Add Full Template: " .. template.name)
+  
+                -- add command to ship root menu for full template 
+                MENU_MISSION_COMMAND:New(template.menutext, DYNDECK.menu[menuship.id].complete, DYNDECK.applyTemplate, self, template.name, menuship.id, menuship.coalitionID, false, shipIndex ,templateIndex)
+
+            else -- this is a partial template and should be placed in the Partial Templates submenu
+                BASE:T("[DYNDECK] Add partial template.")
+
+                -- add submenu for group if it doesn't already exist
+                if not DYNDECK.menu[menuship.id].partial[template.group] then
+                    BASE:T("[DYNDECK] Add Group submenu: " .. template.group)
+ 
+                    DYNDECK.menu[menuship.id].partial[template.group] = MENU_MISSION:New(template.group, DYNDECK.menu[menuship.id].partial) -- add group submenu
+                    DYNDECK.menu[menuship.id].partial[template.group].templates = {} -- container for grouped template submenus
+ 
+                end
+ 
+                if not DYNDECK.menu[menuship.id].partial[template.group].templates[template.name] then -- check template entry isn't a duplicate
+                    BASE:T("[DYNDECK] Add template submenu: " .. template.name)
+
+                    -- add a submenu for the group template
+                    DYNDECK.menu[menuship.id].partial[template.group].templates[template.name] = MENU_MISSION:New(template.menutext, DYNDECK.menu[menuship.id].partial[template.group])
+
+                    -- add a menu to apply the partial template
+                    MENU_MISSION_COMMAND:New("Add",  DYNDECK.menu[menuship.id].partial[template.group].templates[template.name], DYNDECK.applyTemplate, self, template.name, menuship.id, menuship.coalitionID, true, shipIndex ,templateIndex)
+
+                    -- add a menu to remove the partial template
+                    MENU_MISSION_COMMAND:New("Remove", DYNDECK.menu[menuship.id].partial[template.group].templates[template.name], DYNDECK.clearDeck, self, template.name, menuship.id, menuship.coalitionID, shipIndex ,templateIndex)  
+
+                else
+                    BASE:T("[DYNDECK] ERROR! Menu has already been added for template: " .. template.name)
+                end
+ 
+            end
+ 
+        end
+
         -- add menu to completely clear the ships deck of all statics
         MENU_MISSION_COMMAND:New("Clear Deck", DYNDECK.menu[menuship.id], DYNDECK.clearDeck, self, false, menuship.id, menuship.coalitionID, shipIndex)  
+ 
     end
 
 end
 
+
+-- function DYNDECK:addMenu()
+
+--     -- add menu root
+--     DYNDECK.menu = MENU_MISSION:New("Dynamic Deck")
+--     -- add ship menus
+--     for shipIndex, menuship in ipairs(DYNDECK.ship) do
+--         -- add menu for ship
+--         DYNDECK.menu[menuship.id] = MENU_MISSION:New(menuship.name, DYNDECK.menu)
+--         -- add Fixed Templates submenu
+--         DYNDECK.menu[menuship.id].fixed = MENU_MISSION:New("Fixed Templates", DYNDECK.menu[menuship.id])
+--         -- add Partial Templates submenu
+--         DYNDECK.menu[menuship.id].partial = MENU_MISSION:New("Partial Templates", DYNDECK.menu[menuship.id])
+--         -- add menus for the ship's templates
+--         for templateIndex, template in ipairs(menuship.templates) do
+--             if template.noClear then -- partial template
+--                 -- add a submenu for the partial template
+--                 DYNDECK.menu[menuship.id].partial[template.name] = MENU_MISSION:New(template.menutext, DYNDECK.menu[menuship.id].partial)
+--                 -- add a menu to apply the partial template
+--                 MENU_MISSION_COMMAND:New("Add", DYNDECK.menu[menuship.id].partial[template.name], DYNDECK.applyTemplate, self, template.name, menuship.id, menuship.coalitionID, true, shipIndex ,templateIndex)
+--                 -- add a menu to remove the partial template
+--                 MENU_MISSION_COMMAND:New("Remove", DYNDECK.menu[menuship.id].partial[template.name], DYNDECK.clearDeck, self, template.name, menuship.id, menuship.coalitionID, shipIndex ,templateIndex)  
+--             else
+--                 -- full template
+--                 MENU_MISSION_COMMAND:New(template.menutext, DYNDECK.menu[menuship.id].fixed, DYNDECK.applyTemplate, self, template.name, menuship.id, menuship.coalitionID, false, shipIndex ,templateIndex)
+--             end
+--         end
+--         -- add menu to completely clear the ships deck of all statics
+--         MENU_MISSION_COMMAND:New("Clear Deck", DYNDECK.menu[menuship.id], DYNDECK.clearDeck, self, false, menuship.id, menuship.coalitionID, shipIndex)  
+--     end
+
+-- end
+
 DYNDECK:addMenu()
+
+-- default templates for SC and Forrestal. Additional templates should be placed in dynamic_deck_templates.lua and loaded in ME after this file.
 
 function DYNDECK.sc_flex4c234(shipID, templateName) 
 
@@ -3341,2609 +3608,4 @@ function DYNDECK.forrestal_flex4c234(shipID, templateName)
 
 end
 
-function DYNDECK.sc_cat2l(shipID, templateName)
-
-    local namePrefix = "dyndeck_" .. shipID .. "_" .. templateName .. "_"
-
-    -- Creates 9 F-18s on Carrier Bow Catapult 2.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat2L F-18 1", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VFA-25 400 Paul 'Greekbull' Tsaras CO",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -0.56539029044469,
-                                                ["angle"] = 435.79308202651,
-                                                ["x"] = 49.037352753452,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats 9 F-18s on Carrier Bow Catapult 2.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat2L F-18 2", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "vfa-25 generic",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -1.9165360388852,
-                                                ["angle"] = 435.79308202651,
-                                                ["x"] = 60.08834944242,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats 9 F-18s on Carrier Bow Catapult 2.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat2L F-18 3", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "vmfa-122 high visibility",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -3.3698449825059,
-                                                ["angle"] = 435.79308202651,
-                                                ["x"] = 70.985443953678,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- *******************************************************
-    -- Creats 9 F-18s on Carrier Bow Catapult 2.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat2L F-18 4", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VFA-25 426 Matt 'Gannon' Wayne",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -4.7172584559018,
-                                                ["angle"] = 435.79308202651,
-                                                ["x"] = 82.042290909375,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats 9 F-18s on Carrier Bow Catapult 2.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat2L F-18 5", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "vmfa-122",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -5.6807811134881,
-                                                ["angle"] = 435.79308202651,
-                                                ["x"] = 92.660709237033,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats 9 F-18s on Carrier Bow Catapult 2.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat2L F-18 6", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "vmfa-122",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -6.9761561406201,
-                                                ["angle"] = 435.79308202651,
-                                                ["x"] = 104.14295655801,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats 9 F-18s on Carrier Bow Catapult 2.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat2L F-18 7", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VFA-25 Clean",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -7.9935357811509,
-                                                ["angle"] = 435.79308202651,
-                                                ["x"] = 115.02702279532,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats 9 F-18s on Carrier Bow Catapult 2.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat2L F-18 8", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VFA-25 Clean",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -8.8622980860768,
-                                                ["angle"] = 435.79308202651,
-                                                ["x"] = 125.99653280804,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats 9 F-18s on Carrier Bow Catapult 2.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat2L F-18 9", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "vmfa-122",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -8.4189546313416,
-                                                ["angle"] = 429.73678952209,
-                                                ["x"] = 136.63282885359,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats 9 F-18s on Carrier Bow Catapult 2.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat2L F-18 10", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VFA-25 Clean",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -9.0716331338308,
-                                                ["angle"] = 354.47819217609,
-                                                ["x"] = 149.78327421946,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats 9 F-18s on Carrier Bow Catapult 2.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat2L Tech-Y 1", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "yellow",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 5.3374882673047,
-                                                ["angle"] = 116.13602952373,
-                                                ["x"] = 42.777801593228,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats 9 F-18s on Carrier Bow Catapult 2.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat2L Tech-B 2", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "brown",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 5.5495708687677,
-                                                ["angle"] = 117.65446597297,
-                                                ["x"] = 47.052935840525,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats 9 F-18s on Carrier Bow Catapult 2.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat2L Tech-B 3", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "brown",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 0.22348151799788,
-                                                ["angle"] = 117.65446597297,
-                                                ["x"] = 90.125866213387,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats 9 F-18s on Carrier Bow Catapult 2.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat2L Tech-B 4", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "brown",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -1.4497604680265,
-                                                ["angle"] = 117.65446597297,
-                                                ["x"] = 102.70969022384,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats 9 F-18s on Carrier Bow Catapult 2.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat2L Tech-W 5", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "white",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -0.86790735153088,
-                                                ["angle"] = 115.90913672097,
-                                                ["x"] = 107.96544928822,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-end
-
-function DYNDECK.sc_cat2r(shipID, templateName)
-
-    local namePrefix = "dyndeck_" .. shipID .. "_" .. templateName .. "_"
-
-    -- Creats aircraft and techs on Catapult 2 on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat2R F-18 1", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VFA-25 400 Paul 'Greekbull' Tsaras CO",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -0.42373331700052,
-                                                ["angle"] = 479.77537917677,
-                                                ["x"] = 48.801296065951,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Catapult 2 on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat2R F-18 2", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "vfa-25 generic",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -1.9165360388852,
-                                                ["angle"] = 479.77537917677,
-                                                ["x"] = 60.08834944242,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Catapult 2 on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat2R F-18 3", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "vmfa-122 high visibility",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -3.3698449825059,
-                                                ["angle"] = 479.77537917677,
-                                                ["x"] = 70.985443953678,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Catapult 2 on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat2R Tech-Y 1", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "yellow",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 5.4478270146218,
-                                                ["angle"] = 160.11832667399,
-                                                ["x"] = 42.31126245152,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Catapult 2 on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat2R Tech-B 2", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "brown",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 5.6211179625298,
-                                                ["angle"] = 161.63676312323,
-                                                ["x"] = 47.1192869069,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Catapult 2 on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat2R Tech-B 3", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "brown",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 3.0795751066997,
-                                                ["angle"] = 2.0089497358215,
-                                                ["x"] = 58.878521974936,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Catapult 2 on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat2R Tech-B 4", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "brown",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -1.1587672360767,
-                                                ["angle"] = 5.1330890968913,
-                                                ["x"] = 72.452471779597,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Catapult 2 on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat2R Tech-Y 5", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "yellow",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 0.51246658829964,
-                                                ["angle"] = 5.5170615323301,
-                                                ["x"] = 72.529540910213,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-end
-
-function DYNDECK.sc_corral(shipID, templateName)
-
-    local namePrefix = "dyndeck_" .. shipID .. "_" .. templateName .. "_"
-
-    -- Creates aircraft and techs on Corral on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Corral F-18 1", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VFA-25 Clean",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 32.777470310288,
-                                                ["angle"] = 224.62569582771,
-                                                ["x"] = 5.9309357552636,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Corral on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Corral Tech-B 1", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "brown",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 29.62261911384,
-                                                ["angle"] = 118.85874315684,
-                                                ["x"] = 2.1943722273475,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Corral on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Corral Tech-W 2", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "white",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 24.854273797478,
-                                                ["angle"] = 116.27565586389,
-                                                ["x"] = 7.4119005094149,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-end
-
-function DYNDECK.sc_cat1(shipID, templateName)
-
-    local namePrefix = "dyndeck_" .. shipID .. templateName
-
-    -- Creates F-18s on Catapult 1 Nimitz Carrier.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat1 F-18 1", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VFA-25 402 Alex 'Red Sky' Jonischskies Hi Viz",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 28.108140050537,
-                                                ["angle"] = 10.159637342635,
-                                                ["x"] = 75.492905602964,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats F-18s on Catapult 1 Nimitz Carrier.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat1 F-18 2", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VFA-25 402 Alex 'Red Sky' Jonischskies Hi Viz",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 22.10437053479,
-                                                ["angle"] = 10.159637342635,
-                                                ["x"] = 83.262039503581,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats F-18s on Catapult 1 Nimitz Carrier.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat1 F-18 3", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VFA-25 402 Alex 'Red Sky' Jonischskies Hi Viz",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 15.950453495473,
-                                                ["angle"] = 3.6495592326962,
-                                                ["x"] = 91.559690927119,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats F-18s on Catapult 1 Nimitz Carrier.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat1 F-18 4", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VFA-25 402 Alex 'Red Sky' Jonischskies Hi Viz",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 13.854390702424,
-                                                ["angle"] = 3.6495592326962,
-                                                ["x"] = 102.95885426481,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats F-18s on Catapult 1 Nimitz Carrier.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat1 F-18 5", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VFA-25 402 Alex 'Red Sky' Jonischskies Hi Viz",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 13.202562667095,
-                                                ["angle"] = 3.6495592326962,
-                                                ["x"] = 118.26254908461,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats F-18s on Catapult 1 Nimitz Carrier.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat1 F-18 6", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VFA-25 402 Alex 'Red Sky' Jonischskies Hi Viz",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 11.614878866904,
-                                                ["angle"] = 3.5273861850565,
-                                                ["x"] = 131.18367415037,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats F-18s on Catapult 1 Nimitz Carrier.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Cat1 F-18 7", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VFA-25 402 Alex 'Red Sky' Jonischskies Hi Viz",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 10.388253750276,
-                                                ["angle"] = 3.4575730149768,
-                                                ["x"] = 145.08093209201,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-end
-
-function DYNDECK.sc_island(shipID, templateName)
-
-    local namePrefix = "dyndeck_" .. shipID .. templateName
-
-    -- Creats aircraft and techs around island on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Island E-2Cx", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "vaw-125 tigertails",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 15.467359055958,
-                                                ["angle"] = 557.61706381573,
-                                                ["x"] = -35.289777030018,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "E-2C",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs around island on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Island Tech-Y 1", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "yellow",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 7.0412458731262,
-                                                ["angle"] = 160.11832667399,
-                                                ["x"] = -37.131948660666,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs around island on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Island Tech-P 2", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "purple",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 21.632701538063,
-                                                ["angle"] = 162.52688104174,
-                                                ["x"] = -33.324470195337,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-end
-
-function DYNDECK.sc_deckeq(shipID, templateName)
-
-    local namePrefix = "dyndeck_" .. shipID .. templateName
-
-    -- Creats deck equipment around island on Nimitz class carrier.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Deckeq Tow 4", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["category"] = "ADEquipment",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 26.179609650167,
-                                                ["angle"] = 545.06814649389,
-                                                ["x"] = -34.726986137793,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "AS32-31A",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats a UH-60 on the helipad of a Hazard perry.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Deckeq Tow 2", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["category"] = "ADEquipment",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 34.074706103411,
-                                                ["angle"] = 546.01062428996,
-                                                ["x"] = 71.571823411897,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "AS32-31A",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats a UH-60 on the helipad of a Hazard perry.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Deckeq Tow 1", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["category"] = "ADEquipment",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 14.835235254354,
-                                                ["angle"] = 375.47450307759,
-                                                ["x"] = -54.859983171871,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "AS32-31A",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats a UH-60 on the helipad of a Hazard perry.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Deckeq Tow 3", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["category"] = "ADEquipment",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -34.290094792497,
-                                                ["angle"] = 507.63083403861,
-                                                ["x"] = -119.2372580741,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "AS32-31A",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats a UH-60 on the helipad of a Hazard perry.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Deckeq Mover-1", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["category"] = "ADEquipment",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 22.11354181959,
-                                                ["angle"] = 523.07699791876,
-                                                ["x"] = -48.306093823847,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "AS32-32A",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats a UH-60 on the helipad of a Hazard perry.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Deckeq Mover-2", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["category"] = "ADEquipment",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 21.835171682406,
-                                                ["angle"] = 523.07699791876,
-                                                ["x"] = -42.875676980416,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "AS32-32A",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats a UH-60 on the helipad of a Hazard perry.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Deckeq Crain", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["category"] = "ADEquipment",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 26.547575156325,
-                                                ["angle"] = 585.8914032757,
-                                                ["x"] = -69.02095322825,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "AS32-36A",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats a UH-60 on the helipad of a Hazard perry.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Deckeq Rescue", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["category"] = "ADEquipment",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 20.684031571391,
-                                                ["angle"] = 545.01578661633,
-                                                ["x"] = -72.889667764425,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "AS32-p25",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats a UH-60 on the helipad of a Hazard perry.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Deckeq SH-60B-1", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "standard",
-                                            ["category"] = "Helicopters",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 21.156945293163,
-                                                ["angle"] = 561.0030025646,
-                                                ["x"] = -63.23041749546,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "SH-60B",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats a UH-60 on the helipad of a Hazard perry.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Deckeq SH-60B-2", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "standard",
-                                            ["category"] = "Helicopters",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 19.992908088869,
-                                                ["angle"] = 561.0030025646,
-                                                ["x"] = -51.334443322704,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "SH-60B",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats a UH-60 on the helipad of a Hazard perry.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "Deckeq E-2D", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "vaw-125 tigertails",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 24.709702325664,
-                                                ["angle"] = 557.61706381573,
-                                                ["x"] = -79.053240272477,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "E-2C",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-end
-
-function DYNDECK.sc_fantail(shipID, templateName)
-
-    local namePrefix = "dyndeck_" .. shipID .. templateName
-
-    -- Creats aircraft and techs on fan tail on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "FT F-14B 1", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VF-2 F-14B NK100",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 18.179512487887,
-                                                ["angle"] = 496.26874060812,
-                                                ["x"] = -154.54050081595,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "F-14B",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on fan tail on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "FT F-14B 2", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VF-31 F-14B NK207",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 6.7391817566416,
-                                                ["angle"] = 496.30364719316,
-                                                ["x"] = -155.27503906218,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "F-14B",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on fan tail on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "FT F-14B 3", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VF-2 F-14B NK101_NPD",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -5.0029690814996,
-                                                ["angle"] = 496.30364719316,
-                                                ["x"] = -155.87628096397,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "F-14B",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on fan tail on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "FT F-14B 4", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VF-31 F-14B NK207",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -13.005046297121,
-                                                ["angle"] = 497.1239519416,
-                                                ["x"] = -146.66496187523,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "F-14B",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on fan tail on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "FT F-14B 5", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VF-2 F-14B NK102_NPD",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -15.307549672268,
-                                                ["angle"] = 491.24219236238,
-                                                ["x"] = -135.97118197623,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "F-14B",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on fan tail on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "FT F-14B 6", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VF-31 F-14B NK201 CO",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -21.875030227257,
-                                                ["angle"] = 491.22473906986,
-                                                ["x"] = -120.15838880036,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "F-14B",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on fan tail on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "FT Tech-Y 1", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "yellow",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 14.618622991992,
-                                                ["angle"] = 149.85579067227,
-                                                ["x"] = -143.34737720138,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on fan tail on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "FT Tech-R 2", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "red",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 3.8587904552019,
-                                                ["angle"] = 150.3270295703,
-                                                ["x"] = -148.39389397052,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on fan tail on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "FT Tech-R 3", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "red",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 2.9951744287039,
-                                                ["angle"] = 150.60628225062,
-                                                ["x"] = -148.6959220144,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on fan tail on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "FT Tech-B 4", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "brown",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -3.2820572675681,
-                                                ["angle"] = 148.33735422303,
-                                                ["x"] = -146.46714599295,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on fan tail on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "FT Tech-W 5", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "white",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -5.4176867628193,
-                                                ["angle"] = 146.87127765135,
-                                                ["x"] = -135.06168999672,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on fan tail on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "FT Tech-Y 6", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "yellow",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -11.185698655444,
-                                                ["angle"] = 151.70583967938,
-                                                ["x"] = -117.66135621609,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-end
-
-function DYNDECK.sc_patio(shipID, templateName)
-
-    local namePrefix = "dyndeck_" .. shipID .. templateName
-
-    -- Creats aircraft and techs on Patio on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "PatioR F-14 1", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VF-2 F-14B NK103",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 25.574397958365,
-                                                ["angle"] = 12.184219274949,
-                                                ["x"] = -140.22202233315,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "F-14B",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Patio on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "PatioR F-14 2", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VF-2 F-14B NK106",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 26.999894815472,
-                                                ["angle"] = 24.27935099127,
-                                                ["x"] = -126.3733451222,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "F-14B",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Patio on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "PatioR F-14 3", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VF-2 F-14B NK102",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 28.245066265035,
-                                                ["angle"] = 30.230923740571,
-                                                ["x"] = -115.09659159312,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "F-14B",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Patio on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "PatioR Tech-W 1", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "white",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 25.273813754869,
-                                                ["angle"] = 3.701919110256,
-                                                ["x"] = -131.81665467857,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Patio on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "PatioR Tech-B 2", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "brown",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 23.24388530906,
-                                                ["angle"] = 3.5448394775765,
-                                                ["x"] = -119.34764000727,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Patio on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "PatioR Tech-B 3", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "brown",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 23.726752809735,
-                                                ["angle"] = 3.6146526476563,
-                                                ["x"] = -130.88525791424,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Patio on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "PatioR Tech-B 4", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "brown",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 19.911959307137,
-                                                ["angle"] = 6.8435117638458,
-                                                ["x"] = -114.74868459558,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Patio on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "PatioR Tech-Y 5", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "yellow",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 20.905678081278,
-                                                ["angle"] = 5.2727154370509,
-                                                ["x"] = -126.96371630654,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Patio on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "PatioR Tech-Y 6", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "yellow",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 18.76100756934,
-                                                ["angle"] = 6.8435117638458,
-                                                ["x"] = -110.09545944759,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-end
-
-function DYNDECK.sc_el1(shipID, templateName)
-
-    local namePrefix = "dyndeck_" .. shipID .. templateName
-
-    -- Creats aircraft and techs on Elevator 1.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "EL1 F-18 1", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "vmfa-122",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 33.421244398461,
-                                                ["angle"] = 224.62569582771,
-                                                ["x"] = 23.527064339876,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Elevator 1.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "EL1 F-18 2", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "vmfa-122",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 33.553319932144,
-                                                ["angle"] = 224.62569582771,
-                                                ["x"] = 34.459724906861,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Elevator 1.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "EL1 Tech-Y 1", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "yellow",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 25.408732227881,
-                                                ["angle"] = 117.41011987769,
-                                                ["x"] = 33.100003646528,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-end
-
-function DYNDECK.sc_el3(shipID, templateName)
-
-    local namePrefix = "dyndeck_" .. shipID .. templateName
-
-    -- Creats aircraft and techs on Elevator 3 on Nimitz Carriers
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "EL3 F-18 1", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "vmfa-122",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 33.21480070767,
-                                                ["angle"] = 224.62569582771,
-                                                ["x"] = -101.46372616621,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Elevator 3 on Nimitz Carriers
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "EL3 F-18 2", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VFA-25 Clean",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 33.275586055124,
-                                                ["angle"] = 224.62569582771,
-                                                ["x"] = -90.506253749648,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Elevator 3 on Nimitz Carriers
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "EL3 Tech-R 1", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "red",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 32.838770595401,
-                                                ["angle"] = 120.27245985096,
-                                                ["x"] = -103.85624140846,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Elevator 3 on Nimitz Carriers
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "EL3 Tech-W 2", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "white",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 26.443518892345,
-                                                ["angle"] = 118.9111030344,
-                                                ["x"] = -95.772647928271,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Elevator 3 on Nimitz Carriers
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "EL3 Tech-B 3", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "brown",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 26.163495978953,
-                                                ["angle"] = 120.25500655844,
-                                                ["x"] = -92.537165392662,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft and techs on Elevator 3 on Nimitz Carriers
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "EL3 Tech-P 4", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "purple",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = 32.372135214934,
-                                                ["angle"] = 114.94920563238,
-                                                ["x"] = -88.080092987373,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-end
-
-function DYNDECK.sc_el4(shipID, templateName)
-
-    local namePrefix = "dyndeck_" .. shipID .. templateName
-
-    -- Creats aircraft the techs on Elevator 4 on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "EL4 F-18 1", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VFA-25 Generic",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -33.344235799775,
-                                                ["angle"] = 234.05047378848,
-                                                ["x"] = -107.29391769261,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft the techs on Elevator 4 on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "EL4 F-18 2", -- unit name (Name this something identifiable if you wish to remove it later)
-    
-    -- Copy and paste over this with the units information
-                                            ["livery_id"] = "VFA-25 Clean",
-                                            ["category"] = "Planes",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -33.406129444774,
-                                                ["angle"] = 234.05047378848,
-                                                ["x"] = -95.604236622335,
-                                            }, -- end of ["offsets"]
-                                            ["type"] = "FA-18C_hornet",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft the techs on Elevator 4 on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "EL4 Tech-B 1", -- unit name (Name this something identifiable if you wish to remove it later)
-                                            ["livery_id"] = "purple",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -31.964097133702,
-                                                ["angle"] = 118.54458389148,
-                                                ["x"] = -110.23901828911,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft the techs on Elevator 4 on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "EL4 Tech-R 2", -- unit name (Name this something identifiable if you wish to remove it later)
-                                            ["livery_id"] = "red",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -29.671642155997,
-                                                ["angle"] = 120.1328335108,
-                                                ["x"] = -103.49094182992,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft the techs on Elevator 4 on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "EL4 Tech-B 3", -- unit name (Name this something identifiable if you wish to remove it later)
-                                            ["livery_id"] = "brown",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -25.072092217455,
-                                                ["angle"] = 116.97378756469,
-                                                ["x"] = -105.05066039867,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft the techs on Elevator 4 on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "EL4 Tech-W 4", -- unit name (Name this something identifiable if you wish to remove it later)
-                                            ["livery_id"] = "white",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -27.725434969865,
-                                                ["angle"] = 119.50451498008,
-                                                ["x"] = -98.238166449895,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    -- Creats aircraft the techs on Elevator 4 on Nimitz Carriers.
-    
-    local staticObj = {
-        ["name"] = namePrefix .. "EL4 Tech-B 5", -- unit name (Name this something identifiable if you wish to remove it later)
-                                            ["livery_id"] = "brown",
-                                            ["category"] = "Personnel",
-                                            ["offsets"] = 
-                                            {
-                                                ["y"] = -26.717017857683,
-                                                ["angle"] = 116.86906780957,
-                                                ["x"] = -93.431793780025,
-                                            }, -- end of ["offsets"]
-                                            ["shape_name"] = "carrier_tech_USA",
-                                            ["type"] = "us carrier tech",
-    -- Copy and paste over this with the units information end
-    
-    -- these can be left as is, but is required.
-        ["groupId"] = 1,		-- id's of the group/unit we're spawning (will auto increment if id taken?)
-        ["unitId"] = 1,
-        ["y"] = 0,			-- The initial location of the unit (required else unit will offset on origin of map)
-        ["x"] = 0,			
-        ["heading"] = 0,
-        ["linkUnit"] = shipID, -- This value must be set Via 'shipID = #' where # is the id of the ship you wish to spawn on
-        ["linkOffset"] = true,
-        ["dead"] = false,
-    }
-    coalition.addStaticObject(country.id.USA, staticObj) -- makes the object
-    
-    -- ********************************************************
-    
-end
-
--- END Dynamic Deck Population
+--- END Dynamic Deck Population
