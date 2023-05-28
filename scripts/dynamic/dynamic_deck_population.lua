@@ -420,39 +420,6 @@ function DYNDECK:addMenu()
 
 end
 
-
--- function DYNDECK:addMenu()
-
---     -- add menu root
---     DYNDECK.menu = MENU_MISSION:New("Dynamic Deck")
---     -- add ship menus
---     for shipIndex, menuship in ipairs(DYNDECK.ship) do
---         -- add menu for ship
---         DYNDECK.menu[menuship.id] = MENU_MISSION:New(menuship.name, DYNDECK.menu)
---         -- add Fixed Templates submenu
---         DYNDECK.menu[menuship.id].fixed = MENU_MISSION:New("Fixed Templates", DYNDECK.menu[menuship.id])
---         -- add Partial Templates submenu
---         DYNDECK.menu[menuship.id].partial = MENU_MISSION:New("Partial Templates", DYNDECK.menu[menuship.id])
---         -- add menus for the ship's templates
---         for templateIndex, template in ipairs(menuship.templates) do
---             if template.noClear then -- partial template
---                 -- add a submenu for the partial template
---                 DYNDECK.menu[menuship.id].partial[template.name] = MENU_MISSION:New(template.menutext, DYNDECK.menu[menuship.id].partial)
---                 -- add a menu to apply the partial template
---                 MENU_MISSION_COMMAND:New("Add", DYNDECK.menu[menuship.id].partial[template.name], DYNDECK.applyTemplate, self, template.name, menuship.id, menuship.coalitionID, true, shipIndex ,templateIndex)
---                 -- add a menu to remove the partial template
---                 MENU_MISSION_COMMAND:New("Remove", DYNDECK.menu[menuship.id].partial[template.name], DYNDECK.clearDeck, self, template.name, menuship.id, menuship.coalitionID, shipIndex ,templateIndex)  
---             else
---                 -- full template
---                 MENU_MISSION_COMMAND:New(template.menutext, DYNDECK.menu[menuship.id].fixed, DYNDECK.applyTemplate, self, template.name, menuship.id, menuship.coalitionID, false, shipIndex ,templateIndex)
---             end
---         end
---         -- add menu to completely clear the ships deck of all statics
---         MENU_MISSION_COMMAND:New("Clear Deck", DYNDECK.menu[menuship.id], DYNDECK.clearDeck, self, false, menuship.id, menuship.coalitionID, shipIndex)  
---     end
-
--- end
-
 DYNDECK:addMenu()
 
 -- default templates for SC and Forrestal. Additional templates should be placed in dynamic_deck_templates.lua and loaded in ME after this file.
