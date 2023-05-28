@@ -17,7 +17,7 @@ __JTFLoader.Include = function( JTFIncludeFile )
 		if f == nil then
 			error ("Mission Loader: could not load mission file " .. JTFIncludeFile )
 		else
-			env.info( "[JTF-1] Mission Loader: " .. JTFIncludeFile .. " dynamically loaded." )
+			env.info( "[JTF1] Mission Loader: " .. JTFIncludeFile .. " dynamically loaded." )
 			return f()
 		end
 	end

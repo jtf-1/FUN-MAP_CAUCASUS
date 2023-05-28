@@ -3,8 +3,8 @@
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --
 -- Send messages through SRS using STTS
--- Script will try to load the file specified with LocalServerConfigFile [name of settings file] 
--- and LocalServerConfigPath [path to file]. This file should define the path to the SRS installation 
+-- Script will try to load the file specified with defaultServerConfigFile [name of settings file] 
+-- and defaultServerConfigPath [path to file]. This file should define the path to the SRS installation 
 -- directory and the port used by the DCS server instance running the mission. 
 --
 -- If the settings file is not found, the defaults for srs_path and srs_port will be used.
@@ -21,8 +21,8 @@
 
 MISSIONSRS = {
   fileName = "ServerLocalSettings.lua",                           -- name of file containing local server settings
-  LocalServerConfigPath = nil,                                    -- path to server srs settings. nil if file is in root of server's savedgames profile.
-  LocalServerConfigFile = "LocalServerSettings.txt",              -- srs server settings file name
+  defaultServerConfigPath = nil,                                    -- path to server srs settings. nil if file is in root of server's savedgames profile.
+  defaultServerConfigFile = "LocalServerSettings.txt",              -- srs server settings file name
   defaultSrsPath = "C:/Program Files/DCS-SimpleRadio-Standalone", -- default path to SRS install directory if setting file is not avaialable "C:/Program Files/DCS-SimpleRadio-Standalone"
   defaultSrsPort = 5002,                                          -- default SRS port to use if settings file is not available
   defaultText = "No Message Defined!",                            -- default message if text is nil
@@ -39,9 +39,9 @@ MISSIONSRS = {
 }
 
 function MISSIONSRS:LoadSettings()
-  local loadFile  = self.LocalServerConfigFile
-  if UTILS.CheckFileExists(self.LocalServerConfigPath, self.LocalServerConfigFile) then
-    local loadFile, serverSettings = UTILS.LoadFromFile(self.LocalServerConfigPath, self.LocalServerConfigFile)
+  local loadFile  = self.defaultServerConfigFile
+  if UTILS.CheckFileExists(self.defaultServerConfigPath, self.defaultServerConfigFile) then
+    local loadFile, serverSettings = UTILS.LoadFromFile(self.defaultServerConfigPath, self.defaultServerConfigFile)
     BASE:T({"[MISSIONSRS] Load Server Settings",{serverSettings}})
     if not loadFile then
       BASE:E(string.format("[MISSIONSRS] ERROR: Could not load %s", loadFile))

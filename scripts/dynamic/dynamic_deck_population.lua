@@ -18,7 +18,7 @@ DYNDECK.ship = {
                 -- Submenu group under which template should appear. 
                 -- "" assumes full template. 
                 -- If a name is present, partial template assumed. 
-                -- Value will be used as the text for group the submenu.
+                -- Value will be used as the text for group in the submenu.
                 -- Templates with same group name will appear in same group submenu
 
                 group = "", 
