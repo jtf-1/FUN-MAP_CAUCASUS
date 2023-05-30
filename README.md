@@ -248,10 +248,10 @@ This will reset the current player status. If player is currently in a marshal s
 DYNAMIC DECK TEMPLATES
 ======================
 
-Application and removal of Dynamic Deck Templates is available in the F10 menu under "Dynamic Deck". Full and partial templates can be applied to supported ships. 
+Application and removal of Dynamic Deck Templates is available in the F10 menu under "Dynamic Deck". Complete and partial templates can be applied to supported ships. 
 
-Full templates contain a omplete set of objects for Launch or Recovery. If a full template is applied all existing statics will be cleared from the deck first.
+Complete templates contain a full set of static objects for Launch or Recovery. If a Complete template is applied all existing statics will be cleared from the deck first.
 
-Partial templates can be added to or subtracted from a clear deck or a deck containing other partial templates. Partial templates cannot be added or removed from a full template that has already been applied.
+Partial templates can be added to or subtracted from a clear deck or a deck containing other partial templates. Partial templates cannot be added to, or removed from, a Complete template that has already been applied.
 
 The "Clear Deck" command will remove all statics from the deck.
