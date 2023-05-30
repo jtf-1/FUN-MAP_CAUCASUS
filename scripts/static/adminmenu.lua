@@ -24,8 +24,8 @@
 ADMIN = EVENTHANDLER:New()
 ADMIN:HandleEvent(EVENTS.PlayerEnterAircraft)
 
-ADMIN.defaultMissionRestart = "ADMIN9999"
-ADMIN.defaultMissionLoad = "ADMIN9999"
+ADMIN.defaultMissionRestart = "MISSION_RESTART"
+ADMIN.defaultMissionLoad = "MISSION_LOAD"
 ADMIN.adminUnitName = "XX_" -- String to locate within unit name for admin slots
 ADMIN.missionRestart = (JTF1.missionRestart and JTF1.missionRestart or ADMIN.defaultMissionRestart)
 ADMIN.missionLoad = (JTF1.missionLoad and JTF1.missionLoad or ADMIN.defaultMissionLoad)
@@ -34,6 +34,7 @@ ADMIN.menuAllSlots = false -- Set to true for admin menu to appear for all playe
 
 local devState = trigger.misc.getUserFlag(8888)
 
+-- add admin menu to all slots if dev mode is active
 if devState == 1 then
   ADMIN.menuAllSlots = true
 end
@@ -98,33 +99,25 @@ end
 
 --- Add admin menu and commands if client is in an ADMIN spawn
 function ADMIN:BuildAdminMenu(unit,playername)
-
   local adminGroup = unit:GetGroup()
-
   -- add ADMIN menu to F10
   adminMenu = MENU_GROUP:New(adminGroup, "Admin")
-
   -- add command to restart current mission  
   MENU_GROUP_COMMAND:New( adminGroup, "Restart Current Mission", adminMenu, ADMIN.LoadMission, self, playername)
-
   if ADMIN.missionList then
     BASE:T("[JTF1] ADMIN Build missionList.")
-
     -- add menus to load missions
     for i, missionList in ipairs(ADMIN.missionList) do
       BASE:E(missionList)
       -- add menu for mission group  
       local missionName = MENU_GROUP:New(adminGroup, missionList.missionName, adminMenu)
-
       -- add menus for each mission file in the group
       for j, missionMenu in ipairs(missionList.missionMenu) do
         BASE:E(missionMenu)
         -- add full path to mission file if defined
         local missionFile = ADMIN.missionPath .. "\\" .. missionMenu.missionFile
-
         -- add command to load mission
         MENU_GROUP_COMMAND:New( adminGroup, missionMenu.menuText, missionName, ADMIN.LoadMission, self, playername, missionFile )
-
       end
     end
   end

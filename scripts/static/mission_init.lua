@@ -37,7 +37,7 @@ else
     end
 
     -- load server mission list
-    local missionPath = (JTF1.missionPath and JTF1.missionPath or (lsf.writedir() .. "\\missions"))
+    local missionPath = (JTF1.missionPath and JTF1.missionPath or (lfs.writedir() .. "\\missions"))
     local missionList = (JTF1.missionList and JTF1.missionList or JTF1.defaultMissionList)
     local missionListFile = missionPath .. "\\" .. missionList
     BASE:T("[JTF1] mission list file: " .. missionListFile)
