@@ -132,7 +132,7 @@ end
 
  scheduler, schedulerID = SCHEDULER:New( nil,
    function(foo)
-    BASE:T("[MARK_SPAWN] scheduler:" .. UTILS.OneLineSerialize(markEvent))
+    BASE:T({"[MARK_SPAWN] scheduler:", markEvent} )
    end,
  {}, 300, 300)
 
@@ -142,7 +142,7 @@ end
 
 function parseMark (mark)
 
-  BASE:T("[MARK_SPAWN] mark: " .. UTILS.OneLineSerialize(mark))
+  BASE:T({"[MARK_SPAWN] mark: ", mark} )
 
   local cmdOption = false
   local text = mark.text
@@ -195,7 +195,8 @@ function parseMark (mark)
           rot = ROT,
         }
 
-        BASE:T("[MARK_SPAWN] spawnTable: " .. UTILS.OneLineSerialize(spawnTable))
+        BASE:T({"[MARK_SPAWN] spawnTable: ", spawnTable})
+
       MLAirSpawn(spawnTable)
     end
   end
@@ -239,7 +240,7 @@ function parseMark (mark)
           tgt = tgtName
         }
 
-        BASE:T("[SPAWN_MARK] GSPAWN: " .. UTILS.OneLineSerialize(spawnTable))
+        BASE:T({"[SPAWN_MARK] GSPAWN: ",  spawnTable})
       MLGroundSpawn(spawnTable)
     end
   end
@@ -264,7 +265,7 @@ function parseMark (mark)
       power = power, 
     }
 
-    BASE:T("[MARK_SPAWN] RADIO: " .. UTILS.OneLineSerialize(spawnTable))
+    BASE:T({"[MARK_SPAWN] RADIO: ", spawnTable})
     --MLRadioSpawn(spawnTable)
   end
   
@@ -308,7 +309,7 @@ function parseMark (mark)
           tgt = tgtName
         }
 
-      BASE:T("[MARK_SPAWN] NSPAWN: " .. UTILS.OneLineSerialize(spawnTable))
+      BASE:T({"[MARK_SPAWN] NSPAWN: ", spawnTable})
       MLNavalSpawn(spawnTable)
     end
   end
@@ -659,7 +660,7 @@ function MLDeleteGroup(spawnTable,mark)
   elseif(deleteCMD == "AREA") then
     BASE:T("[MARK_SPAWN] Doing Radius Stuff")
     local deleteZone = ZONE_RADIUS:New("DeleteZone",COORDINATE:NewFromVec3(mark.pos):GetVec2(),radius)
-    BASE:T("[MARK_SPAWN] Marker Pos: " .. UTILS.OneLineSerialize(mark.pos) .. " Zone Pos: " .. UTILS.OneLineSerialize(deleteZone:GetVec2()) .. "Radius: " .. deleteZone:GetRadius())
+    BASE:T({"[MARK_SPAWN] Marker Pos: ", mark.pos, " Zone Pos: ", deleteZone:GetVec2(), "Radius: ", deleteZone:GetRadius()})
     for idx, entry in pairs (MLSpawnedGroups) do
       if entry.group:IsAlive() then 
         local groupPos = entry.group:GetVec2()
@@ -761,7 +762,7 @@ function MLWxReport (repoString, mark)
   local qfe = false
   local metric = false
   local options = split(repoString, ",")
-  BASE:T(UTILS.OneLineSerialize(options))
+  BASE:T({options})
   for idx, option in pairs (options) do
     option = option:gsub("%s+", "")
     BASE:T(option)
@@ -1166,7 +1167,7 @@ function MLPopulateTGT(tgt)
   local curratedUnits
   zone:scan(1)
   local units = zone:GetScannedUnits()
-  BASE:T(UTILS.OneLineSerialize(units))
+  BASE:T({units})
   for idx, unit in pairs(units) do
     local unitCategory = unit:GetDCSObject():GetCategory()
     if(unitCategory == "UNIT") then
