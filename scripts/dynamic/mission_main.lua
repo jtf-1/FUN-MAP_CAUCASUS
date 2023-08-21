@@ -8,11 +8,15 @@
 
 
 -- ## CAP CONTROL
+_msg = "[JTF-1 MISSIONMAIN] Adding CAP Menus"
+BASE:T(_msg)
 MenuCapTop = MENU_COALITION:New( coalition.side.BLUE, " ENEMY CAP CONTROL" )
 	MenuCapMaykop = MENU_COALITION:New( coalition.side.BLUE, "MAYKOP", MenuCapTop )
 	MenuCapBeslan = MENU_COALITION:New( coalition.side.BLUE, "BESLAN", MenuCapTop )
 
 -- ## GROUND ATTACK MISSIONS
+_msg = "[JTF-1 MISSIONMAIN] Adding STRIKE Menus"
+BASE:T(_msg)
 MenuGroundTop = MENU_COALITION:New( coalition.side.BLUE, " GROUND ATTACK MISSIONS" )
 	MenuCampAttack = MENU_COALITION:New( coalition.side.BLUE, " Camp Strike", MenuGroundTop )
 	MenuConvoyAttack = MENU_COALITION:New( coalition.side.BLUE, " Convoy Strike", MenuGroundTop )
@@ -30,11 +34,13 @@ MenuGroundTop = MENU_COALITION:New( coalition.side.BLUE, " GROUND ATTACK MISSION
     MenuBridgeAttackEast = MENU_COALITION:New( coalition.side.BLUE, " East Region", MenuBridgeAttack )
     MenuBridgeAttackCentral = MENU_COALITION:New( coalition.side.BLUE, " Central Region", MenuBridgeAttack )
     MenuBridgeAttackWest = MENU_COALITION:New( coalition.side.BLUE, " West Region", MenuBridgeAttack )
-	MenuCommunicationsAttack = MENU_COALITION:New(coalition.side.BLUE, " WiP Communications Strike", MenuGroundTop )
-	MenuC2Attack = MENU_COALITION:New(coalition.side.BLUE, " WiP C2 Strike", MenuGroundTop )
+	--MenuCommunicationsAttack = MENU_COALITION:New(coalition.side.BLUE, " WiP Communications Strike", MenuGroundTop )
+	--MenuC2Attack = MENU_COALITION:New(coalition.side.BLUE, " WiP C2 Strike", MenuGroundTop )
 
 -- ## ANTI-SHIP MISSIONS
-MenuAntiShipTop = MENU_COALITION:New(coalition.side.BLUE, " WiP ANTI-SHIP MISSIONS" ) -- WiP
+_msg = "[JTF-1 MISSIONMAIN] Adding SHIP Menus"
+BASE:T(_msg)
+-- MenuAntiShipTop = MENU_COALITION:New(coalition.side.BLUE, " WiP ANTI-SHIP MISSIONS" ) -- WiP
 
 -- ## STRIKE PACKAGE MISSIONS
 --MenuStrikePackageTop = MENU_COALITION:New(coalition.side.BLUE, " WiP STRIKE PACKAGE MISSIONS" ) -- WiP
@@ -56,6 +62,9 @@ end --function
 -- Scheduled function on spawn to check for presence of the support aircraft in its spawn zone. Repeat check every 60 seconds. Respawn if ac has left zone. 
 -- also respawn on engine shutdown if an airfield is within the support zone.
 function SpawnSupport (SupportSpawn) -- spawnobject, spawnzone
+	_msg = "[JTF-1 MISSIONMAIN] SupportSpawn"
+	BASE:T(_msg)
+
 
 	--local SupportSpawn = _args[1]
 	local SupportSpawnObject = SPAWN:New( SupportSpawn.spawnobject )
@@ -81,7 +90,9 @@ end -- function
 --XXX ## Spawning CAP flights
 -- max 8x CAP aircraft can be spawned at each location
 function SpawnCap( _args ) -- spawnobject, spawntable { spawn, spawnzone, templates, patrolzone, aicapzone, engagerange }
-
+	_msg = "[JTF-1 MISSIONMAIN] SpawnCap()"
+	BASE:T({_msg, _args})
+	
   local SpawnCapTable = _args[1]
   
   SpawnCapTable.spawn:InitLimit( 8,9999 ) -- max 8x cap sections alive   
@@ -102,6 +113,9 @@ end --function
 --  ( Central, West ) 
 function SpawnConvoy ( _args ) -- ConvoyTemplates, SpawnHost {conv, dest, destzone, strikecoords, is_open}, ConvoyType, ConvoyThreats
 
+	_msg = "[JTF-1 MISSIONMAIN] SpawnConvoy()"
+	BASE:T({_msg, _args})
+	
 	local TemplateTable = _args[1]
 	local SpawnHostTable = _args[2]
 	local ConvoyType = _args[3]
@@ -172,6 +186,8 @@ end --function
   
 --XXX ## Spawning enemy camps 
 function SpawnCamp( _args ) --TemplateTable, CampsTable [ loc, town, coords, is_open ], Region
+	_msg = "[JTF-1 MISSIONMAIN] SpawnCamp()"
+	BASE:T({_msg, _args})
 	
 	local SpawnTemplateTable = _args[1]
 	local SpawnCampsTable = _args[2]
@@ -264,11 +280,10 @@ end --function
 
 -- TODO: integrate camp attack, convoy strike
 function SpawnStrikeAttack ( StrikeIndex ) -- "location name"
-  -- TableStrikeAttack { { striketype [Airfield, Factory, Bridge, Communications, C2], strikeivo, strikecoords, strikemission, strikethreats, strikezone, striketargets, medzones { zone, is_open }, smallzones { zone, is_open }, defassets { sam, aaa, manpad, armour}, spawnobjects {}, is_open } 
+	_msg = "[JTF-1 MISSIONMAIN] SpawnStrikeAttack() StrikeIndex"
+	BASE:T({_msg, StrikeIndex})
+ -- TableStrikeAttack { { striketype [Airfield, Factory, Bridge, Communications, C2], strikeivo, strikecoords, strikemission, strikethreats, strikezone, striketargets, medzones { zone, is_open }, smallzones { zone, is_open }, defassets { sam, aaa, manpad, armour}, spawnobjects {}, is_open } 
   local FuncDebug = false
-
-	BASE:TraceOnOff( false )
-	BASE:TraceAll( true )
 
 	if TableStrikeAttack[StrikeIndex].is_open then
 
@@ -441,7 +456,6 @@ function SpawnStrikeAttack ( StrikeIndex ) -- "location name"
 		MESSAGE:New( msg, 10, "" ):ToAll()
 	end
 
-BASE:TraceOnOff( false )
 
 end --function
 
@@ -450,9 +464,9 @@ end --function
 ------------------------------------
 
 function RemoveStrikeAttack ( StrikeIndex )
-BASE:TraceOnOff( false )
-BASE:TraceAll( true )
-
+	_msg = "[JTF-1 MISSIONMAIN] RemoveStrikeAttack() StrikeIndex"
+	BASE:T({_msg, StrikeIndex})
+	
 	if not TableStrikeAttack[StrikeIndex].is_open then
 		local objectcount = #TableStrikeAttack[StrikeIndex].spawnobjects
 		for count = 1, objectcount do
@@ -484,7 +498,6 @@ BASE:TraceAll( true )
 			.. " strike attack mission is not active!"
 		MESSAGE:New( msg, 10, "" ):ToAll()
 	end
-BASE:TraceOnOff( false )
 
 end --function
 
@@ -494,6 +507,8 @@ end --function
 ----------------------------------------
 
 function RemoveSpawn( _args )
+	_msg = "[JTF-1 MISSIONMAIN] RemoveSpawn()"
+	BASE:T({_msg, _args})
 
 	local RemoveSpawnGroupTable = _args[1]
 
@@ -506,6 +521,8 @@ end --function
 
 -- ## Remove oldest spawned group in a mission
 function RemoveSpawnGroup( _args )
+	_msg = "[JTF-1 MISSIONMAIN] RemoveSpawnGroup()"
+	BASE:T({_msg, _args})
 
 	for index, SpawnObject in pairs( _args ) do
 		local FirstSpawnGroup, FirstSpawnIndex = SpawnObject:GetFirstAliveGroup()
@@ -518,6 +535,8 @@ end --function
 
 -- ## CAMP remove spawn
 function RemoveCamp( _args )
+	_msg = "[JTF-1 MISSIONMAIN] RemoveCamp()"
+	BASE:T({_msg, _args})
 
 	local FirstCampGroup, Index = _args[2]:GetFirstAliveGroup()
 	if FirstCampGroup then
@@ -528,6 +547,8 @@ end --function
 
 
 local function InList( tbl, val )
+	_msg = "[JTF-1 MISSIONMAIN] InList()"
+	BASE:T({_msg, tbl, val})
 
     for index, value in ipairs(tbl) do
         if value == val then
@@ -541,26 +562,7 @@ end --function
 
 
 -- END FUNCTIONS
--- -- XXX BEGIN ATIS
 
--- atisVaziani=ATIS:New(AIRBASE.Caucasus.Vaziani, 122.7)
--- atisVaziani:SetRadioRelayUnitName("Radio Relay Vaziani")
--- atisVaziani:AddILS(108.75, "31")
--- atisVaziani:SetTACAN(22)
--- atisVaziani:SetTowerFrequencies({269.1, 140.1})
--- atisVaziani:Start()
-
-
--- atisTbilisi=ATIS:New(AIRBASE.Caucasus.Tbilisi_Lochini, 132.8)
--- atisTbilisi:SetRadioRelayUnitName("Radio Relay Tbilisi")
--- atisTbilisi:AddILS(108.9, "31")
--- atisTbilisi:SetVOR(113.7)
--- atisTbilisi:SetTowerFrequencies({267.1, 138.1})
--- atisTbilisi:SetActiveRunway("L")
--- atisTbilisi:Start()
-
-
--- -- END ATIS
 -- XXX BEGIN SUPPORT AC SECTION
 
 
@@ -598,66 +600,6 @@ end
 
 -- END SUPPORT AC SECTION
 -- XXX BEGIN BOAT SECTION
-
-
------------------------
---- Airboss Lincoln ---
------------------------
-
--- -- Create AIRBOSS object for Lincoln
--- airbossLincoln=AIRBOSS:New( "CSG_CarrierGrp_Lincoln", "Lincoln" )
-
--- -- Set load and save path/name for persistent LSO grades
--- airbossLincoln:Load(nil, "Cauc_Airboss-USS Lincoln_LSOgrades.csv")
--- airbossLincoln:SetAutoSave(nil, "Cauc_Airboss-USS Lincoln_LSOgrades.csv")
-
--- local lincolnOffset_deg = 0 -- Marshal offset
--- local lincolnDefaultPlayerSkill = AIRBOSS.Difficulty.Normal -- default skill level
--- local lincolnRadioRelayMarshall = UNIT:FindByName("RadioRelayMarshall_Lincoln") -- radio relay unit for Marshal
--- local lincolnRadioRelayPaddles = UNIT:FindByName("RadioRelayPaddles_Lincoln") -- radio relay unit for LSO
--- local lincolnClouds, lincolnVisibility, lincolnFog, lincolnDust = airbossLincoln:_GetStaticWeather() -- get mission weather (assumes static weather is used)
-
--- --- Determine Daytime Case
--- -- adjust case according to weather state
-
--- local lincolnCase = 1 -- default to Case I
-
--- if (lincolnClouds.base < 305 and lincolnClouds.density > 8) or lincolnVisibility < 8000 then -- cloudbase < 1000' or viz < 5 miles, Case III
-  -- lincolnCase = 3
--- elseif lincolnFog and lincolnFog.thickness > 60 and lincolnFog.visibility < 8000 then -- visibility in fog < 5nm, Case III
-  -- lincolnCase = 3
--- elseif (lincolnClouds.base < 915 and lincolnClouds.density > 8) and lincolnVisibility >= 8000 then -- cloudbase < 3000', viz > 5 miles, Case II
-  -- lincolnCase = 2
--- end     
- 
--- -- Lincoln AIRBOSS configuration
--- airbossLincoln:SetMenuRecovery(30, 25, false, 30)
--- airbossLincoln:SetSoundfilesFolder("Airboss Soundfiles/")
--- airbossLincoln:SetTACAN(74,"X","STN")
--- airbossLincoln:SetICLS( 4,"STN" )
--- airbossLincoln:SetCarrierControlledArea( 50 )
--- airbossLincoln:SetDespawnOnEngineShutdown( true )
--- airbossLincoln:SetRecoveryTanker( Spawn_Tanker_S3B_Texaco1 )
--- airbossLincoln:SetMarshalRadio( 285.675, "AM" )
--- airbossLincoln:SetLSORadio( 308.475, "AM" )
--- airbossLincoln:SetRadioRelayLSO( lincolnRadioRelayPaddles )
--- airbossLincoln:SetRadioRelayMarshal( lincolnRadioRelayMarshall )
--- airbossLincoln:SetAirbossNiceGuy(true) -- allow direct to commence
--- airbossLincoln:SetDefaultPlayerSkill(lincolnDefaultPlayerSkill)
--- airbossLincoln:SetRespawnAI()
--- airbossLincoln:SetMenuMarkZones(false) -- disable marking zones using smoke or flares
-
--- --- Fun Map Recovery Windows 
--- -- sunrise and sunset dependant on mission date
--- -- https://www.timeanddate.com/sun/united-arab-emirates/abu-dhabi?month=4&year=2011
--- -- Sunrise @ 08:00, Sunset @ 19:00, recovery @ sunrise+10 and sunset-10
--- -- otherwise, intiate recovery through F10 menu
--- airbossLincoln:AddRecoveryWindow( "8:10", "18:50", lincolnCase, lincolnOffset_deg, true, 30 ) -- sunrise to sunset
--- airbossLincoln:AddRecoveryWindow( "18:50", "8:10+1", 3, lincolnOffset_deg, true, 30 ) -- sunset to sunrise D+1
--- airbossLincoln:AddRecoveryWindow( "8:10+1", "18:50+1", lincolnCase, lincolnOffset_deg, true, 30 ) -- sunrise D+1 to sunset D+1
-
--- -- Start AIRBOSS Lincoln
--- airbossLincoln:Start()
 
 -- Recovery Tanker Lincoln ---
 
@@ -700,41 +642,41 @@ Spawn_Rescuehelo_Tarawa:SetOffsetZ(800)
 --- Airboss Tarawa ---
 -----------------------
 
-airbossTarawa=AIRBOSS:New( "CSG_CarrierGrp_Tarawa", "Tarawa" )
+-- airbossTarawa=AIRBOSS:New( "CSG_CarrierGrp_Tarawa", "Tarawa" )
 
-airbossTarawa:Load(nil, "Cauc_Airboss-USS Tarawa_LSOgrades.csv")
-airbossTarawa:SetAutoSave(nil, "Cauc_Airboss-USS Tarawa_LSOgrades.csv")
+-- airbossTarawa:Load(nil, "Cauc_Airboss-USS Tarawa_LSOgrades.csv")
+-- airbossTarawa:SetAutoSave(nil, "Cauc_Airboss-USS Tarawa_LSOgrades.csv")
 
-local tarawaCase = lincolnCase -- set daytime case according to weather, determined in Lincoln section. assumes statc weather accross whole map.
-local tarawaOffset_deg = 0
-local tarawaRadioRelayMarshall = UNIT:FindByName("RadioRelayMarshall_Tarawa")
-local tarawaRadioRelayPaddles = UNIT:FindByName("RadioRelayPaddles_Tarawa")
+-- local tarawaCase = lincolnCase -- set daytime case according to weather, determined in Lincoln section. assumes statc weather accross whole map.
+-- local tarawaOffset_deg = 0
+-- local tarawaRadioRelayMarshall = UNIT:FindByName("RadioRelayMarshall_Tarawa")
+-- local tarawaRadioRelayPaddles = UNIT:FindByName("RadioRelayPaddles_Tarawa")
  
-airbossTarawa:SetMenuRecovery(30, 25, false, 30)
-airbossTarawa:SetSoundfilesFolder("Airboss Soundfiles/")
-airbossTarawa:SetTACAN(1,"X","TAR")
-airbossTarawa:SetICLS( 1,"TAR" )
-airbossTarawa:SetCarrierControlledArea( 50 )
-airbossTarawa:SetDespawnOnEngineShutdown( true )
-airbossTarawa:SetMarshalRadio( 285.675, "AM" )
-airbossTarawa:SetLSORadio( 255.725, "AM" )
-airbossTarawa:SetRadioRelayLSO( tarawaRadioRelayPaddles )
-airbossTarawa:SetRadioRelayMarshal( tarawaRadioRelayMarshall  )
-airbossTarawa:SetAirbossNiceGuy( true )
-airbossTarawa:SetDefaultPlayerSkill(AIRBOSS.Difficulty.Normal)
-airbossTarawa:SetRespawnAI()
-airbossTarawa:SetMenuMarkZones( false ) -- disable marking zones using smoke or flares
+-- airbossTarawa:SetMenuRecovery(30, 25, false, 30)
+-- airbossTarawa:SetSoundfilesFolder("Airboss Soundfiles/")
+-- airbossTarawa:SetTACAN(1,"X","TAR")
+-- airbossTarawa:SetICLS( 1,"TAR" )
+-- airbossTarawa:SetCarrierControlledArea( 50 )
+-- airbossTarawa:SetDespawnOnEngineShutdown( true )
+-- airbossTarawa:SetMarshalRadio( 285.675, "AM" )
+-- airbossTarawa:SetLSORadio( 255.725, "AM" )
+-- airbossTarawa:SetRadioRelayLSO( tarawaRadioRelayPaddles )
+-- airbossTarawa:SetRadioRelayMarshal( tarawaRadioRelayMarshall  )
+-- airbossTarawa:SetAirbossNiceGuy( true )
+-- airbossTarawa:SetDefaultPlayerSkill(AIRBOSS.Difficulty.Normal)
+-- airbossTarawa:SetRespawnAI()
+-- airbossTarawa:SetMenuMarkZones( false ) -- disable marking zones using smoke or flares
 
---- Fun Map Recovery Windows 
--- dependent on mission start and finish times
--- Sunrise @ 08:00, Sunset @ 19:00, recovery @ sunrise+10 and sunset-10
--- otherwise, intiate recovery through F10 menu
-airbossTarawa:AddRecoveryWindow( "8:10", "18:50", tarawaCase, tarawaOffset_deg, true, 30 ) -- sunrise to sunset 
-airbossTarawa:AddRecoveryWindow( "18:50", "8:10+1", 3, tarawaOffset_deg, true, 30 ) -- sunset to sunrise D+1
-airbossTarawa:AddRecoveryWindow( "8:10+1", "18:50+1", tarawaCase, tarawaOffset_deg, true, 30 ) -- sunrise D+1 to sunset D+1
+-- --- Fun Map Recovery Windows 
+-- -- dependent on mission start and finish times
+-- -- Sunrise @ 08:00, Sunset @ 19:00, recovery @ sunrise+10 and sunset-10
+-- -- otherwise, intiate recovery through F10 menu
+-- airbossTarawa:AddRecoveryWindow( "8:10", "18:50", tarawaCase, tarawaOffset_deg, true, 30 ) -- sunrise to sunset 
+-- airbossTarawa:AddRecoveryWindow( "18:50", "8:10+1", 3, tarawaOffset_deg, true, 30 ) -- sunset to sunrise D+1
+-- airbossTarawa:AddRecoveryWindow( "8:10+1", "18:50+1", tarawaCase, tarawaOffset_deg, true, 30 ) -- sunrise D+1 to sunset D+1
 
--- Start AIRBOSS Tarawa
-airbossTarawa:Start()
+-- -- Start AIRBOSS Tarawa
+-- airbossTarawa:Start()
 
 -- Recovery Tanker Tarawa ---
 
@@ -1164,6 +1106,9 @@ _campattackremove_args = {
 -- On reaching Mtskehta it will respawn at the start of the route.
 
 function ResetAbleSentry()
+	_msg = "[JTF-1 MISSIONMAIN] ResetAbleSentry()"
+	BASE:T(_msg)
+
   Spawn_Convoy_AbleSentry:ReSpawn(SpawnIndex_Convoy_AbleSentry) 
 end -- function
 

@@ -1,19 +1,16 @@
-__JTFLoader.Include( 'mission_init.lua' )
-__JTFLoader.Include( 'devcheck.lua' )
-__JTFLoader.Include( 'msrs.lua' )
-__JTFLoader.Include( 'adminmenu.lua' )
-__JTFLoader.Include( 'missiontimer.lua' )
+__JTFLoader.Include( 'lib/Moose.lua' )                  -- library file
+__JTFLoader.Include( 'lib/skynet-iads-compiled.lua' )   -- library file
+__JTFLoader.Include( 'core/mission_init.lua' )          -- core file
+__JTFLoader.Include( 'core/devcheck.lua' )              -- core file
+__JTFLoader.Include( 'core/missionsrs.lua' )            -- core file
+__JTFLoader.Include( 'missionsrs_data.lua' )            -- core file
+__JTFLoader.Include( 'core/adminmenu.lua' )             -- core file
+__JTFLoader.Include( 'core/missiontimer.lua' )          -- core file
+__JTFLoader.Include( 'missiontimer_data.lua' )
 __JTFLoader.Include( 'missiletrainer.lua' )
-__JTFLoader.Include( 'Hercules_Cargo.lua' )
---__JTFLoader.Include( 'supportaircraft.lua' )
---__JTFLoader.Include( 'staticranges.lua' )
---__JTFLoader.Include( 'dynamicranges.lua' )
---__JTFLoader.Include( 'movingtargets.lua' )
---__JTFLoader.Include( 'ecs.lua' )
---__JTFLoader.Include( 'bfmacm.lua' )
---__JTFLoader.Include( 'bvrgci.lua' )
-__JTFLoader.Include( 'mission_main.lua' )
-__JTFLoader.Include( 'markspawn.lua' )
 __JTFLoader.Include( 'dynamic_deck_population.lua' )
 __JTFLoader.Include( 'dynamic_deck_templates.lua' )
-__JTFLoader.Include( 'mission_end.lua' )
+__JTFLoader.Include( 'markspawn.lua' )
+__JTFLoader.Include( 'core/Hercules_Cargo.lua' )        -- core file
+__JTFLoader.Include( 'mission_main.lua' )
+__JTFLoader.Include( 'core/mission_end.lua' )           -- core file
