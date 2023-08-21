@@ -10,6 +10,10 @@ SET me=%~n0
 :: folder in which this file is being executed
 SET parent=%~dp0
 
+:: location of JTF1-Core\Scripts
+SET jtf1corescripts=D:\GitHub\JTF1-Core\Scripts
+ECHO core path:           %jtf1corescripts%
+
 CD %parent%
 
 :: path to static scripts
@@ -22,13 +26,22 @@ DIR  %dynamicscriptpath%*.*
 
 ECHO.
 
+:: Create library scripts folder if it doesn't exist
+if NOT EXIST %dynamicscriptpath%lib\ md %dynamicscriptpath%lib
+
 :: Create symlinks to library files
 :: MOOSE
-MKLINK %dynamicscriptpath%Moose.lua "d:\GitHub\MOOSE_INCLUDE\Moose_Include_Static\Moose.lua"
+MKLINK %dynamicscriptpath%lib\Moose.lua "d:\GitHub\MOOSE_INCLUDE\Moose_Include_Static\Moose.lua"
 :: MIST
-MKLINK %dynamicscriptpath%mist.lua "d:\GitHub\MissionScriptingTools\mist.lua"
+MKLINK %dynamicscriptpath%lib\mist.lua "d:\GitHub\MissionScriptingTools\mist.lua"
 :: SKYNET
-MKLINK %dynamicscriptpath%skynet-iads-compiled.lua "d:\GitHub\Skynet-IADS\demo-missions\skynet-iads-compiled.lua"
+MKLINK %dynamicscriptpath%lib\skynet-iads-compiled.lua "d:\GitHub\Skynet-IADS\demo-missions\skynet-iads-compiled.lua"
+:: MISSIONLIST
+MKLINK %dynamicscriptpath%lib\missions.lua "C:\Users\rober\Saved Games\missions\missions.lua"
+:: SERVERSETTINGS
+MKLINK %dynamicscriptpath%lib\LocalServerSettings.lua "C:\Users\rober\Saved Games\DCS.openbeta\LocalServerSettings.lua"
+:: Create symlink to JTF1-Core\Scripts folder
+MKLINK /j "%dynamicscriptpath%core" "%jtf1corescripts%"
 
 ECHO.
 
