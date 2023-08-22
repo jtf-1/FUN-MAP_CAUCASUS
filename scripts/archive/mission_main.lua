@@ -1,3 +1,4 @@
+env.info( "[JTF-1] mission_main" )
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- BEGIN MAIN
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -8,32 +9,32 @@
 
 
 -- ## CAP CONTROL
-_msg = "[JTF-1 MISSIONMAIN] Adding CAP Menus"
-BASE:T(_msg)
-MenuCapTop = MENU_COALITION:New( coalition.side.BLUE, " ENEMY CAP CONTROL" )
-	MenuCapMaykop = MENU_COALITION:New( coalition.side.BLUE, "MAYKOP", MenuCapTop )
-	MenuCapBeslan = MENU_COALITION:New( coalition.side.BLUE, "BESLAN", MenuCapTop )
+-- _msg = "[JTF-1 MISSIONMAIN] Adding CAP Menus"
+-- BASE:T(_msg)
+-- MenuCapTop = MENU_COALITION:New( coalition.side.BLUE, "ENEMY CAP CONTROL" )
+-- 	MenuCapMaykop = MENU_COALITION:New( coalition.side.BLUE, "MAYKOP", MenuCapTop )
+-- 	MenuCapBeslan = MENU_COALITION:New( coalition.side.BLUE, "BESLAN", MenuCapTop )
 
 -- ## GROUND ATTACK MISSIONS
 _msg = "[JTF-1 MISSIONMAIN] Adding STRIKE Menus"
 BASE:T(_msg)
-MenuGroundTop = MENU_COALITION:New( coalition.side.BLUE, " GROUND ATTACK MISSIONS" )
-	MenuCampAttack = MENU_COALITION:New( coalition.side.BLUE, " Camp Strike", MenuGroundTop )
-	MenuConvoyAttack = MENU_COALITION:New( coalition.side.BLUE, " Convoy Strike", MenuGroundTop )
-		MenuConvoyAttackWest = MENU_COALITION:New( coalition.side.BLUE, " West Region", MenuConvoyAttack )
-		MenuConvoyAttackCentral = MENU_COALITION:New( coalition.side.BLUE, " Central Region", MenuConvoyAttack )
-	MenuAirfieldAttack = MENU_COALITION:New(coalition.side.BLUE, " Airfield Strike", MenuGroundTop )
-    MenuAirfieldAttackEast = MENU_COALITION:New( coalition.side.BLUE, " East Region", MenuAirfieldAttack )
-    MenuAirfieldAttackCentral = MENU_COALITION:New( coalition.side.BLUE, " Central Region", MenuAirfieldAttack )
-    MenuAirfieldAttackWest = MENU_COALITION:New( coalition.side.BLUE, " West Region", MenuAirfieldAttack )
-	MenuFactoryAttack = MENU_COALITION:New(coalition.side.BLUE, " Factory Strike", MenuGroundTop )
-    MenuFactoryAttackEast = MENU_COALITION:New( coalition.side.BLUE, " East Region", MenuFactoryAttack )
-    MenuFactoryAttackCentral = MENU_COALITION:New( coalition.side.BLUE, " Central Region", MenuFactoryAttack )
-    MenuFactoryAttackWest = MENU_COALITION:New( coalition.side.BLUE, " West Region", MenuFactoryAttack )
-	MenuBridgeAttack = MENU_COALITION:New(coalition.side.BLUE, " Bridge Strike", MenuGroundTop )
-    MenuBridgeAttackEast = MENU_COALITION:New( coalition.side.BLUE, " East Region", MenuBridgeAttack )
-    MenuBridgeAttackCentral = MENU_COALITION:New( coalition.side.BLUE, " Central Region", MenuBridgeAttack )
-    MenuBridgeAttackWest = MENU_COALITION:New( coalition.side.BLUE, " West Region", MenuBridgeAttack )
+MenuGroundTop = MENU_COALITION:New( coalition.side.BLUE, "GROUND ATTACK MISSIONS" )
+	MenuCampAttack = MENU_COALITION:New( coalition.side.BLUE, "Camp Strike", MenuGroundTop )
+	MenuConvoyAttack = MENU_COALITION:New( coalition.side.BLUE, "Convoy Strike", MenuGroundTop )
+		MenuConvoyAttackWest = MENU_COALITION:New( coalition.side.BLUE, "West Region", MenuConvoyAttack )
+		MenuConvoyAttackCentral = MENU_COALITION:New( coalition.side.BLUE, "Central Region", MenuConvoyAttack )
+	MenuAirfieldAttack = MENU_COALITION:New(coalition.side.BLUE, "Airfield Strike", MenuGroundTop )
+    MenuAirfieldAttackEast = MENU_COALITION:New( coalition.side.BLUE, "East Region", MenuAirfieldAttack )
+    MenuAirfieldAttackCentral = MENU_COALITION:New( coalition.side.BLUE, "Central Region", MenuAirfieldAttack )
+    MenuAirfieldAttackWest = MENU_COALITION:New( coalition.side.BLUE, "West Region", MenuAirfieldAttack )
+	MenuFactoryAttack = MENU_COALITION:New(coalition.side.BLUE, "Factory Strike", MenuGroundTop )
+    MenuFactoryAttackEast = MENU_COALITION:New( coalition.side.BLUE, "East Region", MenuFactoryAttack )
+    MenuFactoryAttackCentral = MENU_COALITION:New( coalition.side.BLUE, "Central Region", MenuFactoryAttack )
+    MenuFactoryAttackWest = MENU_COALITION:New( coalition.side.BLUE, "West Region", MenuFactoryAttack )
+	MenuBridgeAttack = MENU_COALITION:New(coalition.side.BLUE, "Bridge Strike", MenuGroundTop )
+    MenuBridgeAttackEast = MENU_COALITION:New( coalition.side.BLUE, "East Region", MenuBridgeAttack )
+    MenuBridgeAttackCentral = MENU_COALITION:New( coalition.side.BLUE, "Central Region", MenuBridgeAttack )
+    MenuBridgeAttackWest = MENU_COALITION:New( coalition.side.BLUE, "West Region", MenuBridgeAttack )
 	--MenuCommunicationsAttack = MENU_COALITION:New(coalition.side.BLUE, " WiP Communications Strike", MenuGroundTop )
 	--MenuC2Attack = MENU_COALITION:New(coalition.side.BLUE, " WiP C2 Strike", MenuGroundTop )
 
@@ -89,25 +90,25 @@ end -- function
 
 --XXX ## Spawning CAP flights
 -- max 8x CAP aircraft can be spawned at each location
-function SpawnCap( _args ) -- spawnobject, spawntable { spawn, spawnzone, templates, patrolzone, aicapzone, engagerange }
-	_msg = "[JTF-1 MISSIONMAIN] SpawnCap()"
-	BASE:T({_msg, _args})
+-- function SpawnCap( _args ) -- spawnobject, spawntable { spawn, spawnzone, templates, patrolzone, aicapzone, engagerange }
+-- 	_msg = "[JTF-1 MISSIONMAIN] SpawnCap()"
+-- 	BASE:T({_msg, _args})
 	
-  local SpawnCapTable = _args[1]
+--   local SpawnCapTable = _args[1]
   
-  SpawnCapTable.spawn:InitLimit( 8,9999 ) -- max 8x cap sections alive   
-    :InitCleanUp( 60 ) -- remove aircraft that have landed
-    :OnSpawnGroup(
-      function ( SpawnGroup )
-        AICapZone = AI_CAP_ZONE:New( SpawnCapTable.patrolzone , 1000, 6000, 500, 600 )
-        AICapZone:SetControllable( SpawnGroup )
-        AICapZone:SetEngageZone( SpawnCapTable.engagezone ) -- AICapZone:SetEngageRange( SpawnCapTable.engagerange )
-        AICapZone:__Start( 1 ) -- start patrolling in the PatrolZone.
-      end
-    )
-    :SpawnInZone( SpawnCapTable.spawnzone, true, 3000, 6000 )
+--   SpawnCapTable.spawn:InitLimit( 8,9999 ) -- max 8x cap sections alive   
+--     :InitCleanUp( 60 ) -- remove aircraft that have landed
+--     :OnSpawnGroup(
+--       function ( SpawnGroup )
+--         AICapZone = AI_CAP_ZONE:New( SpawnCapTable.patrolzone , 1000, 6000, 500, 600 )
+--         AICapZone:SetControllable( SpawnGroup )
+--         AICapZone:SetEngageZone( SpawnCapTable.engagezone ) -- AICapZone:SetEngageRange( SpawnCapTable.engagerange )
+--         AICapZone:__Start( 1 ) -- start patrolling in the PatrolZone.
+--       end
+--     )
+--     :SpawnInZone( SpawnCapTable.spawnzone, true, 3000, 6000 )
     
-end --function
+-- end --function
   
 --XXX ## Spawning enemy convoys
 --  ( Central, West ) 
@@ -179,7 +180,7 @@ function SpawnConvoy ( _args ) -- ConvoyTemplates, SpawnHost {conv, dest, destzo
 		.. ConvoyThreats
 		.. "\n\n++++++++++++++++++++++++++++++++++++"
 		
-	MESSAGE:New( ConvoyAttackBrief, 30, "" ):ToAll()
+	MESSAGE:New( ConvoyAttackBrief, 5, "" ):ToAll()
 	
 		
 end --function  
@@ -212,7 +213,7 @@ function SpawnCamp( _args ) --TemplateTable, CampsTable [ loc, town, coords, is_
 			.. SpawnZoneRegion 
 			.. " region of the map has been reached. Please try a different one."
 			.. "\n\n++++++++++++++++++++++++++++++++++++"
-		MESSAGE:New( msg, 10, "" ):ToAll()
+		MESSAGE:New( msg, 5, "" ):ToAll()
 		return
 	end
 	
@@ -272,7 +273,7 @@ function SpawnCamp( _args ) --TemplateTable, CampsTable [ loc, town, coords, is_
 		.. "\n\nThreats:  INFANTRY, HEAVY MG, RPG, I/R SAM, LIGHT ARMOR, AAA"
 		.. "\n\n++++++++++++++++++++++++++++++++++++"
 		
-	MESSAGE:New( CampAttackBrief, 30, "" ):ToAll()
+	MESSAGE:New( CampAttackBrief, 5, "" ):ToAll()
 
 	SpawnCampsTable[ CampTableIndex ].is_open = false
 	
@@ -305,7 +306,7 @@ function SpawnStrikeAttack ( StrikeIndex ) -- "location name"
 			return
 		elseif AaaQty + ManpadQty > SmallZonesCount then
 			local msg = TableStrikeAttack[StrikeIndex].strikename .. " Error! AAA+MANPAD count exceedes small zones count"
-			MESSAGE:New ( msg, 10, "" ):ToAll()
+			MESSAGE:New ( msg, 5, "" ):ToAll()
 			return
 		end
 
@@ -435,7 +436,7 @@ function SpawnStrikeAttack ( StrikeIndex ) -- "location name"
 			.. TableStrikeAttack[StrikeIndex].strikethreats
 			.. "\n\n++++++++++++++++++++++++++++++++++++"
 			
-		MESSAGE:New ( strikeAttackBrief, 30, "" ):ToAll()
+		MESSAGE:New ( strikeAttackBrief, 5, "" ):ToAll()
 		
 	
 		TableStrikeAttack[StrikeIndex].is_open = false -- mark strike mission as active
@@ -453,7 +454,7 @@ function SpawnStrikeAttack ( StrikeIndex ) -- "location name"
 			.. " "
 			.. TableStrikeAttack[StrikeIndex].striketype
 			.. " strike attack mission is already active!"
-		MESSAGE:New( msg, 10, "" ):ToAll()
+		MESSAGE:New( msg, 5, "" ):ToAll()
 	end
 
 
@@ -490,13 +491,13 @@ function RemoveStrikeAttack ( StrikeIndex )
     msg = "\n\nThe " 
       .. TableStrikeAttack[StrikeIndex].strikename
       .. " strike attack mission has been removed."
-    MESSAGE:New( msg, 10, "" ):ToAll()
+    MESSAGE:New( msg, 5, "" ):ToAll()
 
 	else
 		msg = "\n\nThe " 
 			.. TableStrikeAttack[StrikeIndex].strikename
 			.. " strike attack mission is not active!"
-		MESSAGE:New( msg, 10, "" ):ToAll()
+		MESSAGE:New( msg, 5, "" ):ToAll()
 	end
 
 end --function
@@ -567,7 +568,7 @@ end --function
 
 
 ---------------------------------------------------
---- Define spawn zones with trigger zones in ME ---
+--- SUPPORT ZONES Define spawn zones with trigger zones in ME ---
 ---------------------------------------------------
 
 Zone_AAR_1 = ZONE:FindByName( "AAR_1_Zone" ) 
@@ -618,24 +619,24 @@ Spawn_Tanker_S3B_Texaco6:SetRecoveryAirboss( false )
 
 -- Rescue Helo Lincoln ---
 
-Spawn_Rescuehelo_Lincoln = RESCUEHELO:New(UNIT:FindByName("CSG_CarrierGrp_Lincoln"), "RescueHelo_Lincoln")
+-- Spawn_Rescuehelo_Lincoln = RESCUEHELO:New(UNIT:FindByName("CSG_CarrierGrp_Lincoln"), "RescueHelo_Lincoln")
 
-Spawn_Rescuehelo_Lincoln:SetTakeoffAir()
-Spawn_Rescuehelo_Lincoln:SetRespawnInAir()
-Spawn_Rescuehelo_Lincoln:SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Lincoln_03"))
-Spawn_Rescuehelo_Lincoln:SetRescueStopBoatOff()
-Spawn_Rescuehelo_Lincoln:SetOffsetZ(800)
---Spawn_Rescuehelo_Lincoln:Start()
+-- Spawn_Rescuehelo_Lincoln:SetTakeoffAir()
+-- Spawn_Rescuehelo_Lincoln:SetRespawnInAir()
+-- Spawn_Rescuehelo_Lincoln:SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Lincoln_03"))
+-- Spawn_Rescuehelo_Lincoln:SetRescueStopBoatOff()
+-- Spawn_Rescuehelo_Lincoln:SetOffsetZ(800)
+-- --Spawn_Rescuehelo_Lincoln:Start()
 
--- Rescue Helo Tarawa ---
+-- -- Rescue Helo Tarawa ---
 
-Spawn_Rescuehelo_Tarawa = RESCUEHELO:New(UNIT:FindByName("CSG_CarrierGrp_Tarawa"), "RescueHelo_Tarawa")
+-- Spawn_Rescuehelo_Tarawa = RESCUEHELO:New(UNIT:FindByName("CSG_CarrierGrp_Tarawa"), "RescueHelo_Tarawa")
 
-Spawn_Rescuehelo_Tarawa:SetTakeoffAir()
-Spawn_Rescuehelo_Tarawa:SetRespawnInAir()
-Spawn_Rescuehelo_Tarawa:SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Tarawa_03"))
-Spawn_Rescuehelo_Tarawa:SetRescueStopBoatOff()
-Spawn_Rescuehelo_Tarawa:SetOffsetZ(800)
+-- Spawn_Rescuehelo_Tarawa:SetTakeoffAir()
+-- Spawn_Rescuehelo_Tarawa:SetRespawnInAir()
+-- Spawn_Rescuehelo_Tarawa:SetHomeBase(AIRBASE:FindByName("CSG_CarrierGrp_Tarawa_03"))
+-- Spawn_Rescuehelo_Tarawa:SetRescueStopBoatOff()
+-- Spawn_Rescuehelo_Tarawa:SetOffsetZ(800)
 --Spawn_Rescuehelo_Tarawa:Start()
 
 -----------------------
@@ -696,6 +697,8 @@ Spawn_Tanker_C130_Arco2:SetCallsign(CALLSIGN.Tanker.Arco, 2)
 -- XXX BEGIN RANGE SECTION
 
 
+
+-- STATIC RANGES
 
 ------------------
 --- GG33 Range ---
@@ -784,93 +787,93 @@ Range_NL24:Start()
 -- On Spawning, the host will be replaced with a goup selected radomly from a list of templates
 
 
------------------------
---- CAP spawn stubs ---
------------------------
+-- -----------------------
+-- --- CAP spawn stubs ---
+-- -----------------------
 
-MaykopCapSpawn = SPAWN:New( "MaykopCap" )
-BeslanCapSpawn = SPAWN:New( "BeslanCap" )
+-- MaykopCapSpawn = SPAWN:New( "MaykopCap" )
+-- BeslanCapSpawn = SPAWN:New( "BeslanCap" )
 
------------------------
---- CAP spawn zones ---
------------------------
+-- -----------------------
+-- --- CAP spawn zones ---
+-- -----------------------
 
-MaykopCapSpawnZone = ZONE:FindByName( "ZONE_MaykopCapSpawn" )
-BeslanCapSpawnZone = ZONE:FindByName( "ZONE_BeslanCapSpawn" )
+-- MaykopCapSpawnZone = ZONE:FindByName( "ZONE_MaykopCapSpawn" )
+-- BeslanCapSpawnZone = ZONE:FindByName( "ZONE_BeslanCapSpawn" )
 
----------------------------
---- CAP spawn templates ---
----------------------------
+-- ---------------------------
+-- --- CAP spawn templates ---
+-- ---------------------------
 
-CapTemplates = {
-	"Russia_Mig29",
-	"Russia_Mig21",
-	"Russia_Su27"
-}
+-- CapTemplates = {
+-- 	"Russia_Mig29",
+-- 	"Russia_Mig21",
+-- 	"Russia_Su27"
+-- }
 
------------------------------------------
---- AICapzone patrol and engage zones ---
------------------------------------------
+-- -----------------------------------------
+-- --- AICapzone patrol and engage zones ---
+-- -----------------------------------------
 
-WestCapPatrolGroup = GROUP:FindByName( "PolyPatrolWest" )
-WestCapPatrolZone = ZONE_POLYGON:New( "ZONE_PatrolWest", WestCapPatrolGroup )
-WestCapEngageGroup = GROUP:FindByName( "PolyEngageWest" )
-WestCapEngageZone = ZONE_POLYGON:New( "ZONE_EngageWest", WestCapEngageGroup )
+-- WestCapPatrolGroup = GROUP:FindByName( "PolyPatrolWest" )
+-- WestCapPatrolZone = ZONE_POLYGON:New( "ZONE_PatrolWest", WestCapPatrolGroup )
+-- WestCapEngageGroup = GROUP:FindByName( "PolyEngageWest" )
+-- WestCapEngageZone = ZONE_POLYGON:New( "ZONE_EngageWest", WestCapEngageGroup )
 
-EastCapPatrolGroup = GROUP:FindByName( "PolyPatrolEast" )
-EastCapPatrolZone = ZONE_POLYGON:New( "ZONE_PatrolEast", EastCapPatrolGroup )
-EastCapEngageGroup = GROUP:FindByName( "PolyEngageEast" )
-EastCapEngageZone = ZONE_POLYGON:New( "ZONE_EngageEast", EastCapEngageGroup )
+-- EastCapPatrolGroup = GROUP:FindByName( "PolyPatrolEast" )
+-- EastCapPatrolZone = ZONE_POLYGON:New( "ZONE_PatrolEast", EastCapPatrolGroup )
+-- EastCapEngageGroup = GROUP:FindByName( "PolyEngageEast" )
+-- EastCapEngageZone = ZONE_POLYGON:New( "ZONE_EngageEast", EastCapEngageGroup )
 
-------------------------------------------------------
---- table containing CAP spawn config per location ---
-------------------------------------------------------
+-- ------------------------------------------------------
+-- --- table containing CAP spawn config per location ---
+-- ------------------------------------------------------
 
-CapTable = { -- spawn location, { spawn, spawnzone, templates, patrolzone, engagerange } ...
-  maykop = { 
-    spawn = MaykopCapSpawn, 
-    spawnzone = MaykopCapSpawnZone, 
-    templates = CapTemplates, 
-    patrolzone = WestCapPatrolZone, 
-    engagerange = 60000,
-    engagezone = WestCapEngageZone,
-  },
-  beslan = { 
-    spawn = BeslanCapSpawn, 
-    spawnzone = BeslanCapSpawnZone, 
-    templates = CapTemplates, 
-    patrolzone = EastCapPatrolZone, 
-    engagerange = 60000,
-    engagezone = EastCapEngageZone,
-  },
-}
+-- CapTable = { -- spawn location, { spawn, spawnzone, templates, patrolzone, engagerange } ...
+--   maykop = { 
+--     spawn = MaykopCapSpawn, 
+--     spawnzone = MaykopCapSpawnZone, 
+--     templates = CapTemplates, 
+--     patrolzone = WestCapPatrolZone, 
+--     engagerange = 60000,
+--     engagezone = WestCapEngageZone,
+--   },
+--   beslan = { 
+--     spawn = BeslanCapSpawn, 
+--     spawnzone = BeslanCapSpawnZone, 
+--     templates = CapTemplates, 
+--     patrolzone = EastCapPatrolZone, 
+--     engagerange = 60000,
+--     engagezone = EastCapEngageZone,
+--   },
+-- }
 
-------------------
---- Maykop CAP ---
-------------------
+-- ------------------
+-- --- Maykop CAP ---
+-- ------------------
 
-_maykop_args = { -- args passed to spawn menu option
-	CapTable.maykop,
-}
+-- _maykop_args = { -- args passed to spawn menu option
+-- 	CapTable.maykop,
+-- }
 
-CmdMaykopCap = MENU_COALITION_COMMAND:New( coalition.side.BLUE,"Spawn Maykop CAP", MenuCapMaykop, SpawnCap, _maykop_args ) -- Spawn CAP flight
-CmdMaykopCapRemove = MENU_COALITION_COMMAND:New( coalition.side.BLUE,"Remove Oldest Maykop CAP", MenuCapMaykop, RemoveSpawn, _maykop_args ) -- Remove the oldest CAP flight for location
+-- CmdMaykopCap = MENU_COALITION_COMMAND:New( coalition.side.BLUE,"Spawn Maykop CAP", MenuCapMaykop, SpawnCap, _maykop_args ) -- Spawn CAP flight
+-- CmdMaykopCapRemove = MENU_COALITION_COMMAND:New( coalition.side.BLUE,"Remove Oldest Maykop CAP", MenuCapMaykop, RemoveSpawn, _maykop_args ) -- Remove the oldest CAP flight for location
 
-------------------
---- Beslan CAP ---
-------------------
+-- ------------------
+-- --- Beslan CAP ---
+-- ------------------
 
-_beslan_args = { 
-	CapTable.beslan,
-}
+-- _beslan_args = { 
+-- 	CapTable.beslan,
+-- }
 
-CmdBeslanCap = MENU_COALITION_COMMAND:New( coalition.side.BLUE,"Spawn Beslan CAP", MenuCapBeslan, SpawnCap, _beslan_args ) 
-CmdBeslanCapRemove = MENU_COALITION_COMMAND:New( coalition.side.BLUE,"Remove oldest Beslan CAP", MenuCapBeslan, RemoveSpawn, _beslan_args )
-
-
+-- CmdBeslanCap = MENU_COALITION_COMMAND:New( coalition.side.BLUE,"Spawn Beslan CAP", MenuCapBeslan, SpawnCap, _beslan_args ) 
+-- CmdBeslanCapRemove = MENU_COALITION_COMMAND:New( coalition.side.BLUE,"Remove oldest Beslan CAP", MenuCapBeslan, RemoveSpawn, _beslan_args )
 
 
--- END CAP SECTION
+
+
+-- -- END CAP SECTION
 -- BEGIN CAMP ATTACK SECTION
 
 
@@ -1070,7 +1073,7 @@ _east_args = {
 	"East"
 }
 
-cmdCampAttackEast = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Eastern Zone",MenuCampAttack,SpawnCamp, _east_args )
+cmdCampAttackEast = MENU_COALITION_COMMAND:New( coalition.side.BLUE,"Eastern Zone",MenuCampAttack,SpawnCamp, _east_args )
 
 -- Central Zones
 _central_args = {
@@ -1078,7 +1081,7 @@ _central_args = {
 	TableCamps.central,
 	"Central"
 }
-cmdCampAttackCentral = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Central Zone",MenuCampAttack,SpawnCamp, _central_args )
+cmdCampAttackCentral = MENU_COALITION_COMMAND:New( coalition.side.BLUE,"Central Zone",MenuCampAttack,SpawnCamp, _central_args )
 
 -- West Zones
  _West_args = {
@@ -1086,7 +1089,7 @@ cmdCampAttackCentral = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Central
 	TableCamps.west,
 	"West"
 }
-cmdCampAttackWest = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Western Zone",MenuCampAttack,SpawnCamp, _West_args )
+cmdCampAttackWest = MENU_COALITION_COMMAND:New( coalition.side.BLUE,"Western Zone",MenuCampAttack,SpawnCamp, _West_args )
 
 -- TODO: Remove oldest Camp Attack mission
 _campattackremove_args = { 
@@ -1146,7 +1149,7 @@ Spawn_Convoy_AbleSentry = SPAWN:New( "CONVOY_Hard_Able Sentry" )
     
 
 
-cmdConvoyAbleSentryReset = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Able Sentry Reset",MenuConvoyAttack, ResetAbleSentry )
+cmdConvoyAbleSentryReset = MENU_COALITION_COMMAND:New( coalition.side.BLUE,"Able Sentry Reset",MenuConvoyAttack, ResetAbleSentry )
 
 ---------------------------------
 --- On-demand convoy missions ---
@@ -1238,7 +1241,7 @@ _hard_central_args = {
 	HardType,
 	HardThreats
 }
-cmdConvoyAttackHardCentral = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Armoured Convoy",MenuConvoyAttackCentral, SpawnConvoy, _hard_central_args )
+cmdConvoyAttackHardCentral = MENU_COALITION_COMMAND:New( coalition.side.BLUE,"Armoured Convoy",MenuConvoyAttackCentral, SpawnConvoy, _hard_central_args )
 
 _soft_central_args = {
 	ConvoySoftTemplates,
@@ -1246,7 +1249,7 @@ _soft_central_args = {
 	SoftType,
 	SoftThreats
 }
-cmdConvoyAttackSoftCentral = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Supply Convoy",MenuConvoyAttackCentral, SpawnConvoy, _soft_central_args )
+cmdConvoyAttackSoftCentral = MENU_COALITION_COMMAND:New( coalition.side.BLUE,"Supply Convoy",MenuConvoyAttackCentral, SpawnConvoy, _soft_central_args )
 
 -- ## West Zones
 _hard_west_args = {
@@ -1255,7 +1258,7 @@ _hard_west_args = {
 	HardType,
 	HardThreats
 }
-cmdConvoyAttackHardWest = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Armoured Convoy",MenuConvoyAttackWest, SpawnConvoy, _hard_west_args )
+cmdConvoyAttackHardWest = MENU_COALITION_COMMAND:New( coalition.side.BLUE,"Armoured Convoy",MenuConvoyAttackWest, SpawnConvoy, _hard_west_args )
 
 _soft_west_args = {
 	ConvoySoftTemplates,
@@ -1263,7 +1266,7 @@ _soft_west_args = {
 	SoftType,
 	SoftThreats
 }
-cmdConvoyAttackSoftWest = MENU_COALITION_COMMAND:New( coalition.side.BLUE," Supply Convoy",MenuConvoyAttackWest, SpawnConvoy, _soft_west_args )
+cmdConvoyAttackSoftWest = MENU_COALITION_COMMAND:New( coalition.side.BLUE,"Supply Convoy",MenuConvoyAttackWest, SpawnConvoy, _soft_west_args )
 
 
 
