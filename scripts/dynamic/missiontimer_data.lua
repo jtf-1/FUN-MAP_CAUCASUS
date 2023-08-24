@@ -10,9 +10,10 @@ env.info( "[JTF-1] missiontimer_data" )
 
 -- Error prevention. Create empty container if module core lua not loaded.
 if not MISSIONTIMER then 
-	_msg = "[JTF-1 MISSIONTIMER] CORE FILE NOT LOADED!"
-	BASE:E(_msg)
 	MISSIONTIMER = {}
+	MISSIONTIMER.traceTitle = "[JTF-1 MISSIONTIMER] "
+	_msg = MISSIONTIMER.traceTitle .. "CORE FILE NOT LOADED!"
+	BASE:E(_msg)
 end
 
 -- table of values for timer shedule in this miz
@@ -23,5 +24,7 @@ MISSIONTIMER.useSRS = true -- set to false to disable use of SRS for this module
 
 -- start the mission timer
 if MISSIONTIMER.Start then
+	_msg = MISSIONTIMER.traceTitle .. "Call Start()"
+	BASE:T(_msg)
 	MISSIONTIMER:Start()  
 end
