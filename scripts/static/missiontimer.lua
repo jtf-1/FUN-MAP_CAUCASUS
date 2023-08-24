@@ -10,15 +10,16 @@ env.info( "[JTF-1] missiontimer" )
 -- value (defined in script header). Sending missionRestart text will trigger restarting the
 -- current mission via jtf1-hooks.lua.
 --
+MISSIONTIMER = {}
+MISSIONTIMER.traceTitle = "[JTF-1 MISSIONTIMER] "
 
-MISSIONTIMER = {
-	msgWarning = {}, -- schedule container
-	missionRestart = ( JTF1.missionRestart and JTF1.missionRestart or "ADMIN9999" ), -- Message to trigger mission restart via jtf1-hooks
-	durationHrs = 11, -- Mission run time in HOURS
-	msgSchedule = {60, 30, 10, 5}, -- Schedule for mission restart warning messages. Time in minutes.
-	restartDelay =  4, -- time in minutes to delay restart if active clients are present.
-	useSRS = true, -- default flag to determine if htis module should send messages through SRS.
-}
+MISSIONTIMER.msgWarning = {} -- schedule container
+MISSIONTIMER.missionRestart = ( JTF1.missionRestart and JTF1.missionRestart or "ADMIN9999" ) -- Message to trigger mission restart via jtf1-hooks
+MISSIONTIMER.durationHrs = 11 -- Mission run time in HOURS
+MISSIONTIMER.msgSchedule = {60, 30, 10, 5} -- Schedule for mission restart warning messages. Time in minutes.
+MISSIONTIMER.restartDelay =  4 -- time in minutes to delay restart if active clients are present.
+MISSIONTIMER.useSRS = true -- default flag to determine if htis module should send messages through SRS.
+
 
 -- MISSIONTIMER.defaults = {
 --   durationHrs = 11, -- Mission run time in HOURS
