@@ -8,21 +8,24 @@ env.info( "[JTF-1] ablesentry" )
 -- On reaching Mtskehta it will respawn at the start of the route.
 
 ABLESENTRY = {}
+ABLESENTRY.traceTitle = "[JTF-1 ABLESENTRY] "
+ABLESENTRY.menu = {}
+ABLESENTRY.zoneName = "ConvoyObjectiveAbleSentry"
 
 function ABLESENTRY:Start()
-    _msg = "[JTF-1 ABLESENTRY] Start()"
+    _msg = self.traceTitle .. "Start()"
     BASE:T(_msg)
 	
-    ABLESENTRY.Zone_ConvoyObjectiveAbleSentry = ZONE:FindByName( "ConvoyObjectiveAbleSentry" ) 
+    self.zone = ZONE:FindByName( self.zoneName ) 
 
-	ABLESENTRY.Spawn_Convoy_AbleSentry = SPAWN:New( "CONVOY_Hard_Able Sentry" )
+	self.spawn = SPAWN:New( "CONVOY_Hard_Able Sentry" )
 		:InitLimit( 20, 0 )
 		:OnSpawnGroup(
 			function ( SpawnGroup )
-				-- SpawnIndex_Convoy_AbleSentry = Spawn_Convoy_AbleSentry:GetSpawnIndexFromGroup( SpawnGroup )
+				-- SpawnIndex_Convoy_AbleSentry = spawn:GetSpawnIndexFromGroup( SpawnGroup )
 				checkConvoyAbleSentry = SCHEDULER:New( SpawnGroup, 
 				  function()
-					  if SpawnGroup:IsPartlyInZone( ABLESENTRY.Zone_ConvoyObjectiveAbleSentry ) then
+					  if SpawnGroup:IsPartlyInZone( ABLESENTRY.zone ) then
 						  ABLESENTRY:Reset()
 					  end
 				  end,
@@ -31,7 +34,7 @@ function ABLESENTRY:Start()
 				mapMarkConvoyAbleSentry = SCHEDULER:New( SpawnGroup, 
 					function()
 						if SpawnGroup.mapmarkid then
-							COORDINATE:RemoveMark( SpawnGroup.mapmarkid ) -- Spawn_Convoy_AbleSentry.mapmarkid
+							COORDINATE:RemoveMark( SpawnGroup.mapmarkid ) -- spawn.mapmarkid
 						end    
 						local coordsAbleSentry = SpawnGroup:GetCoordinate()
 						local labelAbleSentry = "Able Sentry Convoy\nMost recent reported postion\n" .. coordsAbleSentry:ToStringLLDMS(_SETTINGS:SetLL_Accuracy(0)) .. "\n" .. coordsAbleSentry:ToStringLLDDM(_SETTINGS:SetLL_Accuracy(3))
@@ -44,15 +47,15 @@ function ABLESENTRY:Start()
 			)
 		:SpawnScheduled( 60 , .1 )
 	
-	local cmdConvoyAbleSentryReset = MENU_COALITION_COMMAND:New( coalition.side.BLUE,"Able Sentry Reset",MenuConvoyAttack, ABLESENTRY.Reset )
+	self.menu = MENU_MISSION_COMMAND:New( "Able Sentry Reset",nil, self.Reset, self )
 	
 end
 
 function ABLESENTRY:Reset()
-    _msg = "[JTF-1 ABLESENTRY] Reset()"
+    _msg = self.traceTitle .. "Reset()"
     BASE:T(_msg)
 
-    ABLESENTRY.Spawn_Convoy_AbleSentry:ReSpawn() -- SpawnIndex_Convoy_AbleSentry
+    self.spawn:ReSpawn() -- SpawnIndex_Convoy_AbleSentry
 end -- function
 
 ABLESENTRY:Start()
