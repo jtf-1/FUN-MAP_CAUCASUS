@@ -10,10 +10,11 @@ env.info( "[JTF-1] staticranges_data" )
 
 -- Error prevention. Create empty container if module core lua not loaded.
 if not STATICRANGES then 
-	_msg = "[JTF-1 STATICRANGES] CORE FILE NOT LOADED!"
-	BASE:E(_msg)
 	STATICRANGES = {}
-end
+	STATICRANGES.traceTitle = "[JTF-1 STATICRANGES] "
+	_msg = self.traceTitle .. "CORE FILE NOT LOADED!"
+	BASE:E(_msg)
+	end
 
 -- These values will overrides the default values in staticranges.lua
 STATICRANGES.strafeMaxAlt             = 1530 -- [5000ft] in metres. Height of strafe box.
@@ -95,5 +96,8 @@ STATICRANGES.Ranges = {
   
 -- Start the STATICRANGES module
 if STATICRANGES.Start then
+	_msg = STATICRANGES.traceTitle .. "Call Start()"
+	BASE:T(_msg)
+
 	STATICRANGES:Start()
 end
