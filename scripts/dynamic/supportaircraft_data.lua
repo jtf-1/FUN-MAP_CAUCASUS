@@ -15,9 +15,10 @@ env.info( "[JTF-1] supportaircraft_data" )
 
 -- Error prevention. Create empty container if SUPPORTAIRCRAFT.LUA is not loaded or has failed.
 if not SUPPORTAC then 
-	_msg = "[JTF-1 SUPPORTAC] CORE FILE NOT LOADED!"
-	BASE:E(_msg)
 	SUPPORTAC = {}
+	SUPPORTAC.traceTitle = "[JTF-1 SUPPORTAC] "
+	_msg = SUPPORTAC.traceTitle .. "CORE FILE NOT LOADED!"
+	BASE:E(_msg)
 end
 
 SUPPORTAC.useSRS = true
@@ -143,7 +144,7 @@ SUPPORTAC.mission = {
 
 -- call the function that initialises the SUPPORTAC module
 if SUPPORTAC.Start ~= nil then
-  _msg = "[JTF-1 SUPPORTAC] SUPPORTAIRCRAFT_DATA - call SUPPORTAC:Start()."
+  _msg = SUPPORTAC.traceTitle .. "SUPPORTAIRCRAFT_DATA - call SUPPORTAC:Start()."
   BASE:I(_msg)
   SUPPORTAC:Start()
 end
