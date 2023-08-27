@@ -725,19 +725,12 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_SochiStrike",
 		striketargets = {
-			statics = {            
-				"SOCHI_STATIC_01",
-				"SOCHI_STATIC_02",
-				"SOCHI_STATIC_03",
-				"SOCHI_STATIC_04",
-				"SOCHI_STATIC_05",
-				"SOCHI_STATIC_06",
-				"SOCHI_STATIC_07",
-				"SOCHI_STATIC_08",
-				"SOCHI_STATIC_09",
-				"SOCHI_STATIC_10",
+			statics = {},
+			groups = {
+				"TARGET_SOCHI_01",
+				"TARGET_SOCHI_02",
+				"TARGET_SOCHI_03",
 			},
-			groups = {},
 		},
 		zones = {
 			medium = {
@@ -779,26 +772,16 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
         strikeregion = "West",                            
 		strikename = "Maykop",
 		strikeivo = "AFB",
-		strikecoords = "44  40  54 N | 040  02  08 E",
 		strikemission = "CRATER RUNWAY AND ATTRITE AVIATION ASSETS ON THE GROUND",
 		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_MaykopStrike",
 		striketargets = {
-			statics = {            
-				"MAYKOP_STATIC_01",
-				"MAYKOP_STATIC_02",
-				"MAYKOP_STATIC_03",
-				"MAYKOP_STATIC_04",
-				"MAYKOP_STATIC_05",
-				"MAYKOP_STATIC_06",
-				"MAYKOP_STATIC_07",
-				"MAYKOP_STATIC_08",
-				"MAYKOP_STATIC_09",
-				"MAYKOP_STATIC_10",
-				"MAYKOP_STATIC_11",
-				"MAYKOP_STATIC_12",
+			statics = {},
+			groups = {
+				"TARGET_MAYKOP-1",
+				"TARGET_MAYKOP-2",
+				"TARGET_MAYKOP-3",
 			},
-			groups = {},
 		},
 		zones = {
 			medium = {
@@ -849,12 +832,6 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 			groups = {
 				"TARGET_GUDAUTA_01",
 				"TARGET_GUDAUTA_02",
-				"TARGET_GUDAUTA_03",
-				"TARGET_GUDAUTA_04",
-				"TARGET_GUDAUTA_05",
-				"TARGET_GUDAUTA_06",
-				"TARGET_GUDAUTA_07",
-				"TARGET_GUDAUTA_08",
 			},
 		},
 		zones = {
@@ -891,7 +868,107 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 		},
 		spawnobjects = {},
 		is_open = true,
-	},-- End Maykop
+	},-- End Gudauta
+	{ -- Sukhumi Airfield-West
+		striketype = "Airfield",
+        strikeregion = "West",                            
+		strikename = "Sukhumi",
+		strikeivo = "AFB",
+		strikemission = "CRATER RUNWAY AND ATTRITE AVIATION ASSETS ON THE GROUND",
+		strikezone = "ZONE_Strike_Sukhumi",
+		striketargets = {
+            statics= {},
+			groups = {
+				"TARGET_Sukhumi-1",
+				"TARGET_Sukhumi-2",
+				"TARGET_Sukhumi-3",
+			},
+		},
+		zones = {
+			medium = {
+				{ class = "medium", loc = "ZONE_Med_Sukhumi-1", is_open = true },
+				{ class = "medium", loc = "ZONE_Med_Sukhumi-2", is_open = true },
+				{ class = "medium", loc = "ZONE_Med_Sukhumi-3", is_open = true },
+				{ class = "medium", loc = "ZONE_Med_Sukhumi-4", is_open = true },
+				{ class = "medium", loc = "ZONE_Med_Sukhumi-5", is_open = true },
+				{ class = "medium", loc = "ZONE_Med_Sukhumi-6", is_open = true },
+				{ class = "medium", loc = "ZONE_Med_Sukhumi-7", is_open = true },
+				{ class = "medium", loc = "ZONE_Med_Sukhumi-8", is_open = true },
+				{ class = "medium", loc = "ZONE_Med_Sukhumi-9", is_open = true },
+				{ class = "medium", loc = "ZONE_Med_Sukhumi-10", is_open = true },
+			},
+			small = {
+				{ class = "small", loc = "ZONE_Small_Sukhumi-1", is_open = true },
+				{ class = "small", loc = "ZONE_Small_Sukhumi-2", is_open = true },
+				{ class = "small", loc = "ZONE_Small_Sukhumi-3", is_open = true },
+				{ class = "small", loc = "ZONE_Small_Sukhumi-4", is_open = true },
+				{ class = "small", loc = "ZONE_Small_Sukhumi-5", is_open = true },
+				{ class = "small", loc = "ZONE_Small_Sukhumi-6", is_open = true },
+				{ class = "small", loc = "ZONE_Small_Sukhumi-7", is_open = true },
+				{ class = "small", loc = "ZONE_Small_Sukhumi-8", is_open = true },
+				{ class = "small", loc = "ZONE_Small_Sukhumi-9", is_open = true },
+				{ class = "small", loc = "ZONE_Small_Sukhumi-10", is_open = true },
+			},
+		},
+		defassets = {
+			sam = 2,
+			aaa = 4,
+			manpad = 1,
+			armour = 3,
+		},
+		spawnobjects = {},
+		is_open = true,
+	},-- End Sukhumi
+	{ -- Gelendzhik Airfield-North
+		striketype = "Airfield",
+        strikeregion = "North",                            
+		strikename = "Gelendzhik",
+		strikeivo = "AFB",
+		strikemission = "CRATER RUNWAY AND ATTRITE AVIATION ASSETS ON THE GROUND",
+		strikezone = "ZONE_Strike_Gelendzhik",
+		striketargets = {
+            statics= {},
+			groups = {
+				"TARGET_Gelendzhik-1",
+				"TARGET_Gelendzhik-2",
+				"TARGET_Gelendzhik-3",
+			},
+		},
+		zones = {
+			medium = {
+				{ class = "medium", loc = "ZONE_Med_Gelendzhik-1", is_open = true },
+				{ class = "medium", loc = "ZONE_Med_Gelendzhik-2", is_open = true },
+				{ class = "medium", loc = "ZONE_Med_Gelendzhik-3", is_open = true },
+				{ class = "medium", loc = "ZONE_Med_Gelendzhik-4", is_open = true },
+				{ class = "medium", loc = "ZONE_Med_Gelendzhik-5", is_open = true },
+				{ class = "medium", loc = "ZONE_Med_Gelendzhik-6", is_open = true },
+				{ class = "medium", loc = "ZONE_Med_Gelendzhik-7", is_open = true },
+				{ class = "medium", loc = "ZONE_Med_Gelendzhik-8", is_open = true },
+				{ class = "medium", loc = "ZONE_Med_Gelendzhik-9", is_open = true },
+				{ class = "medium", loc = "ZONE_Med_Gelendzhik-10", is_open = true },
+			},
+			small = {
+				{ class = "small", loc = "ZONE_Small_Gelendzhik-1", is_open = true },
+				{ class = "small", loc = "ZONE_Small_Gelendzhik-2", is_open = true },
+				{ class = "small", loc = "ZONE_Small_Gelendzhik-3", is_open = true },
+				{ class = "small", loc = "ZONE_Small_Gelendzhik-4", is_open = true },
+				{ class = "small", loc = "ZONE_Small_Gelendzhik-5", is_open = true },
+				{ class = "small", loc = "ZONE_Small_Gelendzhik-6", is_open = true },
+				{ class = "small", loc = "ZONE_Small_Gelendzhik-7", is_open = true },
+				{ class = "small", loc = "ZONE_Small_Gelendzhik-8", is_open = true },
+				{ class = "small", loc = "ZONE_Small_Gelendzhik-9", is_open = true },
+				{ class = "small", loc = "ZONE_Small_Gelendzhik-10", is_open = true },
+			},
+		},
+		defassets = {
+			sam = 2,
+			aaa = 4,
+			manpad = 2,
+			armour = 3,
+		},
+		spawnobjects = {},
+		is_open = true,
+	},-- End Sukhumi
 	{ -- LN83 Factory-Central
 		striketype = "Factory",
         strikeregion = "Central",                            
@@ -1195,11 +1272,160 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 		spawnobjects = {},
 		is_open = true,
 	},-- End GJ21
+	{ -- Camp-East
+		striketype = "Camp",
+        strikeregion = "East",                            
+		strikename = "Generate",
+		strikeivo = "Mission",
+		strikemission = "FIND AND DESTROY INSURGENT CAMP",
+		striketargets = {
+			{ 
+				strikezone = "ZONE_Camp-1", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-2", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-3", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-4", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-5", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-6", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-7", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-8", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-9", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-10", 
+				is_open = true 
+			},
+		},
+	},-- End Camp-East
+	{ -- Camp-Central
+		striketype = "Camp",
+        strikeregion = "Central",                            
+		strikename = "Generate",
+		strikeivo = "Mission",
+		strikemission = "FIND AND DESTROY INSURGENT CAMP",
+		striketargets = {
+			{ 
+				strikezone = "ZONE_Camp-11", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-12", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-13", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-14", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-15", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-16", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-17", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-18", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-19", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-20", 
+				is_open = true 
+			},
+		},
+	},-- End Camp-East
+	{ -- Camp-West
+		striketype = "Camp",
+        strikeregion = "West",                            
+		strikename = "Generate",
+		strikeivo = "Mission",
+		strikemission = "FIND AND DESTROY INSURGENT CAMP",
+		striketargets = {
+			{ 
+				strikezone = "ZONE_Camp-21", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-22", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-23", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-24", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-25", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-26", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-27", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-28", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-29", 
+				is_open = true 
+			},
+			{ 
+				strikezone = "ZONE_Camp-30", 
+				is_open = true 
+			},
+		},
+	},-- End Camp-West
 }
 
 
 --- strike Defence spawn templates ---
-TableDefTemplates = {
+-- if late activated templates are used in miz,
+-- list them here. Otherwise, built-in templates will be used
+MISSIONSTRIKE.defenceTemplates = {
 	sam = {
 		"SAM_Sa3Battery",
 		"SAM_Sa6Battery",
@@ -1222,210 +1448,16 @@ TableDefTemplates = {
 	},
 }
 
---- strike Static Object spawn templates ---
-TableStaticTemplates = {
-	target = {
-		"FACTORY_Workshop",
-		"FACTORY_Techcombine",
-	},
-	buildings = {
-		
-	},
-}
-
--- END STRIKE ATTACK DATA
-
-
---------------------------------
---- Camp Strike Mission Data ---
---------------------------------
-
---- camp spawns per location
-TableCamps = { -- map portion, { camp zone, nearest town, Lat Long, spawned status } ...
-	east = {
-		{ 
-			loc = ZONE:New("ZoneCampEast01"), 
-			town = "Kvemo-Sba", 
-			coords = "42  34  02 N | 044  10  20 E", 
-			is_open = true 
-		},
-		{ 
-			loc = ZONE:New("ZoneCampEast02"), 
-			town = "Kvemo-Roka", 
-			coords = "42  32  48 N | 044  07  01 E", 
-			is_open = true 
-		}, 
-		{ 
-			loc = ZONE:New("ZoneCampEast03"), 
-			town = "Edisa", 
-			coords = "42  32  21 N | 044  12  10 E", 
-			is_open = true 
-		},
-		{ 
-			loc = ZONE:New("ZoneCampEast04"), 
-			town = "Kvemo-Khoshka", 
-			coords = "42  27  07 N | 044  03  25 E", 
-			is_open = true
-		},
-		{ 
-			loc = ZONE:New("ZoneCampEast05"), 
-			town = "Elbakita", 
-			coords = "42  25  24 N | 044  00  40 E", 
-			is_open = true
-		},
-		{ 
-			loc = ZONE:New("ZoneCampEast06"), 
-			town = "Tsru", 
-			coords = "42  22  50 N | 044  01  55 E", 
-			is_open = true
-		},
-		{ 
-			loc = ZONE:New("ZoneCampEast07"), 
-			town = "Didi-Gupta", 
-			coords = "42  21 11 N | 043  54  18 E", 
-			is_open = true
-		},
-		{ 
-			loc = ZONE:New("ZoneCampEast08"), 
-			town = "Kekhvi", 
-			coords = "42  19  10 N | 043  56  09 E", 
-			is_open = true
-		}
-	},
-	central = {
-		{ 
-			loc = ZONE:New("ZoneCampCentral01"), 
-			town = "Oni", 
-			coords = "42  35  53 N | 043  27  13 E", 
-			is_open = true
-		},
-		{ 
-			loc = ZONE:New("ZoneCampCentral02"), 
-			town = "Kvashkhieti", 
-			coords = "42  32  49 N | 043  23  10 E", 
-			is_open = true
-		}, 
-		{ 
-			loc = ZONE:New("ZoneCampCentral03"), 
-			town = "Haristvala", 
-			coords = "42  23  46 N | 043  02  27 E", 
-			is_open = true
-		},
-		{ 
-			loc = ZONE:New("ZoneCampCentral04"), 
-			town = "Ahalsopeli", 
-			coords = "42  18  11 N | 042  56  57 E", 
-			is_open = true
-		},
-		{ 
-			loc = ZONE:New("ZoneCampCentral05"), 
-			town = "Mohva", 
-			coords = "42  22  35 N | 043  21  24 E", 
-			is_open = true
-		},
-		{ 
-			loc = ZONE:New("ZoneCampCentral06"), 
-			town = "Sadmeli", 
-			coords = "42  32  05 N | 043  06  36 E", 
-			is_open = true
-		},
-		{ 
-			loc = ZONE:New("ZoneCampCentral07"), 
-			town = "Zogishi", 
-			coords = "42  33  36 N | 042  51  18 E", 
-			is_open = true
-		},
-		{ 
-			loc = ZONE:New("ZoneCampCentral08"), 
-			town = "Namohvani", 
-			coords = "42  41  39 N | 042  41  39 E", 
-			is_open = true
-		},
-	},
-	west = {
-		{ 
-			loc = ZONE:New("ZoneCampWest01"), 
-			town = "Dzhvari", 
-			coords = "42  43  01 N | 042  02  08 E", 
-			is_open = true
-		},
-		{ 
-			loc = ZONE:New("ZoneCampWest02"), 
-			town = "Tkvarcheli", 
-			coords = "42  51  45 N | 041  46  29 E", 
-			is_open = true
-		}, 
-		{ 
-			loc = ZONE:New("ZoneCampWest03"), 
-			town = "Zemo-Azhara", 
-			coords = "43 06 26 N | 041  44 04 E", 
-			is_open = true
-		},
-		{ 
-			loc = ZONE:New("ZoneCampWest04"), 
-			town = "Amtkel", 
-			coords = "43  02  05 N | 041  27  16 E", 
-			is_open = true
-		},
-		{ 
-			loc = ZONE:New("ZoneCampWest05"), 
-			town = "Gora Mukhursha", 
-			coords = "43  19  16 N | 040  52  24 E", 
-			is_open = true
-		},
-		{ 
-			loc = ZONE:New("ZoneCampWest06"), 
-			town = "Ozero Ritsa", 
-			coords = "43  28  17 N | 040  32  01 E", 
-			is_open = true
-		},
-		{ 
-			loc = ZONE:New("ZoneCampWest07"), 
-			town = "Salhino", 
-			coords = "43  31  37 N | 040  05  31 E", 
-			is_open = true
-		},
-		{ 
-			loc = ZONE:New("ZoneCampWest08"), 
-			town = "Leselidze", 
-			coords = "43  23  56 N | 040  00  35 E", 
-			is_open = true
-		},
-	},
-}
-
---- Camp spawn templates ---
-ArmourTemplates = {
-	"ARMOUR_Heavy_01",
-	"ARMOUR_Heavy_02",
-	"ARMOUR_Heavy_03",
-	"ARMOUR_Heavy_04",
-} 
-
--- Camp strike spawn arguments
--- East zones
-_camp_east_args = {
-	ArmourTemplates,
-	TableCamps.east,
-	"East"
-}
--- Central Zones
-_camp_central_args = {
-	ArmourTemplates,
-	TableCamps.central,
-	"Central"
-}
--- West Zones
-_camp_west_args = {
-	ArmourTemplates,
-	TableCamps.west,
-	"West"
-}
--- TODO: Remove oldest Camp Attack mission
-_camp_remove_args = { 
-	CampAttackSpawn,
-	SpawnTentGroup,
-	SpawnInfGroup
+MISSIONSTRIKE.campTemplates = {
+	main = 	"CAMP_Heavy",
+	tentGroup = "CAMP_Tent_Group",
+	infantryGroup = "CAMP_Inf_02",
+	defence = {
+		"ARMOUR_Heavy_01",
+		"ARMOUR_Heavy_02",
+		"ARMOUR_Heavy_03",
+		"ARMOUR_Heavy_04",
+	}
 }
 
 -----------------------------------
@@ -1549,3 +1581,234 @@ if MISSIONSTRIKE.Start then
 
 	MISSIONSTRIKE:Start()
 end
+
+-- END STRIKE ATTACK DATA
+-- --- strike Static Object spawn templates ---
+-- TableStaticTemplates = {
+-- 	target = {
+-- 		"FACTORY_Workshop",
+-- 		"FACTORY_Techcombine",
+-- 	},
+-- 	buildings = {
+		
+-- 	},
+-- }
+
+-- --- strike Defence spawn templates ---
+-- TableDefTemplates = {
+-- 	sam = {
+-- 		"SAM_Sa3Battery",
+-- 		"SAM_Sa6Battery",
+-- 	},
+-- 	aaa = {
+-- 		"AAA_Zu23Ural",
+-- 		"AAA_Zu23Emplacement",
+-- 		"AAA_Zu23Closed",
+-- 		"AAA_Zsu23Shilka",
+-- 	},
+-- 	manpads = {
+-- 		"SAM_Sa18Manpads",
+-- 		"SAM_Sa18sManpads",
+-- 	},
+-- 	armour = {
+-- 		"ARMOUR_Heavy_01",
+-- 		"ARMOUR_Heavy_02",
+-- 		"ARMOUR_Heavy_03",
+-- 		"ARMOUR_Heavy_04",
+-- 	},
+-- }
+
+--------------------------------
+--- Camp Strike Mission Data ---
+--------------------------------
+
+--- camp spawns per location
+-- TableCamps = { -- map portion, { camp zone, nearest town, Lat Long, spawned status } ...
+-- 	east = {
+-- 		{ 
+-- 			loc = ZONE:New("ZONE_Camp-1"), 
+-- 			town = "Kvemo-Sba", 
+-- 			coords = "42  34  02 N | 044  10  20 E", 
+-- 			is_open = true 
+-- 		},
+-- 		{ 
+-- 			loc = ZONE:New("ZONE_Camp-2"), 
+-- 			town = "Kvemo-Roka", 
+-- 			coords = "42  32  48 N | 044  07  01 E", 
+-- 			is_open = true 
+-- 		}, 
+-- 		{ 
+-- 			loc = ZONE:New("ZONE_Camp-3"), 
+-- 			town = "Edisa", 
+-- 			coords = "42  32  21 N | 044  12  10 E", 
+-- 			is_open = true 
+-- 		},
+-- 		{ 
+-- 			loc = ZONE:New("ZONE_Camp-4"), 
+-- 			town = "Kvemo-Khoshka", 
+-- 			coords = "42  27  07 N | 044  03  25 E", 
+-- 			is_open = true
+-- 		},
+-- 		{ 
+-- 			loc = ZONE:New("ZONE_Camp-5"), 
+-- 			town = "Elbakita", 
+-- 			coords = "42  25  24 N | 044  00  40 E", 
+-- 			is_open = true
+-- 		},
+-- 		{ 
+-- 			loc = ZONE:New("ZONE_Camp-6"), 
+-- 			town = "Tsru", 
+-- 			coords = "42  22  50 N | 044  01  55 E", 
+-- 			is_open = true
+-- 		},
+-- 		{ 
+-- 			loc = ZONE:New("ZONE_Camp-7"), 
+-- 			town = "Didi-Gupta", 
+-- 			coords = "42  21 11 N | 043  54  18 E", 
+-- 			is_open = true
+-- 		},
+-- 		{ 
+-- 			loc = ZONE:New("ZONE_Camp-8"), 
+-- 			town = "Kekhvi", 
+-- 			coords = "42  19  10 N | 043  56  09 E", 
+-- 			is_open = true
+-- 		}
+-- 	},
+-- 	central = {
+-- 		{ 
+-- 			loc = ZONE:New("ZONE_Camp-11"), 
+-- 			town = "Oni", 
+-- 			coords = "42  35  53 N | 043  27  13 E", 
+-- 			is_open = true
+-- 		},
+-- 		{ 
+-- 			loc = ZONE:New("ZONE_Camp-12"), 
+-- 			town = "Kvashkhieti", 
+-- 			coords = "42  32  49 N | 043  23  10 E", 
+-- 			is_open = true
+-- 		}, 
+-- 		{ 
+-- 			loc = ZONE:New("ZONE_Camp-13"), 
+-- 			town = "Haristvala", 
+-- 			coords = "42  23  46 N | 043  02  27 E", 
+-- 			is_open = true
+-- 		},
+-- 		{ 
+-- 			loc = ZONE:New("ZONE_Camp-14"), 
+-- 			town = "Ahalsopeli", 
+-- 			coords = "42  18  11 N | 042  56  57 E", 
+-- 			is_open = true
+-- 		},
+-- 		{ 
+-- 			loc = ZONE:New("ZONE_Camp-15"), 
+-- 			town = "Mohva", 
+-- 			coords = "42  22  35 N | 043  21  24 E", 
+-- 			is_open = true
+-- 		},
+-- 		{ 
+-- 			loc = ZONE:New("ZONE_Camp-16"), 
+-- 			town = "Sadmeli", 
+-- 			coords = "42  32  05 N | 043  06  36 E", 
+-- 			is_open = true
+-- 		},
+-- 		{ 
+-- 			loc = ZONE:New("ZONE_Camp-17"), 
+-- 			town = "Zogishi", 
+-- 			coords = "42  33  36 N | 042  51  18 E", 
+-- 			is_open = true
+-- 		},
+-- 		{ 
+-- 			loc = ZONE:New("ZONE_Camp-18"), 
+-- 			town = "Namohvani", 
+-- 			coords = "42  41  39 N | 042  41  39 E", 
+-- 			is_open = true
+-- 		},
+-- 	},
+-- 	west = {
+-- 		{ 
+-- 			loc = ZONE:New("ZoneCampWest01"), 
+-- 			town = "Dzhvari", 
+-- 			coords = "42  43  01 N | 042  02  08 E", 
+-- 			is_open = true
+-- 		},
+-- 		{ 
+-- 			loc = ZONE:New("ZoneCampWest02"), 
+-- 			town = "Tkvarcheli", 
+-- 			coords = "42  51  45 N | 041  46  29 E", 
+-- 			is_open = true
+-- 		}, 
+-- 		{ 
+-- 			loc = ZONE:New("ZoneCampWest03"), 
+-- 			town = "Zemo-Azhara", 
+-- 			coords = "43 06 26 N | 041  44 04 E", 
+-- 			is_open = true
+-- 		},
+-- 		{ 
+-- 			loc = ZONE:New("ZoneCampWest04"), 
+-- 			town = "Amtkel", 
+-- 			coords = "43  02  05 N | 041  27  16 E", 
+-- 			is_open = true
+-- 		},
+-- 		{ 
+-- 			loc = ZONE:New("ZoneCampWest05"), 
+-- 			town = "Gora Mukhursha", 
+-- 			coords = "43  19  16 N | 040  52  24 E", 
+-- 			is_open = true
+-- 		},
+-- 		{ 
+-- 			loc = ZONE:New("ZoneCampWest06"), 
+-- 			town = "Ozero Ritsa", 
+-- 			coords = "43  28  17 N | 040  32  01 E", 
+-- 			is_open = true
+-- 		},
+-- 		{ 
+-- 			loc = ZONE:New("ZoneCampWest07"), 
+-- 			town = "Salhino", 
+-- 			coords = "43  31  37 N | 040  05  31 E", 
+-- 			is_open = true
+-- 		},
+-- 		{ 
+-- 			loc = ZONE:New("ZoneCampWest08"), 
+-- 			town = "Leselidze", 
+-- 			coords = "43  23  56 N | 040  00  35 E", 
+-- 			is_open = true
+-- 		},
+-- 	},
+-- }
+
+-- --- Camp spawn templates ---
+-- ArmourTemplates = {
+-- 	"ARMOUR_Heavy_01",
+-- 	"ARMOUR_Heavy_02",
+-- 	"ARMOUR_Heavy_03",
+-- 	"ARMOUR_Heavy_04",
+-- } 
+
+-- -- Camp strike spawn arguments
+-- -- East zones
+-- _camp_east_args = {
+-- 	ArmourTemplates,
+-- 	TableCamps.east,
+-- 	"East"
+-- }
+-- -- Central Zones
+-- _camp_central_args = {
+-- 	ArmourTemplates,
+-- 	TableCamps.central,
+-- 	"Central"
+-- }
+-- -- West Zones
+-- _camp_west_args = {
+-- 	ArmourTemplates,
+-- 	TableCamps.west,
+-- 	"West"
+-- }
+-- -- TODO: Remove oldest Camp Attack mission
+-- _camp_remove_args = { 
+-- 	CampAttackSpawn,
+-- 	SpawnTentGroup,
+-- 	SpawnInfGroup
+-- }
+
+
+
