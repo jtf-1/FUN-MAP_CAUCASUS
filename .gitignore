@@ -5,6 +5,7 @@
 core/
 static/
 lib/
+archive/
 scripts/.vscode/settings.json
 
 #################
