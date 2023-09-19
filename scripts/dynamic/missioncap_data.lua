@@ -23,20 +23,20 @@ end
 -- CAP Missions
 MISSIONCAP.capMission = { -- spawn location, { spawn, spawnZone, templates, patrolzone, engagerange } ...
 	{
-		name = "Maykop", -- mission name. Used for menu grouping
-		spawnZone = "ZONE_MaykopCapSpawn", -- zone in which CAP aircraft will spawn
+		name = "Region West & North", -- mission name. Used for menu grouping
+		spawnZone = "ZONE_WestNorthCapSpawn", -- zone in which CAP aircraft will spawn
 		patrolZone = "zonePatrolWest", -- zone in which CAP aircraft will patrol
 		engageZone = "zoneEngageWest", -- zone in which CAP will engage enemy aircraft. Ange zone allows creation of a buffer zone between the CAP and approaching enemy
 		engageRange = 60000, -- range at which CAP will engage enemy aircraft if enageZone is NOT defined/found
-		spawnTemplate = "MaykopCap",
+		spawnTemplate = "WestCap",
 	},
 	{
-		name = "Beslan",
-		spawnZone = "ZONE_BeslanCapSpawn",
+		name = "Region Central & East",
+		spawnZone = "ZONE_CentralEastCapSpawn",
 		patrolZone = "zonePatrolEast",
 		engageZone = "zoneEngageEast",
 		engageRange = 60000,
-		spawnTemplate = "BeslanCap",
+		spawnTemplate = "EastCap",
 	},
 }
 
