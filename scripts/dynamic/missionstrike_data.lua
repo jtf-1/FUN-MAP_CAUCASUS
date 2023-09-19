@@ -14,6 +14,8 @@ if not MISSIONSTRIKE then
 	MISSIONSTRIKE.traceTitle = "[JTF-1 MISSIONSTRIKE] "
 	_msg = self.traceTitle .. "CORE FILE NOT LOADED!"
 	BASE:E(_msg)
+	-- EXIT MODULE DATA
+	return
 end
 
 ----------------------------------
@@ -47,546 +49,43 @@ end
 
 -- XXX: MISSIONSTRIKE.mission
 
--- MISSIONSTRIKE.mission = { -- TableStrikeAttack
--- 	{ --Beslan Airfield-East
--- 		striketype = "Airfield", --type of strike; Airfield, Factory, Bridge, Communications, C2
---         strikeregion = "East", -- Region in which mission is located (East, Central, West)                       
--- 		strikename = "Beslan", -- Friendly name for the location used in briefings, menus etc. Currently the same as the key, but will probably change
--- 		strikeivo = "AFB", -- "in the vacinity of" ("AFB" if airfield, "[TOWN/CITY]" other targets)
--- 		strikecoords = "43  12  20 N | 044  36  20 E", -- text LatLong
--- 		strikemission = "CRATER RUNWAY AND ATTRITE AVIATION ASSETS ON THE GROUND", -- text mission description
--- 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR", -- text threats description
--- 		strikezone = "ZONE_BeslanStrike", -- ME zone at center of strike location
--- 		striketargets = {
---             "BESLAN_STATIC_01",
---             "BESLAN_STATIC_02",
---             "BESLAN_STATIC_03",
---             "BESLAN_STATIC_04",
---             "BESLAN_STATIC_05",
---             "BESLAN_STATIC_06",
---             "BESLAN_STATIC_07",
---             "BESLAN_STATIC_08",
---             "BESLAN_STATIC_09",
--- 		},
--- 		medzones = { 
--- 			{ loc = "ZONE_BeslanMed_01", is_open = true },
--- 			{ loc = "ZONE_BeslanMed_02", is_open = true },
--- 			{ loc = "ZONE_BeslanMed_03", is_open = true },
--- 			{ loc = "ZONE_BeslanMed_04", is_open = true },
--- 			{ loc = "ZONE_BeslanMed_05", is_open = true },
--- 			{ loc = "ZONE_BeslanMed_06", is_open = true },
--- 			{ loc = "ZONE_BeslanMed_07", is_open = true },
--- 			{ loc = "ZONE_BeslanMed_08", is_open = true },
--- 			{ loc = "ZONE_BeslanMed_09", is_open = true },
--- 			{ loc = "ZONE_BeslanMed_10", is_open = true },
--- 		},
--- 		smallzones = {
--- 			{ loc = "ZONE_BeslanSmall_01", is_open = true },
--- 			{ loc = "ZONE_BeslanSmall_02", is_open = true },
--- 			{ loc = "ZONE_BeslanSmall_03", is_open = true },
--- 			{ loc = "ZONE_BeslanSmall_04", is_open = true },
--- 			{ loc = "ZONE_BeslanSmall_05", is_open = true },
--- 			{ loc = "ZONE_BeslanSmall_06", is_open = true },
--- 			{ loc = "ZONE_BeslanSmall_07", is_open = true },
--- 			{ loc = "ZONE_BeslanSmall_08", is_open = true },
--- 			{ loc = "ZONE_BeslanSmall_09", is_open = true },
--- 			{ loc = "ZONE_BeslanSmall_10", is_open = true },
--- 		},
--- 		defassets = {
--- 			sam = 4,
--- 			aaa = 5,
--- 			manpad = 3, 
--- 			armour = 3,
--- 		},
--- 		spawnobjects = {},
--- 		is_open = true,
--- 	},
--- 	{ -- Sochi Airfield-West
--- 		striketype = "Airfield",
---         strikeregion = "West",                            
--- 		strikename = "Sochi",
--- 		strikeivo = "AFB",
--- 		strikecoords = "43  26  41 N | 039  56  32 E",
--- 		strikemission = "CRATER RUNWAY AND ATTRITE AVIATION ASSETS ON THE GROUND",
--- 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
--- 		strikezone = "ZONE_SochiStrike",
--- 		striketargets = {
---             "SOCHI_STATIC_01",
---             "SOCHI_STATIC_02",
---             "SOCHI_STATIC_03",
---             "SOCHI_STATIC_04",
---             "SOCHI_STATIC_05",
---             "SOCHI_STATIC_06",
---             "SOCHI_STATIC_07",
---             "SOCHI_STATIC_08",
---             "SOCHI_STATIC_09",
---             "SOCHI_STATIC_10",
--- 		},
--- 		medzones = {
--- 			{ loc = "ZONE_SochiMed_01", is_open = true },
--- 			{ loc = "ZONE_SochiMed_02", is_open = true },
--- 			{ loc = "ZONE_SochiMed_03", is_open = true },
--- 			{ loc = "ZONE_SochiMed_04", is_open = true },
--- 			{ loc = "ZONE_SochiMed_05", is_open = true },
--- 			{ loc = "ZONE_SochiMed_06", is_open = true },
--- 			{ loc = "ZONE_SochiMed_07", is_open = true },
--- 			{ loc = "ZONE_SochiMed_08", is_open = true },
--- 			{ loc = "ZONE_SochiMed_09", is_open = true },
--- 			{ loc = "ZONE_SochiMed_10", is_open = true },
--- 		},
--- 		smallzones = {
--- 			{ loc = "ZONE_SochiSmall_01", is_open = true },
--- 			{ loc = "ZONE_SochiSmall_02", is_open = true },
--- 			{ loc = "ZONE_SochiSmall_03", is_open = true },
--- 			{ loc = "ZONE_SochiSmall_04", is_open = true },
--- 			{ loc = "ZONE_SochiSmall_05", is_open = true },
--- 			{ loc = "ZONE_SochiSmall_06", is_open = true },
--- 			{ loc = "ZONE_SochiSmall_07", is_open = true },
--- 			{ loc = "ZONE_SochiSmall_08", is_open = true },
--- 			{ loc = "ZONE_SochiSmall_09", is_open = true },
--- 			{ loc = "ZONE_SochiSmall_10", is_open = true },
--- 		},
--- 		defassets = { -- max number of each defence asset
--- 			sam = 4,
--- 			aaa = 5,
--- 			manpad = 3,
--- 			armour = 3,
--- 		},
--- 		spawnobjects = {},
--- 		is_open = true,
--- 	},
--- 	{ -- Maykop Airfield-West
--- 		striketype = "Airfield",
---         strikeregion = "West",                            
--- 		strikename = "Maykop",
--- 		strikeivo = "AFB",
--- 		strikecoords = "44  40  54 N | 040  02  08 E",
--- 		strikemission = "CRATER RUNWAY AND ATTRITE AVIATION ASSETS ON THE GROUND",
--- 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
--- 		strikezone = "ZONE_MaykopStrike",
--- 		striketargets = {
---             "MAYKOP_STATIC_01",
---             "MAYKOP_STATIC_02",
---             "MAYKOP_STATIC_03",
---             "MAYKOP_STATIC_04",
---             "MAYKOP_STATIC_05",
---             "MAYKOP_STATIC_06",
---             "MAYKOP_STATIC_07",
---             "MAYKOP_STATIC_08",
---             "MAYKOP_STATIC_09",
---             "MAYKOP_STATIC_10",
---             "MAYKOP_STATIC_11",
---             "MAYKOP_STATIC_12",
--- 		},
--- 		medzones = {
--- 			{ loc = "ZONE_MaykopMed_01", is_open = true },
--- 			{ loc = "ZONE_MaykopMed_02", is_open = true },
--- 			{ loc = "ZONE_MaykopMed_03", is_open = true },
--- 			{ loc = "ZONE_MaykopMed_04", is_open = true },
--- 			{ loc = "ZONE_MaykopMed_05", is_open = true },
--- 			{ loc = "ZONE_MaykopMed_06", is_open = true },
--- 			{ loc = "ZONE_MaykopMed_07", is_open = true },
--- 			{ loc = "ZONE_MaykopMed_08", is_open = true },
--- 			{ loc = "ZONE_MaykopMed_09", is_open = true },
--- 			{ loc = "ZONE_MaykopMed_10", is_open = true },
--- 		},
--- 		smallzones = {
--- 			{ loc = "ZONE_MaykopSmall_01", is_open = true },
--- 			{ loc = "ZONE_MaykopSmall_02", is_open = true },
--- 			{ loc = "ZONE_MaykopSmall_03", is_open = true },
--- 			{ loc = "ZONE_MaykopSmall_04", is_open = true },
--- 			{ loc = "ZONE_MaykopSmall_05", is_open = true },
--- 			{ loc = "ZONE_MaykopSmall_06", is_open = true },
--- 			{ loc = "ZONE_MaykopSmall_07", is_open = true },
--- 			{ loc = "ZONE_MaykopSmall_08", is_open = true },
--- 			{ loc = "ZONE_MaykopSmall_09", is_open = true },
--- 			{ loc = "ZONE_MaykopSmall_10", is_open = true },
--- 		},
--- 		defassets = {
--- 			sam = 4,
--- 			aaa = 5,
--- 			manpad = 3,
--- 			armour = 3,
--- 		},
--- 		spawnobjects = {},
--- 		is_open = true,
--- 	},
--- 	{ -- Nalchik Airfield-Central
--- 		striketype = "Airfield",
---         strikeregion = "Central",                            
--- 		strikename = "Nalchik",
--- 		strikeivo = "AFB",
--- 		strikecoords = "43  30  53 N | 043  38  17 E",
--- 		strikemission = "CRATER RUNWAY AND ATTRITE AVIATION ASSETS ON THE GROUND",
--- 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
--- 		strikezone = "ZONE_NalchikStrike",
--- 		striketargets = {
---             "NALCHIK_STATIC_01",
---             "NALCHIK_STATIC_02",
---             "NALCHIK_STATIC_03",
---             "NALCHIK_STATIC_04",
---             "NALCHIK_STATIC_05",
---             "NALCHIK_STATIC_06",
---             "NALCHIK_STATIC_07",
---             "NALCHIK_STATIC_08",
---             "NALCHIK_STATIC_09",
---             "NALCHIK_STATIC_10",
--- 		},
--- 		medzones = {
--- 			{ loc = "ZONE_NalchikMed_01", is_open = true },
--- 			{ loc = "ZONE_NalchikMed_02", is_open = true },
--- 			{ loc = "ZONE_NalchikMed_03", is_open = true },
--- 			{ loc = "ZONE_NalchikMed_04", is_open = true },
--- 			{ loc = "ZONE_NalchikMed_05", is_open = true },
--- 			{ loc = "ZONE_NalchikMed_06", is_open = true },
--- 			{ loc = "ZONE_NalchikMed_07", is_open = true },
--- 			{ loc = "ZONE_NalchikMed_08", is_open = true },
--- 			{ loc = "ZONE_NalchikMed_09", is_open = true },
--- 			{ loc = "ZONE_NalchikMed_10", is_open = true },
--- 		},
--- 		smallzones = {
--- 			{ loc = "ZONE_NalchikSmall_01", is_open = true },
--- 			{ loc = "ZONE_NalchikSmall_02", is_open = true },
--- 			{ loc = "ZONE_NalchikSmall_03", is_open = true },
--- 			{ loc = "ZONE_NalchikSmall_04", is_open = true },
--- 			{ loc = "ZONE_NalchikSmall_05", is_open = true },
--- 			{ loc = "ZONE_NalchikSmall_06", is_open = true },
--- 			{ loc = "ZONE_NalchikSmall_07", is_open = true },
--- 			{ loc = "ZONE_NalchikSmall_08", is_open = true },
--- 			{ loc = "ZONE_NalchikSmall_09", is_open = true },
--- 			{ loc = "ZONE_NalchikSmall_10", is_open = true },
--- 		},
--- 		defassets = { 
--- 			sam = 4,
--- 			aaa = 5,
--- 			manpad = 3,
--- 			armour = 3,
--- 		},
--- 		spawnobjects = {},
--- 		is_open = true,
--- 	},
--- 	{ -- MN76 
--- 		striketype = "Factory",
---         strikeregion = "East",                            
--- 		strikename = "MN76",
--- 		strikeivo = "Vladikavkaz",
--- 		strikecoords = "43  00  23 N | 044  39  02 E",
--- 		strikemission = "DESTROY WEAPONS MANUFACTURING FACILITY\nAND ANCILLIARY SUPPORT INFRASTRUCTURE",
--- 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
--- 		strikezone = "ZONE_MN76Strike",
--- 		striketargets = {
---             "MN76_STATIC_01",
---             "MN76_STATIC_02",
---             "MN76_STATIC_03",
---             "MN76_STATIC_04",
---             "MN76_STATIC_05",
--- 		},
--- 		medzones = {
--- 			{ loc = "ZONE_MN76Med_01", is_open = true },
--- 			{ loc = "ZONE_MN76Med_02", is_open = true },
--- 			{ loc = "ZONE_MN76Med_03", is_open = true },
--- 			{ loc = "ZONE_MN76Med_04", is_open = true },
--- 			{ loc = "ZONE_MN76Med_05", is_open = true },
--- 		},
--- 		smallzones = {
--- 			{ loc = "ZONE_MN76Small_01", is_open = true },
--- 			{ loc = "ZONE_MN76Small_02", is_open = true },
--- 			{ loc = "ZONE_MN76Small_03", is_open = true },
--- 			{ loc = "ZONE_MN76Small_04", is_open = true },
--- 			{ loc = "ZONE_MN76Small_05", is_open = true },
--- 		},
--- 		defassets = { 
--- 			sam = 2, 
--- 			aaa = 3, 
--- 			manpad = 2, 
--- 			armour = 2, 
--- 		},
--- 		spawnobjects = {},
--- 		is_open = true,
--- 	},
--- 	{ -- LN83 
--- 		striketype = "Factory",
---         strikeregion = "Central",                            
--- 		strikename = "LN83",
--- 		strikeivo = "Chiora",
--- 		strikecoords = "42  44  56 N | 043  32  28 E",
--- 		strikemission = "DESTROY WEAPONS MANUFACTURING FACILITY",
--- 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
--- 		strikezone = "ZONE_LN83Strike",
--- 		striketargets = {
---             "LN83_STATIC_01",
---             "LN83_STATIC_02",
--- 		},
--- 		medzones = {
--- 			{ loc = "ZONE_LN83Med_01", is_open = true },
--- 			{ loc = "ZONE_LN83Med_02", is_open = true },
--- 			{ loc = "ZONE_LN83Med_03", is_open = true },
--- 			{ loc = "ZONE_LN83Med_04", is_open = true },
--- 			{ loc = "ZONE_LN83Med_05", is_open = true },
--- 		},
--- 		smallzones = {
--- 			{ loc = "ZONE_LN83Small_01", is_open = true },
--- 			{ loc = "ZONE_LN83Small_02", is_open = true },
--- 			{ loc = "ZONE_LN83Small_03", is_open = true },
--- 			{ loc = "ZONE_LN83Small_04", is_open = true },
--- 			{ loc = "ZONE_LN83Small_05", is_open = true },
--- 		},
--- 		defassets = { 
--- 			sam = 2, 
--- 			aaa = 3, 
--- 			manpad = 2, 
--- 			armour = 2, 
--- 		},
--- 		spawnobjects = {},
--- 		is_open = true,
--- 	},
--- 	{ -- LN77 
--- 		striketype = "Factory",
---         strikeregion = "Central",                            
--- 		strikename = "LN77",
--- 		strikeivo = "Verh.Balkaria",
--- 		strikecoords = "43  07  35 N | 043  27  24 E",
--- 		strikemission = "DESTROY WEAPONS MANUFACTURING FACILITY\nAND COMMUNICATIONS INFRASTRUCTURE",
--- 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
--- 		strikezone = "ZONE_LN77Strike",
--- 		striketargets = {
---             "LN77_STATIC_01",
---             "LN77_STATIC_02",
---             "LN77_STATIC_03",
---             "LN77_STATIC_04",
--- 		},
--- 		medzones = {
--- 			{ loc = "ZONE_LN77Med_01", is_open = true },
--- 			{ loc = "ZONE_LN77Med_02", is_open = true },
--- 			{ loc = "ZONE_LN77Med_03", is_open = true },
--- 			{ loc = "ZONE_LN77Med_04", is_open = true },
--- 			{ loc = "ZONE_LN77Med_05", is_open = true },
--- 		},
--- 		smallzones = {
--- 			{ loc = "ZONE_LN77Small_01", is_open = true },
--- 			{ loc = "ZONE_LN77Small_02", is_open = true },
--- 			{ loc = "ZONE_LN77Small_03", is_open = true },
--- 			{ loc = "ZONE_LN77Small_04", is_open = true },
--- 			{ loc = "ZONE_LN77Small_05", is_open = true },
--- 		},
--- 		defassets = { 
--- 			sam = 2, 
--- 			aaa = 3, 
--- 			manpad = 1, 
--- 			armour = 3, 
--- 		},
--- 		spawnobjects = {},
--- 		is_open = true,
--- 	},
--- 	{ -- LP30 
--- 		striketype = "Factory",
---         strikeregion = "Central",                            
--- 		strikename = "LP30",
--- 		strikeivo = "Tyrnyauz",
--- 		strikecoords = "43  23  43 N | 042  55  27 E",
--- 		strikemission = "DESTROY WEAPONS MANUFACTURING FACILITY\nAND COMMUNICATIONS INFRASTRUCTURE",
--- 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
--- 		strikezone = "ZONE_LP30Strike",
--- 		striketargets = {
--- 		"LP30_STATIC_01",
---         "LP30_STATIC_02",
---         "LP30_STATIC_03",
---         "LP30_STATIC_04",
--- 		},
--- 		medzones = {
--- 			{ loc = "ZONE_LP30Med_01", is_open = true },
--- 			{ loc = "ZONE_LP30Med_02", is_open = true },
--- 			{ loc = "ZONE_LP30Med_03", is_open = true },
--- 			{ loc = "ZONE_LP30Med_04", is_open = true },
--- 			{ loc = "ZONE_LP30Med_05", is_open = true },
--- 		},
--- 		smallzones = {
--- 			{ loc = "ZONE_LP30Small_01", is_open = true },
--- 			{ loc = "ZONE_LP30Small_02", is_open = true },
--- 			{ loc = "ZONE_LP30Small_03", is_open = true },
--- 			{ loc = "ZONE_LP30Small_04", is_open = true },
--- 			{ loc = "ZONE_LP30Small_05", is_open = true },
--- 			{ loc = "ZONE_LP30Small_06", is_open = true },
--- 			{ loc = "ZONE_LP30Small_07", is_open = true },
--- 		},
--- 		defassets = { 
--- 			sam = 2, 
--- 			aaa = 3, 
--- 			manpad = 2, 
--- 			armour = 2, 
--- 		},
--- 		spawnobjects = {},
--- 		is_open = true,
--- 	},
--- 	{ -- GJ38 
--- 		striketype = "Bridge",
---         strikeregion = "Central",                            
--- 		strikename = "GJ38",
--- 		strikeivo = "Ust Dzheguta",
--- 		strikecoords = "DMPI A 44  04  38 N | 041  58  15 E\n\nDMPI B 44  04  23 N | 041  58  34 E",
--- 		strikemission = "DESTROY ROAD BRIDGE DMPI A AND\nRAIL BRIDGE DMPI B",
--- 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
--- 		strikezone = "ZONE_GJ38Strike",
--- 		striketargets = {
--- 			"GJ38_STATIC_01",
--- 		},
--- 		medzones = {
--- 			{ loc = "ZONE_GJ38Med_01", is_open = true },
--- 			{ loc = "ZONE_GJ38Med_02", is_open = true },
--- 			{ loc = "ZONE_GJ38Med_03", is_open = true },
--- 			{ loc = "ZONE_GJ38Med_04", is_open = true },
--- 			{ loc = "ZONE_GJ38Med_05", is_open = true },
--- 		},
--- 		smallzones = {
--- 			{ loc = "ZONE_GJ38Small_01", is_open = true },
--- 			{ loc = "ZONE_GJ38Small_02", is_open = true },
--- 			{ loc = "ZONE_GJ38Small_03", is_open = true },
--- 			{ loc = "ZONE_GJ38Small_04", is_open = true },
--- 			{ loc = "ZONE_GJ38Small_05", is_open = true },
--- 			{ loc = "ZONE_GJ38Small_06", is_open = true },
--- 			{ loc = "ZONE_GJ38Small_07", is_open = true },
--- 			{ loc = "ZONE_GJ38Small_08", is_open = true },
--- 			{ loc = "ZONE_GJ38Small_09", is_open = true },
--- 			{ loc = "ZONE_GJ38Small_10", is_open = true },
--- 		},
--- 		defassets = { 
--- 			sam = 2, 
--- 			aaa = 4, 
--- 			manpad = 3, 
--- 			armour = 2, 
--- 		},
--- 		spawnobjects = {},
--- 		is_open = true,
--- 	},
--- 	{ -- MN72 
--- 		striketype = "Bridge",
---         strikeregion = "East",                            
--- 		strikename = "MN72",
--- 		strikeivo = "Kazbegi",
--- 		strikecoords = "44  04  38 N | 041  58  15 E",
--- 		strikemission = "DESTROY ROAD BRIDGE",
--- 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
--- 		strikezone = "ZONE_MN72Strike",
--- 		striketargets = {
--- 		},
--- 		medzones = {
--- 			{ loc = "ZONE_MN72Med_01", is_open = true },
--- 			{ loc = "ZONE_MN72Med_02", is_open = true },
--- 			{ loc = "ZONE_MN72Med_03", is_open = true },
--- 			{ loc = "ZONE_MN72Med_04", is_open = true },
--- 			{ loc = "ZONE_MN72Med_05", is_open = true },
--- 		},
--- 		smallzones = {
--- 			{ loc = "ZONE_MN72Small_01", is_open = true },
--- 			{ loc = "ZONE_MN72Small_02", is_open = true },
--- 			{ loc = "ZONE_MN72Small_03", is_open = true },
--- 			{ loc = "ZONE_MN72Small_04", is_open = true },
--- 			{ loc = "ZONE_MN72Small_05", is_open = true },
--- 			{ loc = "ZONE_MN72Small_06", is_open = true },
--- 			{ loc = "ZONE_MN72Small_07", is_open = true },
--- 			{ loc = "ZONE_MN72Small_08", is_open = true },
--- 			{ loc = "ZONE_MN72Small_09", is_open = true },
--- 			{ loc = "ZONE_MN72Small_10", is_open = true },
--- 		},
--- 		defassets = { 
--- 			sam = 2, 
--- 			aaa = 4, 
--- 			manpad = 2, 
--- 			armour = 2, 
--- 		},
--- 		spawnobjects = {},
--- 		is_open = true,
--- 	},
--- 	{ -- GJ21 
--- 		striketype = "Bridge",
---         strikeregion = "Central",                            
--- 		strikename = "GJ21",
--- 		strikeivo = "Teberda",
--- 		strikecoords = "43  26  47 N | 041  44  28 E",
--- 		strikemission = "DESTROY ROAD BRIDGE",
--- 		strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
--- 		strikezone = "ZONE_GJ21Strike",
--- 		striketargets = {
--- 		},
--- 		medzones = {
--- 			{ loc = "ZONE_GJ21Med_01", is_open = true },
--- 			{ loc = "ZONE_GJ21Med_02", is_open = true },
--- 			{ loc = "ZONE_GJ21Med_03", is_open = true },
--- 			{ loc = "ZONE_GJ21Med_04", is_open = true },
--- 			{ loc = "ZONE_GJ21Med_05", is_open = true },
--- 		},
--- 		smallzones = {
--- 			{ loc = "ZONE_GJ21Small_01", is_open = true },
--- 			{ loc = "ZONE_GJ21Small_02", is_open = true },
--- 			{ loc = "ZONE_GJ21Small_03", is_open = true },
--- 			{ loc = "ZONE_GJ21Small_04", is_open = true },
--- 			{ loc = "ZONE_GJ21Small_05", is_open = true },
--- 			{ loc = "ZONE_GJ21Small_06", is_open = true },
--- 			{ loc = "ZONE_GJ21Small_07", is_open = true },
--- 			{ loc = "ZONE_GJ21Small_08", is_open = true },
--- 			{ loc = "ZONE_GJ21Small_09", is_open = true },
--- 			{ loc = "ZONE_GJ21Small_10", is_open = true },
--- 		},
--- 		defassets = { 
--- 			sam = 2, 
--- 			aaa = 4, 
--- 			manpad = 1, 
--- 			armour = 2, 
--- 		},
--- 		spawnobjects = {},
--- 		is_open = true,
--- 	},
--- }
 
 MISSIONSTRIKE.mission = { -- TableStrikeAttack
+	------------ AIRFIELD ------------
+	{ -- Mozdok Airfield-East
+		striketype = MISSIONSTRIKE.enums.striketype.airfield, --type of strike; Airfield, Factory, Bridge, Communications, C2
+		strikeregion = MISSIONSTRIKE.enums.region.east, -- Region in which mission is located (East, Central, West)                       
+		strikename = "Mozdok", -- Friendly name for the location used in briefings, menus etc. Currently the same as the key, but will probably change
+		strikeivo = "AFB", -- "in the vacinity of" ("AFB" if airfield, "[TOWN/CITY]" other targets)
+		strikemission = MISSIONSTRIKE.enums.strikemission.airfield, -- text mission description
+		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR", -- text threats description
+		strikezone = "ZONE_MozdokStrike", -- ME zone at center of strike location
+		striketargetprefix = "TARGET_MOZDOK",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_MozdokSmall"},
+			{class = "medium", prefix = "ZONE_MozdokMed"},
+		},
+		defassets = {
+			sam = 4,
+			aaa = 5,
+			manpad = 3, 
+			armour = 3,
+		},
+		spawnobjects = {},
+		is_open = true,
+	},-- End Mozdok
 	{ -- Beslan Airfield-East
-		striketype = "Airfield", --type of strike; Airfield, Factory, Bridge, Communications, C2
-        strikeregion = "East", -- Region in which mission is located (East, Central, West)                       
+		striketype = MISSIONSTRIKE.enums.striketype.airfield, --type of strike; Airfield, Factory, Bridge, Communications, C2
+        strikeregion = MISSIONSTRIKE.enums.region.east, -- Region in which mission is located (East, Central, West)                       
 		strikename = "Beslan", -- Friendly name for the location used in briefings, menus etc. Currently the same as the key, but will probably change
 		strikeivo = "AFB", -- "in the vacinity of" ("AFB" if airfield, "[TOWN/CITY]" other targets)
-		strikecoords = "43  12  20 N | 044  36  20 E", -- text LatLong
-		strikemission = "CRATER RUNWAY AND ATTRITE AVIATION ASSETS ON THE GROUND", -- text mission description
+		strikemission = MISSIONSTRIKE.enums.strikemission.airfield, -- text mission description
 		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR", -- text threats description
 		strikezone = "ZONE_BeslanStrike", -- ME zone at center of strike location
-		striketargets = {
-            statics= {
-				"BESLAN_STATIC_01",
-				"BESLAN_STATIC_02",
-				"BESLAN_STATIC_03",
-				"BESLAN_STATIC_04",
-				"BESLAN_STATIC_05",
-				"BESLAN_STATIC_06",
-				"BESLAN_STATIC_07",
-				"BESLAN_STATIC_08",
-				"BESLAN_STATIC_09",
-			},
-			groups = {},
-		},
-		zones = {
-			medium = {
-				{ class = "medium", loc = "ZONE_BeslanMed_01", is_open = true },
-				{ class = "medium", loc = "ZONE_BeslanMed_02", is_open = true },
-				{ class = "medium", loc = "ZONE_BeslanMed_03", is_open = true },
-				{ class = "medium", loc = "ZONE_BeslanMed_04", is_open = true },
-				{ class = "medium", loc = "ZONE_BeslanMed_05", is_open = true },
-				{ class = "medium", loc = "ZONE_BeslanMed_06", is_open = true },
-				{ class = "medium", loc = "ZONE_BeslanMed_07", is_open = true },
-				{ class = "medium", loc = "ZONE_BeslanMed_08", is_open = true },
-				{ class = "medium", loc = "ZONE_BeslanMed_09", is_open = true },
-				{ class = "medium", loc = "ZONE_BeslanMed_10", is_open = true },
-			},
-			small = {
-				{ class = "small", loc = "ZONE_BeslanSmall_01", is_open = true },
-				{ class = "small", loc = "ZONE_BeslanSmall_02", is_open = true },
-				{ class = "small", loc = "ZONE_BeslanSmall_03", is_open = true },
-				{ class = "small", loc = "ZONE_BeslanSmall_04", is_open = true },
-				{ class = "small", loc = "ZONE_BeslanSmall_05", is_open = true },
-				{ class = "small", loc = "ZONE_BeslanSmall_06", is_open = true },
-				{ class = "small", loc = "ZONE_BeslanSmall_07", is_open = true },
-				{ class = "small", loc = "ZONE_BeslanSmall_08", is_open = true },
-				{ class = "small", loc = "ZONE_BeslanSmall_09", is_open = true },
-				{ class = "small", loc = "ZONE_BeslanSmall_10", is_open = true },
-			},
+		striketargetprefix = "TARGET_BESLAN`",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_BeslanSmall"},
+			{class = "medium", prefix = "ZONE_BeslanMed"},
 		},
 		defassets = {
 			sam = 4,
@@ -597,114 +96,18 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 		spawnobjects = {},
 		is_open = true,
 	},-- End Beslan
-	{ -- Nalchik Airfield-Central
-		striketype = "Airfield",
-        strikeregion = "Central",                            
-		strikename = "Nalchik",
-		strikeivo = "AFB",
-		strikecoords = "43  30  53 N | 043  38  17 E",
-		strikemission = "CRATER RUNWAY AND ATTRITE AVIATION ASSETS ON THE GROUND",
-		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
-		strikezone = "ZONE_NalchikStrike",
-		striketargets = {
-			statics = {
-				"NALCHIK_STATIC_01",
-				"NALCHIK_STATIC_02",
-				"NALCHIK_STATIC_03",
-				"NALCHIK_STATIC_04",
-				"NALCHIK_STATIC_05",
-				"NALCHIK_STATIC_06",
-				"NALCHIK_STATIC_07",
-				"NALCHIK_STATIC_08",
-				"NALCHIK_STATIC_09",
-				"NALCHIK_STATIC_10",
-			},
-			groups = {},
-		},
-		zones = {
-			medium ={
-				{ class = "medium", loc = "ZONE_NalchikMed_01", is_open = true },
-				{ class = "medium", loc = "ZONE_NalchikMed_02", is_open = true },
-				{ class = "medium", loc = "ZONE_NalchikMed_03", is_open = true },
-				{ class = "medium", loc = "ZONE_NalchikMed_04", is_open = true },
-				{ class = "medium", loc = "ZONE_NalchikMed_05", is_open = true },
-				{ class = "medium", loc = "ZONE_NalchikMed_06", is_open = true },
-				{ class = "medium", loc = "ZONE_NalchikMed_07", is_open = true },
-				{ class = "medium", loc = "ZONE_NalchikMed_08", is_open = true },
-				{ class = "medium", loc = "ZONE_NalchikMed_09", is_open = true },
-				{ class = "medium", loc = "ZONE_NalchikMed_10", is_open = true },
-			}, 
-			small = {
-				{ class = "small", loc = "ZONE_NalchikSmall_01", is_open = true },
-				{ class = "small", loc = "ZONE_NalchikSmall_02", is_open = true },
-				{ class = "small", loc = "ZONE_NalchikSmall_03", is_open = true },
-				{ class = "small", loc = "ZONE_NalchikSmall_04", is_open = true },
-				{ class = "small", loc = "ZONE_NalchikSmall_05", is_open = true },
-				{ class = "small", loc = "ZONE_NalchikSmall_06", is_open = true },
-				{ class = "small", loc = "ZONE_NalchikSmall_07", is_open = true },
-				{ class = "small", loc = "ZONE_NalchikSmall_08", is_open = true },
-				{ class = "small", loc = "ZONE_NalchikSmall_09", is_open = true },
-				{ class = "small", loc = "ZONE_NalchikSmall_10", is_open = true },
-			},
-		},
-		defassets = { 
-			sam = 4,
-			aaa = 5,
-			manpad = 3,
-			armour = 3,
-		},
-		spawnobjects = {},
-		is_open = true,
-	},-- End Nalchik
 	{ -- Mineralnye Airfield-Central
-		striketype = "Airfield",
-        strikeregion = "Central",                            
+		striketype = MISSIONSTRIKE.enums.striketype.airfield,
+        strikeregion = MISSIONSTRIKE.enums.region.central,                            
 		strikename = "Mineralnye",
 		strikeivo = "AFB",
-		strikecoords = "43  30  53 N | 043  38  17 E",
-		strikemission = "CRATER RUNWAY AND ATTRITE AVIATION ASSETS ON THE GROUND",
+		strikemission = MISSIONSTRIKE.enums.strikemission.airfield, -- text mission description
 		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_MineralnyeStrike",
-		striketargets = {
-			statics = {
-				"MINERALNYE_STATIC_01",
-				"MINERALNYE_STATIC_02",
-				"MINERALNYE_STATIC_03",
-				"MINERALNYE_STATIC_04",
-				"MINERALNYE_STATIC_05",
-				"MINERALNYE_STATIC_06",
-				"MINERALNYE_STATIC_07",
-				"MINERALNYE_STATIC_08",
-				"MINERALNYE_STATIC_09",
-				"MINERALNYE_STATIC_10",
-			},
-			groups = {},
-		},
-		zones = {
-			medium = {
-				{ class = "medium", loc = "ZONE_MineralnyeMed_01", is_open = true },
-				{ class = "medium", loc = "ZONE_MineralnyeMed_02", is_open = true },
-				{ class = "medium", loc = "ZONE_MineralnyeMed_03", is_open = true },
-				{ class = "medium", loc = "ZONE_MineralnyeMed_04", is_open = true },
-				{ class = "medium", loc = "ZONE_MineralnyeMed_05", is_open = true },
-				{ class = "medium", loc = "ZONE_MineralnyeMed_06", is_open = true },
-				{ class = "medium", loc = "ZONE_MineralnyeMed_07", is_open = true },
-				{ class = "medium", loc = "ZONE_MineralnyeMed_08", is_open = true },
-				{ class = "medium", loc = "ZONE_MineralnyeMed_09", is_open = true },
-				{ class = "medium", loc = "ZONE_MineralnyeMed_10", is_open = true },
-			},
-			small = {
-				{ class = "small", loc = "ZONE_MineralnyeSmall_01", is_open = true },
-				{ class = "small", loc = "ZONE_MineralnyeSmall_02", is_open = true },
-				{ class = "small", loc = "ZONE_MineralnyeSmall_03", is_open = true },
-				{ class = "small", loc = "ZONE_MineralnyeSmall_04", is_open = true },
-				{ class = "small", loc = "ZONE_MineralnyeSmall_05", is_open = true },
-				{ class = "small", loc = "ZONE_MineralnyeSmall_06", is_open = true },
-				{ class = "small", loc = "ZONE_MineralnyeSmall_07", is_open = true },
-				{ class = "small", loc = "ZONE_MineralnyeSmall_08", is_open = true },
-				{ class = "small", loc = "ZONE_MineralnyeSmall_09", is_open = true },
-				{ class = "small", loc = "ZONE_MineralnyeSmall_10", is_open = true },
-			},
+		striketargetprefix = "TARGET_Mineralnye",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_MineralnyeSmall"},
+			{class = "medium", prefix = "ZONE_MineralnyeMed"},
 		},
 		defassets = { 
 			sam = 4,
@@ -715,50 +118,20 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 		spawnobjects = {},
 		is_open = true,
 	},-- End Mineralnye
-	{ -- Sochi Airfield-West
-		striketype = "Airfield",
-        strikeregion = "West",                            
-		strikename = "Sochi",
+	{ -- Nalchik Airfield-Central
+		striketype = MISSIONSTRIKE.enums.striketype.airfield,
+        strikeregion = MISSIONSTRIKE.enums.region.central,                            
+		strikename = "Nalchik",
 		strikeivo = "AFB",
-		strikecoords = "43  26  41 N | 039  56  32 E",
-		strikemission = "CRATER RUNWAY AND ATTRITE AVIATION ASSETS ON THE GROUND",
+		strikemission = MISSIONSTRIKE.enums.strikemission.airfield, -- text mission description
 		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
-		strikezone = "ZONE_SochiStrike",
-		striketargets = {
-			statics = {},
-			groups = {
-				"TARGET_SOCHI_01",
-				"TARGET_SOCHI_02",
-				"TARGET_SOCHI_03",
-			},
+		strikezone = "ZONE_NalchikStrike",
+		striketargetprefix = "TARGET_Nalchik",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_NalchikSmall"},
+			{class = "medium", prefix = "ZONE_NalchikMed"},
 		},
-		zones = {
-			medium = {
-				{ class = "medium", loc = "ZONE_SochiMed_01", is_open = true },
-				{ class = "medium", loc = "ZONE_SochiMed_02", is_open = true },
-				{ class = "medium", loc = "ZONE_SochiMed_03", is_open = true },
-				{ class = "medium", loc = "ZONE_SochiMed_04", is_open = true },
-				{ class = "medium", loc = "ZONE_SochiMed_05", is_open = true },
-				{ class = "medium", loc = "ZONE_SochiMed_06", is_open = true },
-				{ class = "medium", loc = "ZONE_SochiMed_07", is_open = true },
-				{ class = "medium", loc = "ZONE_SochiMed_08", is_open = true },
-				{ class = "medium", loc = "ZONE_SochiMed_09", is_open = true },
-				{ class = "medium", loc = "ZONE_SochiMed_10", is_open = true },
-			},
-			small = {
-				{ class = "small", loc = "ZONE_SochiSmall_01", is_open = true },
-				{ class = "small", loc = "ZONE_SochiSmall_02", is_open = true },
-				{ class = "small", loc = "ZONE_SochiSmall_03", is_open = true },
-				{ class = "small", loc = "ZONE_SochiSmall_04", is_open = true },
-				{ class = "small", loc = "ZONE_SochiSmall_05", is_open = true },
-				{ class = "small", loc = "ZONE_SochiSmall_06", is_open = true },
-				{ class = "small", loc = "ZONE_SochiSmall_07", is_open = true },
-				{ class = "small", loc = "ZONE_SochiSmall_08", is_open = true },
-				{ class = "small", loc = "ZONE_SochiSmall_09", is_open = true },
-				{ class = "small", loc = "ZONE_SochiSmall_10", is_open = true },
-			},
-		},
-		defassets = { -- max number of each defence asset
+		defassets = { 
 			sam = 4,
 			aaa = 5,
 			manpad = 3,
@@ -766,48 +139,19 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 		},
 		spawnobjects = {},
 		is_open = true,
-	},-- End Sochi
+	},-- End Nalchik
 	{ -- Maykop Airfield-West
-		striketype = "Airfield",
-        strikeregion = "West",                            
+		striketype = MISSIONSTRIKE.enums.striketype.airfield,
+        strikeregion = MISSIONSTRIKE.enums.region.west,                            
 		strikename = "Maykop",
 		strikeivo = "AFB",
-		strikemission = "CRATER RUNWAY AND ATTRITE AVIATION ASSETS ON THE GROUND",
+		strikemission = MISSIONSTRIKE.enums.strikemission.airfield, -- text mission description
 		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_MaykopStrike",
-		striketargets = {
-			statics = {},
-			groups = {
-				"TARGET_MAYKOP-1",
-				"TARGET_MAYKOP-2",
-				"TARGET_MAYKOP-3",
-			},
-		},
-		zones = {
-			medium = {
-				{ class = "medium", loc = "ZONE_MaykopMed_01", is_open = true },
-				{ class = "medium", loc = "ZONE_MaykopMed_02", is_open = true },
-				{ class = "medium", loc = "ZONE_MaykopMed_03", is_open = true },
-				{ class = "medium", loc = "ZONE_MaykopMed_04", is_open = true },
-				{ class = "medium", loc = "ZONE_MaykopMed_05", is_open = true },
-				{ class = "medium", loc = "ZONE_MaykopMed_06", is_open = true },
-				{ class = "medium", loc = "ZONE_MaykopMed_07", is_open = true },
-				{ class = "medium", loc = "ZONE_MaykopMed_08", is_open = true },
-				{ class = "medium", loc = "ZONE_MaykopMed_09", is_open = true },
-				{ class = "medium", loc = "ZONE_MaykopMed_10", is_open = true },
-			},
-			small = {
-				{ class = "small", loc = "ZONE_MaykopSmall_01", is_open = true },
-				{ class = "small", loc = "ZONE_MaykopSmall_02", is_open = true },
-				{ class = "small", loc = "ZONE_MaykopSmall_03", is_open = true },
-				{ class = "small", loc = "ZONE_MaykopSmall_04", is_open = true },
-				{ class = "small", loc = "ZONE_MaykopSmall_05", is_open = true },
-				{ class = "small", loc = "ZONE_MaykopSmall_06", is_open = true },
-				{ class = "small", loc = "ZONE_MaykopSmall_07", is_open = true },
-				{ class = "small", loc = "ZONE_MaykopSmall_08", is_open = true },
-				{ class = "small", loc = "ZONE_MaykopSmall_09", is_open = true },
-				{ class = "small", loc = "ZONE_MaykopSmall_10", is_open = true },
-			},
+		striketargetprefix = "TARGET_MAYKOP",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_MaykopSmall"},
+			{class = "medium", prefix = "ZONE_MaykopMed"},
 		},
 		defassets = {
 			sam = 4,
@@ -818,47 +162,40 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 		spawnobjects = {},
 		is_open = true,
 	},-- End Maykop
+	{ -- Sochi Airfield-West
+		striketype = MISSIONSTRIKE.enums.striketype.airfield,
+        strikeregion = MISSIONSTRIKE.enums.region.west,                            
+		strikename = "Sochi",
+		strikeivo = "AFB",
+		strikemission = MISSIONSTRIKE.enums.strikemission.airfield, -- text mission description
+		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
+		strikezone = "ZONE_SochiStrike",
+		striketargetprefix = "TARGET_SOCHI",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_SochiSmall"},
+			{class = "medium", prefix = "ZONE_SochiMed"},
+		},
+		defassets = { -- max number of each defence asset
+			sam = 4,
+			aaa = 5,
+			manpad = 3,
+			armour = 3,
+		},
+		spawnobjects = {},
+		is_open = true,
+	},-- End Sochi
 	{ -- Gudauta Airfield-West
-		striketype = "Airfield",
-        strikeregion = "West",                            
+		striketype = MISSIONSTRIKE.enums.striketype.airfield,
+        strikeregion = MISSIONSTRIKE.enums.region.west,                            
 		strikename = "Gudauta",
 		strikeivo = "AFB",
-		--strikecoords = "44  40  54 N | 040  02  08 E",
-		strikemission = "CRATER RUNWAY AND ATTRITE AVIATION ASSETS ON THE GROUND",
+		strikemission = MISSIONSTRIKE.enums.strikemission.airfield, -- text mission description
 		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_Strike_Gudauta",
-		striketargets = {
-            statics= {},
-			groups = {
-				"TARGET_GUDAUTA_01",
-				"TARGET_GUDAUTA_02",
-			},
-		},
-		zones = {
-			medium = {
-				{ class = "medium", loc = "ZONE_Med_Gudauta_01", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Gudauta_02", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Gudauta_03", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Gudauta_04", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Gudauta_05", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Gudauta_06", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Gudauta_07", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Gudauta_08", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Gudauta_09", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Gudauta_10", is_open = true },
-			},
-			small = {
-				{ class = "small", loc = "ZONE_Small_Gudauta_01", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Gudauta_02", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Gudauta_03", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Gudauta_04", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Gudauta_05", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Gudauta_06", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Gudauta_07", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Gudauta_08", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Gudauta_09", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Gudauta_10", is_open = true },
-			},
+		striketargetprefix = "TARGET_GUDAUTA",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_Small_Gudauta"},
+			{class = "medium", prefix = "ZONE_Med_Gudauta"},
 		},
 		defassets = {
 			sam = 4,
@@ -870,45 +207,16 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 		is_open = true,
 	},-- End Gudauta
 	{ -- Sukhumi Airfield-West
-		striketype = "Airfield",
-        strikeregion = "West",                            
+		striketype = MISSIONSTRIKE.enums.striketype.airfield,
+        strikeregion = MISSIONSTRIKE.enums.region.west,                            
 		strikename = "Sukhumi",
 		strikeivo = "AFB",
-		strikemission = "CRATER RUNWAY AND ATTRITE AVIATION ASSETS ON THE GROUND",
+		strikemission = MISSIONSTRIKE.enums.strikemission.airfield, -- text mission description
 		strikezone = "ZONE_Strike_Sukhumi",
-		striketargets = {
-            statics= {},
-			groups = {
-				"TARGET_Sukhumi-1",
-				"TARGET_Sukhumi-2",
-				"TARGET_Sukhumi-3",
-			},
-		},
-		zones = {
-			medium = {
-				{ class = "medium", loc = "ZONE_Med_Sukhumi-1", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Sukhumi-2", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Sukhumi-3", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Sukhumi-4", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Sukhumi-5", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Sukhumi-6", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Sukhumi-7", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Sukhumi-8", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Sukhumi-9", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Sukhumi-10", is_open = true },
-			},
-			small = {
-				{ class = "small", loc = "ZONE_Small_Sukhumi-1", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Sukhumi-2", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Sukhumi-3", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Sukhumi-4", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Sukhumi-5", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Sukhumi-6", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Sukhumi-7", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Sukhumi-8", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Sukhumi-9", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Sukhumi-10", is_open = true },
-			},
+		striketargetprefix = "TARGET_SUKHUMI",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_Small_Sukhumi"},
+			{class = "medium", prefix = "ZONE_Med_Sukhumi"},
 		},
 		defassets = {
 			sam = 2,
@@ -920,45 +228,16 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 		is_open = true,
 	},-- End Sukhumi
 	{ -- Gelendzhik Airfield-North
-		striketype = "Airfield",
-        strikeregion = "North",                            
-		strikename = "Gelendzhik",
+		striketype = MISSIONSTRIKE.enums.striketype.airfield,
+        strikeregion = MISSIONSTRIKE.enums.region.north,                            
+		strikename = "Novorossiysk",
 		strikeivo = "AFB",
-		strikemission = "CRATER RUNWAY AND ATTRITE AVIATION ASSETS ON THE GROUND",
-		strikezone = "ZONE_Strike_Gelendzhik",
-		striketargets = {
-            statics= {},
-			groups = {
-				"TARGET_Gelendzhik-1",
-				"TARGET_Gelendzhik-2",
-				"TARGET_Gelendzhik-3",
-			},
-		},
-		zones = {
-			medium = {
-				{ class = "medium", loc = "ZONE_Med_Gelendzhik-1", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Gelendzhik-2", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Gelendzhik-3", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Gelendzhik-4", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Gelendzhik-5", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Gelendzhik-6", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Gelendzhik-7", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Gelendzhik-8", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Gelendzhik-9", is_open = true },
-				{ class = "medium", loc = "ZONE_Med_Gelendzhik-10", is_open = true },
-			},
-			small = {
-				{ class = "small", loc = "ZONE_Small_Gelendzhik-1", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Gelendzhik-2", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Gelendzhik-3", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Gelendzhik-4", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Gelendzhik-5", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Gelendzhik-6", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Gelendzhik-7", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Gelendzhik-8", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Gelendzhik-9", is_open = true },
-				{ class = "small", loc = "ZONE_Small_Gelendzhik-10", is_open = true },
-			},
+		strikemission = MISSIONSTRIKE.enums.strikemission.airfield, -- text mission description
+		strikezone = "ZONE_NovorossiyskStrike",
+		striketargetprefix = "TARGET_NOVOROSSIYSK",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_NovorossiyskSmall"},
+			{class = "medium", prefix = "ZONE_NovorossiyskMed"},
 		},
 		defassets = {
 			sam = 2,
@@ -969,37 +248,40 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 		spawnobjects = {},
 		is_open = true,
 	},-- End Sukhumi
+	{ -- Gelendzhik Airfield-North
+		striketype = MISSIONSTRIKE.enums.striketype.airfield,
+        strikeregion = MISSIONSTRIKE.enums.region.north,                            
+		strikename = "Gelendzhik",
+		strikeivo = "AFB",
+		strikemission = MISSIONSTRIKE.enums.strikemission.airfield, -- text mission description
+		strikezone = "ZONE_Strike_Gelendzhik",
+		striketargetprefix = "TARGET_GELENDZHIK",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_Small_Gelendzhik"},
+			{class = "medium", prefix = "ZONE_Med_Gelendzhik"},
+		},
+		defassets = {
+			sam = 2,
+			aaa = 4,
+			manpad = 2,
+			armour = 3,
+		},
+		spawnobjects = {},
+		is_open = true,
+	},-- End Sukhumi
+	------------ FACTORY ------------
 	{ -- LN83 Factory-Central
-		striketype = "Factory",
-        strikeregion = "Central",                            
+		striketype = MISSIONSTRIKE.enums.striketype.factory,
+        strikeregion = MISSIONSTRIKE.enums.region.central,                            
 		strikename = "LN83",
 		strikeivo = "Chiora",
-		strikecoords = "42  44  56 N | 043  32  28 E",
-		strikemission = "DESTROY WEAPONS MANUFACTURING FACILITY",
+		strikemission = MISSIONSTRIKE.enums.strikemission.factory.weapons, -- text mission description
 		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_LN83Strike",
-		striketargets = {
-			statics = {
-				"LN83_STATIC_01",
-				"LN83_STATIC_02",
-			},
-			groups = {},
-		},
-		zones = {
-			medium = {
-				{ class = "medium", loc = "ZONE_LN83Med_01", is_open = true },
-				{ class = "medium", loc = "ZONE_LN83Med_02", is_open = true },
-				{ class = "medium", loc = "ZONE_LN83Med_03", is_open = true },
-				{ class = "medium", loc = "ZONE_LN83Med_04", is_open = true },
-				{ class = "medium", loc = "ZONE_LN83Med_05", is_open = true },
-			},
-			small = {
-				{ class = "small", loc = "ZONE_LN83Small_01", is_open = true },
-				{ class = "small", loc = "ZONE_LN83Small_02", is_open = true },
-				{ class = "small", loc = "ZONE_LN83Small_03", is_open = true },
-				{ class = "small", loc = "ZONE_LN83Small_04", is_open = true },
-				{ class = "small", loc = "ZONE_LN83Small_05", is_open = true },
-			},
+		striketargetprefix = "TARGET_CHIORA",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_LN83Small"},
+			{class = "medium", prefix = "ZONE_LN83Med"},
 		},
 		defassets = { 
 			sam = 2, 
@@ -1011,38 +293,17 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 		is_open = true,
 	},-- End LN83
 	{ -- LN77 Factory-Central
-		striketype = "Factory",
-        strikeregion = "Central",                            
+		striketype = MISSIONSTRIKE.enums.striketype.factory,
+        strikeregion = MISSIONSTRIKE.enums.region.central,                            
 		strikename = "LN77",
 		strikeivo = "Verh.Balkaria",
-		strikecoords = "43  07  35 N | 043  27  24 E",
-		strikemission = "DESTROY WEAPONS MANUFACTURING FACILITY\nAND COMMUNICATIONS INFRASTRUCTURE",
+		strikemission = MISSIONSTRIKE.enums.strikemission.factory.weapons, -- text mission description
 		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_LN77Strike",
-		striketargets = {
-			statics = {
-				"LN77_STATIC_01",
-				"LN77_STATIC_02",
-				"LN77_STATIC_03",
-				"LN77_STATIC_04",
-			},
-			groups = {},
-		},
-		zones = {
-			medium = {
-				{ class = "medium", loc = "ZONE_LN77Med_01", is_open = true },
-				{ class = "medium", loc = "ZONE_LN77Med_02", is_open = true },
-				{ class = "medium", loc = "ZONE_LN77Med_03", is_open = true },
-				{ class = "medium", loc = "ZONE_LN77Med_04", is_open = true },
-				{ class = "medium", loc = "ZONE_LN77Med_05", is_open = true },
-			},
-			small = {
-				{ class = "small", loc = "ZONE_LN77Small_01", is_open = true },
-				{ class = "small", loc = "ZONE_LN77Small_02", is_open = true },
-				{ class = "small", loc = "ZONE_LN77Small_03", is_open = true },
-				{ class = "small", loc = "ZONE_LN77Small_04", is_open = true },
-				{ class = "small", loc = "ZONE_LN77Small_05", is_open = true },
-			},
+		striketargetprefix = "TARGET_LN77",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_LN77Small"},
+			{class = "medium", prefix = "ZONE_LN77Med"},
 		},
 		defassets = { 
 			sam = 2, 
@@ -1054,40 +315,17 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 		is_open = true,
 	},-- End LN77
 	{ -- LP30 Factory-Central
-		striketype = "Factory",
-        strikeregion = "Central",                            
+		striketype = MISSIONSTRIKE.enums.striketype.factory,
+        strikeregion = MISSIONSTRIKE.enums.region.central,                            
 		strikename = "LP30",
 		strikeivo = "Tyrnyauz",
-		strikecoords = "43  23  43 N | 042  55  27 E",
-		strikemission = "DESTROY WEAPONS MANUFACTURING FACILITY\nAND COMMUNICATIONS INFRASTRUCTURE",
+		strikemission = MISSIONSTRIKE.enums.strikemission.factory.weapons, -- text mission description
 		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_LP30Strike",
-		striketargets = {
-			statics = {			
-				"LP30_STATIC_01",
-				"LP30_STATIC_02",
-				"LP30_STATIC_03",
-				"LP30_STATIC_04",
-			},
-			groups = {},
-		},
-		zones = {
-			medium = {
-				{ class = "medium", loc = "ZONE_LP30Med_01", is_open = true },
-				{ class = "medium", loc = "ZONE_LP30Med_02", is_open = true },
-				{ class = "medium", loc = "ZONE_LP30Med_03", is_open = true },
-				{ class = "medium", loc = "ZONE_LP30Med_04", is_open = true },
-				{ class = "medium", loc = "ZONE_LP30Med_05", is_open = true },
-			},
-			small = {
-				{ class = "small", loc = "ZONE_LP30Small_01", is_open = true },
-				{ class = "small", loc = "ZONE_LP30Small_02", is_open = true },
-				{ class = "small", loc = "ZONE_LP30Small_03", is_open = true },
-				{ class = "small", loc = "ZONE_LP30Small_04", is_open = true },
-				{ class = "small", loc = "ZONE_LP30Small_05", is_open = true },
-				{ class = "small", loc = "ZONE_LP30Small_06", is_open = true },
-				{ class = "small", loc = "ZONE_LP30Small_07", is_open = true },
-			},
+		striketargetprefix = "TARGET_LP30",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_LP30Small"},
+			{class = "medium", prefix = "ZONE_LP30Med"},
 		},
 		defassets = { 
 			sam = 2, 
@@ -1099,39 +337,17 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 		is_open = true,
 	},-- End LP30
 	{ -- MN76 Factory-West
-		striketype = "Factory",
-        strikeregion = "East",                            
+		striketype = MISSIONSTRIKE.enums.striketype.factory,
+        strikeregion = MISSIONSTRIKE.enums.region.east,                            
 		strikename = "MN76",
 		strikeivo = "Vladikavkaz",
-		strikecoords = "43  00  23 N | 044  39  02 E",
-		strikemission = "DESTROY WEAPONS MANUFACTURING FACILITY\nAND ANCILLIARY SUPPORT INFRASTRUCTURE",
+		strikemission = MISSIONSTRIKE.enums.strikemission.factory.weapons, -- text mission description
 		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_MN76Strike",
-		striketargets = {
-			statics = {
-				"MN76_STATIC_01",
-				"MN76_STATIC_02",
-				"MN76_STATIC_03",
-				"MN76_STATIC_04",
-				"MN76_STATIC_05",
-			},
-			groups = {},
-		},
-		zones = {
-			medium = {
-				{ class = "medium", loc = "ZONE_MN76Med_01", is_open = true },
-				{ class = "medium", loc = "ZONE_MN76Med_02", is_open = true },
-				{ class = "medium", loc = "ZONE_MN76Med_03", is_open = true },
-				{ class = "medium", loc = "ZONE_MN76Med_04", is_open = true },
-				{ class = "medium", loc = "ZONE_MN76Med_05", is_open = true },
-			},
-			small = {
-				{ class = "small", loc = "ZONE_MN76Small_01", is_open = true },
-				{ class = "small", loc = "ZONE_MN76Small_02", is_open = true },
-				{ class = "small", loc = "ZONE_MN76Small_03", is_open = true },
-				{ class = "small", loc = "ZONE_MN76Small_04", is_open = true },
-				{ class = "small", loc = "ZONE_MN76Small_05", is_open = true },
-			},
+		striketargetprefix = "TARGET_MN76",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_MN76Small"},
+			{class = "medium", prefix = "ZONE_MN76Med"},
 		},
 		defassets = { 
 			sam = 2, 
@@ -1142,39 +358,64 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 		spawnobjects = {},
 		is_open = true,
 	},-- End MN76
+	------------ PORT ------------
+	{ -- DK05 Port-North
+		striketype = MISSIONSTRIKE.enums.striketype.port,
+        strikeregion = MISSIONSTRIKE.enums.region.north,                            
+		strikename = "DK05",
+		strikeivo = "Novorossiysk",
+		strikemission = MISSIONSTRIKE.enums.strikemission.port.docks, -- text mission description
+		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
+		strikezone = "ZONE_DK05Strike",
+		striketargetprefix = "TARGET_DK05",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_DK05Small"},
+			{class = "medium", prefix = "ZONE_DK05Med"},
+		},
+		defassets = { 
+			sam = 2, 
+			aaa = 4, 
+			manpad = 2, 
+			armour = 2, 
+		},
+		spawnobjects = {},
+		is_open = true,
+	},-- End DK05
+	{ -- EJ08 Port-North
+		striketype = MISSIONSTRIKE.enums.striketype.port,
+        strikeregion = MISSIONSTRIKE.enums.region.north,                            
+		strikename = "EJ08",
+		strikeivo = "Tuapse",
+		strikemission = MISSIONSTRIKE.enums.strikemission.port.fuel, -- text mission description
+		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
+		strikezone = "ZONE_EJ08Strike",
+		striketargetprefix = "TARGET_EJ08",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_EJ08Small"},
+			{class = "medium", prefix = "ZONE_EJ08Med"},
+		},
+		defassets = { 
+			sam = 2, 
+			aaa = 3, 
+			manpad = 2, 
+			armour = 2, 
+		},
+		spawnobjects = {},
+		is_open = true,
+	},-- End EJ08
+	------------ BRIDGE ------------
 	{ -- MN72 Bridge-East
-		striketype = "Bridge",
-        strikeregion = "East",                            
+		striketype = MISSIONSTRIKE.enums.striketype.bridge,
+        strikeregion = MISSIONSTRIKE.enums.region.east,                            
 		strikename = "MN72",
 		strikeivo = "Kazbegi",
-		strikecoords = "44  04  38 N | 041  58  15 E",
-		strikemission = "DESTROY ROAD BRIDGE",
+		strikemission = MISSIONSTRIKE.enums.strikemission.bridge.road, -- text mission description
 		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_MN72Strike",
-		striketargets = {
-			statics = {},
-			groups = {},
-		},
-		zones = {
-			medium = {
-				{ class = "medium", loc = "ZONE_MN72Med_01", is_open = true },
-				{ class = "medium", loc = "ZONE_MN72Med_02", is_open = true },
-				{ class = "medium", loc = "ZONE_MN72Med_03", is_open = true },
-				{ class = "medium", loc = "ZONE_MN72Med_04", is_open = true },
-				{ class = "medium", loc = "ZONE_MN72Med_05", is_open = true },
-			},
-			small = {
-				{ class = "small", loc = "ZONE_MN72Small_01", is_open = true },
-				{ class = "small", loc = "ZONE_MN72Small_02", is_open = true },
-				{ class = "small", loc = "ZONE_MN72Small_03", is_open = true },
-				{ class = "small", loc = "ZONE_MN72Small_04", is_open = true },
-				{ class = "small", loc = "ZONE_MN72Small_05", is_open = true },
-				{ class = "small", loc = "ZONE_MN72Small_06", is_open = true },
-				{ class = "small", loc = "ZONE_MN72Small_07", is_open = true },
-				{ class = "small", loc = "ZONE_MN72Small_08", is_open = true },
-				{ class = "small", loc = "ZONE_MN72Small_09", is_open = true },
-				{ class = "small", loc = "ZONE_MN72Small_10", is_open = true },
-			},
+		striketargetprefix = "TARGET_MN72",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_MN72Small"},
+			{class = "medium", prefix = "ZONE_MN72Med"},
 		},
 		defassets = { 
 			sam = 2, 
@@ -1186,39 +427,17 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 		is_open = true,
 	},-- End MN72
 	{ -- GJ38 Bridge-Central
-		striketype = "Bridge",
-        strikeregion = "Central",                            
+		striketype = MISSIONSTRIKE.enums.striketype.bridge,
+        strikeregion = MISSIONSTRIKE.enums.region.central,                            
 		strikename = "GJ38",
 		strikeivo = "Ust Dzheguta",
-		strikecoords = "DMPI A 44  04  38 N | 041  58  15 E\n\nDMPI B 44  04  23 N | 041  58  34 E",
-		strikemission = "DESTROY ROAD BRIDGE DMPI A AND\nRAIL BRIDGE DMPI B",
+		strikemission = MISSIONSTRIKE.enums.strikemission.bridge.roadrail, -- text mission description
 		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_GJ38Strike",
-		striketargets = {
-			statics = {},
-			groups = {},
-			"GJ38_STATIC_01",
-		},
-		zones = {
-			medium = {
-				{ class = "medium", loc = "ZONE_GJ38Med_01", is_open = true },
-				{ class = "medium", loc = "ZONE_GJ38Med_02", is_open = true },
-				{ class = "medium", loc = "ZONE_GJ38Med_03", is_open = true },
-				{ class = "medium", loc = "ZONE_GJ38Med_04", is_open = true },
-				{ class = "medium", loc = "ZONE_GJ38Med_05", is_open = true },
-			},
-			small = {
-				{ class = "small", loc = "ZONE_GJ38Small_01", is_open = true },
-				{ class = "small", loc = "ZONE_GJ38Small_02", is_open = true },
-				{ class = "small", loc = "ZONE_GJ38Small_03", is_open = true },
-				{ class = "small", loc = "ZONE_GJ38Small_04", is_open = true },
-				{ class = "small", loc = "ZONE_GJ38Small_05", is_open = true },
-				{ class = "small", loc = "ZONE_GJ38Small_06", is_open = true },
-				{ class = "small", loc = "ZONE_GJ38Small_07", is_open = true },
-				{ class = "small", loc = "ZONE_GJ38Small_08", is_open = true },
-				{ class = "small", loc = "ZONE_GJ38Small_09", is_open = true },
-				{ class = "small", loc = "ZONE_GJ38Small_10", is_open = true },
-			},
+		striketargetprefix = "TARGET_GJ38",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_GJ38Small"},
+			{class = "medium", prefix = "ZONE_GJ38Med"},
 		},
 		defassets = { 
 			sam = 2, 
@@ -1230,38 +449,17 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 		is_open = true,
 	},-- End GJ38
 	{ -- GJ21 Bridge-Central
-		striketype = "Bridge",
-        strikeregion = "Central",                            
+		striketype = MISSIONSTRIKE.enums.striketype.bridge,
+        strikeregion = MISSIONSTRIKE.enums.region.central,                            
 		strikename = "GJ21",
 		strikeivo = "Teberda",
-		strikecoords = "43  26  47 N | 041  44  28 E",
-		strikemission = "DESTROY ROAD BRIDGE",
+		strikemission = MISSIONSTRIKE.enums.strikemission.bridge.road, -- text mission description
 		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
 		strikezone = "ZONE_GJ21Strike",
-		striketargets = {
-			statics = {},
-			groups = {},
-		},
-		zones = {
-			medium = {
-				{ class = "medium", loc = "ZONE_GJ21Med_01", is_open = true },
-				{ class = "medium", loc = "ZONE_GJ21Med_02", is_open = true },
-				{ class = "medium", loc = "ZONE_GJ21Med_03", is_open = true },
-				{ class = "medium", loc = "ZONE_GJ21Med_04", is_open = true },
-				{ class = "medium", loc = "ZONE_GJ21Med_05", is_open = true },
-			},
-			small = {
-				{ class = "small", loc = "ZONE_GJ21Small_01", is_open = true },
-				{ class = "small", loc = "ZONE_GJ21Small_02", is_open = true },
-				{ class = "small", loc = "ZONE_GJ21Small_03", is_open = true },
-				{ class = "small", loc = "ZONE_GJ21Small_04", is_open = true },
-				{ class = "small", loc = "ZONE_GJ21Small_05", is_open = true },
-				{ class = "small", loc = "ZONE_GJ21Small_06", is_open = true },
-				{ class = "small", loc = "ZONE_GJ21Small_07", is_open = true },
-				{ class = "small", loc = "ZONE_GJ21Small_08", is_open = true },
-				{ class = "small", loc = "ZONE_GJ21Small_09", is_open = true },
-				{ class = "small", loc = "ZONE_GJ21Small_10", is_open = true },
-			},
+		striketargetprefix = "TARGET_GJ21",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_GJ21Small"},
+			{class = "medium", prefix = "ZONE_GJ21Med"},
 		},
 		defassets = { 
 			sam = 2, 
@@ -1272,12 +470,57 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 		spawnobjects = {},
 		is_open = true,
 	},-- End GJ21
+	{ -- GJ22 Bridge-West
+		striketype = MISSIONSTRIKE.enums.striketype.bridge,
+        strikeregion = MISSIONSTRIKE.enums.region.west,                            
+		strikename = "GJ22",
+		strikeivo = "Verkhnyaya Teberda",
+		strikemission = MISSIONSTRIKE.enums.strikemission.bridge.road, -- text mission description
+		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
+		strikezone = "ZONE_GJ22Strike",
+		striketargetprefix = "TARGET_GJ22",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_GJ22Small"},
+			{class = "medium", prefix = "ZONE_GJ22Med"},
+		},
+		defassets = { 
+			sam = 2, 
+			aaa = 4, 
+			manpad = 1, 
+			armour = 2, 
+		},
+		spawnobjects = {},
+		is_open = true,
+	},-- End GJ22
+	{ -- GJ18 Bridge-West
+		striketype = MISSIONSTRIKE.enums.striketype.bridge,
+        strikeregion = MISSIONSTRIKE.enums.region.west,                            
+		strikename = "GJ18",
+		strikeivo = "Ispravnaya",
+		strikemission = MISSIONSTRIKE.enums.strikemission.bridge.road, -- text mission description
+		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
+		strikezone = "ZONE_GJ18Strike",
+		striketargetprefix = "TARGET_GJ18",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_GJ18Small"},
+			{class = "medium", prefix = "ZONE_GJ18Med"},
+		},
+		defassets = { 
+			sam = 2, 
+			aaa = 4, 
+			manpad = 1, 
+			armour = 2, 
+		},
+		spawnobjects = {},
+		is_open = true,
+	},-- End GJ18
+	------------ CAMP ------------
 	{ -- Camp-East
-		striketype = "Camp",
-        strikeregion = "East",                            
+		striketype = MISSIONSTRIKE.enums.striketype.camp,
+        strikeregion = MISSIONSTRIKE.enums.region.east,                            
 		strikename = "Generate",
 		strikeivo = "Mission",
-		strikemission = "FIND AND DESTROY INSURGENT CAMP",
+		strikemission = MISSIONSTRIKE.enums.strikemission.camp, -- text mission description
 		striketargets = {
 			{ 
 				strikezone = "ZONE_Camp-1", 
@@ -1322,11 +565,11 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 		},
 	},-- End Camp-East
 	{ -- Camp-Central
-		striketype = "Camp",
-        strikeregion = "Central",                            
+		striketype = MISSIONSTRIKE.enums.striketype.camp,
+        strikeregion = MISSIONSTRIKE.enums.region.central,                            
 		strikename = "Generate",
 		strikeivo = "Mission",
-		strikemission = "FIND AND DESTROY INSURGENT CAMP",
+		strikemission = MISSIONSTRIKE.enums.strikemission.camp, -- text mission description
 		striketargets = {
 			{ 
 				strikezone = "ZONE_Camp-11", 
@@ -1371,11 +614,11 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 		},
 	},-- End Camp-East
 	{ -- Camp-West
-		striketype = "Camp",
-        strikeregion = "West",                            
+		striketype = MISSIONSTRIKE.enums.striketype.camp,
+        strikeregion = MISSIONSTRIKE.enums.region.west,                            
 		strikename = "Generate",
 		strikeivo = "Mission",
-		strikemission = "FIND AND DESTROY INSURGENT CAMP",
+		strikemission = MISSIONSTRIKE.enums.strikemission.camp, -- text mission description
 		striketargets = {
 			{ 
 				strikezone = "ZONE_Camp-21", 
@@ -1419,12 +662,93 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 			},
 		},
 	},-- End Camp-West
+	------------ CONVOY ------------
+	{ -- Convoy-West
+		striketype = MISSIONSTRIKE.enums.striketype.convoy,
+        strikeregion = MISSIONSTRIKE.enums.region.west,                            
+		strikename = "Generate",
+		strikeivo = "Convoy Mission",
+		strikemission = MISSIONSTRIKE.enums.strikemission.convoy, -- text mission description
+		option = {
+			"Light",
+			"Heavy",
+		},
+		striketargets = {
+			{ 
+				startzone = "ZONE_Convoy_Start-1",
+				endzone = "ZONE_Convoy_End-1",
+				destname = "Gudauta Airfield",
+				is_open = true
+			},
+			{ 
+				startzone = "ZONE_Convoy_Start-2",
+				endzone = "ZONE_Convoy_End-2",
+				destname = "Gudauta Airfield",
+				is_open = true
+			},
+			{ 
+				startzone = "ZONE_Convoy_Start-3",
+				endzone = "ZONE_Convoy_End-3",
+				destname = "Sukhumi Airfield",
+				is_open = true
+			},
+			{ 
+				startzone = "ZONE_Convoy_Start-4",
+				endzone = "ZONE_Convoy_End-4",
+				destname = "Sukhumi Airfield",
+				is_open = true
+			},
+		},
+	},-- End Convoy-West
+	{ -- Convoy-Central
+		striketype = MISSIONSTRIKE.enums.striketype.convoy,
+        strikeregion = MISSIONSTRIKE.enums.region.central,                            
+		strikename = "Generate",
+		strikeivo = "Convoy Mission",
+		strikemission = MISSIONSTRIKE.enums.strikemission.convoy, -- text mission description
+		striketargets = {
+			{ 
+				startzone = "ZONE_Convoy_Start-5",
+				endzone = "ZONE_Convoy_End-5",
+				destname = "Kutaisi Airfield",
+				is_open = true
+			},
+			{ 
+				startzone = "ZONE_Convoy_Start-6",
+				endzone = "ZONE_Convoy_End-5",
+				destname = "Kutaisi Airfield",
+				is_open = true
+			},
+			{ 
+				startzone = "ZONE_Convoy_Start-7",
+				endzone = "ZONE_Convoy_End-7",
+				destname = "Khashuri",
+				is_open = true
+			},
+			{ 
+				startzone = "ZONE_Convoy_Start-8",
+				endzone = "ZONE_Convoy_End-8",
+				destname = "Khashuri",
+				is_open = true
+			},
+		},
+	},-- End Convoy-Central
 }
 
 
+
+-- Start Strike Attack Module
+if MISSIONSTRIKE.Start then
+	_msg = MISSIONSTRIKE.traceTitle .. "Call Start() from missionstrike_data."
+	BASE:T(_msg)
+	MISSIONSTRIKE:Start()
+end
+
+-- END STRIKE ATTACK DATA
 --- strike Defence spawn templates ---
 -- if late activated templates are used in miz,
 -- list them here. Otherwise, built-in templates will be used
+--[[
 MISSIONSTRIKE.defenceTemplates = {
 	sam = {
 		"SAM_Sa3Battery",
@@ -1460,10 +784,23 @@ MISSIONSTRIKE.campTemplates = {
 	}
 }
 
------------------------------------
---- Convoy Strike Mission Data ---
------------------------------------
+MISSIONSTRIKE.convoyTemplates = {
+	main = "CONVOY_base",
+	convoy = {
+		light = {
+			"CONVOY_light-1",
+			"CONVOY_light-2",
+		},
+		heavy = {
+			"CONVOY_heavy-1",
+			"CONVOY_heavy-2",
+		},
+	},
+}
+--]]
 
+-- Convoy Strike Mission Data ---
+--[[
 SpawnConvoys = { -- map portion, { spawn host, nearest town, Lat Long, destination zone, spawned status } ...
 	west = {
 		{ 
@@ -1571,20 +908,12 @@ _soft_west_args = {
 	SoftType,
 	SoftThreats
 }
-
+--]]
 -- END CONVOY ATTACK DATA
 
--- Start Strike Attack Module
-if MISSIONSTRIKE.Start then
-	_msg = MISSIONSTRIKE.traceTitle .. "Call Start()"
-	BASE:T(_msg)
-
-	MISSIONSTRIKE:Start()
-end
-
--- END STRIKE ATTACK DATA
--- --- strike Static Object spawn templates ---
--- TableStaticTemplates = {
+-- strike Static Object spawn templates
+--[[
+	-- TableStaticTemplates = {
 -- 	target = {
 -- 		"FACTORY_Workshop",
 -- 		"FACTORY_Techcombine",
@@ -1617,198 +946,199 @@ end
 -- 		"ARMOUR_Heavy_04",
 -- 	},
 -- }
+--]]
+-- END strike Static Object spawn templates
 
---------------------------------
---- Camp Strike Mission Data ---
---------------------------------
+-- Camp Strike Mission Data
+--[[
+- camp spawns per location
+TableCamps = { -- map portion, { camp zone, nearest town, Lat Long, spawned status } ...
+	east = {
+		{ 
+			loc = ZONE:New("ZONE_Camp-1"), 
+			town = "Kvemo-Sba", 
+			coords = "42  34  02 N | 044  10  20 E", 
+			is_open = true 
+		},
+		{ 
+			loc = ZONE:New("ZONE_Camp-2"), 
+			town = "Kvemo-Roka", 
+			coords = "42  32  48 N | 044  07  01 E", 
+			is_open = true 
+		}, 
+		{ 
+			loc = ZONE:New("ZONE_Camp-3"), 
+			town = "Edisa", 
+			coords = "42  32  21 N | 044  12  10 E", 
+			is_open = true 
+		},
+		{ 
+			loc = ZONE:New("ZONE_Camp-4"), 
+			town = "Kvemo-Khoshka", 
+			coords = "42  27  07 N | 044  03  25 E", 
+			is_open = true
+		},
+		{ 
+			loc = ZONE:New("ZONE_Camp-5"), 
+			town = "Elbakita", 
+			coords = "42  25  24 N | 044  00  40 E", 
+			is_open = true
+		},
+		{ 
+			loc = ZONE:New("ZONE_Camp-6"), 
+			town = "Tsru", 
+			coords = "42  22  50 N | 044  01  55 E", 
+			is_open = true
+		},
+		{ 
+			loc = ZONE:New("ZONE_Camp-7"), 
+			town = "Didi-Gupta", 
+			coords = "42  21 11 N | 043  54  18 E", 
+			is_open = true
+		},
+		{ 
+			loc = ZONE:New("ZONE_Camp-8"), 
+			town = "Kekhvi", 
+			coords = "42  19  10 N | 043  56  09 E", 
+			is_open = true
+		}
+	},
+	central = {
+		{ 
+			loc = ZONE:New("ZONE_Camp-11"), 
+			town = "Oni", 
+			coords = "42  35  53 N | 043  27  13 E", 
+			is_open = true
+		},
+		{ 
+			loc = ZONE:New("ZONE_Camp-12"), 
+			town = "Kvashkhieti", 
+			coords = "42  32  49 N | 043  23  10 E", 
+			is_open = true
+		}, 
+		{ 
+			loc = ZONE:New("ZONE_Camp-13"), 
+			town = "Haristvala", 
+			coords = "42  23  46 N | 043  02  27 E", 
+			is_open = true
+		},
+		{ 
+			loc = ZONE:New("ZONE_Camp-14"), 
+			town = "Ahalsopeli", 
+			coords = "42  18  11 N | 042  56  57 E", 
+			is_open = true
+		},
+		{ 
+			loc = ZONE:New("ZONE_Camp-15"), 
+			town = "Mohva", 
+			coords = "42  22  35 N | 043  21  24 E", 
+			is_open = true
+		},
+		{ 
+			loc = ZONE:New("ZONE_Camp-16"), 
+			town = "Sadmeli", 
+			coords = "42  32  05 N | 043  06  36 E", 
+			is_open = true
+		},
+		{ 
+			loc = ZONE:New("ZONE_Camp-17"), 
+			town = "Zogishi", 
+			coords = "42  33  36 N | 042  51  18 E", 
+			is_open = true
+		},
+		{ 
+			loc = ZONE:New("ZONE_Camp-18"), 
+			town = "Namohvani", 
+			coords = "42  41  39 N | 042  41  39 E", 
+			is_open = true
+		},
+	},
+	west = {
+		{ 
+			loc = ZONE:New("ZoneCampWest01"), 
+			town = "Dzhvari", 
+			coords = "42  43  01 N | 042  02  08 E", 
+			is_open = true
+		},
+		{ 
+			loc = ZONE:New("ZoneCampWest02"), 
+			town = "Tkvarcheli", 
+			coords = "42  51  45 N | 041  46  29 E", 
+			is_open = true
+		}, 
+		{ 
+			loc = ZONE:New("ZoneCampWest03"), 
+			town = "Zemo-Azhara", 
+			coords = "43 06 26 N | 041  44 04 E", 
+			is_open = true
+		},
+		{ 
+			loc = ZONE:New("ZoneCampWest04"), 
+			town = "Amtkel", 
+			coords = "43  02  05 N | 041  27  16 E", 
+			is_open = true
+		},
+		{ 
+			loc = ZONE:New("ZoneCampWest05"), 
+			town = "Gora Mukhursha", 
+			coords = "43  19  16 N | 040  52  24 E", 
+			is_open = true
+		},
+		{ 
+			loc = ZONE:New("ZoneCampWest06"), 
+			town = "Ozero Ritsa", 
+			coords = "43  28  17 N | 040  32  01 E", 
+			is_open = true
+		},
+		{ 
+			loc = ZONE:New("ZoneCampWest07"), 
+			town = "Salhino", 
+			coords = "43  31  37 N | 040  05  31 E", 
+			is_open = true
+		},
+		{ 
+			loc = ZONE:New("ZoneCampWest08"), 
+			town = "Leselidze", 
+			coords = "43  23  56 N | 040  00  35 E", 
+			is_open = true
+		},
+	},
+}
 
---- camp spawns per location
--- TableCamps = { -- map portion, { camp zone, nearest town, Lat Long, spawned status } ...
--- 	east = {
--- 		{ 
--- 			loc = ZONE:New("ZONE_Camp-1"), 
--- 			town = "Kvemo-Sba", 
--- 			coords = "42  34  02 N | 044  10  20 E", 
--- 			is_open = true 
--- 		},
--- 		{ 
--- 			loc = ZONE:New("ZONE_Camp-2"), 
--- 			town = "Kvemo-Roka", 
--- 			coords = "42  32  48 N | 044  07  01 E", 
--- 			is_open = true 
--- 		}, 
--- 		{ 
--- 			loc = ZONE:New("ZONE_Camp-3"), 
--- 			town = "Edisa", 
--- 			coords = "42  32  21 N | 044  12  10 E", 
--- 			is_open = true 
--- 		},
--- 		{ 
--- 			loc = ZONE:New("ZONE_Camp-4"), 
--- 			town = "Kvemo-Khoshka", 
--- 			coords = "42  27  07 N | 044  03  25 E", 
--- 			is_open = true
--- 		},
--- 		{ 
--- 			loc = ZONE:New("ZONE_Camp-5"), 
--- 			town = "Elbakita", 
--- 			coords = "42  25  24 N | 044  00  40 E", 
--- 			is_open = true
--- 		},
--- 		{ 
--- 			loc = ZONE:New("ZONE_Camp-6"), 
--- 			town = "Tsru", 
--- 			coords = "42  22  50 N | 044  01  55 E", 
--- 			is_open = true
--- 		},
--- 		{ 
--- 			loc = ZONE:New("ZONE_Camp-7"), 
--- 			town = "Didi-Gupta", 
--- 			coords = "42  21 11 N | 043  54  18 E", 
--- 			is_open = true
--- 		},
--- 		{ 
--- 			loc = ZONE:New("ZONE_Camp-8"), 
--- 			town = "Kekhvi", 
--- 			coords = "42  19  10 N | 043  56  09 E", 
--- 			is_open = true
--- 		}
--- 	},
--- 	central = {
--- 		{ 
--- 			loc = ZONE:New("ZONE_Camp-11"), 
--- 			town = "Oni", 
--- 			coords = "42  35  53 N | 043  27  13 E", 
--- 			is_open = true
--- 		},
--- 		{ 
--- 			loc = ZONE:New("ZONE_Camp-12"), 
--- 			town = "Kvashkhieti", 
--- 			coords = "42  32  49 N | 043  23  10 E", 
--- 			is_open = true
--- 		}, 
--- 		{ 
--- 			loc = ZONE:New("ZONE_Camp-13"), 
--- 			town = "Haristvala", 
--- 			coords = "42  23  46 N | 043  02  27 E", 
--- 			is_open = true
--- 		},
--- 		{ 
--- 			loc = ZONE:New("ZONE_Camp-14"), 
--- 			town = "Ahalsopeli", 
--- 			coords = "42  18  11 N | 042  56  57 E", 
--- 			is_open = true
--- 		},
--- 		{ 
--- 			loc = ZONE:New("ZONE_Camp-15"), 
--- 			town = "Mohva", 
--- 			coords = "42  22  35 N | 043  21  24 E", 
--- 			is_open = true
--- 		},
--- 		{ 
--- 			loc = ZONE:New("ZONE_Camp-16"), 
--- 			town = "Sadmeli", 
--- 			coords = "42  32  05 N | 043  06  36 E", 
--- 			is_open = true
--- 		},
--- 		{ 
--- 			loc = ZONE:New("ZONE_Camp-17"), 
--- 			town = "Zogishi", 
--- 			coords = "42  33  36 N | 042  51  18 E", 
--- 			is_open = true
--- 		},
--- 		{ 
--- 			loc = ZONE:New("ZONE_Camp-18"), 
--- 			town = "Namohvani", 
--- 			coords = "42  41  39 N | 042  41  39 E", 
--- 			is_open = true
--- 		},
--- 	},
--- 	west = {
--- 		{ 
--- 			loc = ZONE:New("ZoneCampWest01"), 
--- 			town = "Dzhvari", 
--- 			coords = "42  43  01 N | 042  02  08 E", 
--- 			is_open = true
--- 		},
--- 		{ 
--- 			loc = ZONE:New("ZoneCampWest02"), 
--- 			town = "Tkvarcheli", 
--- 			coords = "42  51  45 N | 041  46  29 E", 
--- 			is_open = true
--- 		}, 
--- 		{ 
--- 			loc = ZONE:New("ZoneCampWest03"), 
--- 			town = "Zemo-Azhara", 
--- 			coords = "43 06 26 N | 041  44 04 E", 
--- 			is_open = true
--- 		},
--- 		{ 
--- 			loc = ZONE:New("ZoneCampWest04"), 
--- 			town = "Amtkel", 
--- 			coords = "43  02  05 N | 041  27  16 E", 
--- 			is_open = true
--- 		},
--- 		{ 
--- 			loc = ZONE:New("ZoneCampWest05"), 
--- 			town = "Gora Mukhursha", 
--- 			coords = "43  19  16 N | 040  52  24 E", 
--- 			is_open = true
--- 		},
--- 		{ 
--- 			loc = ZONE:New("ZoneCampWest06"), 
--- 			town = "Ozero Ritsa", 
--- 			coords = "43  28  17 N | 040  32  01 E", 
--- 			is_open = true
--- 		},
--- 		{ 
--- 			loc = ZONE:New("ZoneCampWest07"), 
--- 			town = "Salhino", 
--- 			coords = "43  31  37 N | 040  05  31 E", 
--- 			is_open = true
--- 		},
--- 		{ 
--- 			loc = ZONE:New("ZoneCampWest08"), 
--- 			town = "Leselidze", 
--- 			coords = "43  23  56 N | 040  00  35 E", 
--- 			is_open = true
--- 		},
--- 	},
--- }
+--- Camp spawn templates ---
+ArmourTemplates = {
+	"ARMOUR_Heavy_01",
+	"ARMOUR_Heavy_02",
+	"ARMOUR_Heavy_03",
+	"ARMOUR_Heavy_04",
+} 
 
--- --- Camp spawn templates ---
--- ArmourTemplates = {
--- 	"ARMOUR_Heavy_01",
--- 	"ARMOUR_Heavy_02",
--- 	"ARMOUR_Heavy_03",
--- 	"ARMOUR_Heavy_04",
--- } 
-
--- -- Camp strike spawn arguments
--- -- East zones
--- _camp_east_args = {
--- 	ArmourTemplates,
--- 	TableCamps.east,
--- 	"East"
--- }
--- -- Central Zones
--- _camp_central_args = {
--- 	ArmourTemplates,
--- 	TableCamps.central,
--- 	"Central"
--- }
--- -- West Zones
--- _camp_west_args = {
--- 	ArmourTemplates,
--- 	TableCamps.west,
--- 	"West"
--- }
--- -- TODO: Remove oldest Camp Attack mission
--- _camp_remove_args = { 
--- 	CampAttackSpawn,
--- 	SpawnTentGroup,
--- 	SpawnInfGroup
--- }
-
+-- Camp strike spawn arguments
+-- East zones
+_camp_east_args = {
+	ArmourTemplates,
+	TableCamps.east,
+	"East"
+}
+-- Central Zones
+_camp_central_args = {
+	ArmourTemplates,
+	TableCamps.central,
+	"Central"
+}
+-- West Zones
+_camp_west_args = {
+	ArmourTemplates,
+	TableCamps.west,
+	"West"
+}
+-- TODO: Remove oldest Camp Attack mission
+_camp_remove_args = { 
+	CampAttackSpawn,
+	SpawnTentGroup,
+	SpawnInfGroup
+}
+--]]
+-- END Camp Strike Mission Data
 
 
