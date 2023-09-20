@@ -13,7 +13,7 @@ core\staticranges.lua
 staticranges_data.lua
 core\missioncap.lua
 missioncap_data.lua
-core\missionstrike.lua
+missionstrike.lua
 missionstrike_data.lua
 core\cvncontrol.lua
 cvncontrol_data.lua
