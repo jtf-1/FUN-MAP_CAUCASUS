@@ -41,7 +41,7 @@ copy %kneeboardpath%*.* %projectroot%Temp\KNEEBOARD\IMAGES
 
 
 :: Add build content to MIZ
-For %%I IN (%projectroot%DEV_*.miz) do (
+For %%I IN (%projectroot%DEV_*.miz %projectroot%TEST_*.miz) do (
   ECHO %DATE:~6,4%-%DATE:~3,2%-%DATE:~0,2%T%TIME%      Building MIZ file:    %%I >> %log%
   echo Mission: %%I
   echo.
