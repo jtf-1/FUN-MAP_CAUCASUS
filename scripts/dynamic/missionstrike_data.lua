@@ -336,7 +336,7 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 		spawnobjects = {},
 		is_open = true,
 	},-- End LP30
-	{ -- MN76 Factory-West
+	{ -- MN76 Factory-East
 		striketype = MISSIONSTRIKE.enums.striketype.factory,
         strikeregion = MISSIONSTRIKE.enums.region.east,                            
 		strikename = "MN76",
@@ -518,7 +518,7 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 	{ -- Camp-East
 		striketype = MISSIONSTRIKE.enums.striketype.camp,
         strikeregion = MISSIONSTRIKE.enums.region.east,                            
-		strikename = "Generate",
+		strikename = "Add",
 		strikeivo = "Mission",
 		strikemission = MISSIONSTRIKE.enums.strikemission.camp, -- text mission description
 		striketargets = {
@@ -567,7 +567,7 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 	{ -- Camp-Central
 		striketype = MISSIONSTRIKE.enums.striketype.camp,
         strikeregion = MISSIONSTRIKE.enums.region.central,                            
-		strikename = "Generate",
+		strikename = "Add",
 		strikeivo = "Mission",
 		strikemission = MISSIONSTRIKE.enums.strikemission.camp, -- text mission description
 		striketargets = {
@@ -616,7 +616,7 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 	{ -- Camp-West
 		striketype = MISSIONSTRIKE.enums.striketype.camp,
         strikeregion = MISSIONSTRIKE.enums.region.west,                            
-		strikename = "Generate",
+		strikename = "Add",
 		strikeivo = "Mission",
 		strikemission = MISSIONSTRIKE.enums.strikemission.camp, -- text mission description
 		striketargets = {
@@ -666,71 +666,88 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 	{ -- Convoy-West
 		striketype = MISSIONSTRIKE.enums.striketype.convoy,
         strikeregion = MISSIONSTRIKE.enums.region.west,                            
-		strikename = "Generate",
+		strikename = "Add",
 		strikeivo = "Convoy Mission",
 		strikemission = MISSIONSTRIKE.enums.strikemission.convoy, -- text mission description
-		option = {
-			"Light",
-			"Heavy",
-		},
 		striketargets = {
 			{ 
-				startzone = "ZONE_Convoy_Start-1",
+				strikezone = "ZONE_Convoy_Start-1",
 				endzone = "ZONE_Convoy_End-1",
 				destname = "Gudauta Airfield",
 				is_open = true
 			},
 			{ 
-				startzone = "ZONE_Convoy_Start-2",
+				strikezone = "ZONE_Convoy_Start-2",
 				endzone = "ZONE_Convoy_End-2",
 				destname = "Gudauta Airfield",
 				is_open = true
 			},
 			{ 
-				startzone = "ZONE_Convoy_Start-3",
+				strikezone = "ZONE_Convoy_Start-3",
 				endzone = "ZONE_Convoy_End-3",
 				destname = "Sukhumi Airfield",
 				is_open = true
 			},
 			{ 
-				startzone = "ZONE_Convoy_Start-4",
+				strikezone = "ZONE_Convoy_Start-4",
 				endzone = "ZONE_Convoy_End-4",
 				destname = "Sukhumi Airfield",
 				is_open = true
 			},
 		},
+		options = {
+			MISSIONSTRIKE.enums.convoy.supply,
+			MISSIONSTRIKE.enums.convoy.armoured,
+		},
 	},-- End Convoy-West
 	{ -- Convoy-Central
 		striketype = MISSIONSTRIKE.enums.striketype.convoy,
         strikeregion = MISSIONSTRIKE.enums.region.central,                            
-		strikename = "Generate",
+		strikename = "Add",
 		strikeivo = "Convoy Mission",
 		strikemission = MISSIONSTRIKE.enums.strikemission.convoy, -- text mission description
 		striketargets = {
 			{ 
-				startzone = "ZONE_Convoy_Start-5",
+				strikezone = "ZONE_Convoy_Start-5",
 				endzone = "ZONE_Convoy_End-5",
 				destname = "Kutaisi Airfield",
 				is_open = true
 			},
 			{ 
-				startzone = "ZONE_Convoy_Start-6",
+				strikezone = "ZONE_Convoy_Start-6",
 				endzone = "ZONE_Convoy_End-5",
 				destname = "Kutaisi Airfield",
 				is_open = true
 			},
 			{ 
-				startzone = "ZONE_Convoy_Start-7",
+				strikezone = "ZONE_Convoy_Start-7",
 				endzone = "ZONE_Convoy_End-7",
 				destname = "Khashuri",
 				is_open = true
 			},
+		},
+		options = {
+			MISSIONSTRIKE.enums.convoy.supply,
+			MISSIONSTRIKE.enums.convoy.armoured,
+		},
+	},-- End Convoy-Central
+	{ -- Convoy-East
+		striketype = MISSIONSTRIKE.enums.striketype.convoy,
+        strikeregion = MISSIONSTRIKE.enums.region.east,                            
+		strikename = "Add",
+		strikeivo = "Convoy Mission",
+		strikemission = MISSIONSTRIKE.enums.strikemission.convoy, -- text mission description
+		striketargets = {
 			{ 
-				startzone = "ZONE_Convoy_Start-8",
+				strikezone = "ZONE_Convoy_Start-8",
 				endzone = "ZONE_Convoy_End-8",
 				destname = "Khashuri",
 				is_open = true
 			},
+		},
+		options = {
+			MISSIONSTRIKE.enums.convoy.supply,
+			MISSIONSTRIKE.enums.convoy.armoured,
 		},
 	},-- End Convoy-Central
 }
