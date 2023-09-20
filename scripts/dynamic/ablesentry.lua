@@ -13,7 +13,7 @@ ABLESENTRY.menu = {}
 ABLESENTRY.zoneName = "ConvoyObjectiveAbleSentry"
 
 function ABLESENTRY:Start()
-    _msg = self.traceTitle .. "Start()"
+    _msg = string.format("%sStart()", self.traceTitle) 
     BASE:T(_msg)
 	
     self.zone = ZONE:FindByName( self.zoneName ) 
@@ -37,7 +37,10 @@ function ABLESENTRY:Start()
 							COORDINATE:RemoveMark( SpawnGroup.mapmarkid ) -- spawn.mapmarkid
 						end    
 						local coordsAbleSentry = SpawnGroup:GetCoordinate()
-						local labelAbleSentry = "Able Sentry Convoy\nMost recent reported postion\n" .. coordsAbleSentry:ToStringLLDMS(_SETTINGS:SetLL_Accuracy(0)) .. "\n" .. coordsAbleSentry:ToStringLLDDM(_SETTINGS:SetLL_Accuracy(3))
+						local labelAbleSentry = string.format("Able Sentry Convoy\nMost recent reported postion\n%s\n%s", 
+														coordsAbleSentry:ToStringLLDMS(_SETTINGS:SetLL_Accuracy(0)), 
+														coordsAbleSentry:ToStringLLDDM(_SETTINGS:SetLL_Accuracy(3))
+													)
 						local mapMarkAbleSentry = coordsAbleSentry:MarkToAll(labelAbleSentry, true) -- add mark to map
 						SpawnGroup.mapmarkid = mapMarkAbleSentry -- add mark ID to SPAWN object 
 					end,
@@ -47,7 +50,11 @@ function ABLESENTRY:Start()
 			)
 		:SpawnScheduled( 60 , .1 )
 	
-	self.menu = MENU_MISSION_COMMAND:New( "Able Sentry Reset",nil, self.Reset, self )
+	self.menu = MENU_MISSION_COMMAND:New( "Able Sentry Reset",
+											nil, 
+											self.Reset, 
+											self
+										)
 	
 end
 
