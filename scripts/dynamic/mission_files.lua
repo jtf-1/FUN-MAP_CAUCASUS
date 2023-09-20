@@ -15,7 +15,7 @@ __JTFLoader.Include( 'core/staticranges.lua' )          -- core file
 __JTFLoader.Include( 'staticranges_data.lua' )
 __JTFLoader.Include( 'core/missioncap.lua' )            -- core file
 __JTFLoader.Include( 'missioncap_data.lua' )
-__JTFLoader.Include( 'core/missionstrike.lua' )         -- core file
+__JTFLoader.Include( 'missionstrike.lua' )         -- core file
 __JTFLoader.Include( 'missionstrike_data.lua' )
 __JTFLoader.Include( 'core/cvncontrol.lua' )
 __JTFLoader.Include( 'cvncontrol_data.lua' )
