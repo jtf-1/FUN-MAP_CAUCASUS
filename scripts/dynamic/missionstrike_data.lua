@@ -745,6 +745,22 @@ MISSIONSTRIKE.mission = { -- TableStrikeAttack
 				is_open = true
 			},
 		},
+		striketargets = {
+			{ 
+				strikezone = "ZONE_Convoy_Start-9",
+				endzone = "ZONE_Convoy_End-9",
+				destname = "Gori",
+				is_open = true
+			},
+		},
+		striketargets = {
+			{ 
+				strikezone = "ZONE_Convoy_Start-10",
+				endzone = "ZONE_Convoy_End-10",
+				destname = "Misaktsieli",
+				is_open = true
+			},
+		},
 		options = {
 			MISSIONSTRIKE.enums.convoy.supply,
 			MISSIONSTRIKE.enums.convoy.armoured,
