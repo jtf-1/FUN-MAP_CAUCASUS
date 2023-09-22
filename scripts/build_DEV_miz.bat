@@ -38,7 +38,7 @@ copy %staticscriptpath%*.* %projectroot%Temp\l10n\DEFAULT
 mkdir %projectroot%TEMP\KNEEBOARD\IMAGES
 copy %kneeboardpath%*.* %projectroot%Temp\KNEEBOARD\IMAGES
 
-
+cd %projectroot%Temp
 
 :: Add build content to MIZ
 For %%I IN (%projectroot%DEV_*.miz %projectroot%TEST_*.miz) do (
@@ -49,8 +49,8 @@ For %%I IN (%projectroot%DEV_*.miz %projectroot%TEST_*.miz) do (
   echo +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   echo ++                     Build File                        ++
   echo +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  cd %projectroot%Temp
-  7z.exe u "%%I" *
+  7z.exe d "%%I" KNEEBOARD/
+  7z.exe a "%%I" *
 )
   
 cd %projectroot%
