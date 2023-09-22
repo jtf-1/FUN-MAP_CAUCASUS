@@ -15,7 +15,8 @@ function MISSIONSTRIKE:Start()
 	BASE:T(_msg)
 
 	-- add main menu
-	self.menu.top = MENU_COALITION:New( coalition.side.BLUE, "Strike Missions" )
+	local textTop = "Strike Missions"
+	self.menu.top = MENU_COALITION:New( coalition.side.BLUE, textTop )
 
 	--- generate strike defence spawn templates if defined in missionstrike_data.lua
 	if self.defenceTemplates then
@@ -24,13 +25,19 @@ function MISSIONSTRIKE:Start()
 		for defIndex, defenceTemplate in pairs(self.defenceTemplates) do
 			for templateIndex = 1, #defenceTemplate do
 				local templateName = defenceTemplate[templateIndex]
-				_msg = string.format("%sStart(). Add defence spawn object %s", self.traceTitle, templateName)
+				_msg = string.format("%sStart(). Add defence spawn object %s", 
+					self.traceTitle, 
+					templateName
+				)
 				BASE:T(_msg)
 				local addSpawn = self:AddSpawnTemplate(templateName)
 				if addSpawn then
 					self.defenceSpawns[templateName] = addSpawn
 				else
-					_msg = string.format("%sError! Start(). NIL returned by AddSpawn() for template %s!", self.traceTitle, templateName)
+					_msg = string.format("%sError! Start(). NIL returned by AddSpawn() for template %s!", 
+						self.traceTitle, 
+						templateName
+					)
 					BASE:E(_msg)
 				end
 			end
@@ -44,79 +51,68 @@ function MISSIONSTRIKE:Start()
 			-- type defence contains list of templates for random selection
 			if type == "defence" then
 				for index, defenceName in ipairs(template) do
-					_msg = string.format("%sAdd camp spawn object %s", self.traceTitle, defenceName)
+					_msg = string.format("%sAdd camp spawn object %s", 
+						self.traceTitle, 
+						defenceName
+					)
 					BASE:T(_msg)
 					local addSpawn = self:AddSpawnTemplate(defenceName)
 					if addSpawn then
 						self.campSpawns[defenceName] = addSpawn
 					else
-						_msg = string.format("%sError! NIL returned by AddSpawn() for template %s!", self.traceTitle, defenceName)
+						_msg = string.format("%sError! NIL returned by AddSpawn() for template %s!", 
+							self.traceTitle, 
+							defenceName
+						)
 						BASE:E(_msg)
 					end
 				end
 			else
-				_msg = string.format("%sStart(). Add camp spawn object %s", self.traceTitle, template)
+				_msg = string.format("%sStart(). Add camp spawn object %s", 
+					self.traceTitle, 
+					template
+				)
 				BASE:T(_msg)
 				local addSpawn = self:AddSpawnTemplate(template)
 				if addSpawn then
 					self.campSpawns[type] = addSpawn
 				else
-					_msg = string.format("%sError! Start(). NIL returned by AddSpawn() for template %s!", self.traceTitle, template)
+					_msg = string.format("%sError! Start(). NIL returned by AddSpawn() for template %s!", 
+						self.traceTitle, 
+						template
+					)
 					BASE:E(_msg)
 				end
 			end
 		end
 	end
 
-	-- generate convoy spawn templates
-	_msg = string.format("%sAdd convoy spawn templates", self.traceTitle)
-	BASE:T(_msg)
-
+	-- generate convoy spawn objects
 	if self.convoyTemplates then
-
+		-- table of convoy spawn objects
 		self.convoyspawn = {}
-
 		for templateType, templateValue in pairs(self.convoyTemplates) do
-		
-			-- templateValue contains list of convoy templates for random selection
-			if type(templateValue) == "table" then
-
-				-- add category for templates
-				self.convoyspawn[templateType] = {}
-
-				-- step through each convoy category
-				for index, categoryTemplate in ipairs(templateValue) do
-					_msg = string.format("%sAdd convoy spawn type %s at index %d", 
-						self.traceTitle, 
-						templateType, 
-						index
-					)
-					BASE:T(_msg)
-					local addSpawn = self:AddSpawnTemplate(categoryTemplate)
-					if addSpawn then
-						self.convoyspawn[templateType][index] = addSpawn
-					else
-						_msg = string.format("%sError adding convoy spawn. NIL returned by AddSpawn() for template index %d!", 
-							self.traceTitle, 
-							index
-						)
-						BASE:E(_msg)
-					end
-				end
-				
-			else
-				_msg = string.format("%sAdd convoy spawn type %s", 
+			-- add type for templates
+			self.convoyspawn[templateType] = {}
+			-- step through each type template
+			for index, typeTemplate in ipairs(templateValue) do
+				_msg = string.format("%sAdd convoy spawn type %s at index %d", 
 					self.traceTitle, 
-					templateType
+					templateType, 
+					index
 				)
 				BASE:T(_msg)
-				local addSpawn = self:AddSpawnTemplate(templateValue)
+				local addSpawn = self:AddSpawnTemplate(typeTemplate.template)
+				local description = typeTemplate.description
+				local threats = typeTemplate.threats
 				if addSpawn then
-					self.convoyspawn[templateType] = addSpawn
+					self.convoyspawn[templateType][index] = addSpawn
+					self.convoyspawn[templateType][index]["description"] = description
+					self.convoyspawn[templateType][index]["threats"] = threats
 				else
-					_msg = string.format("%sError! Start(). NIL returned by AddSpawn() for template %s!", 
+					_msg = string.format("%sError adding convoy spawn. NIL returned by AddSpawn() for template index %d!", 
 						self.traceTitle, 
-						templateType
+						index
 					)
 					BASE:E(_msg)
 				end
@@ -125,33 +121,42 @@ function MISSIONSTRIKE:Start()
 	end
 
 	--- initialise missions and generate strike attack menus ---
-	for strikeIndex, mission in pairs(self.mission) do -- step through self.mission and grab the mission data for each key ( = "location")
+	for strikeIndex, mission in pairs(self.missions) do -- step through self.mission and grab the mission data for each key ( = "location")
 
+		-- set ID for mission
 		mission.strikeindex = strikeIndex
 
 		local strikeType = mission.striketype
 		local strikeRegion = mission.strikeregion
 		local strikeName = mission.strikename
 		local strikeIvo = mission.strikeivo
-		local strikeZoneName = mission.strikezone
+		local strikeZone = mission.strikezone
 		local strikeOptions = mission.options
 		local strikeTargets = mission.striketargets
-		
+
 		-- Mission root contains a strikezone
-		if mission.strikezone then
-	
-			-- add text for map mark and briefing message to mission
-			mission.strikemarktext, mission.strikeattackbrieftext = self:AddBriefingText(mission)
+		if strikeZone then
 
 			-- add a container for strikezone target spawn templates
 			if not mission.striketargetspawn then
 				mission.striketargetspawn = {}
 			end
 			
-			local strikeZone = ZONE:FindByName(strikeZoneName)
-			if strikeZone then
-				_msg = string.format("%sStrike Zone %s found.", self.traceTitle, mission.strikezone)
+			local zoneStrikeZone = ZONE:FindByName(strikeZone)
+			if zoneStrikeZone then
+				_msg = string.format("%sStrike Zone %s found.", 
+					self.traceTitle, 
+					strikeZone
+				)
 				BASE:T(_msg)
+
+				mission.zonestrikezone = zoneStrikeZone
+
+				-- add text for map mark and briefing message to mission
+				local strikeMarkText, strikeAttackBriefSummary, strikeAttackBriefMission = self:AddBriefingText(mission)
+				mission.strikemarktext = strikeMarkText
+				mission.strikeattackbriefsummary = strikeAttackBriefSummary
+				mission.strikeattackbriefmission = strikeAttackBriefMission
 
 				-- generate spawn templates for late activated groups in the mission.strikezone
 				local strikeTargetPrefix = mission.striketargetprefix
@@ -162,10 +167,17 @@ function MISSIONSTRIKE:Start()
 					:FilterOnce()
 
 				if setStrikeTargetGroups == nil then
-					_msg = string.format("%sNo target templates found with prefix %s in zone %s", self.traceTitle, strikeTargetPrefix, strikeZoneName)
+					_msg = string.format("%sNo target templates found with prefix %s in zone %s", 
+						self.traceTitle, 
+						strikeTargetPrefix, 
+						strikeZone
+					)
 					BASE:E(_msg)
 				else
-					_msg = string.format("%sStrike Target templates in zone %s", self.traceTitle, strikeZoneName)
+					_msg = string.format("%sStrike Target templates in zone %s", 
+						self.traceTitle, 
+						strikeZone
+					)
 					BASE:T({_msg, setStrikeTargetGroups})
 					-- add a spawn template for each group
 					setStrikeTargetGroups:ForEachGroup(
@@ -176,7 +188,10 @@ function MISSIONSTRIKE:Start()
 							mission.striketargetspawn[groupName] = SPAWN:New(groupName)
 								:InitUnControlled()
 
-							_msg = string.format("%sCreate Strike Target spawn %s", self.traceTitle, groupName)
+							_msg = string.format("%sCreate Strike Target spawn %s", 
+								self.traceTitle, 
+								groupName
+							)
 							BASE:T(_msg)
 
 						end
@@ -184,7 +199,10 @@ function MISSIONSTRIKE:Start()
 				end
 				-- add asset spawn zones on map to mission if not already explicitly defined
 				if mission.zones == nil then
-					_msg = string.format("%sNo mission.zones pre-defined for strike zone %s. Building list of sub-zones using prefix.", self.traceTitle, strikeZoneName)
+					_msg = string.format("%sNo mission.zones pre-defined for strike zone %s. Building list of sub-zones using prefix.", 
+						self.traceTitle, 
+						strikeZone
+					)
 					BASE:T(_msg)
 					-- add table of zones to mission
 					mission.zones = {}
@@ -199,7 +217,12 @@ function MISSIONSTRIKE:Start()
 								:FilterPrefixes(prefix)
 								:FilterOnce()
 							if setStrikeZone == nil then
-								_msg = string.format("%sNo % class zones found with prefix %s for strike zone %s", self.traceTitle, class,  prefix, strikeZoneName)
+								_msg = string.format("%sNo % class zones found with prefix %s for strike zone %s", 
+									self.traceTitle, 
+									class,  
+									prefix, 
+									strikeZone
+								)
 								BASE:E(_msg)
 							else
 								setStrikeZone:ForEachZone(
@@ -220,11 +243,14 @@ function MISSIONSTRIKE:Start()
 				-- add list of static objects to mission if not already explicitly defined
 				if mission.statics == nil then
 					mission.statics = {}
-					_msg = string.format("%sAdd Statics for mission %s.", self.traceTitle, strikeName)
+					_msg = string.format("%sAdd Statics for mission %s.", 
+						self.traceTitle, 
+						strikeName
+					)
 					BASE:T(_msg)
 					-- build a SET of static object within the mission.strikezone
 					local setStrikeTargetStatics = SET_STATIC:New()
-						:FilterZones({strikeZone})
+						:FilterZones({zoneStrikeZone})
 						:FilterStart()
 					-- add each static to the mission
 					setStrikeTargetStatics:ForEachStatic(
@@ -233,90 +259,149 @@ function MISSIONSTRIKE:Start()
 							local staticName = addStatic:GetName()
 							addStatic.isAlive = true
 							table.insert(mission.statics, addStatic)
-							_msg = string.format("%sStatic %s added to mission %s", self.traceTitle, staticName, strikeName)
+							_msg = string.format("%sStatic %s added to mission %s", 
+								self.traceTitle, 
+								staticName, 
+								strikeName
+							)
 							BASE:T({_msg, static})
 						end
 					)
 				end
-				-- clear the mission static object from the map. respawn them when mission is activated
+				-- clear the mission static objects in the zone from the map. respawn them when mission is activated
 				self:RemoveStatics(mission)
 			-- log error if zone is not found in the miz
 			else
-				_msg = string.format("%sError! Strike Zone %s not found in MIZ!", self.traceTitle, mission.strikezone)
+				_msg = string.format("%sError! Strike Zone %s not found in MIZ!", 
+					self.traceTitle, 
+					mission.strikezone
+				)
 				BASE:E(_msg)
 			end
-		-- If mission has multiple strike targets from which to randomly select
-		elseif mission.striketargets ~= nil then
+
+		elseif mission.striketargets ~= nil then -- mission has multiple strike targets from which to randomly select one
 			-- step through each of the targets in the strike mission
 			for index, strikeTarget in pairs(mission.striketargets)  do
 				_msg = string.format("%s",self.traceTitle)
 				BASE:T({_msg, strikeTarget = strikeTarget})
 
-
 				-- Create a Strike Name
 				-- get coordinates of strikezone
-				local strikeZone = ZONE:FindByName(strikeTarget.strikezone)
-				if strikeZone == nil then
-					_msg = string.format("%sError adding menus. Zone %s for strike %s type %s in region %s %s not found!", self.traceTitle, strikeZone, strikeName, strikeType, strikeRegion)
+				local strikeZone = strikeTarget.strikezone
+				local zoneStrikeZone = ZONE:FindByName(strikeZone)
+				if zoneStrikeZone ~= nil then
+
+					strikeTarget.zonestrikezone = zoneStrikeZone
+
+					local spawnZoneCoord = zoneStrikeZone:GetCoordinate()
+					-- convert to MGRS
+					local spawnZoneMGRS = spawnZoneCoord:ToStringMGRS(_SETTINGS:SetMGRS_Accuracy(2))
+					-- remove spaces from MGRS and take use the last four characters
+					local strikeName = string.sub(string.gsub(spawnZoneMGRS, "%s+", ""), -6, -1)
+	
+					-- add mission context to the selected target
+					strikeTarget.striketype = mission.striketype
+					strikeTarget.strikeregion = mission.strikeregion
+					strikeTarget.strikename = strikeName
+					strikeTarget.strikeindex = strikeName
+					strikeTarget.strikemission = mission.strikemission
+	
+					-- add text for map mark and briefing message to mission
+					_msg = string.format("%sAdd briefing text to selected target %s", 
+						self.traceTitle, 
+						strikeName
+					)
+					BASE:T(_msg)
+					if mission.options then
+						strikeTarget.strikeattackbriefsummary = {}
+						strikeTarget.strikeattackbriefmission = {}
+						strikeTarget.strikemarktext = {}
+						for _, option in ipairs(mission.options) do
+							local optionText = string.format(" %s ", option)
+							local strikeMarkText, strikeAttackBriefSummary, strikeAttackBriefMission = self:AddBriefingText(strikeTarget, option)
+							strikeTarget.strikemarktext[option] = strikeMarkText
+							strikeTarget.strikeattackbriefsummary[option] = strikeAttackBriefSummary
+							strikeTarget.strikeattackbriefmission[option] = strikeAttackBriefMission
+							--strikeTarget.strikemarktext[option], strikeTarget.strikeattackbrieftext[option] = self:AddBriefingText(strikeTarget, option)
+						end						
+					else
+						local strikeMarkText, strikeAttackBriefSummary, strikeAttackBriefMission = self:AddBriefingText(strikeTarget)
+						strikeTarget.strikemarktext = strikeMarkText
+						strikeTarget.strikeattackbriefsummary = strikeAttackBriefSummary
+						strikeTarget.strikeattackbriefmission = strikeAttackBriefMission
+					end
+
+				else
+					_msg = string.format("%sError. Zone %s for strike %s type %s in region %s %s not found!", 
+						self.traceTitle, 
+						strikeZone, 
+						strikeName, 
+						strikeType, 
+						strikeRegion
+					)
+					BASE:E(_msg)
 					return
 				end
-				local spawnZoneCoord = strikeZone:GetCoordinate()
-				-- convert to MGRS
-				local spawnZoneMGRS = spawnZoneCoord:ToStringMGRS(_SETTINGS:SetMGRS_Accuracy(2))
-				-- remove spaces from MGRS and take use the last four characters
-				local strikeName = string.sub(string.gsub(spawnZoneMGRS, "%s+", ""), -6, -1)
 
-				-- add mission context to the selected target
-				strikeTarget.striketype = mission.striketype
-				strikeTarget.strikeregion = mission.strikeregion
-				strikeTarget.strikename = strikeName
-				strikeTarget.strikeindex = strikeName
-				strikeTarget.strikemission = mission.strikemission
-
-				-- add text for map mark and briefing message to mission
-				_msg = string.format("%sAdd briefing text to selected target %s", self.traceTitle, strikeName)
-				BASE:T(_msg)
-				if mission.options then
-					strikeTarget.strikeattackbrieftext = {}
-					strikeTarget.strikemarktext = {}
-					for _, option in ipairs(mission.options) do
-						local optionText = string.format(" %s ", option)
-						strikeTarget.strikemarktext[option], strikeTarget.strikeattackbrieftext[option] = self:AddBriefingText(strikeTarget, option)
-					end						
-				else
-					strikeTarget.strikemarktext, strikeTarget.strikeattackbrieftext = self:AddBriefingText(strikeTarget)
-				end
 			end
+		else -- no targets in mission!
+			_msg = string.format("%sError. No targets defined for region %s, type %s, mission %s!",
+				self.traceTitle, 
+				strikeRegion,
+				strikeType,
+				strikeName
+			)
+			BASE:E(_msg)
+
 		end
+
 		-- Add menus for strike mission
-		_msg = string.format("%sAdding Menus for Type: %s, Region: %s, Name: %s, IVO: %s", self.traceTitle, strikeType, strikeRegion, strikeName, strikeIvo)
+		_msg = string.format("%sAdding Menus for Type: %s, Region: %s, Name: %s, IVO: %s", 
+			self.traceTitle, 
+			strikeType, 
+			strikeRegion, 
+			strikeName, 
+			strikeIvo
+		)
 		BASE:T(_msg)
+
 		-- add strike type menu
 		if not self.menu[strikeType] then
+			-- menu text
+			local textType = string.format("%s Strike", strikeType)		
+			-- add menu
 			self.menu[strikeType] = MENU_COALITION:New( coalition.side.BLUE, 
-				string.format("%s Strike", strikeType), 
+				textType, 
 				self.menu.top
 			)
 		end
+
 		-- add region menu
 		if not self.menu[strikeType][strikeRegion] then
 			if (strikeTargets == nil) or (strikeOptions ~= nil) then
+				-- menu text
+				local textRegion = string.format("%s Region", strikeRegion)
+				-- add menu
 				self.menu[strikeType][strikeRegion] = MENU_COALITION:New( coalition.side.BLUE, 
-					string.format("%s Region", strikeRegion), 
+					textRegion, 
 					self.menu[strikeType]
 				)
 			end
 		end
+
 		-- add mission menus
-		 -- add command menu for each option
-		 if strikeOptions ~= nil then
+		-- add command menu for each option
+		if strikeOptions ~= nil then
 			for _, option in ipairs(strikeOptions) do
+				-- menu text
+				local textAdd = string.format("%s %s %s", 
+					strikeName, 
+					option, 
+					strikeIvo
+				)
+				-- add menu
 				self.menu[strikeType][strikeRegion][strikeIndex] = MENU_COALITION_COMMAND:New( coalition.side.BLUE, 
-					string.format("%s %s %s", 
-						strikeName, 
-						option, 
-						strikeIvo
-					), 
+					textAdd, 
 					self.menu[strikeType][strikeRegion], 
 					self.SpawnStrikeTarget, 
 					self, 
@@ -324,25 +409,34 @@ function MISSIONSTRIKE:Start()
 					option 
 				) -- add menu command to launch the mission
 			end
+		
 		-- random target without options. add command at region level
-		elseif strikeTargets ~= nil then 
+		elseif strikeTargets ~= nil then
+			-- menu text
+			local textAdd = string.format("%s Region %s %s", 
+				strikeRegion,
+				strikeName, 
+				strikeIvo
+			)
+			-- add menu			
 			self.menu[strikeType][strikeIndex] = MENU_COALITION_COMMAND:New( coalition.side.BLUE, 
-				string.format("%s Region %s %s", 
-					strikeRegion,
-					strikeName, 
-					strikeIvo
-				), 
+				textAdd, 
 				self.menu[strikeType], 
 				self.SpawnStrikeTarget, 
 				self, 
 				mission
 			) -- add menu command to launch the mission
+		
 		-- otherwise, add command menu to region
 		else 
+			-- menu text
+			textAdd = string.format("%s %s", 
+				strikeName, 
+				strikeIvo
+			)
+			-- add menu
 			self.menu[strikeType][strikeRegion][strikeIndex] = MENU_COALITION_COMMAND:New( coalition.side.BLUE, 
-				string.format("%s %s", 
-					strikeName, 
-					strikeIvo), 
+				textAdd, 
 				self.menu[strikeType][strikeRegion], 
 				self.SpawnStrikeTarget, 
 				self, 
@@ -350,6 +444,10 @@ function MISSIONSTRIKE:Start()
 			) -- add menu command to launch the mission
 		end
 	end
+
+	-- add remove menu for active missions
+	local textRemove = "Remove Missions"
+	self.menu.remove = MENU_COALITION:New(coalition.side.BLUE, textRemove, self.menu.top)
 end
 
 function MISSIONSTRIKE:SpawnStrikeTarget (mission, option) -- "location name"
@@ -357,14 +455,21 @@ function MISSIONSTRIKE:SpawnStrikeTarget (mission, option) -- "location name"
 	mission.option = option or nil
 
 	--local mission = self.mission[strikeIndex]
-	_msg = string.format("%sSpawnStrikeTarget() Type = %s, Name = %s.", self.traceTitle, mission.striketype, mission.strikeregion)
+	_msg = string.format("%sSpawnStrikeTarget() Type = %s, Name = %s.", 
+		self.traceTitle, 
+		mission.striketype, 
+		mission.strikeregion
+	)
 	BASE:T(_msg)
 
 	local strikeType = mission.striketype
 	
 
 	if (strikeType == MISSIONSTRIKE.enums.striketype.camp) or (strikeType == MISSIONSTRIKE.enums.striketype.convoy) then
-		_msg = string.format("%sActivating mission type: %s.", self.traceTitle, mission.striketype)
+		_msg = string.format("%sActivating mission type: %s.", 
+			self.traceTitle, 
+			mission.striketype
+		)
 		BASE:T(_msg)
 
 		self:SpawnRandomStrikeTarget(mission)
@@ -372,111 +477,19 @@ function MISSIONSTRIKE:SpawnStrikeTarget (mission, option) -- "location name"
 
 	elseif UTILS.IsInTable(MISSIONSTRIKE.enums.striketype, strikeType) then -- other strike types
 
-		_msg = string.format("%sActivating mission type: %s.", self.traceTitle, mission.striketype)
+		_msg = string.format("%sActivating mission type: %s.", 
+			self.traceTitle, 
+			mission.striketype
+		)
 		BASE:T(_msg)
 
 		self:SpawnOther(mission)
 	
-		--[[ if mission.is_open then -- check mission is not already active
-
-			local strikeRegion = mission.strikeregion
-			local strikeIndex = mission.strikeindex
-			local strikeIvo = mission.strikeivo
-			local strikeName = mission.strikename
-
-			-- create container for spawned objects if not already present
-			if not mission.spawnedobjects then
-				mission.spawnedobjects = {}
-			end
-
-			local medZonesCount = #mission.zones["medium"] -- number of medium defzones
-			local smallZonesCount = #mission.zones["small"] -- number of small defzones
-
-			_msg = string.format("%sZone type counts; medium = %d, small = %d", self.traceTitle, medZonesCount, smallZonesCount)
-			BASE:T(_msg)
-	
-			local samQty = math.random( 1, mission.defassets.sam ) or 0-- number of SAM defences min 1
-			local aaaQty = math.random( 1, mission.defassets.aaa ) or 0 -- number of AAA defences min 1
-			local manpadQty = math.random( 0, mission.defassets.manpad ) or 0 -- number of manpad defences min 0. Spawn in AAA zones. aaaQty + manpadQty MUST NOT exceed smallZonesCount
-			local armourQty = math.random( 1, mission.defassets.armour ) or 0-- number of armour groups min 1. spawn in SAM zones. samQty + armourQty MUST NOT exceed medZonesCount
-			local strikeMarkZone = ZONE:FindByName( mission.strikezone ) -- ZONE object for zone named in strikezone
-	
-			-- set threat message with threat counts
-			mission.strikeThreats = string.format("%dx RADAR SAM,  %dx AAA, %dx MANPAD, %dx LIGHT ARMOUR", samQty, aaaQty, manpadQty, armourQty)
-			BASE:T(self.traceTitle .. mission.strikeThreats)
-	
-			--- Check sufficient zones exist for the mission air defences ---
-			if samQty + armourQty > medZonesCount then
-				_msg = mission.strikename .. " Error! SAM+Armour count exceedes medium zones count"
-				BASE:E(_msg)
-				return
-			elseif aaaQty + manpadQty > smallZonesCount then
-				_msg = mission.strikename .. " Error! AAA+MANPAD count exceedes small zones count"
-				BASE:E(_msg)
-				return
-			end
-			
-			-- spawn static objects
-			_msg = string.format("%sRefresh Statics for mission %s.", self.traceTitle, strikeName)
-			BASE:T(_msg)
-
-			self:AddStatics(mission)
-			
-			-- spawn target groups
-			_msg = string.format("%s{Spawn Target Groups for mission} %s.", self.traceTitle, strikeName)
-			BASE:T(_msg)
-
-			_msg = string.format("%sstriketargetspawn", self.traceTitle)
-			BASE:T({_msg,mission.striketargetspawn})
-
-			for spawnName, spawnData in pairs(mission.striketargetspawn) do
-				_msg = string.format("%s%s Spawn Target Group %s", self.traceTitle, mission.strikename, spawnName)
-				BASE:T(_msg)
-				local spawnGroup = {}
-				local airbase = mission.striketargetspawn[spawnName].airbase
-				spawnGroup = mission.striketargetspawn[spawnName]:Spawn()
-				table.insert(mission.spawnedobjects, spawnGroup )
-			end
-			
-			-- add SAM assets
-			if samQty > 0 then
-				self:AddStrikeAssets(mission, "sam", samQty, "medium", medZonesCount) -- AssetType ["sam", "aaa", "manpads", "armour"], AssetQty, AssetZoneType ["med", "small"], AssetZonesCount
-			end
-			-- add AAA assets
-			if samQty > 0 then
-				self:AddStrikeAssets(mission, "aaa", aaaQty, "small", smallZonesCount)
-			end
-			-- add Manpad assets
-			if manpadQty > 0 then
-				self:AddStrikeAssets(mission, "manpads", manpadQty, "small", smallZonesCount)
-			end
-			-- add armour assets
-			if armourQty > 0 then
-				self:AddStrikeAssets(mission, "armour", armourQty, "medium", medZonesCount)
-			end
-			
-			mission.is_open = false -- mark strike mission as active
-			
-			--- menu: remove mission start command and add mission remove command
-			self.menu[strikeType][strikeRegion][strikeIndex]:Remove()
-			self.menu[strikeType][strikeIndex] = MENU_COALITION_COMMAND:New(
-				coalition.side.BLUE, 
-				"Remove ".. strikeName .. " " .. strikeIvo, 
-				self.menu[strikeType], 
-				self.RemoveStrikeAttack, 
-				self, 
-				mission
-			)
-	
-			MISSIONSTRIKE:Briefing(mission)
-		else
-			_msg = string.format("The %s %s strike attack mission is already active!", mission.strikename, mission.striketype)
-			MESSAGE:New( _msg, 5, "" ):ToAll()
-			_msg = self.traceTitle .. _msg
-			BASE:E(_msg)
-		end ]]
 	else -- unknowm mission type!
-		_msg = string.format("%sError. Unknown mission type: %s!", self.traceTitle, mission.striketype)
+		_msg = string.format("%sError. Unknown mission type: %s!", 
+			self.traceTitle, 
+			mission.striketype
+		)
 		BASE:E(_msg)
 	end
 
@@ -487,7 +500,11 @@ end --SpawnStrikeTarget
 function MISSIONSTRIKE:RemoveStrikeAttack (mission)
 	--local mission = self.mission[strikeIndex]
 
-	_msg = string.format("%sRemoveStrikeAttack() %s %s.", self.traceTitle, mission.striketype, mission.strikename)
+	_msg = string.format("%sRemoveStrikeAttack() %s %s.", 
+		self.traceTitle, 
+		mission.striketype, 
+		mission.strikename
+	)
 	BASE:T(_msg)
 
 	local strikeIndex = mission.strikeindex
@@ -508,7 +525,12 @@ function MISSIONSTRIKE:RemoveStrikeAttack (mission)
 		--for index = 1, objectcount do
 		for index, spawn in ipairs(mission.spawnedobjects) do
 			if spawn:IsAlive() then
-				_msg = string.format("%sRemove Spawned Object %s from mission %s %s.", self.traceTitle, spawn:GetName(), mission.striketype, mission.strikename)
+				_msg = string.format("%sRemove Spawned Object %s from mission %s %s.", 
+					self.traceTitle, 
+					spawn:GetName(), 
+					mission.striketype, 
+					mission.strikename
+				)
 				BASE:T(_msg)
 				spawn:Destroy() --false
 			end
@@ -552,13 +574,20 @@ function MISSIONSTRIKE:RemoveStrikeAttack (mission)
 		-- set strike mission as available
 		mission.is_open = true 
 
-		_msg = string.format("The %s %s strike attack mission has been removed.", mission.striketype, mission.strikename)
+		_msg = string.format("The %s %s strike attack mission has been removed.", 
+			mission.striketype, 
+			mission.strikename
+		)
 		MESSAGE:New( _msg, 5, "" ):ToAll()
 		_msg = self.traceTitle .. _msg
 		BASE:T(_msg)
 
 	else
-		_msg = string.format("%sStrike attack mission %s %s is not active!", self.traceTitle, mission.striketype, mission.strikename)
+		_msg = string.format("%sStrike attack mission %s %s is not active!", 
+			self.traceTitle, 
+			mission.striketype, 
+			mission.strikename
+		)
 		BASE:E(_msg)		
 	end
 
@@ -572,8 +601,9 @@ function MISSIONSTRIKE:SpawnRandomStrikeTarget(mission)
 	local strikeType = mission.striketype
 	local strikeRegion = mission.strikeregion
 	local strikeOption = mission.option
-
-	-- table of target camps available for activation wthin the region
+	-- spawned target
+	local strikeSpawn = {}
+	-- table of open targets available for activation wthin the region
 	local openTargets = {}
 
 	-- build list of open targets
@@ -583,6 +613,9 @@ function MISSIONSTRIKE:SpawnRandomStrikeTarget(mission)
 		end
 	end
 
+	_msg = string.format("%sOpen Tagets table", self.traceTitle)
+	BASE:T({_msg, openTargets})
+
 	-- select random target from list
 	local targetCount = #openTargets
 	local targetIndex = 1 -- default to first entry
@@ -590,7 +623,10 @@ function MISSIONSTRIKE:SpawnRandomStrikeTarget(mission)
 	if targetCount > 1 then -- Randomize spawn location if more than 1 available
 		targetIndex = math.random ( 1, targetCount)
 	elseif targetCount == 0 then -- no open targets remaining
-		_msg = string.format("All %s Strike missions for the Region % are already active!", strikeType, strikeRegion)
+		_msg = string.format("All %s Strike missions for the Region %s are already active!", 
+			strikeType, 
+			strikeRegion
+		)
 		MESSAGE:New( _msg, 5, "" ):ToAll()
 		_msg = self.traceTitle .. _msg
 		BASE:E(_msg)
@@ -605,7 +641,12 @@ function MISSIONSTRIKE:SpawnRandomStrikeTarget(mission)
 
 	local strikeName = selectedTarget.strikename
 
-	_msg = string.format("%s%s %s Selected Target %s.", self.traceTitle, strikeType, strikeRegion, strikeName)
+	_msg = string.format("%s%s %s Selected Target %s.", 
+		self.traceTitle, 
+		strikeType, 
+		strikeRegion, 
+		strikeName
+	)
 	BASE:T({_msg, selectedTarget = selectedTarget})
 
 	-- find the zone object for the selected
@@ -621,19 +662,45 @@ function MISSIONSTRIKE:SpawnRandomStrikeTarget(mission)
 		if selectedTarget.striketype == MISSIONSTRIKE.enums.striketype.camp then
 			self:SpawnCamp(selectedTarget)
 		elseif selectedTarget.striketype == MISSIONSTRIKE.enums.striketype.convoy then
-			self:SpawnConvoy(selectedTarget)
+			strikeSpawn = self:SpawnConvoy(selectedTarget)
 		else
-			_msg = string.format("%sstriketype %s for selected target %s not recognised!", self.traceTitle, selectedTarget.striketype, selectedTarget.strikename)
+			_msg = string.format("%sstriketype %s for selected target %s not recognised!", 
+				self.traceTitle, 
+				selectedTarget.striketype, 
+				selectedTarget.strikename
+			)
 			BASE:E(_msg)
 		end
 		--  mark the selected target target as closed
 		selectedTarget.is_open = false
+
+		_msg = string.format("%sstriketype %s for selected target %s", 
+			self.traceTitle, 
+			selectedTarget.striketype, 
+			selectedTarget.strikename
+		)
+		BASE:T({_msg, selectedTarget = selectedTarget})
+
 		-- display mission briefing
 		self:Briefing(selectedTarget)
 		-- add remove menu option for the selected target
-		self.menu[strikeType][strikeName] = MENU_COALITION_COMMAND:New( coalition.side.BLUE, "Remove ".. strikeName,  self.menu[strikeType], self.RemoveStrikeAttack, self, selectedTarget )
+		local textRemove = string.format("Remove %s %s", 
+			strikeType, 
+			strikeName
+		)
+		self.menu[strikeType][strikeName] = MENU_COALITION_COMMAND:New( coalition.side.BLUE, 
+			textRemove,  
+			self.menu.remove, 
+			self.RemoveStrikeAttack, 
+			self, 
+			selectedTarget
+		)
+		-- self.menu[strikeType][strikeName] = MENU_COALITION_COMMAND:New( coalition.side.BLUE, "Remove ".. strikeName,  self.menu[strikeType], self.RemoveStrikeAttack, self, selectedTarget )
 	else
-		_msg = string.format("%sstrikezone %s for selected target not found!", self.traceTitle, selectedTarget.strikezone)
+		_msg = string.format("%sstrikezone %s for selected target not found!", 
+			self.traceTitle, 
+			selectedTarget.strikezone
+		)
 		BASE:E(_msg)
 		return
 	end
@@ -709,19 +776,26 @@ function MISSIONSTRIKE:SpawnConvoy(selectedTarget) -- ConvoyTemplates, SpawnHost
 		BASE:T(_msg)
 		-- set default spawn object
 		local convoySpawn = self.convoyspawn[strikeOption]
-		_msg = string.format("%sInitial convoySpawn", self.traceTitle)
+		_msg = string.format("%sconvoySpawn template options", self.traceTitle)
 		BASE:T({_msg, convoySpawn})
 		-- more than one spawn object is available for the convoy type randomly select one
 		local templateCount = #convoySpawn
-		_msg = string.format("%s template count = %d", self.traceTitle, templateCount)
+		_msg = string.format("%s template count = %d", 
+			self.traceTitle, 
+			templateCount
+		)
 		BASE:T(_msg)
 		local templateIndex = 1
 		if templateCount > 1 then
 			templateIndex = math.random(1,templateCount)
 			convoySpawn = convoySpawn[templateIndex]
 		end
-		_msg = string.format("%sFinal convoySpawn", self.traceTitle)
+		_msg = string.format("%sselected convoySpawn template", self.traceTitle)
 		BASE:T({_msg, convoySpawn})
+		-- add convoy description to selected target
+		selectedTarget.strikedescription = convoySpawn.description
+		-- add convoy threats to selected target
+		selectedTarget.strikethreats = convoySpawn.threats
 		-- get coordinate of destination zone
 		local toCoordinate = strikeZoneEnd:GetCoordinate()
 		-- draw start and destination zones if trace is on
@@ -784,7 +858,11 @@ function MISSIONSTRIKE:SpawnOther(mission)
 		local medZonesCount = #mission.zones["medium"] -- number of medium defzones
 		local smallZonesCount = #mission.zones["small"] -- number of small defzones
 
-		_msg = string.format("%sZone type counts; medium = %d, small = %d", self.traceTitle, medZonesCount, smallZonesCount)
+		_msg = string.format("%sZone type counts; medium = %d, small = %d", 
+			self.traceTitle, 
+			medZonesCount, 
+			smallZonesCount
+		)
 		BASE:T(_msg)
 
 		local samQty = math.random( 1, mission.defassets.sam ) or 0-- number of SAM defences min 1
@@ -794,8 +872,13 @@ function MISSIONSTRIKE:SpawnOther(mission)
 		--local strikeMarkZone = ZONE:FindByName( mission.strikezone ) -- ZONE object for zone named in strikezone
 
 		-- set threat message with threat counts
-		mission.strikeThreats = string.format("%dx RADAR SAM,  %dx AAA, %dx MANPAD, %dx LIGHT ARMOUR", samQty, aaaQty, manpadQty, armourQty)
-		BASE:T(self.traceTitle .. mission.strikeThreats)
+		mission.strikethreats = string.format("%dx RADAR SAM,  %dx AAA, %dx MANPAD, %dx LIGHT ARMOUR", 
+			samQty, 
+			aaaQty, 
+			manpadQty, 
+			armourQty
+		)
+		BASE:T(self.traceTitle .. mission.strikethreats)
 
 		--- Check sufficient zones exist for the mission air defences ---
 		if samQty + armourQty > medZonesCount then
@@ -809,20 +892,29 @@ function MISSIONSTRIKE:SpawnOther(mission)
 		end
 		
 		-- spawn static objects
-		_msg = string.format("%sRefresh Statics for mission %s.", self.traceTitle, strikeName)
+		_msg = string.format("%sRefresh Statics for mission %s.", 
+			self.traceTitle, 
+			strikeName
+		)
 		BASE:T(_msg)
 
 		self:AddStatics(mission)
 		
 		-- spawn target groups
-		_msg = string.format("%s{Spawn Target Groups for mission} %s.", self.traceTitle, strikeName)
+		_msg = string.format("%s{Spawn Target Groups for mission} %s.", 
+			self.traceTitle, 
+			strikeName
+		)
 		BASE:T(_msg)
 
 		_msg = string.format("%sstriketargetspawn", self.traceTitle)
 		BASE:T({_msg,mission.striketargetspawn})
 
 		for spawnName, spawnData in pairs(mission.striketargetspawn) do
-			_msg = string.format("%s%s Spawn Target Group %s", self.traceTitle, mission.strikename, spawnName)
+			_msg = string.format("%s%s Spawn Target Group %s", self.traceTitle, 
+				mission.strikename, 
+				spawnName
+			)
 			BASE:T(_msg)
 			local spawnGroup = {}
 			local airbase = mission.striketargetspawn[spawnName].airbase
@@ -849,12 +941,19 @@ function MISSIONSTRIKE:SpawnOther(mission)
 		
 		mission.is_open = false -- mark strike mission as active
 		
-		--- menu: remove mission start command and add mission remove command
+		--- menu: remove mission start command
 		self.menu[strikeType][strikeRegion][strikeIndex]:Remove()
+		-- add mission remove command
+		local textRemove = string.format("Remove %s %s %s", 
+			strikeType,
+			strikeName,
+			strikeIvo
+		)
 		self.menu[strikeType][strikeIndex] = MENU_COALITION_COMMAND:New(
 			coalition.side.BLUE, 
-			"Remove ".. strikeName .. " " .. strikeIvo, 
-			self.menu[strikeType], 
+			textRemove, 
+			self.menu.remove, 
+			-- self.menu[strikeType], 
 			self.RemoveStrikeAttack, 
 			self, 
 			mission
@@ -862,7 +961,10 @@ function MISSIONSTRIKE:SpawnOther(mission)
 
 		MISSIONSTRIKE:Briefing(mission)
 	else
-		_msg = string.format("The %s %s strike attack mission is already active!", mission.strikename, mission.striketype)
+		_msg = string.format("The %s %s strike attack mission is already active!", 
+			mission.strikename, 
+			mission.striketype
+		)
 		MESSAGE:New( _msg, 5, "" ):ToAll()
 		_msg = self.traceTitle .. _msg
 		BASE:E(_msg)
@@ -920,19 +1022,37 @@ end --AddStrikeAssets
 
 function MISSIONSTRIKE:AddBriefingText(mission, option)
 
-	--- Create Mission Mark textp ---
-	local strikeMarkZone = ZONE:FindByName( mission.strikezone ) -- ZONE object for zone named in strikezone 
-	local strikeMarkZoneCoord = strikeMarkZone:GetCoordinate() -- get coordinates of strikezone
-
 	local strikeMarkName = mission.strikename
 	local strikeMarkOption = option or ""
 	local strikeMarkType = mission.striketype
 	local strikeMarkRegion = mission.strikeregion
 	local strikeMarkIvo = mission.strikeivo
 	local strikeAttackMission = mission.strikemission
-	local strikeMarkCoordsLLDMS = strikeMarkZoneCoord:ToStringLLDMS(SETTINGS:SetLL_Accuracy(0)) --mission.strikecoords
-	local strikeMarkCoordsLLDDM = strikeMarkZoneCoord:ToStringLLDDM(SETTINGS:SetLL_Accuracy(3)) --mission.strikecoords
-	local strikeMarkCoordsMGRS = strikeMarkZoneCoord:ToStringMGRS(SETTINGS:SetMGRS_Accuracy(5)) --mission.strikecoords
+	
+	-- local strikeMarkCoordsLLDMS = ""
+	-- local strikeMarkCoordsLLDDM = ""
+	-- local strikeMarkCoordsMGRS = ""
+
+	--- Create Mission Mark textp ---
+	local strikeMarkZone = mission.zonestrikezone --ZONE:FindByName( strikeMarkZoneName ) -- ZONE object for zone named in strikezone
+	-- if strikeMarkZone ~= nil then 
+	local strikeMarkZoneCoord = strikeMarkZone:GetCoordinate() -- get coordinates of strikezone
+
+	strikeMarkCoordsLLDMS = strikeMarkZoneCoord:ToStringLLDMS(SETTINGS:SetLL_Accuracy(0))  or "" --mission.strikecoords
+	strikeMarkCoordsLLDDM = strikeMarkZoneCoord:ToStringLLDDM(SETTINGS:SetLL_Accuracy(3))  or "" --mission.strikecoords
+	strikeMarkCoordsMGRS = strikeMarkZoneCoord:ToStringMGRS(SETTINGS:SetMGRS_Accuracy(5))  or ""  --mission.strikecoords
+
+	-- else
+	-- 	_msg = string.format("%sError in AddBriefingText. strikeZone %s, mission %s, type %s, region %s not found!",
+	-- 		self.traceTitle,
+	-- 		strikeMarkZoneName,
+	-- 		strikeMarkName,
+	-- 		strikeMarkType,
+	-- 		strikeMarkRegion
+	-- 	)
+	-- 	BASE:E(_msg)
+	-- end
+
 
 	-- add briefing summary to mission
 	local strikeAttackSummary = ""
@@ -950,7 +1070,7 @@ function MISSIONSTRIKE:AddBriefingText(mission, option)
 		)
 	elseif strikeMarkType == MISSIONSTRIKE.enums.striketype.convoy then
 		local destName = mission.destname
-		strikeAttackSummary = string.format("Air Interdiction mission in %s region against %s %s routing to %s\n\nLast known postion shown below",
+		strikeAttackSummary = string.format("Air Interdiction mission in %s region against %s %s routing to %s",
 			strikeMarkRegion, 
 			strikeMarkOption,
 			strikeMarkType, 
@@ -967,9 +1087,6 @@ function MISSIONSTRIKE:AddBriefingText(mission, option)
 		)
 	end
 
-	_msg = string.format("%smission.strikesummary = %s", MISSIONSTRIKE.traceTitle, strikeAttackSummary)
-	BASE:T(_msg)
-
 	local strikeMarkText = string.format("%s %s %s Strike %s\n%s\n%s\n%s", 
 		strikeMarkName,
 		strikeMarkOption, 
@@ -980,15 +1097,36 @@ function MISSIONSTRIKE:AddBriefingText(mission, option)
 		strikeMarkCoordsMGRS
 	)
 
-	local strikeAttackBriefText = string.format("\n\n++++++++++++++++++++++++++++++++++++\n\n%s\n\nMission: %s\n\nCoordinates:\n%s\n%s\n%s", 
-		strikeAttackSummary, 
+	_msg = string.format("%sAdd strike mark text for mission %s",
+		MISSIONSTRIKE.traceTitle,
+		strikeMarkName	
+	)
+	BASE:T({_msg, strikeMarkText = strikeMarkText})
+
+	local strikeAttackBriefSummary = string.format("\n\n++++++++++++++++++++++++++++++++++++\n\n%s", 
+		strikeAttackSummary 
+	)
+
+	_msg = string.format("%sAdd summary text for mission %s",
+		MISSIONSTRIKE.traceTitle,
+		strikeMarkName
+	)
+	BASE:T({_msg, strikeAttackBriefSummary = strikeAttackBriefSummary})
+
+	local strikeAttackBriefMission = string.format("\nMission: %s\n\nCoordinates:\n%s\n%s\n%s",
 		strikeAttackMission, 
 		strikeMarkCoordsLLDMS, 
 		strikeMarkCoordsLLDDM, 
 		strikeMarkCoordsMGRS 
 	)
 
-	return strikeMarkText, strikeAttackBriefText
+	_msg = string.format("%sAdd mission text for mission %s",
+		MISSIONSTRIKE.traceTitle,
+		strikeMarkName
+	)
+	BASE:T({_msg, strikeAttackBriefMission = strikeAttackBriefMission})
+
+	return strikeMarkText, strikeAttackBriefSummary, strikeAttackBriefMission
 
 end --AddBriefingText
 
@@ -1004,40 +1142,59 @@ function MISSIONSTRIKE:Briefing(mission)
 	local strikeZone = mission.strikezone
 	local strikeOption = mission.option
 
-	local strikeAttackBrief = mission.strikeattackbrieftext
+	-- summary and mission for brief text
+	local strikeAttackBriefSummary = mission.strikeattackbriefsummary
+	local strikeAttackBriefMission = mission.strikeattackbriefmission
 	if strikeOption then
-		strikeAttackBrief = mission.strikeattackbrieftext[strikeOption]
+		strikeAttackBriefSummary = mission.strikeattackbriefsummary[strikeOption]
+		strikeAttackBriefMission = mission.strikeattackbriefmission[strikeOption]
 	end
 
-	_msg = self.traceTitle
-	BASE:T({_msg, strikeAttackBrief = strikeAttackBrief})
-	
+	-- add description if available
+	local strikeAttackBriefDescription = ""
+	if mission.strikedescription then
+		strikeAttackBriefDescription = string.format("\nConsisting of %s", 
+			mission.strikedescription
+		)
+	end
 
-	if strikeAttackBrief ~= nil then
-		local strikeThreats = mission.strikeThreats
-	
+	if (strikeAttackBriefSummary ~= nil) and (strikeAttackBriefMission ~= nil) then
+
+		-- add threats to brief if provided
+		local strikeThreats = mission.strikethreats
 		if strikeThreats then
-			strikeThreats = string.format("Threats: %s\n\n++++++++++++++++++++++++++++++++++++", 
+			strikeThreats = string.format("\nThreats: %s\n\n++++++++++++++++++++++++++++++++++++", 
 				strikeThreats
 			)
 		else 
 			strikeThreats = "++++++++++++++++++++++++++++++++++++"
 		end
 	
-		strikeAttackBrief = string.format("%s\n\n%s",
-			strikeAttackBrief,
+		strikeAttackBrief = string.format("%s%s\n%s\n%s",
+			strikeAttackBriefSummary,
+			strikeAttackBriefDescription,
+			strikeAttackBriefMission,
 			strikeThreats
 		) 
-	
-		MESSAGE:New (strikeAttackBrief, 5, "" ):ToAll()
-			
-	else
-		_msg = string.format("%sError showing briefing. Briefing text for mission %s type %s in region %s not found!", 
+
+		_msg = string.format("%sBriefing for mission %s, type %s, region %s", 
 			self.traceTitle, 
 			strikeName, 
 			strikeType, 
 			strikeRegion
 		)
+		BASE:T({_msg, strikeAttackBrief})
+
+		MESSAGE:New (strikeAttackBrief, 5, "" ):ToAll()
+			
+	else
+		_msg = string.format("%sError showing briefing. Briefing text for mission %s, type %s, region %s not found!", 
+			self.traceTitle, 
+			strikeName, 
+			strikeType, 
+			strikeRegion
+		)
+		BASE:T(_msg)
 		return
 	end
 
@@ -1050,7 +1207,12 @@ function MISSIONSTRIKE:Briefing(mission)
 	local strikeMarkZone = ZONE:FindByName( strikeZone ) -- ZONE object for zone named in strikezone
 
 	if strikeMarkZone ~= nil then
-		_msg = self.traceTitle
+		_msg = string.format("%sAdd Map Mark for mission %s, type %s, region %s",
+			self.traceTitle,
+			strikeName, 
+			strikeType, 
+			strikeRegion
+		)
 		BASE:T({_msg, strikeMarkZone = strikeMarkZone})
 
 		local strikeMarkZoneCoord = strikeMarkZone:GetCoordinate() -- get coordinates of strikezone
@@ -1077,18 +1239,27 @@ function MISSIONSTRIKE:AddSpawnTemplate(templateName, spawnCategory, spawnCountr
 	local addSpawn = nil
 
 	if GROUP:FindByName(templateName) then
-		_msg = string.format("%sAddSpawn(). using MIZ temaplate %s.", self.traceTitle, templateName)
+		_msg = string.format("%sAddSpawn(). using MIZ temaplate %s.", 
+			self.traceTitle, 
+			templateName
+		)
 		BASE:T(_msg)
 		addSpawn = SPAWN:New( templateName )
 	elseif self.template[templateName] then
-		_msg = string.format("%sAddSpawn(). Using MISSIONSTRIKE temaplate %s.", self.traceTitle, templateName)
+		_msg = string.format("%sAddSpawn(). Using MISSIONSTRIKE temaplate %s.", 
+			self.traceTitle, 
+			templateName
+		)
 		BASE:T(_msg)
 		addSpawn = SPAWN:NewFromTemplate(self.template[templateName],templateName)
 			:InitCountry(country) -- set spawn countryid
 			:InitCoalition(coalition) -- set spawn coalition
 			:InitCategory(category) -- set category
 	else
-		_msg = string.format("%sError! AddSpawn(). Template %s not found!", self.traceTitle, templateName)
+		_msg = string.format("%sError! AddSpawn(). Template %s not found!", 
+			self.traceTitle, 
+			templateName
+		)
 		BASE:E(_msg)
 	end
 	return addSpawn
@@ -1102,12 +1273,19 @@ function MISSIONSTRIKE:RemoveStatics(mission)
 		for _, static in pairs(mission.statics) do
 			staticName = static:GetName()
 			static.isAlive = false
-			_msg = string.format("%s%s Destroy Static %s", self.traceTitle, mission.strikename, staticName)
+			_msg = string.format("%s%s Destroy Static %s", 
+				self.traceTitle, 
+				mission.strikename, 
+				staticName
+			)
 			BASE:T({_msg, static})
 			static:Destroy()
 		end
 	else
-		_msg = string.format("%sRemoveStatics(): No statics table for mission %s", self.traceTitle, mission.strikename)
+		_msg = string.format("%sRemoveStatics(): No statics table for mission %s", 
+			self.traceTitle, 
+			mission.strikename
+		)
 		BASE:T(_msg)
 	end
 	
@@ -1120,7 +1298,11 @@ function MISSIONSTRIKE:AddStatics(mission)
 	for _, static in pairs(mission.statics) do
 		staticName = static:GetName()
 		static.isAlive = true
-		_msg = string.format("%s%s Respawn Static %s", self.traceTitle, mission.strikename, staticName)
+		_msg = string.format("%s%s Respawn Static %s", 
+			self.traceTitle, 
+			mission.strikename, 
+			staticName
+		)
 		BASE:T({_msg, static})
 		static:ReSpawn(country.id.RUSSIA)
 	end
@@ -1214,14 +1396,51 @@ MISSIONSTRIKE.campTemplates = {
 
 -- convoy templates
 MISSIONSTRIKE.convoyTemplates = {
-	main = "CONVOY_base",
+	-- main = {
+	-- 	{template = "CONVOY_base", convoytext = "Single Unit"}
+	-- },
 	supply = {
-		"CONVOY_light-1",
-		"CONVOY_light-2",
+		{
+			template = "CONVOY_light-1", 
+			description = "Soft-skinned transport vehicles, BTR-80",
+			threats = "Radar SAM, AAA"
+		},
+		{
+			template = "CONVOY_light-2", 
+			description = "Fuel Supply vehicles, BTR-80",
+			threats = "Radar SAM, AAA"
+		},
 	},
 	armoured = {
-		"CONVOY_heavy-1",
-		"CONVOY_heavy-2",
+		{
+			template = "CONVOY_heavy-1", 
+			description = "BMP-2, BTR-RD, BTR-80",
+			threats = "Radar SAM, AAA"
+		},
+		{
+			template = "CONVOY_heavy-2", 
+			description = "T-72, BTR-80",
+			threats = "Radar SAM, AAA"
+		},
+		{
+			template = "CONVOY_heavy-3", 
+			description = "T-90, BTR-80",
+			threats = "Radar SAM, AAA"
+		},
+	},
+	artillery = {
+		{
+			template = "CONVOY_base", 
+			description = "Artillery",
+			threats = nil
+		},
+	},
+	missile = {
+		{
+			template = "CONVOY_base", 
+			description = "Missile",
+			threats = nil
+		},
 	},
 }
 
