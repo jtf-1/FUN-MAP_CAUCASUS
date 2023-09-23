@@ -650,7 +650,7 @@ function MISSIONSTRIKE:SpawnRandomStrikeTarget(mission)
 	BASE:T({_msg, selectedTarget = selectedTarget})
 
 	-- find the zone object for the selected
-	local zoneStrike = ZONE:FindByName(selectedTarget.strikezone)
+	local zoneStrike = selectedTarget.zonestrikezone
 
 	if zoneStrike then
 		selectedTarget.zonestrike = zoneStrike
