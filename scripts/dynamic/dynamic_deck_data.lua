@@ -28,7 +28,8 @@ end
 DYNDECK.ship = {
     {
         name = "CVN-72 Lincoln", -- Name will be used for ship's menu entry
-        id = 1137, -- unit ID in Mission Editor
+        unit = "JTF-1_CVN72", -- name of ship unit object
+        --id = 1773, -- unit ID in Mission Editor
         coalitionID = 2, -- 1, red, 2 blue
         fullTemplateActive = false, -- flag to denote a full deck template is active
         templates = {
