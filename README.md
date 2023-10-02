@@ -154,7 +154,7 @@ WIP - Use F10 map marks to spawn BVR opponents or ground threats anywhere on the
 NOTE: currently no syntax error feedback if you get it wrong.
 
 COMMANDS
-========
+--------
 
 - ASPAWN: = Spawn Air Group
 - GSPAWN: = Spawn Ground Group
@@ -202,7 +202,7 @@ Example
 
 CMD ASPAWN: MIG29, NUM: 2, HDG: 180, SKILL: GOOD
 
-Will spawn 2x MiG29 at the default speed of 425 knots, with heading 180 and skill level GOOD.
+Will spawn 2x Red MiG29 at the default speed of 425 knots, with heading 180 and skill level GOOD.
 
 
 Groundspawn Syntax
