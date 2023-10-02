@@ -195,6 +195,7 @@ Airspawn Options
 - SKILL: [AVERAGE, GOOD, HIGH, EXCELLENT, RANDOM] - default AVERAGE
 - TASK: [CAP] - default NOTHING
 - SIDE: [RED, BLUE, NEUTRAL] - default RED (Russia)
+- OPTIONS	(will list the types available for this command)
 
 
 Example
