@@ -1,10 +1,11 @@
-env.info( "[JTF-1] mission_strike" )
+env.info("[JTF-1] mission_strike")
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 --- BEGIN MISSIONSTRIKE
 -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 MISSIONSTRIKE = {}
 MISSIONSTRIKE.traceTitle = "[JTF-1 MISSIONSTRIKE] "
+MISSIONSTRIKE.version = "0.1"
 
 MISSIONSTRIKE.menu = {} -- MISSIONSTRIKE menus container
 --MISSIONSTRIKE.spawn = {} -- MISSIONSTRIKE spawn objects container
