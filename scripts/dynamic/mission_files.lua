@@ -16,7 +16,7 @@ __JTFLoader.Include( 'core/staticranges.lua' )          -- core file
 __JTFLoader.Include( 'staticranges_data.lua' )
 __JTFLoader.Include( 'core/missioncap.lua' )            -- core file
 __JTFLoader.Include( 'missioncap_data.lua' )
-__JTFLoader.Include( 'missionstrike.lua' )         -- core file
+__JTFLoader.Include( 'missionstrike.lua' )         
 __JTFLoader.Include( 'missionstrike_data.lua' )
 __JTFLoader.Include( 'core/cvncontrol.lua' )
 __JTFLoader.Include( 'cvncontrol_data.lua' )
@@ -25,8 +25,8 @@ __JTFLoader.Include( 'core/dynamic_deck_templates.lua' )-- core file
 __JTFLoader.Include( 'dynamic_deck_data.lua' )
 __JTFLoader.Include( 'core/missiletrainer.lua' )        -- core file
 __JTFLoader.Include( 'missiletrainer_data.lua' )
-__JTFLoader.Include( 'markspawn.lua' )
-__JTFLoader.Include( 'markspawn_templates.lua' )
+__JTFLoader.Include( 'core/markspawn.lua' )             -- core file
+__JTFLoader.Include( 'core/markspawn_templates.lua' )   -- core file
 --__JTFLoader.Include( 'markspawn_data.lua' )
 __JTFLoader.Include( 'core/Hercules_Cargo.lua' )        -- core file
 __JTFLoader.Include( 'ablesentry.lua' )
