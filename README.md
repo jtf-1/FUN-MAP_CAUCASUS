@@ -153,6 +153,14 @@ WIP - Use F10 map marks to spawn BVR opponents or ground threats anywhere on the
 
 NOTE: currently no syntax error feedback if you get it wrong.
 
+COMMANDS
+========
+
+- ASPAWN: = Spawn Air Group
+- GSPAWN: = Spawn Ground Group
+- NSPAWN: = Spawn Navy Group
+- WXREPORT: = display message with weather conditions
+- DELETE: = Delete one, or more, Group(s)
 
 Airspawn syntax
 ---------------
@@ -164,10 +172,16 @@ Airspawn Types
 --------------
 
 - F4
+- SU25
 - SU27
 - MIG29
 - SU25
 - MIG23
+- F16
+- F18
+- F16SEAD
+- F18SEAD
+- OPTIONS	(will list the types available for this command)
 
 
 Airspawn Options
@@ -180,6 +194,7 @@ Airspawn Options
 - SPD: [knots] - default 425
 - SKILL: [AVERAGE, GOOD, HIGH, EXCELLENT, RANDOM] - default AVERAGE
 - TASK: [CAP] - default NOTHING
+- SIDE: [RED, BLUE, NEUTRAL] - default RED (Russia)
 
 
 Example
@@ -199,11 +214,20 @@ CMD GSPAWN: [groundspawn type][, [option]: [value]][...]
 Groundspawn Types
 -----------------
 
-- SA2
-- SA6
-- SA10
-- SA11
-- SA15
+- SA2		(battery)
+- SA3		{battery)
+- SA6		(battery)
+- SA8		(single)
+- SA10		(battery)
+- SA11		(battery)
+- SA15		(single)
+- SA19		(single)
+- ZSU23		(ZSU23 Shilka)
+- ZU23EMP	(ZU23 fixed emplacement)
+- ZU23URAL	(ZU23 mounted on Ural)
+- CONLIGHT      (Supply convoy)
+- CONHEAVY	(Armoured convoy) 
+- OPTIONS	(will list the types available for this command)
 
 
 Groundspawn Options
@@ -224,21 +248,51 @@ Will spawn an SA6 Battery on the location of the map mark, in alert state GREEN 
 Delete Spawn Syntax
 -------------------
 
-CMD DELETE: [object type] [group name from F10 map]
+CMD DELETE: [object] [object option[s]]
 
 
-Delete Spawn Object Types
--------------------------
+Delete Spawn Objects
+--------------------
 
-- GROUP
+- GROUP [requires name of Command Spawned Group in F10 map]
+- KIND [requires option CAT and/or TYPE and/or ROLE] [SIDE]
+- AREA  [Zone radius defined by RAD option] [CAT, TYPE, ROLE, SIDE]
+- NEAREST [CAT, TYPE, ROLE, SIDE]
+- ALL
+
+
+Delete Spawn Options
+--------------------
+
+- CAT: [AIR, GROUND] - default ALL
+- TYPE: [the spawned object Type] - default ALL
+- ROLE: [CAS, SEAD, SAM, AAA, CVY] - default ALL
+- SIDE: [RED, BLUE, NEUTRAL, ALL] - default RED
+- RAD: [radius from mark in NM] - default 5NM
 
 
 Example
 -------
 
-CMD DELETE: GROUP MIG29A#001
+CMD DELETE: GROUP MIG29#001 
 
-Will remove the spawned group named MIG29A#001
+- Will remove the spawned group named MIG29#001
+
+CMD DELETE: KIND TYPE: SA15
+
+- will remove all SA15 groups
+
+CMD DELETE: KIND ROLE: SAM
+
+- will remove all groups with the SAM role
+
+CMD DELETE: AREA TYPE: SA8
+
+- will remove all SA8 groups within 5NM of mark
+
+CMD DELETE: AREA RAD: 1 ROLE: SAM SIDE: ALL
+
+- will remove all groups within 5NM of the mark, with the SAM role, on Red, Blue and Neutral sides 
 
 
 Cut-n-Paste Command Examples
@@ -248,6 +302,6 @@ CMD GSPAWN: SA8, ALERT: RED, SKILL: HIGH
 
 CMD GSPAWN: SA15, ALERT: RED, SKILL: HIGH
 
-CMD ASPAWN: MIG29, NUM: 2, HDG: 90, SKILL: GOOD, ALT: 280, TASK: CAP
+CMD ASPAWN: MIG29, NUM: 2, HDG: 90, SKILL: GOOD, ALT: 280, TASK: CAP, SIDE: RED
 
 CMD DELETE: GROUP MIG29A#001
