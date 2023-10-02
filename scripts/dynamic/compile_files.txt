@@ -22,8 +22,8 @@ core\dynamic_deck_templates.lua
 dynamic_deck_data.lua
 core\missiletrainer.lua
 missiletrainer_data.lua
-markspawn.lua
-markspawn_templates.lua
+core\markspawn.lua
+core\markspawn_templates.lua
 core\Hercules_Cargo.lua
 ablesentry.lua
 core\mission_end.lua
