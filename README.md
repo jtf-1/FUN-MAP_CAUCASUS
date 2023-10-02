@@ -149,7 +149,10 @@ The "Clear Deck" command will remove all statics from the deck.
 MAP MARK SPAWNING
 =================
 
-WIP - Use F10 map marks to spawn BVR opponents or ground threats anywhere on the map. Add mark to map then type the CMD syntax below in the map mark text field. The command will execute on mouse-clicking out of the text box.
+(Originally sourced from Virtual 57th and refactored for JTF-1)
+
+
+Use F10 map marks to spawn BVR opponents or ground threats anywhere on the map. Add mark to map then type the CMD syntax below in the map mark text field. The command will execute on mouse-clicking out of the text box.
 
 NOTE: currently no syntax error feedback if you get it wrong.
 
@@ -159,7 +162,7 @@ COMMANDS
 - ASPAWN: = Spawn Air Group
 - GSPAWN: = Spawn Ground Group
 - NSPAWN: = Spawn Navy Group
-- WXREPORT: = display message with weather conditions
+- WXREPORT: = Adds a weather report to the placed mark
 - DELETE: = Delete one, or more, Group(s)
 
 Airspawn syntax
@@ -206,6 +209,7 @@ CMD ASPAWN: MIG29, NUM: 2, HDG: 180, SKILL: GOOD
 Will spawn 2x Red MiG29 at the default speed of 425 knots, with heading 180 and skill level GOOD.
 
 
+
 Groundspawn Syntax
 ------------------
 
@@ -244,6 +248,33 @@ Example
 CMD GSPAWN: SA6, ALERT: GREEN, SKILL: HIGH
 
 Will spawn an SA6 Battery on the location of the map mark, in alert state GREEN and with skill level HIGH.
+
+
+
+Weather Report Syntax
+---------------------
+
+CMD WXREPORT: [QFE, METRIC]
+
+
+Weather Report Options
+----------------------
+
+- QFE   (Pressure displayed as QFE) - default QNH
+- METRIC  (Produces the report in Metric format (mp/s, hPa) - default Imperial
+
+
+Example
+-------
+
+CMD WXREPORT:
+
+Will report Wind in knots, QNH in inHg, temperature in centigrade at the mark's position
+
+CMD WXREPORT: QFE
+
+Will report wind in knots, QFE in inHg, temperature in centigrade at the mark's position
+
 
 
 Delete Spawn Syntax
