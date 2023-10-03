@@ -324,7 +324,7 @@ CMD DELETE: AREA TYPE: SA8
 
 CMD DELETE: AREA RAD: 1 ROLE: SAM SIDE: ALL
 
-- will remove all groups within 5NM of the mark, with the SAM role, on Red, Blue and Neutral sides 
+- will remove all groups within 1NM of the mark, with the SAM role, on Red, Blue and Neutral sides 
 
 
 Cut-n-Paste Command Examples
