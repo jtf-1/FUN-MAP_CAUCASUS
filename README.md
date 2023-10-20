@@ -35,11 +35,12 @@ Tarawa Hawk;
 NAVAL OPERATIONS
 ================
 
+Carriers will cruise North/South. Use the Carrier Control menu to start or stop recovery/lanuch windows.
+
 Strike: 357.775
 Marshal: 285.675
 
 CVN-72 Abraham Lincoln:
-- BRC 280'
 - TACAN 72X 
 - ILCS: Channel 4
 - LINK 4 372.0 Mhz
@@ -50,7 +51,6 @@ CVN-72 Abraham Lincoln:
 Dynamic Deck Templates are available for this carrier.
 
 Tarawa:
-- BRC 280'
 - TACAN 1X
 - ILCS Channel 1
 - Tower/Paddles: 255.725
