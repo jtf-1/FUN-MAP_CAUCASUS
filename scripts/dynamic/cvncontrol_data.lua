@@ -39,6 +39,7 @@ CVNCONTROL.cvn = {
 		tankertacan = 38, -- hawk tanker TACAN channel
 		tankertacanid = "TEX", -- hawk tanker TACAN morse ID
 		tankerradio = 317.775, -- hawk tanker radio freq
+		flagsetlights = 6672, -- mission trigger flag for setting carrier light mode
 	},
 	{
 		name = "LHA1", -- identifier for this CVN
