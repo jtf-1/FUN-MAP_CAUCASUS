@@ -97,8 +97,8 @@ Strike missions are available, on demand, via the F10 menu. Air defences can be 
 - Airfield
 - Factory
 - Bridge
-- Communications (WiP)
-- C2 (WiP)
+- Port
+- Naval (WiP)
 
 AI BFM/ACM
 ==========
@@ -121,10 +121,10 @@ Bomb targets are scored on the proximity of the last round to the target. Smoke 
 Strafe Pits, where available, are configured with two targets. Aircraft must be below 3000ft AGL and within 500ft either side of the inbound heading to the target to avoid a foul pass. Rounds fired after the foul line will not count.
 
 
-CVN CONTROL
-===========
+CARRIER CONTROL
+===============
 
-Launch and Recovery windows can be requested from the F10|Other|JTF-1|CVN Control menu. The carrier will cruise West/East to hold station and will turn into wind when a window is requested. The following window lengths are available;
+Launch and Recovery windows can be requested from the F10|Other|Carrier Control menu. The carrier will cruise West/East to hold station and will turn into wind when a window is requested. The following window lengths are available;
 
 - 15 minutes
 - 30 minutes
@@ -132,6 +132,8 @@ Launch and Recovery windows can be requested from the F10|Other|JTF-1|CVN Contro
 - 90 mninutes
 
 The current window can also be cancelled from the menu. After a window has been cancelled the carrier will retun to the point at which the window was requested and continue holding station.
+
+Deck lighting can be controlled via the Change Lights submenu. By default, the carrier lights mode is set to Navigation when cruising and will change to Recovery mode at the start of a recovery window. The mode can be changed to Launch, or back to Recovery, via the menu.
 
 
 DYNAMIC DECK TEMPLATES
