@@ -35,7 +35,7 @@ Tarawa Hawk;
 NAVAL OPERATIONS
 ================
 
-Carriers will cruise North/South. Use the Carrier Control menu to start or stop recovery/lanuch windows.
+Carriers will cruise North/South. Use the Carrier Control menu to start or stop recovery/launch windows.
 
 Strike: 357.775
 Marshal: 285.675
