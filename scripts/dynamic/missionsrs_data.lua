@@ -19,8 +19,8 @@ end
 -- MISSIONSRS.srsPath = "C:/Program Files/DCS-SimpleRadio-Standalone" -- default path to SRS install directory if setting file is not avaialable "C:/Program Files/DCS-SimpleRadio-Standalone"
 -- MISSIONSRS.srsPort = 5002                                          -- default SRS port to use if settings file is not available
 -- MISSIONSRS.msg = "No Message Defined!"                             -- default message if text is nil
-MISSIONSRS.freqs = "243,251,3,30"                          -- transmit on guard, CTAF, NTTR TWR, NTTR BLACKJACK and 30FM as default frequencies
--- MISSIONSRS.modulations = "AM,AM,AM,AM,FM"                          -- default modulation (count *must* match qty of freqs)
+MISSIONSRS.freqs = {243,251,3,30}                          -- transmit on guard, CTAF, NTTR TWR, NTTR BLACKJACK and 30FM as default frequencies
+-- MISSIONSRS.modulations = {AM,AM,AM,AM,FM}                          -- default modulation (count *must* match qty of freqs)
 -- MISSIONSRS.vol = "1.0"                                             -- default to full volume
 -- MISSIONSRS.name = "Server"                                         -- default to server as sender
 -- MISSIONSRS.coalition = 0                                           -- default to spectators
