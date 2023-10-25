@@ -247,9 +247,9 @@ Groundspawn Options
 Example
 -------
 
-CMD GSPAWN: SA6, ALERT: GREEN, SKILL: HIGH
+CMD GSPAWN: SA6, ALERT: RED, SKILL: HIGH
 
-Will spawn an SA6 Battery on the location of the map mark, in alert state GREEN and with skill level HIGH.
+Will spawn an SA6 Battery on the location of the map mark, in alert state RED and with skill level HIGH.
 
 
 
