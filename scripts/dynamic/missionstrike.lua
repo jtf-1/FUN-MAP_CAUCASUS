@@ -447,7 +447,7 @@ function MISSIONSTRIKE:Start()
 	end
 
 	-- add remove menu for active missions
-	local textRemove = "Remove Missions"
+	local textRemove = "CANCEL MISSIONS"
 	self.menu.remove = MENU_COALITION:New(coalition.side.BLUE, textRemove, self.menu.top)
 end
 
@@ -543,7 +543,7 @@ function MISSIONSTRIKE:RemoveStrikeAttack (mission)
 		self:RemoveStatics(mission)
 
 		--reset mission zone(s)
-		if not mission.striketype == MISSIONSTRIKE.enums.striketype.camp then
+		if mission.striketype ~= MISSIONSTRIKE.enums.striketype.camp then
 			for _indexZone, zoneType in pairs(mission.zones) do
 				for _indexType, zone in pairs(zoneType) do
 					zone.is_open = true
@@ -553,18 +553,17 @@ function MISSIONSTRIKE:RemoveStrikeAttack (mission)
 		
 		-- remove reset menu option
 		self.menu[strikeType][strikeIndex]:Remove()
-		if not mission.striketype == MISSIONSTRIKE.enums.striketype.camp then
+		if mission.striketype ~= MISSIONSTRIKE.enums.striketype.camp then
+			_msg = string.format("%sReactivate mission %s in menu", 
+				self.traceTitle,
+				mission.strikename
+			)
+			BASE:T(_msg)
+
 			-- reset mission menu
 			self.menu[strikeType][strikeRegion][strikeIndex] = MENU_COALITION_COMMAND:New(
 				coalition.side.BLUE, 
 				strikeName .. " " .. strikeIvo, 
-				self.menu[strikeType][strikeRegion], 
-				self.SpawnStrikeTarget, 
-				self, 
-				mission
-			) -- add menu command to launch the mission
-			self.menu[strikeType][strikeRegion][strikeIndex] = MENU_COALITION_COMMAND:New(
-				coalition.side.BLUE, strikeName .. " " .. strikeIvo, 
 				self.menu[strikeType][strikeRegion], 
 				self.SpawnStrikeTarget, 
 				self, 
