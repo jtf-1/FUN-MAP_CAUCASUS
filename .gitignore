@@ -3,11 +3,11 @@
 #################
 
 scripts/reference/
-static/archive/
-static/temp/
-static/mist.lua
-static/Moose_.lua
-static/skynet-iads-compiled.lua
+scripts/static/archive/
+scripts/static/temp/
+scripts/static/mist.lua
+scripts/static/Moose_.lua
+scripts/static/skynet-iads-compiled.lua
 #core/
 lib/
 archive/
