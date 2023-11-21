@@ -2,8 +2,13 @@
 ## JTF-1
 #################
 
-core/
-static/
+
+static/archive/
+static/temp/
+static/mist.lua
+static/Moose_.lua
+static/skynet-iads-compiled.lua
+#core/
 lib/
 archive/
 reference/
