@@ -245,3 +245,4 @@ Moose Development/Moose/.vscode/launch.json
 .gitignore
 /.gitignore
 scripts/.vscode/settings.json
+scripts/reference/mission.lua
