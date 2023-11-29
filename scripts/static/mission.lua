@@ -1,4 +1,4 @@
- env.info("[JTF-1] MISSION BUILD 2023-10-30T19:17:35.11")  
+ env.info("[JTF-1] MISSION BUILD 2023-11-29T12:22:28.54")  
   
 --------------------------------[core\mission_init.lua]-------------------------------- 
  
@@ -3256,8 +3256,8 @@ SUPPORTAC.mission = {
 		tacan = 115,
 		tacanid = "SHL",
 		radio = 317.5,
-		flightLevel = 200,
-		speed = 275,
+		flightLevel = 220,
+		speed = 275	,
 		heading = 81,
 		leg = 30,
 		fuelLowThreshold = 30,
@@ -3295,7 +3295,7 @@ SUPPORTAC.mission = {
 		tacanid = "SHL",
 		radio = 317.6,
 		flightLevel = 200,
-		speed = 275,
+		speed = 315,
 		heading = 295,
 		leg = 30,
 		fuelLowThreshold = 30,
@@ -3314,7 +3314,7 @@ SUPPORTAC.mission = {
 		tacanid = "TEX",
 		radio = 317.65,
 		flightLevel = 240,
-		speed = 315,
+		speed = 275,
 		heading = 295,
 		leg = 30,
 		fuelLowThreshold = 30,
@@ -6537,7 +6537,7 @@ CVNCONTROL.cvn = {
 		menutext = "CVN-72 Lincoln",-- text used for the carrier's control menu
 		deckoffset = -4, -- deck offset from boat heading
         uturn = false, -- whether boat should return to the position it was in prior to the recover/launch request
-		recoveryspeed = 25, -- wind speed over the deck dunring recovery
+		recoveryspeed = 30, -- wind speed over the deck dunring recovery
 		tacan = 72, -- boat TACAN channel
 		tacanid = "ABE", -- TACAN morse ID
 		icls = 4,-- ICLS channel
@@ -6546,7 +6546,7 @@ CVNCONTROL.cvn = {
 		radiomodulation = radio.modulation.AM, -- AI ATC freq modulation [radio.modulation.AM/FM]
 		cruise = 11, -- speed at which boat should steam when not on launch/recovery
 		tanker = true, -- if a Hawk tanker should be spawned
-		tankertemplate = "S-3B_ARC11", -- name of GROUP template to be used. If nil, use the built-in template (default nil)
+		tankertemplate = nil, -- name of GROUP template to be used. If nil, use the built-in template (default nil)
 		tankercallsign = CALLSIGN.Tanker.Texaco, -- Hawk tanker callsign [CALLSIGN.Tanker.Texaco/Shell/Arco]
 		tankercallsignnumber = 6, -- hawk tanker callsign number
 		tankertacan = 38, -- hawk tanker TACAN channel
@@ -6570,7 +6570,7 @@ CVNCONTROL.cvn = {
 		radiomodulation = radio.modulation.AM, -- AI ATC freq modulation [radio.modulation.AM/FM]
 		cruise = 11, -- speed at which boat should steam when not on launch/recovery
 		tanker = true, -- if a Hawk tanker should be spawned
-		tankertemplate = "S-3B_ARC12", -- name of GROUP template to be used. If nil, use the built-in template (default nil)
+		tankertemplate = nil, -- name of GROUP template to be used. If nil, use the built-in template (default nil)
 		tankercallsign = CALLSIGN.Tanker.Arco, -- Hawk tanker callsign [CALLSIGN.Tanker.Texaco/Shell/Arco]
 		tankercallsignnumber = 2, -- hawk tanker callsign number
 		tankertacan = 39, -- hawk tanker TACAN channel
