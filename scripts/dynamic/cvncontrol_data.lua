@@ -10,7 +10,7 @@ env.info( "[JTF-1] cvncontrol_data" )
 -- Error prevention. Create empty container if module core lua not loaded.
 if not CVNCONTROL then 
 	CVNCONTROL = {}
-	JTF1.traceTitle = "[JTF-1 CVNCONTROL] "
+	CVNCONTROL.traceTitle = "[JTF-1 CVNCONTROL] "
 	_msg = CVNCONTROL.traceTitle .. "CORE FILE NOT LOADED!"
 	BASE:E(_msg)
 end
