@@ -426,6 +426,50 @@ MISSIONSTRIKE.missions = { -- TableStrikeAttack
 		is_open = true,
 	},-- End EJ52
 	------------ BRIDGE ------------
+	{ -- EJ19 Bridge-North
+		striketype = MISSIONSTRIKE.enums.striketype.bridge,
+        strikeregion = MISSIONSTRIKE.enums.region.north,                            
+		strikename = "EJ19",
+		strikeivo = "Krivenkovskoe",
+		strikemission = MISSIONSTRIKE.enums.strikemission.bridge.rail, -- text mission description
+		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
+		strikezone = "ZONE_EJ19Strike",
+		striketargetprefix = "TARGET_EJ19",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_EJ19Small"},
+			{class = "medium", prefix = "ZONE_EJ19Med"},
+		},
+		defassets = { 
+			sam = 2, 
+			aaa = 4, 
+			manpad = 1, 
+			armour = 2, 
+		},
+		spawnobjects = {},
+		is_open = true,
+	},-- End EJ19
+	{ -- FJ48 Bridge-West
+		striketype = MISSIONSTRIKE.enums.striketype.bridge,
+        strikeregion = MISSIONSTRIKE.enums.region.west,                            
+		strikename = "FJ48",
+		strikeivo = "Shedok",
+		strikemission = MISSIONSTRIKE.enums.strikemission.bridge.rail, -- text mission description
+		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
+		strikezone = "ZONE_FJ48Strike",
+		striketargetprefix = "TARGET_FJ48",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_FJ48Small"},
+			{class = "medium", prefix = "ZONE_FJ48Med"},
+		},
+		defassets = { 
+			sam = 2, 
+			aaa = 4, 
+			manpad = 1, 
+			armour = 2, 
+		},
+		spawnobjects = {},
+		is_open = true,
+	},-- End FJ48
 	{ -- GJ22 Bridge-West
 		striketype = MISSIONSTRIKE.enums.striketype.bridge,
         strikeregion = MISSIONSTRIKE.enums.region.west,                            
@@ -470,9 +514,9 @@ MISSIONSTRIKE.missions = { -- TableStrikeAttack
 		spawnobjects = {},
 		is_open = true,
 	},-- End GJ18
-	{ -- GJ38 Bridge-Central
+	{ -- GJ38 Bridge-West
 		striketype = MISSIONSTRIKE.enums.striketype.bridge,
-        strikeregion = MISSIONSTRIKE.enums.region.central,                            
+        strikeregion = MISSIONSTRIKE.enums.region.west,                            
 		strikename = "GJ38",
 		strikeivo = "Ust Dzheguta",
 		strikemission = MISSIONSTRIKE.enums.strikemission.bridge.roadrail, -- text mission description
@@ -492,9 +536,9 @@ MISSIONSTRIKE.missions = { -- TableStrikeAttack
 		spawnobjects = {},
 		is_open = true,
 	},-- End GJ38
-	{ -- GJ21 Bridge-Central
+	{ -- GJ21 Bridge-West
 		striketype = MISSIONSTRIKE.enums.striketype.bridge,
-        strikeregion = MISSIONSTRIKE.enums.region.central,                            
+        strikeregion = MISSIONSTRIKE.enums.region.west,                            
 		strikename = "GJ21",
 		strikeivo = "Teberda",
 		strikemission = MISSIONSTRIKE.enums.strikemission.bridge.road, -- text mission description
@@ -514,6 +558,50 @@ MISSIONSTRIKE.missions = { -- TableStrikeAttack
 		spawnobjects = {},
 		is_open = true,
 	},-- End GJ21
+	{ -- LP57 Bridge-Central
+		striketype = MISSIONSTRIKE.enums.striketype.bridge,
+        strikeregion = MISSIONSTRIKE.enums.region.central,                            
+		strikename = "LP57",
+		strikeivo = "Gundelen",
+		strikemission = MISSIONSTRIKE.enums.strikemission.bridge.road, -- text mission description
+		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
+		strikezone = "ZONE_LP57Strike",
+		striketargetprefix = "TARGET_LP57",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_LP57Small"},
+			{class = "medium", prefix = "ZONE_LP57Med"},
+		},
+		defassets = { 
+			sam = 2, 
+			aaa = 4, 
+			manpad = 2, 
+			armour = 2, 
+		},
+		spawnobjects = {},
+		is_open = true,
+	},-- End LP57
+	{ -- LN90 Bridge-Central
+		striketype = MISSIONSTRIKE.enums.striketype.bridge,
+        strikeregion = MISSIONSTRIKE.enums.region.central,                            
+		strikename = "LN90",
+		strikeivo = "Kashhatau",
+		strikemission = MISSIONSTRIKE.enums.strikemission.bridge.road, -- text mission description
+		--strikethreats = "RADAR SAM, I/R SAM, AAA, LIGHT ARMOUR",
+		strikezone = "ZONE_LN90Strike",
+		striketargetprefix = "TARGET_LN90",
+		zoneprefix = {
+			{class = "small", prefix = "ZONE_LN90Small"},
+			{class = "medium", prefix = "ZONE_LN90Med"},
+		},
+		defassets = { 
+			sam = 2, 
+			aaa = 4, 
+			manpad = 2, 
+			armour = 2, 
+		},
+		spawnobjects = {},
+		is_open = true,
+	},-- End LN90
 	{ -- MN72 Bridge-East
 		striketype = MISSIONSTRIKE.enums.striketype.bridge,
         strikeregion = MISSIONSTRIKE.enums.region.east,                            
