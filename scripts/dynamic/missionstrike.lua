@@ -1362,6 +1362,7 @@ MISSIONSTRIKE.defenceTemplates = {
 	sam = {
 		"SAM_Sa3Battery",
 		"SAM_Sa6Battery",
+		"SAM_Sa6Battery",
 	},
 	aaa = {
 		"AAA_Zu23Ural",
