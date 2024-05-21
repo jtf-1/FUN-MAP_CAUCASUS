@@ -246,3 +246,7 @@ Moose Development/Moose/.vscode/launch.json
 /.gitignore
 scripts/.vscode/settings.json
 scripts/reference/mission.lua
+TEST_JTF-1_Caucasus_DAY_Fun_Map.miz
+TEST_JTF-1_Caucasus_DAY_WEATHER_Fun_Map.miz
+TEST_JTF-1_Caucasus_NIGHT_Fun_Map.miz
+TEST_JTF-1_Caucasus_NIGHT_WEATHER_Fun_Map.miz
