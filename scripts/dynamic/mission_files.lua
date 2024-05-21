@@ -10,6 +10,7 @@ __JTFLoader.Include( 'core/adminmenu.lua' )                 -- core file
 __JTFLoader.Include( 'adminmenu_data.lua' ) 
 __JTFLoader.Include( 'core/missiontimer.lua' )              -- core file
 __JTFLoader.Include( 'missiontimer_data.lua' )
+__JTFLoader.Include( 'core/spawntemplates.lua' )            -- core file
 __JTFLoader.Include( 'core/supportaircraft.lua' )           -- core file
 __JTFLoader.Include( 'core/supportaircraft_templates.lua' ) -- core file
 __JTFLoader.Include( 'supportaircraft_data.lua' )
@@ -27,8 +28,8 @@ __JTFLoader.Include( 'dynamic_deck_data.lua' )
 __JTFLoader.Include( 'core/missiletrainer.lua' )            -- core file
 __JTFLoader.Include( 'missiletrainer_data.lua' )
 __JTFLoader.Include( 'core/markspawn.lua' )                 -- core file
-__JTFLoader.Include( 'core/markspawn_templates.lua' )       -- core file
---__JTFLoader.Include( 'markspawn_data.lua' )
+--__JTFLoader.Include( 'core/markspawn_templates.lua' )       -- core file
+__JTFLoader.Include( 'markspawn_data.lua' )
 __JTFLoader.Include( 'core/Hercules_Cargo.lua' )            -- core file
 __JTFLoader.Include( 'ablesentry.lua' )
 __JTFLoader.Include( 'core/mission_end.lua' )               -- core file    
