@@ -33,48 +33,40 @@ env.info( "[JTF-1] supportaircraft.lua" )
 -- Available support aircraft categories and types for which predefined templates are available [category] = [template name];
 --
 -- Category: tanker
---    tankerBoom = "KC-135" - SUPPORTAC.template["KC-135"]
---    tankerProbe = KC-135MPRS" - SUPPORTAC.template["KC-135MPRS"]
---    WIP** tankerProbeC130 = "KC-130" - SUPPORTAC.template["KC-130"]
+--    tankerBoom = "KC-135" - SPAWNTEMPLATES.templates["KC-135"]
+--    tankerProbe = KC-135MPRS" - SPAWNTEMPLATES.templates["KC-135MPRS"]
+--    WIP** tankerProbeC130 = "KC-130" - SPAWNTEMPLATES.templates["KC-130"]
 --
 -- Category: awacs
--- awacsE3a = "AWACS-E3A" - SUPPORTAC.template["AWACS-E3A"]
--- awacsE2d = "AWACS-E3A" - SUPPORTAC.template["AWACS-E3A"]
+-- awacsE3a = "AWACS-E3A" - SPAWNTEMPLATES.templates["AWACS-E3A"]
+-- awacsE2d = "AWACS-E3A" - SPAWNTEMPLATES.templates["AWACS-E3A"]
 --
 
 SUPPORTAC = {}
 SUPPORTAC.traceTitle = "[JTF-1 SUPPORTAC] "
 SUPPORTAC.ClassName = "SUPPORTAC"
 SUPPORTAC.useSRS = true -- if true, messages will be sent over SRS using the MISSIONSRS module. If false, messages will be sent as in-game text.
-SUPPORTAC.trace = false -- tracing off by default if false
+
 SUPPORTAC = BASE:Inherit(SUPPORTAC, BASE:New())
 
 local _msg -- used for debug messages only
 local useSRS
 
-if JTF1 then
-	SUPPORTAC.trace = JTF1.trace
-end
-
 -- function to start the SUPPORTAC module.
 function SUPPORTAC:Start()
-	_msg = string.format(self.traceTitle .. "Start()")
+	_msg = string.format("%sStart()", self.traceTitle)
 	self:T(_msg)
-
-	-- set tracing on or off
-	self:TraceOnOff(self.trace)
-	self:TraceAll(self.trace)
-	local traceState = tostring(self.trace)
-	_msg = string.format("%sModule Tracing is %s.", self.traceTitle, traceState)
-	self:I(_msg)
 
 	-- default to not using SRS unless both the server AND the module request it AND MISSIONSRS.Radio.active is true
 	useSRS = (JTF1.useSRS and self.useSRS) and MISSIONSRS.Radio.active 
 	self:I({self.traceTitle .. "useSRS", self.useSRS})
 
 	for index, mission in ipairs(SUPPORTAC.mission) do -- FOR-DO LOOP
-		_msg = string.format(self.traceTitle .. "Start - mission %s", mission.name)
-		SUPPORTAC:T(_msg)
+		_msg = string.format("%sStart - mission %s", 
+			self.traceTitle, 
+			mission.name
+		)
+		SUPPORTAC:T({_msg, mission})
 
 		local skip = false -- check value to exit early from the current for/do iteration
 
@@ -83,22 +75,30 @@ function SUPPORTAC:Start()
 		if missionZone then -- CHECK MISSION ZONE
 		
 			-- if trace is on, draw the zone on the map
-			if self:IsTrace() then 
-				-- draw mission zone on map
-				missionZone:DrawZone()
-			end
+			-- if BASE:IsTrace() then 
+			-- 	-- draw mission zone on map
+			-- 	missionZone:DrawZone()
+			-- end
 
 			-- airbase to which aircraft will fly on RTB
 			local missionTheatre = env.mission.theatre
-			_msg = SUPPORTAC.traceTitle .. tostring(missionTheatre)
+			_msg = SUPPORTAC.traceTitle .. missionTheatre
 			self:T(_msg)
-			local missionHomeAirbase = SUPPORTAC.homeAirbase["Nevada"]--mission.homeAirbase or SUPPORTAC.homeAirbase[missionTheatre]
-			_msg = SUPPORTAC.traceTitle .. tostring(missionHomeAirbase)
+			_msg = SUPPORTAC.traceTitle .. SUPPORTAC.homeAirbase.Nevada
 			self:T(_msg)
-			_msg = string.format(self.traceTitle .. "start - Mission %s set to use %s as home base.", mission.name, missionHomeAirbase)
+			local missionHomeAirbase = mission.homeAirbase or SUPPORTAC.homeAirbase[missionTheatre]
+			_msg = string.format("%sstart - Mission %s set to use %s as home base.", 
+				self.traceTitle, 
+				mission.name, 
+				missionHomeAirbase
+			)
 			SUPPORTAC:T(_msg)
 			if missionHomeAirbase then -- CHECK HOME AIRBASE
-				_msg = string.format(self.traceTitle .. "start - Mission %s using %s as home base.", mission.name, missionHomeAirbase)
+				_msg = string.format("%sstart - Mission %s using %s as home base.", 
+					self.traceTitle, 
+					mission.name, 
+					missionHomeAirbase
+				)
 				SUPPORTAC:T(_msg)
 
 				-- set home airbase in mission
@@ -138,17 +138,23 @@ function SUPPORTAC:Start()
 				mission.waypointCoordinate = waypointCoordinate
 
 				if GROUP:FindByName(missionSpawnType) then -- FIND MISSION SPAWN TEMPLATE - use from mission block
-					_msg = string.format(self.traceTitle .. "start - Using spawn template from miz for %s.", missionSpawnType)
+					_msg = string.format("%sstart - Using spawn template from miz for %s.", 
+						self.traceTitle, 
+						missionSpawnType
+					)
 					SUPPORTAC:T(_msg)
 
 					-- add mission spawn object using template in miz
 					mission.missionSpawnTemplate = SPAWN:NewWithAlias(missionSpawnType, missionSpawnAlias)
-				elseif SUPPORTAC.template[missionSpawnType] then -- ELSEIF FIND MISSION SPAWN TEMPLATE-- Use predfined template from SUPPORTAC.template[missionSpawnType]
-					_msg = string.format(self.traceTitle .. "start - Using spawn template from SUPPORTAC.template for %s.", missionSpawnType)
+				elseif SPAWNTEMPLATES.templates[missionSpawnType] then -- ELSEIF FIND MISSION SPAWN TEMPLATE-- Use predfined template from SPAWNTEMPLATES.templates[missionSpawnType]
+					_msg = string.format("%sstart - Using spawn template from SPAWNTEMPLATES.templates for %s.", 
+						self.traceTitle, 
+						missionSpawnType
+					)
 					SUPPORTAC:T(_msg)
 
 					-- get template to use for spawn
-					local spawnTemplate = SUPPORTAC.template[missionSpawnType]
+					local spawnTemplate = SPAWNTEMPLATES.templates[missionSpawnType]
 
 					-- check "category" has been set in template
 					-- if not spawnTemplate["category"] then
@@ -187,6 +193,12 @@ function SUPPORTAC:Start()
 						missionUnit["callsign"][1] = missionCallsignId
 						missionUnit["callsign"][2] = missionCallsignNumber
 						missionUnit["callsign"][3] = 1
+						_msg = string.format("%sCallsign for mission %s is %s", 
+							self.traceTitle, 
+							mission.name, 
+							spawnTemplate.units[1]["callsign"]["name"]
+						)
+						SUPPORTAC:T(_msg)
 					elseif type(missionUnit["callsign"]) == "number" then
 						missionUnit["callsign"] = tonumber(missionCallsignId)
 					else
@@ -197,7 +209,7 @@ function SUPPORTAC:Start()
 					local missionCoalition = mission.coalition or SUPPORTAC.missionDefault.coalition
 					local missionGroupCategory = mission.groupCategory or SUPPORTAC.missionDefault.groupCategory
 
-					-- add mission spawn object using template in SUPPORTAC.template[missionSpawnType]
+					-- add mission spawn object using template in SPAWNTEMPLATES.templates[missionSpawnType]
 					mission.missionSpawnTemplate = SPAWN:NewFromTemplate(spawnTemplate, missionSpawnType, missionSpawnAlias)
 						:InitCountry(missionCountryid) -- set spawn countryid
 						:InitCoalition(missionCoalition) -- set spawn coalition
@@ -208,7 +220,11 @@ function SUPPORTAC:Start()
 
 				-- if missionSpawnTamplate was not created continue to next iteration, otherwise set spawn inits and create a new mission
 				if skip then -- CHECK SKIP
-					_msg = string.format(self.traceTitle .. "Start - template for type %s for mission %s is not present in MIZ or as a predefined template!", missionSpawnType, missionSpawnAlias)
+					_msg = string.format("%sStart - template for type %s for mission %s is not present in MIZ or as a predefined template!", 
+						self.traceTitle, 
+						missionSpawnType, 
+						missionSpawnAlias
+					)
 					SUPPORTAC:E(_msg)
 				else -- CHECK SKIP
 					-- mission spawn object defaults
@@ -218,8 +234,8 @@ function SUPPORTAC:Start()
 					mission.missionSpawnTemplate:OnSpawnGroup(
 						function(spawngroup)
 							local spawnGroupName = spawngroup:GetName()
-							-- _msg = string.format(SUPPORTAC.traceTitle .. "Spawned Group %s", spawnGroupName)
-							-- self:T(_msg)
+							_msg = string.format(SUPPORTAC.traceTitle .. "Spawned Group %s", spawnGroupName)
+							BASE:T(_msg)
 		
 							spawngroup:CommandSetUnlimitedFuel(spawnUnlimitedFuel)
 							spawngroup:CommandSetCallsign(mission.callsign, mission.callsignNumber) -- set the template callsign
@@ -227,8 +243,11 @@ function SUPPORTAC:Start()
 						,mission
 					)
 
-					_msg = string.format(self.traceTitle .. "New late activated mission spawn template added for %s", missionSpawnAlias)
-					SUPPORTAC:T(_msg)
+					_msg = string.format("%sNew late activated mission spawn template added for %s", 
+						self.traceTitle, 
+						missionSpawnAlias
+					)
+					SUPPORTAC:T({_msg, mission.missionSpawnTemplate})
 					
 					-- call NewMission() to create the initial mission for the support aircraft
 					-- subsequent mission restarts will be called after the mission's AUFTRAG is cancelled
@@ -237,13 +256,19 @@ function SUPPORTAC:Start()
 			
 			else -- CHECK HOME AIRBASE
 				
-				_msg = string.format(self.traceTitle .. "Start - Default Home Airbase for %s not defined! Mission skipped.", missionTheatre)
+				_msg = string.format("%sStart - Default Home Airbase for %s not defined! Mission skipped.", 
+					self.traceTitle, 
+					missionTheatre
+				)
 				SUPPORTAC:E(_msg)
 
 			end -- CHECK HOME AIRBASE
 
 		else -- CHECK MISSION ZONE
-			_msg = string.format(self.traceTitle .. "Start - Zone %s not found! Mission skipped.", mission.zone)
+			_msg = string.format("%sStart - Zone %s not found! Mission skipped.", 
+				self.traceTitle, 
+				mission.zone
+			)
 			SUPPORTAC:E(_msg)
 		end -- CHECK MISSION ZONE
 
@@ -253,7 +278,10 @@ end -- SUPPORTAC:Start()
 
 -- function to create new support mission and flightGroup
 function SUPPORTAC:NewMission(mission, initDelay)
-	_msg = string.format(self.traceTitle .. "Create new mission for %s", mission.name)
+	_msg = string.format("%sCreate new mission for %s", 
+		self.traceTitle, 
+		mission.name
+	)
 	SUPPORTAC:T(_msg)
 
 	-- create new mission
@@ -275,7 +303,10 @@ function SUPPORTAC:NewMission(mission, initDelay)
 		missionHeading, 
 		missionLeg
 		)
-		_msg = string.format(self.traceTitle .. "New mission created: %s", newMission:GetName())
+		_msg = string.format("%sNew mission created: %s", 
+			self.traceTitle, 
+			newMission:GetName()
+		)
 		SUPPORTAC:T(_msg)
 	elseif mission.category == SUPPORTAC.category.awacs then
 		local missionLeg = mission.leg or SUPPORTAC.missionDefault.awacsLeg -- set leg length. Either mission defined or use default for AWACS.
@@ -287,7 +318,10 @@ function SUPPORTAC:NewMission(mission, initDelay)
 		missionHeading,
 		missionLeg
 		)
-		_msg = string.format(self.traceTitle .. "New mission created: %s", newMission:GetName())
+		_msg = string.format("%sNew mission created: %s", 
+			self.traceTitle, 
+			newMission:GetName()
+		)
 		SUPPORTAC:T(_msg)
 	else
 		_msg = self.traceTitle .. "Mission category not defined!"
@@ -308,8 +342,11 @@ function SUPPORTAC:NewMission(mission, initDelay)
 
 	-- spawn new group
 	local spawnGroup = mission.missionSpawnTemplate:SpawnFromCoordinate(mission.spawnCoordinate)
-	_msg = string.format(self.traceTitle .. "New late activated group %s spawned.", spawnGroup:GetName())
-	SUPPORTAC:T(_msg)
+	_msg = string.format("%sNew late activated group %s spawned.", 
+		self.traceTitle, 
+		spawnGroup:GetName()
+	)
+	SUPPORTAC:T({_msg, spawnGroup})
 
 	-- create new flightGroup
 	local flightGroup = FLIGHTGROUP:New(spawnGroup)
@@ -391,7 +428,10 @@ end -- SUPPORTAC:NewMission()
 -- if MISSIONSRS is loaded, message will be sent on aupport aircraft freq.
 -- Otherwise, message will be sent as text to all.
 function SUPPORTAC:SendMessage(msgText, msgFreq)
-	local _msg = string.format(self.traceTitle .. "SendMessage: %s", msgText)
+	local _msg = string.format("%sSendMessage: %s", 
+		self.traceTitle, 
+		msgText
+	)
 	SUPPORTAC:T(_msg)
 	if useSRS then
 		MISSIONSRS:SendRadio(msgText, msgFreq)
@@ -422,20 +462,20 @@ SUPPORTAC.category = {
 
 -- Support aircraft types. Used to define the late activated group to be used as the spawn template
 -- for the type. A check is made to ensure the template exists in the miz or that the value is the
--- same as the ID in the SUPPORTAC.template block (see supportaircraft.lua)
+-- same as the ID in the SPAWNTEMPLATES.templates block (see supportaircraft.lua)
 SUPPORTAC.type = {
-	tankerBoom = "KC-135", -- template to be used for type = "tankerBoom" OR SUPPORTAC.template["KC-135"]
-	tankerProbe = "KC-135MPRS", -- template to be used for type = "tankerProbe" OR SUPPORTAC.template["KC-135MPRS"]
-	tankerProbeC130 = "KC-130", -- template for type = "tankerProbeC130" OR SUPPORTAC.template["KC-130"]
-	awacsE3a = "AWACS-E3A", -- template to be used for type = "awacsE3a" OR SUPPORTAC.template["AWACS-E3A"]
-	awacsE2d = "AWACS-E2D", -- template to be used for type = "awacsE2d" OR SUPPORTAC.template["AWACS-E2D"]
-	awacsA50 = "AWACS-A50", -- template to be used for type = "awacsA50" OR SUPPORTAC.template["AWACS-A50"]
+	tankerBoom = "KC-135", -- template to be used for type = "tankerBoom" OR SPAWNTEMPLATES.templates["KC-135"]
+	tankerProbe = "KC-135MPRS", -- template to be used for type = "tankerProbe" OR SPAWNTEMPLATES.templates["KC-135MPRS"]
+	tankerProbeC130 = "KC-130", -- template for type = "tankerProbeC130" OR SPAWNTEMPLATES.templates["KC-130"]
+	awacsE3a = "AWACS-E3A", -- template to be used for type = "awacsE3a" OR SPAWNTEMPLATES.templates["AWACS-E3A"]
+	awacsE2d = "AWACS-E2D", -- template to be used for type = "awacsE2d" OR SPAWNTEMPLATES.templates["AWACS-E2D"]
+	awacsA50 = "AWACS-A50", -- template to be used for type = "awacsA50" OR SPAWNTEMPLATES.templates["AWACS-A50"]
 } -- end SUPPORTAC.type
 
 -- Default home airbase. Added to the mission spawn template if not defined in
 -- the mission data block
 SUPPORTAC.homeAirbase = {
-	["Nevada"] = AIRBASE.Nevada.Nellis,
+	["Nevada"] = AIRBASE.Nevada.Nellis_AFB,
 	["Caucasus"] = AIRBASE.Caucasus.Tbilisi_Lochini,
 	["PersianGulf"] = AIRBASE.PersianGulf.Al_Dhafra_AB,
 	["Syria"] = AIRBASE.Syria.Incirlik,
@@ -470,4 +510,4 @@ SUPPORTAC.missionDefault = {
 } -- end SUPPORTAC.missionDefault
 
 
--- END SUPPORT AIRCRAFT SECTION  
+-- END SUPPORT AIRCRAFT SECTION

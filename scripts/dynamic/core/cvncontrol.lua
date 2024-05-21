@@ -9,6 +9,8 @@ CVNCONTROL.ClassName = "CVNCONTROL"
 CVNCONTROL.traceTitle = "[JTF-1] "
 CVNCONTROL.version = "1.0"
 
+CVNCONTROL.markWaypoints = false
+
 CVNCONTROL.menu = {}
 
 CVNCONTROL.enums = {
@@ -57,7 +59,7 @@ function CVNCONTROL:Start()
 		cvn.navygroup:SetPatrolAdInfinitum(true)
 
 		-- if trace is on, draw the zone on the map
-		if BASE:IsTrace() then 
+		if BASE:IsTrace() and CVNCONTROL.markWaypoints then 
 			local _msg = string.format("Add waypoint marks for group %s", cvn.name)
 			CVNCONTROL:T(_msg)
 			-- draw waypoints on map
@@ -67,7 +69,7 @@ function CVNCONTROL:Start()
 		-- add recovery tanker if cvn.recoverytanker is true
 		function cvn.navygroup:OnAfterElementSpawned(From, Event, To, Element)
 			local _msg = string.format("%sOnAfterElementSpawned for Element %s", CVNCONTROL.traceTitle, Element.name)
-			CVNCONTROL:T({_msg,Element})
+			CVNCONTROL:T(_msg)
 
 			local elementName = Element.name
 	
@@ -86,7 +88,7 @@ function CVNCONTROL:Start()
 				local unit = UNIT:FindByName(cvn.unit)--GROUP:FindByName(cvn.group):GetUnit(1)
 				local unitid = unit:GetID()
 				_msg = string.format("%sUnit object for %s", CVNCONTROL.traceTitle, cvn.unit)
-				CVNCONTROL:T({_msg, unit})
+				CVNCONTROL:T(_msg)
 	
 			end
 	
@@ -117,7 +119,7 @@ function CVNCONTROL:Start()
 		end
 
 		local _msg = string.format("%sNew Navygroup =", self.traceTitle)
-		self:T({_msg,cvn.navygroup})
+		self:T(_msg)
 		
 		-- add top menu if not already added
 		if not self.menu.top then
@@ -160,7 +162,7 @@ end
 function CVNCONTROL:start_recovery(cvn, minutes)
 
 	_msg = string.format("%sstart_recovery().", self.traceTitle)
-	self:T({_msg,cvn})
+	self:T(_msg)
 
 	self:setLights(cvn, self.enums.setlightsrecovery)
 	
@@ -278,7 +280,7 @@ function CVNCONTROL:recoveryTanker(cvn)
 		local spawnAliasPrefix = string.format("%s_HAWK", cvn.name)
 
 		-- add mission spawn object using template in SUPPORTAC.template[missionSpawnType]
-		cvn.spawntemplate = SPAWN:NewFromTemplate(CVNCONTROL.templates[spawnTemplatePrefix], spawnTemplatePrefix, spawnAliasPrefix)
+		cvn.spawntemplate = SPAWN:NewFromTemplate(SPAWNTEMPLATES.templates[spawnTemplatePrefix], spawnTemplatePrefix, spawnAliasPrefix)
 			:InitCountry(countryId) -- set spawn countryid
 			:InitCoalition(coalition) -- set spawn coalition
 			:InitCategory(groupCategory) -- set category
@@ -311,147 +313,147 @@ function CVNCONTROL:recoveryTanker(cvn)
 
 end
 
-CVNCONTROL.templates = {
-	["S3BTANKER"] = {
-		["category"] = Group.Category.AIRPLANE,
-		["lateActivation"] = true,
-		["tasks"] = 
-		{
-		}, -- end of ["tasks"]
-		["radioSet"] = false,
-		["task"] = "Refueling",
-		["uncontrolled"] = false,
-		["route"] = 
-		{
-			["routeRelativeTOT"] = true,
-			["points"] = 
-			{
-				[1] = 
-				{
-					["alt"] = 1828.8,
-					["action"] = "Turning Point",
-					["alt_type"] = "BARO",
-					["speed"] = 141.31944444444,
-					["task"] = 
-					{
-						["id"] = "ComboTask",
-						["params"] = 
-						{
-							["tasks"] = 
-							{
-								[1] = 
-								{
-									["number"] = 1,
-									["auto"] = true,
-									["id"] = "Tanker",
-									["enabled"] = true,
-									["params"] = 
-									{
-									}, -- end of ["params"]
-								}, -- end of [1]
-								[2] = 
-								{
-									["number"] = 2,
-									["auto"] = true,
-									["id"] = "WrappedAction",
-									["enabled"] = true,
-									["params"] = 
-									{
-										["action"] = 
-										{
-											["id"] = "ActivateBeacon",
-											["params"] = 
-											{
-												["type"] = 4,
-												["AA"] = false,
-												["callsign"] = "TKR",
-												["system"] = 4,
-												["channel"] = 1,
-												["modeChannel"] = "X",
-												["bearing"] = true,
-												["frequency"] = 962000000,
-											}, -- end of ["params"]
-										}, -- end of ["action"]
-									}, -- end of ["params"]
-								}, -- end of [2]
-								[3] = 
-								{
-									["number"] = 3,
-									["auto"] = false,
-									["id"] = "WrappedAction",
-									["enabled"] = true,
-									["params"] = 
-									{
-										["action"] = 
-										{
-											["id"] = "SetInvisible",
-											["params"] = 
-											{
-												["value"] = true,
-											}, -- end of ["params"]
-										}, -- end of ["action"]
-									}, -- end of ["params"]
-								}, -- end of [3]
-							}, -- end of ["tasks"]
-						}, -- end of ["params"]
-					}, -- end of ["task"]
-					["type"] = "Turning Point",
-					["ETA"] = 0,
-					["ETA_locked"] = true,
-					["y"] = 606748.96393416,
-					["x"] = -358539.84033849,
-					["formation_template"] = "",
-					["speed_locked"] = true,
-				}, -- end of [1]
-			}, -- end of ["points"]
-		}, -- end of ["route"]
-		["groupId"] = 1,
-		["hidden"] = false,
-		["units"] = 
-		{
-			[1] = 
-			{
-				["alt"] = 1828.8,
-				["alt_type"] = "BARO",
-				["livery_id"] = "usaf standard",
-				["skill"] = "High",
-				["speed"] = 141.31944444444,
-				["type"] = "S-3B Tanker",
-				["unitId"] = 1,
-				["psi"] = 0,
-				["y"] = 606748.96393416,
-				["x"] = -358539.84033849,
-				["name"] = "Aerial-1-1",
-				["payload"] = 
-				{
-					["pylons"] = 
-					{
-					}, -- end of ["pylons"]
-					["fuel"] = "7813",
-					["flare"] = 30,
-					["chaff"] = 30,
-					["gun"] = 100,
-				}, -- end of ["payload"]
-				["heading"] = 0,
-				["callsign"] = 
-				{
-					[1] = 1,
-					[2] = 1,
-					["name"] = "Texaco11",
-					[3] = 1,
-				}, -- end of ["callsign"]
-				["onboard_num"] = "010",
-			}, -- end of [1]
-		}, -- end of ["units"]
-		["y"] = 606748.96393416,
-		["x"] = -358539.84033849,
-		["name"] = "S3BTANKER",
-		["communication"] = true,
-		["start_time"] = 0,
-		["modulation"] = 0,
-		["frequency"] = 251,
-	}, -- end of ["S3BTANKER"]
-}
+-- CVNCONTROL.templates = {
+-- 	["S3BTANKER"] = {
+-- 		["category"] = Group.Category.AIRPLANE,
+-- 		["lateActivation"] = true,
+-- 		["tasks"] = 
+-- 		{
+-- 		}, -- end of ["tasks"]
+-- 		["radioSet"] = false,
+-- 		["task"] = "Refueling",
+-- 		["uncontrolled"] = false,
+-- 		["route"] = 
+-- 		{
+-- 			["routeRelativeTOT"] = true,
+-- 			["points"] = 
+-- 			{
+-- 				[1] = 
+-- 				{
+-- 					["alt"] = 1828.8,
+-- 					["action"] = "Turning Point",
+-- 					["alt_type"] = "BARO",
+-- 					["speed"] = 141.31944444444,
+-- 					["task"] = 
+-- 					{
+-- 						["id"] = "ComboTask",
+-- 						["params"] = 
+-- 						{
+-- 							["tasks"] = 
+-- 							{
+-- 								[1] = 
+-- 								{
+-- 									["number"] = 1,
+-- 									["auto"] = true,
+-- 									["id"] = "Tanker",
+-- 									["enabled"] = true,
+-- 									["params"] = 
+-- 									{
+-- 									}, -- end of ["params"]
+-- 								}, -- end of [1]
+-- 								[2] = 
+-- 								{
+-- 									["number"] = 2,
+-- 									["auto"] = true,
+-- 									["id"] = "WrappedAction",
+-- 									["enabled"] = true,
+-- 									["params"] = 
+-- 									{
+-- 										["action"] = 
+-- 										{
+-- 											["id"] = "ActivateBeacon",
+-- 											["params"] = 
+-- 											{
+-- 												["type"] = 4,
+-- 												["AA"] = false,
+-- 												["callsign"] = "TKR",
+-- 												["system"] = 4,
+-- 												["channel"] = 1,
+-- 												["modeChannel"] = "X",
+-- 												["bearing"] = true,
+-- 												["frequency"] = 962000000,
+-- 											}, -- end of ["params"]
+-- 										}, -- end of ["action"]
+-- 									}, -- end of ["params"]
+-- 								}, -- end of [2]
+-- 								[3] = 
+-- 								{
+-- 									["number"] = 3,
+-- 									["auto"] = false,
+-- 									["id"] = "WrappedAction",
+-- 									["enabled"] = true,
+-- 									["params"] = 
+-- 									{
+-- 										["action"] = 
+-- 										{
+-- 											["id"] = "SetInvisible",
+-- 											["params"] = 
+-- 											{
+-- 												["value"] = true,
+-- 											}, -- end of ["params"]
+-- 										}, -- end of ["action"]
+-- 									}, -- end of ["params"]
+-- 								}, -- end of [3]
+-- 							}, -- end of ["tasks"]
+-- 						}, -- end of ["params"]
+-- 					}, -- end of ["task"]
+-- 					["type"] = "Turning Point",
+-- 					["ETA"] = 0,
+-- 					["ETA_locked"] = true,
+-- 					["y"] = 606748.96393416,
+-- 					["x"] = -358539.84033849,
+-- 					["formation_template"] = "",
+-- 					["speed_locked"] = true,
+-- 				}, -- end of [1]
+-- 			}, -- end of ["points"]
+-- 		}, -- end of ["route"]
+-- 		["groupId"] = 1,
+-- 		["hidden"] = false,
+-- 		["units"] = 
+-- 		{
+-- 			[1] = 
+-- 			{
+-- 				["alt"] = 1828.8,
+-- 				["alt_type"] = "BARO",
+-- 				["livery_id"] = "usaf standard",
+-- 				["skill"] = "High",
+-- 				["speed"] = 141.31944444444,
+-- 				["type"] = "S-3B Tanker",
+-- 				["unitId"] = 1,
+-- 				["psi"] = 0,
+-- 				["y"] = 606748.96393416,
+-- 				["x"] = -358539.84033849,
+-- 				["name"] = "Aerial-1-1",
+-- 				["payload"] = 
+-- 				{
+-- 					["pylons"] = 
+-- 					{
+-- 					}, -- end of ["pylons"]
+-- 					["fuel"] = "7813",
+-- 					["flare"] = 30,
+-- 					["chaff"] = 30,
+-- 					["gun"] = 100,
+-- 				}, -- end of ["payload"]
+-- 				["heading"] = 0,
+-- 				["callsign"] = 
+-- 				{
+-- 					[1] = 1,
+-- 					[2] = 1,
+-- 					["name"] = "Texaco11",
+-- 					[3] = 1,
+-- 				}, -- end of ["callsign"]
+-- 				["onboard_num"] = "010",
+-- 			}, -- end of [1]
+-- 		}, -- end of ["units"]
+-- 		["y"] = 606748.96393416,
+-- 		["x"] = -358539.84033849,
+-- 		["name"] = "S3BTANKER",
+-- 		["communication"] = true,
+-- 		["start_time"] = 0,
+-- 		["modulation"] = 0,
+-- 		["frequency"] = 251,
+-- 	}, -- end of ["S3BTANKER"]
+-- }
 
 --CVNCONTROL:Start() -- called from cvncontrol_data
 
