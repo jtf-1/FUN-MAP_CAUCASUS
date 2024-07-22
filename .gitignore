@@ -8,7 +8,7 @@ scripts/static/temp/
 scripts/static/mist.lua
 scripts/static/Moose_.lua
 scripts/static/skynet-iads-compiled.lua
-scripts/dynamic/core/
+/scripts/dynamic/core/
 lib/
 archive/
 reference/
