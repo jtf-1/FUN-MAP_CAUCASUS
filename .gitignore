@@ -250,3 +250,7 @@ TEST_JTF-1_Caucasus_DAY_Fun_Map.miz
 TEST_JTF-1_Caucasus_DAY_WEATHER_Fun_Map.miz
 TEST_JTF-1_Caucasus_NIGHT_Fun_Map.miz
 TEST_JTF-1_Caucasus_NIGHT_WEATHER_Fun_Map.miz
+scripts/dynamic/core/supportaircraft.lua
+scripts/dynamic/core/missionautocap.lua
+scripts/dynamic/core/devcheck.lua
+scripts/dynamic/core/activeranges.lua
