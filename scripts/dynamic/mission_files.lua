@@ -1,3 +1,27 @@
+env.info( "[JTF-1] mission_files" )
+-- CORE MODULES ADMIN
+env.info("[JTF-1] Load Core Modules")
+
+
+-- TEMPLATES
+env.info("[JTF-1] Load Templates")
+
+
+-- LOCAL MODULES
+env.info("[JTF-1] No Local Modules to load.")
+
+
+-- DATA
+env.info("[JTF-1] Load Data")
+
+
+-- JTF END
+env.info("Load Main End")
+
+-- LEGACY SCRIPTS
+env.info("[JTF-1] No Legacy Scripts to load")
+
+
 __JTFLoader.Include( 'lib/Moose.lua' )                      -- library file
 __JTFLoader.Include( 'lib/skynet-iads-compiled.lua' )       -- library file
 __JTFLoader.Include( 'core/mission_init.lua' )              -- core file
