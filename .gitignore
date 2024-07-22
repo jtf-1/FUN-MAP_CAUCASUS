@@ -13,6 +13,7 @@ lib/
 archive/
 reference/
 scripts/.vscode/settings.json
+dynspawn/
 
 #################
 ## Eclipse
